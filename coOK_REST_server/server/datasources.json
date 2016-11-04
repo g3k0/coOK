@@ -1,6 +1,14 @@
 {
   "db": {
+    "host": "localhost",
+    "port": 27017,
+    "database": "cook",
     "name": "db",
-    "connector": "memory"
+    "connector": "mongodb",
+    "server": {
+      "auto_reconnect": true,
+      "reconnectTries": 100,
+      "reconnectInterval": 1000
+    }
   }
 }

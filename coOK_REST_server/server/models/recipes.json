@@ -2,9 +2,18 @@
   "name": "recipes",
   "plural": "recipes",
   "base": "PersistedModel",
+  "strict": true,
   "idInjection": true,
   "options": {
     "validateUpsert": true
+  },
+  "mongodb": {
+    "collection": "recipes"
+  },
+  "settings": {
+    "mongodb": {
+      "allowExtendedOperators": true
+    }
   },
   "properties": {
     "name": {

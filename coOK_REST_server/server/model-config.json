@@ -14,7 +14,8 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "db",
+    "public": false
   },
   "AccessToken": {
     "dataSource": "db",
@@ -34,6 +35,10 @@
   },
   "recipes": {
     "dataSource": "db",
+    "public": true
+  },
+  "general-services": {
+    "dataSource": null,
     "public": true
   }
 }
