@@ -1,0 +1,41 @@
+{
+  "name": "recipes",
+  "plural": "recipes",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "string"
+    },
+    "mainIngredient": {
+      "type": "string"
+    },
+    "persons": {
+      "type": "number"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "ingredients": {
+      "type": [
+        "string"
+      ],
+      "required": true
+    },
+    "preparation": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

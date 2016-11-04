@@ -1,7 +1,8 @@
 # coOK
-React Native mobile app that suggest recipes based on the food that you have at home
+<<<<<<< HEAD
+Hybrid mobile app built in Ionic that suggest recipes based on the food that you have in your fridge
 ------------------------------------------------------------------------------------
 
-v. 0.0.1
+v. 0.1.0
 
-App built with React Native
+Hybrid  mobile app built in Ionic that suggest recipes based on the food that you have at home
