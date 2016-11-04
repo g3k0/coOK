@@ -39,8 +39,7 @@
       "required": true
     },
     "preparation": {
-      "type": "string",
-      "required": true
+      "type": "string"
     }
   },
   "validations": [],

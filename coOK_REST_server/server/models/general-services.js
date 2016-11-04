@@ -34,7 +34,7 @@
 
 			_.each(recipesArray, (recipe) => {
 				let recipeObj = {};
-				recipeObj = commonUtils.convertTextToJSON(recipesArray[0], '-');
+				recipeObj = commonUtils.convertTextToJSON(recipe, '-');
 				recipeObjs.push(recipeObj);
 			});
 
@@ -44,7 +44,7 @@
 					return cb(err);
 				}
 
-				log.info(`[Generalservices][importRecipes] tutte le ${recipeObjs.length} ricette sono state correttamente importate nel database`);
+				log.info(`[Generalservices][importRecipes] ${recipeObjs.length} ricette sono state correttamente importate nel database`);
 				return cb(null,{results:'ok'});
 			});
 		};

@@ -44,8 +44,8 @@
 			}
             
             for (let i=0; i<arr.length; ++i) {
-            	if (arr[i].indexOf('=') > -1) {
-            		obj.Ingredienti.push(arr[i]);
+            	if (arr[i].indexOf('=') > -1 || arr[i].indexOf('Di') > -1 &&  arr[i].indexOf('/') > -1) {
+            		if (obj.Ingredienti && Array.isArray(obj.Ingredienti)) obj.Ingredienti.push(arr[i]);
             	}
             }
 
