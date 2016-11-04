@@ -1,7 +1,10 @@
 # coOK
-Hybrid mobile app built in Ionic that suggest recipes based on the food that you have in your fridge
-------------------------------------------------------------------------------------
+Hybrid mobile app built in Ionic 
+================================
 
-v. 0.1.0
+**version 0.1.0**
 
-Hybrid  mobile app built in Ionic that suggest recipes based on the food that you have at home
+description
+-----------
+
+The repository contains the Node.js server that exposes the REST API needed by the app and the app itself. 
