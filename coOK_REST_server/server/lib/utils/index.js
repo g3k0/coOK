@@ -5,7 +5,7 @@
 (function () {
 	'use strict';
 
-	let Requests = require('./requests');
+	let Common = require('./common');
 
-	module.exports.requests = new Requests() //common functions on service requests objects
+	module.exports.common = new Common() //common functions on service requests objects
 })();

@@ -13,7 +13,9 @@
 	 */
 	let log = require(`${__base}/lib/logging`);
 	let app = require(`${__base}/server`);
-	let requestUtils = require(`${__base}/lib/utils`).requests;
+	let commonUtils = require(`${__base}/lib/utils`).common;
+	let fs = require('fs');
+	let _ = require('underscore');
 
 	module.exports = (Generalservices) => {
 
@@ -22,24 +24,29 @@
 		 */
 		Generalservices.importRecipes = (cb) => {
 			log.info(`[Generalservices][importRecipes] received request with recipes to import...`);
-			let recipesSchema = require(`${__base}/schemas/recipes.json`);
 
-			//TO DO - import txt data from file to JSON object
+			let recipes = fs.readFileSync(`${__base}/uploads/ricette.txt`, 'utf8');
+			let recipesArray = recipes.split(':Ricette').filter((item) => {
+				return item.indexOf('Nome') > -1;
+			});
 
-			//let firstRecipe = recipes[0]; //TO DO - loop the validation to all recipes array request
+			let recipeObjs = [];
 
-			/*requestUtils.validate(recipesSchema, firstRecipe, () => {
-				log.info(`[Generalservices][importRecipes] response sent`)
+			_.each(recipesArray, (recipe) => {
+				let recipeObj = {};
+				recipeObj = commonUtils.convertTextToJSON(recipesArray[0], '-');
+				recipeObjs.push(recipeObj);
+			});
+
+			app.models.recipes.create(recipeObjs, (err) => {
+				if (err) {
+					log.error(`[Generalservices][importRecipes] error: ${err}`);
+					return cb(err);
+				}
+
+				log.info(`[Generalservices][importRecipes] tutte le ${recipeObjs.length} ricette sono state correttamente importate nel database`);
 				return cb(null,{results:'ok'});
-
-			}, (err) => {
-				log.error(`[Generalservices][importRecipes] error: ${err}`);
-				return cb(err);
-			});*/
-			return cb(null,{results:'ok'});
-
+			});
 		};
-
 	};
-
 })();
