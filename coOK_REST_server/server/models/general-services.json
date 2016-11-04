@@ -10,5 +10,35 @@
   "validations": [],
   "relations": {},
   "acls": [],
-  "methods": {}
+  "methods": {
+    "importRecipes": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "recipes",
+          "type": "array",
+          "required": true,
+          "description": "an array of objects with input data",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "object",
+          "root": true,
+          "description": "service response"
+        }
+      ],
+      "description": "Recipes data import service",
+      "http": [
+        {
+          "path": "/import-recipes",
+          "verb": "post"
+        }
+      ]
+    }
+  }
 }

@@ -1,6 +1,9 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 
+// Configure base directory
+global.__base = __dirname + '/';
+
 var app = module.exports = loopback();
 
 app.start = function() {

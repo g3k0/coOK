@@ -1,0 +1,45 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+  	"id": "http://jsonschema.net",
+  	"type": "object",
+  	"properties": {
+  		"name": {
+  			"id": "http://jsonschema.net/name",
+  			"type": "string"
+  		},
+      "type": {
+        "id": "http://jsonschema.net/type",
+        "type": "string"
+      },
+      "mainIngredient": {
+        "id": "http://jsonschema.net/mainIngredient",
+        "type": "string"
+      },
+      "persons": {
+        "id": "http://jsonschema.net/persons",
+        "type": "integer"
+      },
+      "notes": {
+        "id": "http://jsonschema.net/notes",
+        "type": "string"
+      },
+      "ingredients": {
+        "id": "http://jsonschema.net/ingredients",
+        "type": "array",
+        "items": {
+          "id": "http://jsonschema.net/ingredients/0",
+          "type": "string"
+
+        }
+      },
+      "preparation": {
+        "id": "http://jsonschema.net/preparation",
+        "type": "string"
+      }
+  	},
+  	"required": [
+  		"name",
+      "ingredients",
+      "preparation"
+  	]
+}
