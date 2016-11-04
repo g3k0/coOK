@@ -3,6 +3,7 @@
     "loopback#favicon": {}
   },
   "initial": {
+    "loopback-context#per-request": {},
     "compression": {},
     "cors": {
       "params": {
@@ -11,7 +12,6 @@
         "maxAge": 86400
       }
     },
-    "loopback-context#per-request": {},
     "helmet#xssFilter": {},
     "helmet#frameguard": {
       "params": [

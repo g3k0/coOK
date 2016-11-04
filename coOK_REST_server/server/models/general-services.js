@@ -18,12 +18,12 @@
 	module.exports = (Generalservices) => {
 
 		Generalservices.importRecipes = (recipes, cb) => {
-
+			log.info(`[Generalservices][importRecipes] received request with recipes to import...`);
 			let recipesSchema = require(`${__base}/schemas/recipes.json`);
 			let firstRecipe = recipes[0]; //TO DO - loop the validation to all recipes array request
 
 			requestUtils.validate(recipesSchema, firstRecipe, () => {
-
+				log.info(`[Generalservices][importRecipes] response sent`)
 				return cb(null,{results:'ok'});
 
 			}, (err) => {
