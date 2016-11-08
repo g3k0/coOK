@@ -10,5 +10,24 @@
       "reconnectTries": 100,
       "reconnectInterval": 1000
     }
+  },
+  "emailDs": {
+    "name": "emailDs",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "smtp.gmail.com",
+        "secure": true,
+        "port": 465,
+        "tls": {
+          "rejectUnauthorized": false
+        },
+        "auth": {
+          "user": "enpassant8@gmail.com",
+          "pass": "y7&19J#q2="
+        }
+      }
+    ]
   }
 }

@@ -33,6 +33,9 @@
     "dataSource": "db",
     "public": false
   },
+  "Email": {
+    "dataSource": "emailDs"
+  },
   "recipes": {
     "dataSource": "db",
     "public": true
@@ -43,7 +46,10 @@
   },
   "users": {
     "dataSource": "db",
-    "public": true
+    "public": true,
+    "options": {
+      "emailVerificationRequired": true
+    }
   },
   "groups": {
     "dataSource": "db",
