@@ -16,7 +16,7 @@
 
 	module.exports = (Users) => {
 		//send verification email after registration
-	    Users.afterRemote('create', (context, user, next) => {
+	    /*Users.afterRemote('create', (context, user, next) => {
 	    	log.info('[Users][create] user.afterRemote triggered');
 
 	    	let options = {
@@ -44,6 +44,6 @@
 	        		redirectToLinkText: 'Log in'
 	      		});
 	   		});
-	  	});
+	  	});*/
 	};
 })();
