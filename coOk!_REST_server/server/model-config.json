@@ -40,5 +40,13 @@
   "general-services": {
     "dataSource": null,
     "public": true
+  },
+  "users": {
+    "dataSource": "db",
+    "public": true
+  },
+  "groups": {
+    "dataSource": "db",
+    "public": true
   }
 }
