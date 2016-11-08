@@ -43,7 +43,11 @@
   },
   "users": {
     "dataSource": "db",
-    "public": true
+    "public": true,
+    "options": {
+    "realmRequired": true,
+    "realmDelimiter": ":"
+  }
   },
   "groups": {
     "dataSource": "db",

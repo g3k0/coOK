@@ -19,12 +19,14 @@
 	    	name: '',
 	    	surname: '',
 	    	email: '',
-	    	password: ''
+	    	password: '',
+	    	realm: ''
 	    });
 	};
 
 	let login = (req, res, next) => {
 		User.login({
+			realm: req.body.realm,
 	    	email: req.body.email,
 	    	password: req.body.password
 	    }, 'user', (err, token) => {
@@ -54,10 +56,19 @@
 	    });
 	};
 
+	let register = (req, res, next) => {
+		User.create(req.body, (err,user) => {
+			res.render('registered', {
+				email: user.email
+			});
+		});
+	};
+
 	/**
 	 * Functions exports
 	 */
 	module.exports.login = login;
 	module.exports.logout = logout;
 	module.exports.home = home;
+	module.exports.register = register;
 })();

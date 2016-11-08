@@ -41,6 +41,7 @@
 		router.get('/', auth.home);
 		router.post('/login', auth.login);
 		router.get('/logout', auth.logout);
+		router.post('/register', auth.register);
 
 		router.get('/', server.loopback.status());
 		server.use(router);
