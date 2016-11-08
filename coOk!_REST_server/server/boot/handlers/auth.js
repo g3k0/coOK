@@ -15,7 +15,6 @@
 	let User = app.models.user;
 
 	let home = (req, res, next) => {
-		let credentials = dsConfig.emailDs.transports[0].auth;
 	    res.render('login', {
 	      email: '',
 	      password: ''
