@@ -1,7 +1,7 @@
 <section>
   <form action="/login" method="post">
     <fieldset>
-      <legend>Login form</legend>
+      <legend>Modulo di login</legend>
       <div>
         <label for="email">Email:</label>
         <input type="text" name="email" value="<%= email %>"/>
@@ -20,17 +20,25 @@
 <section>
   <form action="/api/users" method="post">
     <fieldset>
-      <legend>Sign up form</legend>
+      <legend>modulo di registrazione</legend>
       <div>
-        <label for="email">Email:</label>
-        <input type="text" name="email" value="<%= email %>"/>
+        <label for="name">Nome:</label>
+        <input type="text" name="name" value="<%= name %>"/>
       </div>
       <div>
-        <label for="password">Password:</label>
-        <input type="password" name="password" value="<%= password %>"/>
+        <label for="surname">Cognome:</label>
+        <input type="text" name="surname" value="<%= surname %>"/>
       </div>
       <div>
-        <input type="submit" value="Sign up"/>
+        <label for="email">Email (obbligatorio):</label>
+        <input type="text" name="email" value="<%= email %>" required/>
+      </div>
+      <div>
+        <label for="password">Password (obbligatorio):</label>
+        <input type="password" name="password" value="<%= password %>" required />
+      </div>
+      <div>
+        <input type="submit" value="Registrati ai servizi"/>
       </div>
     </fieldset>
   </form>

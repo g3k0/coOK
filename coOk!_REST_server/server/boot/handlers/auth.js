@@ -16,30 +16,32 @@
 
 	let home = (req, res, next) => {
 	    res.render('login', {
-	      email: '',
-	      password: ''
+	    	name: '',
+	    	surname: '',
+	    	email: '',
+	    	password: ''
 	    });
 	};
 
 	let login = (req, res, next) => {
 		User.login({
-	      email: req.body.email,
-	      password: req.body.password
+	    	email: req.body.email,
+	    	password: req.body.password
 	    }, 'user', (err, token) => {
-	      if (err) {
-	        res.render('response', {
-	          title: 'Login failed',
-	          content: err,
-	          redirectTo: '/',
-	          redirectToLinkText: 'Try again'
-	        });
-	        return;
-	      }
+	    	if (err) {
+	        	res.render('response', {
+	        		title: 'Login failed',
+	        		content: err,
+	        		redirectTo: '/',
+	        		redirectToLinkText: 'Try again'
+	       		});
+	        	return;
+	      	}
 
-	      res.render('home', {
-	        email: req.body.email,
-	        accessToken: token.id
-	      });
+	    	res.render('home', {
+	        	email: req.body.email,
+	        	accessToken: token.id
+	      	});
 	    });
 	};
 
@@ -47,8 +49,8 @@
 		if (!req.query.access_token) return res.sendStatus(401);
 
 	    User.logout(req.query.access_token, (err) => {
-	      if (err) return next(err);
-	      res.redirect('/');
+	    	if (err) return next(err);
+	    	res.redirect('/');
 	    });
 	};
 
