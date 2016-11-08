@@ -11,8 +11,8 @@
 	/**
 	 * Module dependencies
 	 */
-	let log = require(`${__base}/lib/logging`);
-	let path = require('path');
+	/*let log = require(`${__base}/lib/logging`);
+	let path = require('path');*/
 
 	module.exports = (Users) => {
 		//send verification email after registration

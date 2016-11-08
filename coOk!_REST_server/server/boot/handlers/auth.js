@@ -12,7 +12,7 @@
 	 */
 	let app = require(`${__base}/server`);
 
-	let User = app.models.user;
+	let User = app.models.users;
 
 	let home = (req, res, next) => {
 	    res.render('login', {
@@ -44,9 +44,9 @@
 	};
 
 	let logout = (req, res, next) => {
-		if (!req.accessToken) return res.sendStatus(401);
+		if (!req.query.access_token) return res.sendStatus(401);
 
-	    User.logout(req.accessToken.id, (err) => {
+	    User.logout(req.query.access_token, (err) => {
 	      if (err) return next(err);
 	      res.redirect('/');
 	    });

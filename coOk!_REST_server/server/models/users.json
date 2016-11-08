@@ -24,7 +24,6 @@
     },
     "username": {
       "type": "string",
-      "required": true,
       "unique": true
     },
     "email": {
@@ -37,8 +36,7 @@
       "required": true
     },
     "group": {
-      "type": "string",
-      "required": true
+      "type": "string"
     }
   },
   "validations": [],
