@@ -15,13 +15,23 @@
 	let User = app.models.users;
 
 	let home = (req, res, next) => {
-	    res.render('login', {
-	    	name: '',
-	    	surname: '',
-	    	email: '',
-	    	password: '',
-	    	realm: ''
-	    });
+		// uncomment this define role restart server and go to home page to create a new ROle in role collection
+		/*let Role = app.models.Role;
+		Role.create({
+	      name: 'web'
+	    }, function(err, role) {
+	        if (err) cb(err);
+
+	        console.log(`Role ${JSON.stringify(role)} created`);*/
+  
+	        res.render('login', {
+		    	name: '',
+		    	surname: '',
+		    	email: '',
+		    	password: '',
+		    	realm: ''
+		    });
+	    //});
 	};
 
 	let login = (req, res, next) => {
