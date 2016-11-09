@@ -1,0 +1,165 @@
+<style type="text/css">
+  @import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+  html, body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #b6b6b6;
+    color: #2a4242;
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    color: #003333;
+  }
+
+  h1 {
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  section#description {
+    float:left;
+    width: 66%;
+    padding-left: 10px;
+  }
+
+  section#forms {
+    float:left;
+    width: 32%;
+  }
+
+  label {
+    display: inline-block;
+    margin-top: 7px;
+  }
+
+  footer {
+    clear: both;
+    font-size: 15px;
+    text-align: center;
+  }
+</style>
+
+<h1>DATABASE RICETTE</h1>
+
+<div id="container">
+
+  <section id="description">
+    <h2>Descrizione</h2>
+    <p>
+      La presente applicazione fornisce le API REST per accedere a un database di 28200 ricette in italiano divise nelle seguenti categorie:
+    </p>
+
+    <ul>
+      <li>Antipasti</li>
+      <li>Bevande</li>
+      <li>Carni</li>
+      <li>Contorni</li>
+      <li>Dessert</li>
+      <li>Pesce</li>
+      <li>Pollame</li>
+      <li>Primi</li>
+      <li>Salse</li>
+    </ul>
+
+    <p>
+      L'accesso ai dati &egrave; vincolato alla registrazione utente.<br />
+      A seguito di login viene fornito un token di sessione della durata di due settimane utilizzabile per accedere alle API. <br />
+      Per effettuare registrazione e login utilizzare gli appositi moduli sulla destra. 
+    </p>
+
+    <p>
+      <strong>End point: [GET] /api/recipes?access_token=&lt;token&gt;</strong>
+    </p>
+
+    <p>
+      Il content type della risposta è di tipo application/JSON e segue il seguente schema:<br />
+      {<br />
+        name: <i>String</i><br />
+        type: <i>String</i><br />
+        mainIngredient: <i>String</i><br />
+        persons: <i>Number</i><br />
+        ingredients: <i>Array</i><br />
+        notes: <i>String</i><br />
+        preparation: <i>String</i><br />
+      } 
+    </p>
+
+    <p>
+      E' possibile filtrare la risposta passando dei filtri in query string come nel seguente esempio:
+    </p>
+
+    <p>
+      <strong>[GET] /api/recipes?filter={"where":{"mainIngredient":"patate"}}&access_token=&lt;token&gt;</strong>
+    </p>
+
+    <p>
+      Per una lista completa dei filtri applicabili riferirsi alla <a href="http://loopback.io/doc/en/lb2/Where-filter.html" target="_blank">seguente documentazione</a> (in inglese).
+    </p>
+
+  </section>
+
+  <section id="forms">
+    <form action="/login" method="post">
+      <fieldset>
+        <legend>Modulo di login</legend>
+        <div>
+          <label for="email">Email:</label><br />
+          <input type="text" name="email" value="<%= email %>"/>
+        </div>
+        <div>
+          <label for="password">Password:</label> <br />
+          <input type="password" name="password" value="<%= password %>"/>
+        </div>
+        <div>
+          <input type="hidden" name="realm" value="web" />
+        </div>
+        <div style="margin-top:10px;">
+          <input type="submit" value="Login"/>
+        </div>
+      </fieldset>
+    </form>
+
+    <form action="/register" method="post">
+      <fieldset>
+        <legend>modulo di registrazione</legend>
+        <div>
+          <label for="name">Nome:</label><br />
+          <input type="text" name="name" value="<%= name %>"/>
+        </div>
+        <div>
+          <label for="surname">Cognome:</label><br />
+          <input type="text" name="surname" value="<%= surname %>"/>
+        </div>
+        <div>
+          <label for="email">Email (obbligatorio):</label><br />
+          <input type="text" name="email" value="<%= email %>" required/>
+        </div>
+        <div>
+          <label for="password">Password (obbligatorio):</label><br />
+          <input type="password" name="password" value="<%= password %>" required />
+        </div>
+        <div>
+          <input type="hidden" name="realm" value="web" />
+        </div>
+        <div>
+          <input type="hidden" name="group" value="web" />
+        </div>
+        <div style="margin-top:10px;">
+          <input type="submit" value="Registrati ai servizi"/>
+        </div>
+      </fieldset>
+    </form>
+  </section>
+
+</div>
+
+<footer>
+  <p>
+    Sviluppo database: Giorgio Musilli. Sviluppo software: Christian Palazzo.
+    Quest'opera è distribuita con Licenza <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribuzione 4.0 Internazionale</a>.
+  </p>
+  <p>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licenza Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+  </p>
+</footer>
