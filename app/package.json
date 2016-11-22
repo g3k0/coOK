@@ -1,8 +1,19 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "coOk!",
+  "version": "0.1.0",
+  "description": "Recipes suggestions based on ingredients",
+  "author": {
+    "name":"Christian Palazzo",
+    "email": "info@christianpalazzo.org",
+    "url": "http://www.christianpalazzo.org"
+  },
+  "bugs": {
+    "url": "http://www.christianpalazzo.org",
+    "email": "info@christianpalazzo.org"
+  },
+  "homepage": "",
   "private": true,
+  "license": "LICENSE.txt",
   "scripts": {
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve"
@@ -37,5 +48,8 @@
     "cordova-plugin-whitelist"
   ],
   "cordovaPlatforms": [],
-  "description": "app: An Ionic project"
+  "engines": {
+    "node": "~6.5.0",
+    "npm": "~3.10.3"
+  }
 }
