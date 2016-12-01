@@ -54,7 +54,7 @@
     "public": false
   },
   "appauth": {
-    "datasource": null,
+    "dataSource": null,
     "public": true
   }
 }
