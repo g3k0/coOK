@@ -1,0 +1,55 @@
+{
+  "name": "coOk!",
+  "version": "0.1.0",
+  "description": "Recipes suggestions based on ingredients",
+  "author": {
+    "name":"Christian Palazzo",
+    "email": "info@christianpalazzo.org",
+    "url": "http://www.christianpalazzo.org"
+  },
+  "bugs": {
+    "url": "http://www.christianpalazzo.org",
+    "email": "info@christianpalazzo.org"
+  },
+  "homepage": "",
+  "private": true,
+  "license": "LICENSE.txt",
+  "scripts": {
+    "ionic:build": "ionic-app-scripts build",
+    "ionic:serve": "ionic-app-scripts serve"
+  },
+  "dependencies": {
+    "@angular/common": "2.1.1",
+    "@angular/compiler": "2.1.1",
+    "@angular/compiler-cli": "2.1.1",
+    "@angular/core": "2.1.1",
+    "@angular/forms": "2.1.1",
+    "@angular/http": "2.1.1",
+    "@angular/platform-browser": "2.1.1",
+    "@angular/platform-browser-dynamic": "2.1.1",
+    "@angular/platform-server": "2.1.1",
+    "@ionic/storage": "1.1.6",
+    "ionic-angular": "2.0.0-rc.3",
+    "ionic-native": "2.2.3",
+    "ionicons": "3.0.0",
+    "rxjs": "5.0.0-beta.12",
+    "zone.js": "0.6.26"
+  },
+  "devDependencies": {
+    "@ionic/app-scripts": "0.0.45",
+    "typescript": "2.0.6"
+  },
+  "cordovaPlugins": [
+    "cordova-plugin-console",
+    "cordova-plugin-device",
+    "cordova-plugin-splashscreen",
+    "ionic-plugin-keyboard",
+    "cordova-plugin-statusbar",
+    "cordova-plugin-whitelist"
+  ],
+  "cordovaPlatforms": [],
+  "engines": {
+    "node": "~6.5.0",
+    "npm": "~3.10.3"
+  }
+}
