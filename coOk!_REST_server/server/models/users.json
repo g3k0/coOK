@@ -35,7 +35,8 @@
       "type": "string"
     },
     "appId": {
-      "type": "string"
+      "type": "string",
+      "unique": true
     }
   },
   "validations": [],

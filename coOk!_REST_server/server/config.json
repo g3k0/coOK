@@ -27,6 +27,7 @@
     "initialToken": "gfkoSif40dM3dLlm2",
     "group": "app",
     "realm": "app",
-    "emailSuffix": "@app.com"
+    "emailSuffix": "@app.com",
+    "password": "mobileApp"
   }
 }
