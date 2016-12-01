@@ -39,4 +39,31 @@ Web server API
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
 }
 
+* [GET] /api/appauth/register/:token
+  accetta: <token> String;
+
+  case 401: {
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"error": {
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": String,
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"status": Number,
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"message": String,
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"statusCode": Number,
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"stack": String
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+} 
+
+  case 500: {
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"error": {
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": String,
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"status": Number,
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"message": String,
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"statusCode": Number,
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"stack": String
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+} 
+
+  case 200: {
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"results": String
+  }
+
  
