@@ -33,6 +33,9 @@
     },
     "group": {
       "type": "string"
+    },
+    "appId": {
+      "type": "string"
     }
   },
   "validations": [],

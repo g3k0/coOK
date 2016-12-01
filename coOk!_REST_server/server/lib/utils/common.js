@@ -11,7 +11,7 @@
 
 		}
 
-		validate(schema, inputData, success, failure) {
+		validate (schema, inputData, success, failure) {
 			if (!schema) throw new Error('[Common][validate] Error missing schema data.');
 			if (!inputData) throw new Error('[Common][validate] Error missing input data.');
 
@@ -23,7 +23,7 @@
 			return success();
 		}
 
-		convertTextToJSON(text, propertySeparator) {
+		convertTextToJSON (text, propertySeparator) {
 			if (!text) throw new Error('[Common][convertTextToJSON] Error missing text data.');
 			if (!propertySeparator) throw new Error('[Common][convertTextToJSON] Error missing propertySeparator data.');
 
@@ -63,6 +63,19 @@
 			if (res.notes === ' -') res.notes = '';
 
 			return res;
+		}
+
+		/** 
+		 * App id string generation
+		 */
+		guid () {
+		  function s4 () {
+		    return Math.floor((1 + Math.random()) * 0x10000)
+		      .toString(16)
+		      .substring(1);
+		  }
+		  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+		    s4() + '-' + s4() + s4() + s4();
 		}
 
 	}

@@ -45,12 +45,16 @@
     "dataSource": "db",
     "public": false,
     "options": {
-    "realmRequired": true,
-    "realmDelimiter": ":"
-  }
+      "realmRequired": true,
+      "realmDelimiter": ":"
+    }
   },
   "groups": {
     "dataSource": "db",
     "public": false
+  },
+  "appauth": {
+    "datasource": null,
+    "public": true
   }
 }

@@ -22,5 +22,11 @@
     }
   },
   "legacyExplorer": false,
-  "cookieSecret": "tanto va la gatta al largo che s'affoga"
+  "cookieSecret": "tanto va la gatta al largo che s'affoga",
+  "mobileApp": {
+    "initialToken": "gfkoSif40dM3dLlm2",
+    "group": "app",
+    "realm": "app",
+    "emailSuffix": "@app.com"
+  }
 }

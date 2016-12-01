@@ -1,0 +1,37 @@
+{
+  "name": "appauth",
+  "plural": "appauth",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {
+    "register": {
+      "isStatic": true,
+      "accepts": [{
+        "arg": "token",
+        "type": "string"
+      }],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "object",
+          "root": true,
+          "description": "service response"
+        }
+      ],
+      "description": "mobile app registration",
+      "http": [
+        {
+          "path": "/register/:token",
+          "verb": "get"
+        }
+      ]
+    }
+  }
+}
