@@ -92,16 +92,14 @@
 			};
 
 			let loopbackLogin = (email) => {
-				let loopbackLogin = new Promise((resolve, reject) => {
-					app.models.User.login({
+				let loopbackLoginPromise = new Promise((resolve, reject) => {
+					app.models.users.login({
 				    	email: email,
-				    	password: app.get('mobileApp').password
+				    	password: app.get('mobileApp').password,
+				    	realm: app.get('mobileApp').realm
 				  	}, 'user', function(err, token) {
-				   		if (err) {
-				      		// TO DO 	
-				    	}
-				    	//TO DO
-				      	//accessToken: token.id
+				   		if (err) reject(err);
+				    	resolve(token.id);
 				    });
 				});
 				
@@ -114,19 +112,36 @@
 				//resolve
 				if (!user) {
 					log.info(`[Appauth][login] user not found. Stopping the login process...`);
-					err.status = 404;
+					err.statusCode = 404;
 					err.message = 'user not found';
 					return cb(err);
 				}
 				// I have the user object, now I do the Loopback login
 				log.info(`[Appauth][login] user found. Obtaining an access token fot the mobile app...`);
 
-				//TO DO
-				return cb(null, user);
+				loopbackLogin(user.email)
+				.then((token) => {
+					if (!token) {
+						err.statusCode = 404;
+						err.message = 'User not found';
+						log.info(`[Appauth][login] ${err}. Stopping the login process...`);
+						return cb(err);
+					}
+					return cb(null, {
+						results: token
+					});
+
+				}, (err) => {
+					//reject
+					log.error(`[Appauth][login] Error on user login collection: ${err}. Stopping the login process...`);
+					err.statusCode = 500;
+					err.message = 'Internal server error';
+					return cb(err);
+					});
 			}, (err) => {
 				//reject
 				log.error(`[Appauth][login] Error on querying the users collection: ${err}. Stopping the login process...`);
-				err.status = 500;
+				err.statusCode = 500;
 				err.message = 'Internal server error';
 				return cb(err);
 			});
