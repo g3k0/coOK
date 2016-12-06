@@ -37,7 +37,6 @@
 				recipeObj = commonUtils.convertTextToJSON(recipe, '-');
 				recipeObjs.push(recipeObj);
 			});
-			console.log(recipeObjs)
 
 			app.models.recipes.create(recipeObjs, (err) => {
 				if (err) {
