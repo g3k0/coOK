@@ -33,6 +33,10 @@
     },
     "group": {
       "type": "string"
+    },
+    "appId": {
+      "type": "string",
+      "unique": true
     }
   },
   "validations": [],
