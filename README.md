@@ -14,83 +14,81 @@ The web server is developed by Node.js version 4.6.1 and the mobile app is an hy
 Web server API
 --------------
 
-* [GET] /api/recipes?access_token=\<access-token\>
-  case 200: [{
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": String,
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": String,
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"mainIngredient": String,
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"persons": Number,
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"notes": String,
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"ingredients": [String],
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"preparation": String,
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": String
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//other objects
-  ]
+* [GET] /api/recipes?access_token=\<access-token\>  
+  case 200: [{  
+       "name": String,  
+       "type": String,  
+       "mainIngredient": String,  
+       "persons": Number,  
+       "notes": String,  
+       "ingredients": [String],  
+       "preparation": String,  
+       "id": String  
+    },  
+    //other objects  
+  ]  
   
-  case 401: {
-  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"error": {
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "Error",
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"status": 401,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"message": "Autorizzazione richiesta",
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"statusCode": 401,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"code": "AUTHORIZATION_REQUIRED",
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"stack": String
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-}
+  case 401: {  
+  	"error": {  
+    "name": "Error",  
+    "status": 401,  
+    "message": "Autorizzazione richiesta",  
+    "statusCode": 401,  
+    "code": "AUTHORIZATION_REQUIRED",  
+    "stack": String  
+  }  
+}  
 
-* [GET] /api/appauth/register/:token
-  accetta: \<token\> String;
+* [GET] /api/appauth/register/:token  
+  accetta: \<token\> String;  
 
-  case 401: {
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"error": {
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": String,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"status": Number,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"message": String,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"statusCode": Number,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"stack": String
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-} 
+  case 401: {  
+    "error": {  
+      "name": String,  
+      "status": Number,  
+      "message": String,  
+      "statusCode": Number,  
+      "stack": String  
+    }  
+  }  
 
-  case 500: {
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"error": {
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": String,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"status": Number,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"message": String,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"statusCode": Number,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"stack": String
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-} 
+  case 500: {  
+    "error": {  
+      "name": String,  
+      "status": Number,  
+      "message": String,  
+      "statusCode": Number,  
+      "stack": String  
+    }  
+  }  
 
-  case 200: {
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"results": String
-  }
+  case 200: {  
+    "results": String  
+  }  
 
-* [GET] /api/appauth/login/:appId
-accetta: \<appId\> String
+* [GET] /api/appauth/login/:appId  
+accetta: \<appId\> String  
 
-case 200: {
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"results": String
-  }
+case 200: {  
+  "results": String  
+}  
 
-case 404: {
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"error": {
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": String,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"status": Number,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"message": String,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"statusCode": Number,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"stack": String
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-} 
+case 404: {  
+  "error": {  
+    "name": String,  
+    "status": Number,  
+    "message": String,  
+    "statusCode": Number,  
+    "stack": String  
+  }  
+}  
 
-case 500: {
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"error": {
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": String,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"status": Number,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"message": String,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"statusCode": Number,
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"stack": String
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-} 
-
- 
+case 500: {  
+  "error": {  
+    "name": String,  
+    "status": Number,  
+    "message": String,  
+    "statusCode": Number,  
+    "stack": String  
+  }  
+}  

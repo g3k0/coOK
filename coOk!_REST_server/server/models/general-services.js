@@ -25,7 +25,7 @@
 		Generalservices.importRecipes = (cb) => {
 			log.info(`[Generalservices][importRecipes] received request with recipes to import...`);
 
-			let recipes = fs.readFileSync(`${__base}/uploads/ricette.txt`, 'utf8');
+			let recipes = fs.readFileSync(`${__base}/uploads/ricette`, 'utf8');
 			let recipesArray = recipes.split(':Ricette').filter((item) => {
 				return item.indexOf('Nome') > -1;
 			});
