@@ -1,18 +1,32 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
+import { TabsPage } from '../components/tabs/tabs';
+import { MenuPage } from '../components/menu/menu';
+import { HomePage } from '../components/home/home';
+import { FavoritesPage } from '../components/favorites/favorites';
+import { CalendarPage } from '../components/calendar/calendar';
+import {CalendarDetailPage} from '../components/calendar-detail/calendar-detail'
+import { RecipePage } from '../components/recipe/recipe';
+import { RecipesListPage } from '../components/recipes-list/recipes-list';
+import { InfoPage } from '../components/info/info';
+import { GuidePage } from '../components/guide/guide';
+import { VoteUsPage } from '../components/vote-us/vote-us';
 
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    TabsPage,
+    MenuPage,
     HomePage,
-    TabsPage
+    FavoritesPage,
+    CalendarPage,
+    CalendarDetailPage,
+    RecipePage,
+    RecipesListPage,
+    InfoPage,
+    GuidePage,
+    VoteUsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -20,10 +34,17 @@ import { TabsPage } from '../pages/tabs/tabs';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    TabsPage,
+    MenuPage,
     HomePage,
-    TabsPage
+    FavoritesPage,
+    CalendarPage,
+    CalendarDetailPage,
+    RecipePage,
+    RecipesListPage,
+    InfoPage,
+    GuidePage,
+    VoteUsPage
   ],
   providers: []
 })
