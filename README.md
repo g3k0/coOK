@@ -14,83 +14,81 @@ The web server is developed by Node.js version 4.6.1 and the mobile app is an hy
 Web server API
 --------------
 
-* [GET] /api/recipes?access_token=\<access-token\>
-  case 200: [{
-       "name": String,
-       "type": String,
-       "mainIngredient": String,
-       "persons": Number,
-       "notes": String,
-       "ingredients": [String],
-       "preparation": String,
-       "id": String
-    },
-    //other objects
-  ]
+* [GET] /api/recipes?access_token=\<access-token\>  
+  case 200: [{  
+       "name": String,  
+       "type": String,  
+       "mainIngredient": String,  
+       "persons": Number,  
+       "notes": String,  
+       "ingredients": [String],  
+       "preparation": String,  
+       "id": String  
+    },  
+    //other objects  
+  ]  
   
-  case 401: {
-  	"error": {
-    "name": "Error",
-    "status": 401,
-    "message": "Autorizzazione richiesta",
-    "statusCode": 401,
-    "code": "AUTHORIZATION_REQUIRED",
-    "stack": String
-  }
-}
+  case 401: {  
+  	"error": {  
+    "name": "Error",  
+    "status": 401,  
+    "message": "Autorizzazione richiesta",  
+    "statusCode": 401,  
+    "code": "AUTHORIZATION_REQUIRED",  
+    "stack": String  
+  }  
+}  
 
-* [GET] /api/appauth/register/:token
-  accetta: \<token\> String;
+* [GET] /api/appauth/register/:token  
+  accetta: \<token\> String;  
 
-  case 401: {
-    "error": {
-      "name": String,
-      "status": Number,
-      "message": String,
-      "statusCode": Number,
-      "stack": String
-    }
-  } 
+  case 401: {  
+    "error": {  
+      "name": String,  
+      "status": Number,  
+      "message": String,  
+      "statusCode": Number,  
+      "stack": String  
+    }  
+  }  
 
-  case 500: {
-    "error": {
-      "name": String,
-      "status": Number,
-      "message": String,
-      "statusCode": Number,
-      "stack": String
-    }
-  } 
+  case 500: {  
+    "error": {  
+      "name": String,  
+      "status": Number,  
+      "message": String,  
+      "statusCode": Number,  
+      "stack": String  
+    }  
+  }  
 
-  case 200: {
-    "results": String
-  }
+  case 200: {  
+    "results": String  
+  }  
 
-* [GET] /api/appauth/login/:appId
-accetta: \<appId\> String
+* [GET] /api/appauth/login/:appId  
+accetta: \<appId\> String  
 
-case 200: {
-  "results": String
-}
+case 200: {  
+  "results": String  
+}  
 
-case 404: {
-  "error": {
-    "name": String,
-    "status": Number,
-    "message": String,
-    "statusCode": Number,
-    "stack": String
-  }
-} 
+case 404: {  
+  "error": {  
+    "name": String,  
+    "status": Number,  
+    "message": String,  
+    "statusCode": Number,  
+    "stack": String  
+  }  
+}  
 
-case 500: {
-  "error": {
-    "name": String,
-    "status": Number,
-    "message": String,
-    "statusCode": Number,
-    "stack": String
-  }
-} 
-
- 
+case 500: {  
+  "error": {  
+    "name": String,  
+    "status": Number,  
+    "message": String,  
+    "statusCode": Number,  
+    "stack": String  
+  }  
+}  
