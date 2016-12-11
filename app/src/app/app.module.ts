@@ -6,12 +6,6 @@ import { MenuPage } from '../components/menu/menu';
 import { HomePage } from '../components/home/home';
 import { FavoritesPage } from '../components/favorites/favorites';
 import { CalendarPage } from '../components/calendar/calendar';
-import {CalendarDetailPage} from '../components/calendar-detail/calendar-detail'
-import { RecipePage } from '../components/recipe/recipe';
-import { RecipesListPage } from '../components/recipes-list/recipes-list';
-import { InfoPage } from '../components/info/info';
-import { GuidePage } from '../components/guide/guide';
-import { VoteUsPage } from '../components/vote-us/vote-us';
 
 @NgModule({
   declarations: [
@@ -20,13 +14,7 @@ import { VoteUsPage } from '../components/vote-us/vote-us';
     MenuPage,
     HomePage,
     FavoritesPage,
-    CalendarPage,
-    CalendarDetailPage,
-    RecipePage,
-    RecipesListPage,
-    InfoPage,
-    GuidePage,
-    VoteUsPage
+    CalendarPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -38,13 +26,7 @@ import { VoteUsPage } from '../components/vote-us/vote-us';
     MenuPage,
     HomePage,
     FavoritesPage,
-    CalendarPage,
-    CalendarDetailPage,
-    RecipePage,
-    RecipesListPage,
-    InfoPage,
-    GuidePage,
-    VoteUsPage
+    CalendarPage
   ],
   providers: []
 })
