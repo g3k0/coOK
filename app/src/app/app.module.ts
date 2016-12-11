@@ -17,7 +17,7 @@ import { CalendarPage } from '../components/calendar/calendar';
     CalendarPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp,{tabsPlacement:'top'})
   ],
   bootstrap: [IonicApp],
   entryComponents: [
