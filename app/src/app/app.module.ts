@@ -1,29 +1,32 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
+import { TabsPage } from '../components/tabs/tabs';
+import { MenuPage } from '../components/menu/menu';
+import { HomePage } from '../components/home/home';
+import { FavoritesPage } from '../components/favorites/favorites';
+import { CalendarPage } from '../components/calendar/calendar';
 
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    TabsPage,
+    MenuPage,
     HomePage,
-    TabsPage
+    FavoritesPage,
+    CalendarPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp,{tabsPlacement:'top'})
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    TabsPage,
+    MenuPage,
     HomePage,
-    TabsPage
+    FavoritesPage,
+    CalendarPage
   ],
   providers: []
 })
