@@ -9,13 +9,14 @@ import { FavoritesPage } from '../favorites/favorites';
   selector: 'page-tabs',
   templateUrl: 'tabs.html'
 })
+
 export class TabsPage {
   // this tells the tabs component which Pages
   // should be each tab's root Page
-  tab1Root: any = MenuPage;
-  tab2Root: any = HomePage;
-  tab3Root: any = FavoritesPage;
-  tab4Root: any = CalendarPage;
+  tab4Root: any = MenuPage;
+  tab1Root: any = HomePage;
+  tab2Root: any = FavoritesPage;
+  tab3Root: any = CalendarPage;
 
   constructor() {
 
