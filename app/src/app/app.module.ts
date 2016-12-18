@@ -8,26 +8,29 @@ import { FavoritesPage } from '../components/favorites/favorites';
 import { CalendarPage } from '../components/calendar/calendar';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    TabsPage,
-    MenuPage,
-    HomePage,
-    FavoritesPage,
-    CalendarPage
-  ],
-  imports: [
-    IonicModule.forRoot(MyApp,{tabsPlacement:'top'})
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    TabsPage,
-    MenuPage,
-    HomePage,
-    FavoritesPage,
-    CalendarPage
-  ],
-  providers: []
+    declarations: [
+        MyApp,
+        TabsPage,
+        MenuPage,
+        HomePage,
+        FavoritesPage,
+        CalendarPage
+    ],
+    imports: [
+        IonicModule.forRoot(MyApp,{
+            tabsPlacement: 'top'
+        })
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
+        TabsPage,
+        MenuPage,
+        HomePage,
+        FavoritesPage,
+        CalendarPage
+    ],
+    providers: []
 })
+
 export class AppModule {}

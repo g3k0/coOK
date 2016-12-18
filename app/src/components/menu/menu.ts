@@ -3,7 +3,6 @@ import { InfoPage } from '../info/info';
 import { GuidePage } from '../guide/guide';
 import { VoteUsPage } from '../vote-us/vote-us';
 
-
 @Component({
   selector: 'page-menu',
   templateUrl: 'menu.html',
@@ -15,8 +14,8 @@ import { VoteUsPage } from '../vote-us/vote-us';
 })
 export class MenuPage {
 
-  constructor() {
+ constructor() {
 
-  }
+	}
 
 }
