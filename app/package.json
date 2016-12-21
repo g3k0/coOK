@@ -1,53 +1,23 @@
 {
-  "name": "coOk",
-  "version": "0.3.0",
-  "description": "rich cook recipes application",
-  "author": {
-    "name": "Christian Palazzo",
-    "email": "info@christianpalazzo.org",
-    "url": "http://www.christianpalazzo.org"
-  },
-  "bugs": {
-    "url": "http://www.christianpalazzo.org/contatti",
-    "email": "info@christianpalazzo.org"
-  },
+  "name": "ionic-tabs-plus-sidemenu",
+  "version": "1.0.0",
+  "description": "ionic-tabs-plus-sidemenu: An Ionic project",
   "dependencies": {
-    "angular2": "*",
-    "es6-promise": "*",
-    "es6-shim": "*",
-    "ionic-angular": "*",
-    "ionic-native": "*",
-    "ionicons": "*",
-    "reflect-metadata": "*",
-    "rxjs": "*",
-    "zone.js": "*"
+    "gulp": "*",
+    "gulp-concat": "*",
+    "gulp-minify-css": "*",
+    "gulp-rename": "*",
+    "gulp-sass": "*"
   },
   "devDependencies": {
-    "del": "*",
-    "gulp": "*",
-    "gulp-watch": "*",
-    "ionic-gulp-browserify-typescript": "*",
-    "ionic-gulp-fonts-copy": "*",
-    "ionic-gulp-html-copy": "*",
-    "ionic-gulp-sass-build": "*",
-    "ionic-gulp-scripts-copy": "*"
+    "bower": "*",
+    "gulp-util": "*",
+    "shelljs": "*"
   },
   "cordovaPlugins": [
-    "cordova-plugin-device",
-    "cordova-plugin-console",
-    "cordova-plugin-whitelist",
-    "cordova-plugin-splashscreen",
-    "cordova-plugin-statusbar",
-    "ionic-plugin-keyboard"
+    "com.ionic.keyboard"
   ],
-  "cordovaPlatforms": [],
-  "engines": {
-    "node": "~4.6.1",
-    "npm": "~3.10.5"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/g3k0/coOK.git"
-  },
-  "license": "LICENSE.txt"
+  "cordovaPlatforms": [
+    "ios"
+  ]
 }

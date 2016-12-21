@@ -1,14 +1,15 @@
-# Ionic 2 Side Menu and Tabs with typescript
+Ionic Tabs + SideMenu
+===================
 
-## Getting Started
+This is a starter app for those wishing to have both tabs and a side menu using the Ionic Framework.
 
-* Clone this repository.
-* Run `npm install` from the project root.
-* Install the ionic CLI (`npm install -g ionic@beta`).
-* Run `ionic serve` or `ionic serve --lab` in a terminal from the project root.
-* :D
+[Demo](http://codepen.io/loringdodge/pen/vOrRpV)
+
+![Screenshot](screenshots/iphone.png)
 
 
-## Problem with new beta version?
 
-Please install a new Ionic 2 project and copy `app` folder into this new project.
+
+
+
+

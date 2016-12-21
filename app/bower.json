@@ -1,20 +1,7 @@
 {
-  "name": "coOk",
-  "authors": [
-    "Palazzo Christian <christian.palazzo@aizoon.it>"
-  ],
-  "description": "",
-  "main": "",
-  "moduleType": [],
-  "license": "",
-  "homepage": "",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {}
+  "name": "HelloIonic",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.0.1"
+  }
 }
