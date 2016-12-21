@@ -1,4 +1,16 @@
 {
+  "name": "coOk",
+  "version": "0.3.0",
+  "description": "Rich cook recipes application",
+  "author": {
+    "name": "Christian Palazzo",
+    "email": "info@christianpalazzo.org",
+    "url": "http://www.christianpalazzo.org"
+  },
+  "bugs": {
+    "url": "http://www.christianpalazzo.org/contatti",
+    "email": "info@christianpalazzo.org"
+  },
   "dependencies": {
     "@angular/common": "2.0.0-rc.4",
     "@angular/compiler": "2.0.0-rc.4",
@@ -28,8 +40,6 @@
     "tslint-ionic-rules": "0.0.4",
     "run-sequence": "1.1.5"
   },
-  "name": "sidemenutabs",
-  "description": "SidemenuTabs: An Ionic project",
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",
@@ -38,5 +48,14 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [],
+  "engines": {
+    "node": "~6.9.1",
+    "npm": "~3.10.5"
+  },
+  "license": "LICENSE.txt",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g3k0/coOK.git"
+  }
 }
