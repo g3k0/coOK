@@ -1,4 +1,16 @@
 {
+  "name": "coOk!",
+  "version": "0.3.0",
+  "description": "rich cook recipes application",
+  "author": {
+    "name": "Christian Palazzo",
+    "email": "info@christianpalazzo.org",
+    "url": "http://www.christianpalazzo.org"
+  },
+  "bugs": {
+    "url": "http://www.christianpalazzo.org/contatti",
+    "email": "info@christianpalazzo.org"
+  },
   "dependencies": {
     "angular2": "*",
     "es6-promise": "*",
@@ -20,8 +32,6 @@
     "ionic-gulp-sass-build": "*",
     "ionic-gulp-scripts-copy": "*"
   },
-  "name": "tabs-and-menu",
-  "description": "tabs-and-menu: An Ionic project",
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",
@@ -30,5 +40,14 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [],
+  "engines": {
+    "node": "~4.6.1",
+    "npm": "~3.10.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g3k0/coOK.git"
+  },
+  "license": "LICENSE.txt"
 }

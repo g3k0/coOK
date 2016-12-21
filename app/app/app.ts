@@ -1,10 +1,10 @@
 import 'es6-shim';
 import {App, IonicApp, Platform, MenuController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
-import {HelloIonicPage} from './pages/hello-ionic/hello-ionic';
-import {ListPage} from './pages/list/list';
+import {SearchPage} from './pages/search/search';
+import {CalendarPage} from './pages/calendar/calendar';
 import {TabsPage} from './pages/tabs/tabs';
-import {LoginPage} from './pages/login/login';
+import {FavoritesPage} from './pages/favorites/favorites';
 
 
 @App({
@@ -27,9 +27,9 @@ class MyApp {
 
     // set our app's pages
     this.pages = [
-      { title: 'Home', component: HelloIonicPage },
-      { title: 'List Example', component: ListPage },
-      { title: 'Login', component: LoginPage },
+      { title: 'Search', component: SearchPage },
+      { title: 'Calendar', component: CalendarPage },
+      { title: 'Favorites', component: FavoritesPage },
       { title: 'Tabs', component: TabsPage }
     ];
   }

@@ -1,7 +1,7 @@
 import {Page} from 'ionic-angular';
-import {HelloIonicPage} from '../hello-ionic/hello-ionic';
-import {LoginPage} from '../login/login';
-import {ListPage} from '../list/list';
+import {SearchPage} from '../search/search';
+import {FavoritesPage} from '../favorites/favorites';
+import {CalendarPage} from '../calendar/calendar';
 
 import {Type} from 'angular2/core';
 
@@ -10,9 +10,9 @@ import {Type} from 'angular2/core';
 })
 export class TabsPage {
 
-  tab1Root: any = HelloIonicPage;
-  tab2Root: any = LoginPage;
-  tab3Root: Type = ListPage;
+  tab1Root: any = SearchPage;
+  tab2Root: any = FavoritesPage;
+  tab3Root: Type = CalendarPage;
 
   constructor() {
 
