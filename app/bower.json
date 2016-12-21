@@ -1,19 +1,14 @@
 {
-  "name": "cook",
-  "description": "Hybrid mobile app of recipes",
-  "main": [],
-  "dependencies": {
-    "jquery": "^3.1.1",
-    "jquery-ui": "^1.12.1",
-    "ionic": "^1.3.2"
-  },
-  "devDependencies": {},
-  "moduleType": [],
-  "keywords": [],
+  "name": "coOk",
   "authors": [
-    "Christian Palazzo <info@christianpalazzo.org>"
+    "Palazzo Christian <christian.palazzo@aizoon.it>"
   ],
-  "license": "MIT",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "",
+  "homepage": "",
+  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
@@ -21,5 +16,5 @@
     "test",
     "tests"
   ],
-  "private": true
+  "dependencies": {}
 }
