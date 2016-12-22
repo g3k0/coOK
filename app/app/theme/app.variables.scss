@@ -26,10 +26,27 @@
 // are different per mode.
 
 $colors: (
-  primary:    #387ef5,
-  secondary:  #32db64,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222,
-  favorite:   #69BB7B
+  primary: rgba(79, 164, 225, 1), 
+  secondary: rgba(248, 44, 44, 1),
+  fontColor: rgba(255, 255, 255, 1)
 );
+
+// -------------------------------------------------------------------------------
+
+/**
+ * TABS
+ */
+$tabs-md-background: rgba(248, 44, 44, 1);
+$tabs-ios-background: rgba(248, 44, 44, 1);
+$tabs-wp-background: rgba(248, 44, 44, 1);
+$tabs-background: rgba(248, 44, 44, 1);
+
+$tabs-md-tab-color-active: rgba(255, 255, 255, 1);
+$tabs-ios-tab-color-active: rgba(255, 255, 255, 1);
+$tabs-wp-tab-color-active: rgba(255, 255, 255, 1);
+$tabs-tab-color-active: rgba(255, 255, 255, 1);
+
+$tabs-md-tab-color: rgba(142, 142, 142 1);
+$tabs-ios-tab-color: rgba(142, 142, 142 1);
+$tabs-wp-tab-color: rgba(142, 142, 142 1);
+$tabs-tab-color: rgba(142, 142, 142 1);
