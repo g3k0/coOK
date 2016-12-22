@@ -3,9 +3,9 @@ import {Platform, ionicBootstrap, MenuController, NavController} from 'ionic-ang
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
 
-import {SearchPage} from './pages/search/search';
-import {FavoritesPage} from './pages/favorites/favorites';
-import {CalendarPage} from './pages/calendar/calendar';
+import {InfoPage} from './pages/info/info';
+import {GuidePage} from './pages/guide/guide';
+import {VotePage} from './pages/vote/vote';
 
 @Component({
   templateUrl: 'build/app.html',
@@ -19,9 +19,9 @@ export class MyApp {
   constructor(private platform: Platform, private menu: MenuController) {
     this.menu = menu;
     this.pages = [
-        { title: 'Search', component: SearchPage },
-        { title: 'Favorites', component: FavoritesPage },
-        { title: 'Calendar', component: CalendarPage }
+        { title: 'Guida', component: GuidePage },
+        { title: 'Info', component: InfoPage },
+        { title: 'Votaci', component: VotePage }
     ];
     this.rootPage = TabsPage;
 
