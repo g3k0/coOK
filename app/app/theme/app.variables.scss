@@ -33,25 +33,24 @@ $colors: (
 
 // -------------------------------------------------------------------------------
 
-/** 
- * TOOLBAR
- */
-
-
 /**
  * TABS
  */
-$tabs-md-background: rgba(248, 44, 44, 1);
-$tabs-ios-background: rgba(248, 44, 44, 1);
-$tabs-wp-background: rgba(248, 44, 44, 1);
-$tabs-background: rgba(248, 44, 44, 1);
+$tabs-md-background: color($colors, secondary, base);
+$tabs-ios-background: color($colors, secondary, base);
+$tabs-wp-background: color($colors, secondary, base);
+$tabs-background: color($colors, secondary, base);
 
-$tabs-md-tab-color-active: rgba(255, 255, 255, 1);
-$tabs-ios-tab-color-active: rgba(255, 255, 255, 1);
-$tabs-wp-tab-color-active: rgba(255, 255, 255, 1);
-$tabs-tab-color-active: rgba(255, 255, 255, 1);
+$tabs-md-tab-color-active: color($colors, primary, base);
+$tabs-ios-tab-color-active: color($colors, primary, base);
+$tabs-wp-tab-color-active: color($colors, primary, base);
+$tabs-tab-color-active: color($colors, primary, base);
 
-$tabs-md-tab-color: rgba(142, 142, 142 1);
-$tabs-ios-tab-color: rgba(142, 142, 142 1);
-$tabs-wp-tab-color: rgba(142, 142, 142 1);
-$tabs-tab-color: rgba(142, 142, 142 1);
+$tabs-md-tab-color: color($colors, fontColor, base);
+$tabs-ios-tab-color: color($colors, fontColor, base);
+$tabs-wp-tab-color: color($colors, fontColor, base);
+$tabs-tab-color: color($colors, fontColor, base);
+
+/**
+ * MENU
+ */
