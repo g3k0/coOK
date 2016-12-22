@@ -54,3 +54,29 @@ $tabs-tab-color: color($colors, fontColor, base);
 /**
  * MENU
  */
+.menu-header {
+	div {
+		background: color($colors, primary, base);
+		color: color($colors, fontColor, base);
+	}
+}
+
+.menu-content {
+	background: color($colors, secondary, base);
+	ion-list {
+		.item { 
+			background: color($colors, secondary, base);
+			color: color($colors, fontColor, base);
+			.item-inner {
+				border: none;
+				div {
+					font-size: 2rem;
+				}
+			}
+		}
+	}
+}
+
+ion-list > .item:last-child, ion-list > .item-wrapper:last-child .item {
+	border-bottom: none !important;
+}

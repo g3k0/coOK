@@ -19,9 +19,9 @@ export class MyApp {
   constructor(private platform: Platform, private menu: MenuController) {
     this.menu = menu;
     this.pages = [
-        { title: 'Guida', component: GuidePage },
-        { title: 'Info', component: InfoPage },
-        { title: 'Votaci', component: VotePage }
+        { title: 'Guida', component: GuidePage, icon: 'help' },
+        { title: 'Info', component: InfoPage, icon: 'information-circle' },
+        { title: 'Votaci', component: VotePage, icon: 'star-outline' }
     ];
     this.rootPage = TabsPage;
 
