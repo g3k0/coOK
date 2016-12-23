@@ -16,7 +16,7 @@
 	}
 
 	.form-wrapper {
-	    width: 17em;
+	    width: 21.8em;
 	    padding: 12px;
 	    margin: 2em auto 1.5em auto;
 	    background: rgba(68,68,68,1);
@@ -30,12 +30,11 @@
 	}
 
 	.form-wrapper input {
-	    width: 11.01em;
+	    width: 15.8em;
 	    height: 1.89em;
 	    padding: .5em;
 	    float: left;    
-	    font: bold 1em Raleway-Regular;
-	    color: black;
+	    color: color($colors, inverseFontColor, base);
 	    border: none;
 	    background: rgba(238,238,238,1);
 	    -moz-border-radius: 3px 0 0 3px;
