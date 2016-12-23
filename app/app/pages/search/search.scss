@@ -128,12 +128,8 @@
 	/**
 	 * Ingredients boxes
 	 */
-	/*.ingredients {
-		text-align: center;
-		padding: 0 .6em;
-	}*/
-	
 	ion-grid.ingredients {
+		padding: 0;
 		ion-row {
 			margin-top: -.5em;
 			margin-bottom: -.5em;
