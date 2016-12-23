@@ -42,5 +42,86 @@
 	<button ion-button color="danger" small>
         Reset filtri
     </button>
-    
+
+    <div id="accordion" class="filters">
+        <h3>Nome Ricetta</h3>
+        <div>
+            <form>
+                <input class="recipe-name" type="text" placeholder="Inserisci...">
+            </form>    
+        </div>
+
+        <h3>Ingrediente principale</h3>
+        <div>
+            <form>
+                <input class="main-ingredient" type="text" placeholder="Inserisci...">
+            </form>    
+        </div>
+
+        <h3>Tipo di piatto</h3>
+        <div>
+            <div class="row dishes">
+                <div class="col-xs-6 col-sm-6 col-md-6">Bevande</div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <input type="checkbox" data-toggle="toggle">
+                </div>
+            </div>
+            <div class="row dishes">
+                <div class="col-xs-6 col-sm-6 col-md-6">Antipasti</div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <input type="checkbox" data-toggle="toggle">
+                </div>
+            </div>
+            <div class="row dishes">
+                <div class="col-xs-6 col-sm-6 col-md-6">Primi</div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <input type="checkbox" data-toggle="toggle">
+                </div>
+            </div>
+            <div class="row dishes">
+                <div class="col-xs-6 col-sm-6 col-md-6">Carni</div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <input type="checkbox" data-toggle="toggle">
+                </div>
+            </div>
+            <div class="row dishes">
+                <div class="col-xs-6 col-sm-6 col-md-6">Pollame</div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <input type="checkbox" data-toggle="toggle">
+                </div>
+            </div>
+            <div class="row dishes">
+                <div class="col-xs-6 col-sm-6 col-md-6">Pesce</div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <input type="checkbox" data-toggle="toggle">
+                </div>
+            </div>
+            <div class="row dishes">
+                <div class="col-xs-6 col-sm-6 col-md-6">Contorni</div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <input type="checkbox" data-toggle="toggle">
+                </div>
+            </div>
+            <div class="row dishes">
+                <div class="col-xs-6 col-sm-6 col-md-6">Salse</div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <input type="checkbox" data-toggle="toggle">
+                </div>
+            </div>
+            <div class="row dishes">
+                <div class="col-xs-6 col-sm-6 col-md-6">Dolci</div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <input type="checkbox" data-toggle="toggle">
+                </div>
+            </div>
+        </div>
+
+        <h3>Numero di persone</h3>
+        <div>
+            <div id="slider">
+                <div id="custom-handle" class="ui-slider-handle ui-slider-horizontal"></div>
+            </div>
+        </div>
+    </div>
+
 </ion-content>

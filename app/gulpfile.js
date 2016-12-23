@@ -2,6 +2,7 @@ var gulp = require('gulp'),
     gulpWatch = require('gulp-watch'),
     del = require('del'),
     runSequence = require('run-sequence'),
+    gulpConcat = require('gulp-concat'),
     argv = process.argv;
 
 
@@ -38,7 +39,7 @@ var isRelease = argv.indexOf('--release') > -1;
 
 gulp.task('watch', ['clean'], function(done){
   runSequence(
-    ['sass', 'html', 'fonts', 'scripts'],
+    ['sass', 'html', 'fonts', 'scripts', 'extlibs'],
     function(){
       gulpWatch('app/**/*.scss', function(){ gulp.start('sass'); });
       gulpWatch('app/**/*.html', function(){ gulp.start('html'); });
@@ -49,7 +50,7 @@ gulp.task('watch', ['clean'], function(done){
 
 gulp.task('build', ['clean'], function(done){
   runSequence(
-    ['sass', 'html', 'fonts', 'scripts'],
+    ['sass', 'html', 'fonts', 'scripts', 'extlibs'],
     function(){
       buildBrowserify({
         minify: isRelease,
@@ -65,7 +66,9 @@ gulp.task('build', ['clean'], function(done){
 });
 
 gulp.task('sass', buildSass);
+
 gulp.task('html', copyHTML);
+
 gulp.task('fonts', function(){
   return copyFonts({
     src: [
@@ -75,8 +78,17 @@ gulp.task('fonts', function(){
     dest: 'www/build/fonts'
   });
 });
+
 gulp.task('scripts', copyScripts);
+
+gulp.task('extlibs', function() {
+   return gulp.src(['app/extlibs/**.js'])
+     .pipe(gulpConcat('custom.js'))
+     .pipe(gulp.dest('www/build/js'));
+});
+
 gulp.task('clean', function(){
   return del('www/build');
 });
+
 gulp.task('lint', tslint);
