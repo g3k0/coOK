@@ -1,4 +1,8 @@
 .search {
+
+	/**
+	 * Ingredients input
+	 */
 	background : color($colors, primary, base);
 	color: color($colors, fontColor, base);
 
@@ -18,7 +22,7 @@
 	.form-wrapper {
 	    width: 21.8em;
 	    padding: 12px;
-	    margin: 2em auto 1.5em auto;
+	    margin: 1em auto;
 	    background: rgba(68,68,68,1);
 	    background: rgba(0,0,0,.2);
 	    -moz-border-radius: 10px;
@@ -44,7 +48,7 @@
 
 	.form-wrapper input:focus {
 	    outline: 0;
-	    background: rgba(255,255,255,1);
+	    background: color($colors, fontColor, base);
 	    -moz-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
 	    -webkit-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
 	    box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
@@ -80,9 +84,9 @@
 	    height: 3.2em;
 	    width: 7.1em;
 	    font: bold .6em Raleway-Regular;
-	    color: rgba(255,255,255,1);
+	    color: color($colors, fontColor, base);
 	    text-transform: uppercase;
-	    background: rgba(248,44,44,1);
+	    background: color($colors, secondary, base);
 	    -moz-border-radius: 0 3px 3px 0;
 	    -webkit-border-radius: 0 3px 3px 0;
 	    border-radius: 0 3px 3px 0;      
@@ -119,5 +123,33 @@
 	.form-wrapper button::-moz-focus-inner {
 	    border: 0;
 	    padding: 0;
+	}
+
+	/**
+	 * Ingredients boxes
+	 */
+	/*.ingredients {
+		text-align: center;
+		padding: 0 .6em;
+	}*/
+	
+	ion-grid.ingredients {
+		ion-row {
+			margin-top: -.5em;
+			margin-bottom: -.5em;
+			ion-col {
+				padding: .3em;
+				p {
+					font-family: Architects_Daughter !important;
+					font-size: .9em;
+					padding: .5em;
+					font-weight: bold;
+					text-align: center;
+					color: color($colors, fontColor, base);
+					background-color: color($colors, secondary, base);
+					border-radius: 10px;
+				}  
+			}
+		}
 	}
 }
