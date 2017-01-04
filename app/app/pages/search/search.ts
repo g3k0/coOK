@@ -142,7 +142,7 @@ export class SearchPage {
 	    let alert = this.alertCtrl.create();
     	alert.setTitle('Numero di persone');
 
-    	let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    	let numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
     	for (let num of numbers) {
     		alert.addInput({
 	      		type: 'radio',
