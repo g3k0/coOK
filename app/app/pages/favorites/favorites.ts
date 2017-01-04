@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
   templateUrl: 'build/pages/favorites/favorites.html'
 })
 export class FavoritesPage {
-	searchQuery: string = '';
+	//searchQuery: string = '';
 	items: any[];
 
 	constructor(public http: Http) {

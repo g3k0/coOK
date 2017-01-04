@@ -1,4 +1,26 @@
 .favorites {
 	background : color($colors, primary, base);
 	color: color($colors, fontColor, base);
+
+	ion-searchbar {
+		padding: 0 0 8px 0;
+	}
+
+	ion-item {
+		margin-bottom: .5em;
+		div {
+			padding-right: 0 !important;
+			div {
+				ion-label {
+					font-size: .7em;
+				}
+				ion-icon {
+					display: inline-block;
+					float: right;
+					font-size: 1.5em;
+					margin-right: .8em;
+				}
+			}
+		}
+	}
 }
