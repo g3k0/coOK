@@ -149,6 +149,31 @@
 		}
 	}
 
+	/**
+	 * FILTERS
+	 */
+	.filters {
+		margin: .2em;
+		width: 98%;
+
+		ion-list {
+			button.item {
+				ion-icon {
+					font-size: 1em;
+					margin-top: 1em;
+				}
+				div.item-inner {
+					margin-left: .5em;
+					div.input-wrapper {
+						ion-label {
+							font-size: .8em;
+						}
+					}
+				}
+			}
+		}
+	}
+
 	/** 
 	 * FILTERS ACCORDION
 	 */
