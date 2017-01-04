@@ -1,3 +1,13 @@
+@font-face {
+    font-family: Raleway;
+    src: url('../fonts/Raleway/Raleway-Bold.ttf');
+}
+
+@font-face {
+    font-family: Architects_Daughter;
+    src: url('../fonts/Architects_Daughter/ArchitectsDaughter.ttf');
+}
+
 // http://ionicframework.com/docs/v2/theming/
 
 // Ionic Shared Functions
@@ -28,7 +38,10 @@
 $colors: (
   primary: rgba(79, 164, 225, 1), 
   secondary: rgba(248, 44, 44, 1),
-  fontColor: rgba(255, 255, 255, 1)
+  fontColor: rgba(255, 255, 255, 1),
+  inverseFontColor: rgba(100, 100, 100, 1),
+  danger: rgba(255, 0, 0, 1),
+  success: rgba(34, 216, 68, 1)
 );
 
 // -------------------------------------------------------------------------------
@@ -50,6 +63,13 @@ $tabs-md-tab-color: color($colors, fontColor, base);
 $tabs-ios-tab-color: color($colors, fontColor, base);
 $tabs-wp-tab-color: color($colors, fontColor, base);
 $tabs-tab-color: color($colors, fontColor, base);
+
+/**
+ * GENERAL RULES
+ */
+html, body {
+	font-family: Raleway !important;  
+}
 
 /**
  * MENU

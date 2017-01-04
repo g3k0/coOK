@@ -8,5 +8,73 @@
 </ion-header>
 
 <ion-content padding class="search">
-  <h3>Cerca Ricette</h3>
+	<form class="form-wrapper cf">
+        <input type="text" placeholder="Inserisci gli ingredienti...">
+        <button type="submit">Inserisci</button>
+    </form>
+
+    <ion-grid class="ingredients">
+		<ion-row>
+			<ion-col width-25>
+				<p>Patate <span>x</span></p>
+			</ion-col>
+			<ion-col width-25>
+				<p>Carote <span>x</span></p>
+			</ion-col>
+			<ion-col width-25>
+				<p>Burro <span>x</span></p>
+			</ion-col>
+			<ion-col width-25>
+				<p>Ricotta <span>x</span></p>
+			</ion-col>
+		</ion-row>
+
+		<ion-row>
+			<ion-col width-25>
+				<p>Fettine di carne <span>x</span></p>
+			</ion-col>
+			<ion-col width-25>
+				<p>Insalata <span>x</span></p>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+    
+    <ion-card class="filters">
+
+        <ion-card-header>
+            Filtri
+        </ion-card-header>
+
+        <ion-list>
+
+            <button ion-item (click)="recipeName()">
+                <ion-icon name="md-create" item-left></ion-icon>
+                Nome Ricetta
+            </button>
+
+            <button ion-item (click)="mainIngredient()">
+                <ion-icon name="md-pizza" item-left></ion-icon>
+                Ingrediente principale
+            </button>
+
+            <button ion-item (click)="recipeType()">
+                <ion-icon name="md-restaurant" item-left></ion-icon>
+                Tipo di piatto
+            </button>
+
+            <button ion-item (click)="persons()">
+                <ion-icon name="md-people" item-left></ion-icon>
+                Numero di persone
+            </button>
+
+        </ion-list>
+
+    </ion-card>
+
+    <button ion-button color="secondary" small>
+        Reset filtri
+    </button>
+
+    <button ion-button color="success" class="search-button">Cerca</button>
+
 </ion-content>
