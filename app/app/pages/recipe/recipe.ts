@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {ViewController} from 'ionic-angular';
 
 @Component({
 	templateUrl: 'build/pages/recipe/recipe.html',
@@ -6,6 +7,12 @@ import {Component} from '@angular/core';
 })
 
 export class RecipePage { 
-	constructor() {
+
+	constructor (public viewCtrl: ViewController) {
+
+	}
+
+	dismiss () {
+	    this.viewCtrl.dismiss();
 	}
 }
