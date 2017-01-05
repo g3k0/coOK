@@ -8,10 +8,15 @@ import {ViewController} from 'ionic-angular';
 
 export class RecipePage { 
 
-	constructor (public viewCtrl: ViewController) {
+	constructor (
+		public viewCtrl: ViewController
+	) {
 
 	}
 
+	/**
+	 * Modal partial view closing method
+	 */
 	dismiss () {
 	    this.viewCtrl.dismiss();
 	}

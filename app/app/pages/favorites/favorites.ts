@@ -14,7 +14,10 @@ export class FavoritesPage {
 
 	items: any[];
 
-	constructor (public http: Http, public modalCtrl: ModalController) {
+	constructor (
+        public http: Http, 
+        public modalCtrl: ModalController
+    ) {
 		this.http.get('./saved_recipes.json')
 		.subscribe(res => {
 			this.items = res.json();

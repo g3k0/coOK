@@ -6,7 +6,9 @@ import { AlertController } from 'ionic-angular';
 })
 
 export class SearchPage {
-	constructor(public alertCtrl: AlertController) {
+	constructor(
+		public alertCtrl: AlertController
+	) {
 
 	}
 
