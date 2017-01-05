@@ -23,4 +23,38 @@
 	scroll-content {
 		color: color($colors, fontColor, base);
 	} 
+
+	.title {
+		ion-col {
+			h3 {
+				color: color($colors, secondary, base);
+				margin-top: 1em;
+			}
+		}
+	}
+
+	.content {
+		ion-col {
+			font-size: 1.2em;
+			padding: 0;
+			padding-left: .4em;
+		}
+	}
+
+	img.category-icon {
+		width: 2em;
+		height: 2em;
+		display: inline-block;
+		height: 100%;
+		vertical-align: middle;
+
+	}
+
+	.ingredients-content {
+		ion-col {
+			ul {
+				margin-left: -1.4em;
+			}
+		}
+	}
 }
