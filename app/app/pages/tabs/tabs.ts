@@ -12,7 +12,7 @@ export class TabsPage {
   private tab2Root: any;
   private tab3Root: any;
 
-  constructor() {
+  constructor () {
     // this tells the tabs component which Pages
     // should be each tab's root Page
     this.tab1Root = SearchPage;
