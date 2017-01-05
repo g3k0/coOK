@@ -5,17 +5,16 @@ import { Http } from '@angular/http';
   templateUrl: 'build/pages/favorites/favorites.html'
 })
 export class FavoritesPage {
-	//searchQuery: string = '';
 	items: any[];
 
-	constructor(public http: Http) {
+	constructor (public http: Http) {
 		this.http.get('./recipes_mock.json')
 		.subscribe(res => {
 			this.items = res.json();
 		});
   	}
 
-  	getItems(ev: any) {
+  	getItems (ev: any) {
     	
     	// set val to the value of the searchbar
     	let val = ev.target.value;
