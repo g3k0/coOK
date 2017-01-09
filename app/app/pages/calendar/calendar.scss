@@ -30,6 +30,24 @@
 			border-top: 1px solid white;
 		}
 	}
+
+	ion-item {
+		margin-bottom: .5em;
+		div {
+			padding-right: 0 !important;
+			div {
+				ion-label {
+					font-size: .6em;
+				}
+				ion-icon {
+					display: inline-block;
+					float: right;
+					font-size: 1.4em;
+					margin-right: .8em;
+				}
+			}
+		}
+	}
 }
 
 /*
