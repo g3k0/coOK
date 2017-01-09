@@ -1,4 +1,25 @@
 .calendar {
 	background : color($colors, primary, base);
 	color: color($colors, fontColor, base);
+
+	.day {
+		border: 1px solid white;
+		padding: 0;
+		ion-grid {
+			padding: 0;
+		}
+		ion-col[width-90] {
+			flex: 0 0 100%;
+			max-width: 100%;
+		}
+		.day-title {
+			background : color($colors, secondary, base);
+			text-align: center;
+		}
+
+		.day-lunch, .day-dinner {
+			background : color($colors, lightGrey, base);
+			color: color($colors, inverseFontColor, base);
+		}
+	}
 }
