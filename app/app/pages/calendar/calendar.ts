@@ -4,6 +4,13 @@ import {Component} from '@angular/core';
   templateUrl: 'build/pages/calendar/calendar.html'
 })
 export class CalendarPage {
+  flipped: boolean = false;
+ 
   constructor() {
+ 
+  }
+ 
+  flip(){
+    this.flipped = !this.flipped;
   }
 }
