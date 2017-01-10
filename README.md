@@ -2,7 +2,7 @@
 Hybrid mobile app built in Ionic 
 ================================
 
-**version 0.3.3** 
+**version 0.3.4** 
 
 description
 -----------
