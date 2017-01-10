@@ -7,14 +7,14 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content padding class="calendar flip-container" (click)="flip()" [class.flipped]="flipped">
+<ion-content padding class="calendar flip-container" [class.flipped]="flipped">
     <div class="flipper">
 	    <div class="front">
 			<ion-grid>
 
 				<ion-row>
 
-					<ion-col width-33 class="day">
+					<ion-col width-33 class="day" (click)="flip()">
 						<ion-grid>
 							<ion-row>
 								<ion-col width-90 class="day-title">
@@ -34,7 +34,7 @@
 						</ion-grid>				
 					</ion-col>
 
-					<ion-col width-33 class="day">
+					<ion-col width-33 class="day" (click)="flip()">
 						<ion-grid>
 							<ion-row>
 								<ion-col width-90 class="day-title">
@@ -54,7 +54,7 @@
 						</ion-grid>				
 					</ion-col>
 
-					<ion-col width-33 class="day">
+					<ion-col width-33 class="day" (click)="flip()">
 						<ion-grid>
 							<ion-row>
 								<ion-col width-90 class="day-title">
@@ -78,7 +78,7 @@
 
 			  	<ion-row>
 
-					<ion-col width-33 class="day">
+					<ion-col width-33 class="day" (click)="flip()">
 						<ion-grid>
 							<ion-row>
 								<ion-col width-90 class="day-title">
@@ -98,7 +98,7 @@
 						</ion-grid>				
 					</ion-col>
 
-					<ion-col width-33 class="day">
+					<ion-col width-33 class="day" (click)="flip()">
 						<ion-grid>
 							<ion-row>
 								<ion-col width-90 class="day-title">
@@ -118,7 +118,7 @@
 						</ion-grid>				
 					</ion-col>
 
-					<ion-col width-33 class="day">
+					<ion-col width-33 class="day" (click)="flip()">
 						<ion-grid>
 							<ion-row>
 								<ion-col width-90 class="day-title">
@@ -142,7 +142,7 @@
 
 			  	<ion-row>
 
-					<ion-col width-33 class="day">
+					<ion-col width-33 class="day" (click)="flip()">
 						<ion-grid>
 							<ion-row>
 								<ion-col width-90 class="day-title">
@@ -169,6 +169,12 @@
 		<div class="back">
 	 
 			<ion-grid>
+
+				<ion-row>
+					<ion-col width-90 (click)="flip()">
+						<ion-icon name="arrow-round-back"></ion-icon>
+					</ion-col>
+				</ion-row>
 		
 				<ion-row>
 					<ion-col width-90>
