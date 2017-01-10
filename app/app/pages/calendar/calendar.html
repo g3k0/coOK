@@ -191,17 +191,17 @@
 						    <ion-card-content>
 						    	<ion-list>
 									<ion-item>
-										<span (click)="presentModal()">A Pizza Ca' Pummarola Ncopp'</span>
+										<span (click)="presentModalRecipe()">A Pizza Ca' Pummarola Ncopp'</span>
 										<ion-icon name="trash"></ion-icon>
 										<ion-icon name="share"></ion-icon>
 									</ion-item>
 									<ion-item>
-										<span (click)="presentModal()">Abbacchio A Scottadito</span>
+										<span (click)="presentModalRecipe()">Abbacchio A Scottadito</span>
 										<ion-icon name="trash"></ion-icon>
 										<ion-icon name="share"></ion-icon>
 									</ion-item>
 								</ion-list>
-								<button ion-button small>
+								<button ion-button small (click)="presentModalAddRecipe()">
 									<ion-icon name="add"></ion-icon>
 									Aggiungi
 								</button>
@@ -219,12 +219,12 @@
 						    <ion-card-content>
 						    	<ion-list>
 									<ion-item>
-										<span (click)="presentModal()">Abbraccio Di Mezze Maniche</span>
+										<span (click)="presentModalRecipe()">Abbraccio Di Mezze Maniche</span>
 										<ion-icon name="trash"></ion-icon>
 										<ion-icon name="share"></ion-icon>
 									</ion-item>
 								</ion-list>
-								<button ion-button small>
+								<button ion-button small (click)="presentModalAddRecipe()">
 									<ion-icon name="add"></ion-icon>
 									Aggiungi
 								</button>

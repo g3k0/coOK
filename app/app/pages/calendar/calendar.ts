@@ -1,10 +1,11 @@
 import {Component, ViewChild} from '@angular/core';
 import {ModalController} from 'ionic-angular';
 import {RecipePage} from '../recipe/recipe';
+import {AddRecipePage} from '../add-recipe/add-recipe';
 
 @Component({
 	templateUrl: 'build/pages/calendar/calendar.html',
-	directives: [RecipePage]
+	directives: [RecipePage, AddRecipePage]
 })
 
 export class CalendarPage {
@@ -29,8 +30,13 @@ export class CalendarPage {
   	/**
      * Modal page loading method
      */
-    presentModal () {
+    presentModalRecipe () {
         let modal = this.modalCtrl.create(RecipePage);
+        modal.present();
+    }
+
+    presentModalAddRecipe () {
+        let modal = this.modalCtrl.create(AddRecipePage);
         modal.present();
     }
 }
