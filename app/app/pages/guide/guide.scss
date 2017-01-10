@@ -1,4 +1,7 @@
 .guide {
 	background: color($colors, secondary, base);
-	color: color($colors, fontColor, base);
+	color: color($colors, lightGrey, base);
+	p {
+		color: color($colors, fontColor, base);
+	}
 }
