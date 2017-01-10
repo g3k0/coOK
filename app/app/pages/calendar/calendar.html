@@ -6,6 +6,237 @@
         <ion-title>Calendario</ion-title>
     </ion-navbar>
 </ion-header>
-<ion-content padding class="calendar">
-    <h3>Calendario</h3>
+
+<ion-content padding class="calendar flip-container" [class.flipped]="flipped">
+    <div class="flipper">
+	    <div class="front">
+			<ion-grid>
+
+				<ion-row>
+
+					<ion-col width-33 class="day" (click)="flip()">
+						<ion-grid>
+							<ion-row>
+								<ion-col width-90 class="day-title">
+									Lunedi
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col width-90 class="day-lunch">
+									pranzo
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col width-90 class="day-dinner">
+									cena
+								</ion-col>
+							</ion-row>	
+						</ion-grid>				
+					</ion-col>
+
+					<ion-col width-33 class="day" (click)="flip()">
+						<ion-grid>
+							<ion-row>
+								<ion-col width-90 class="day-title">
+									Martedi
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col width-90 class="day-lunch">
+									pranzo
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col width-90 class="day-dinner">
+									cena
+								</ion-col>
+							</ion-row>	
+						</ion-grid>				
+					</ion-col>
+
+					<ion-col width-33 class="day" (click)="flip()">
+						<ion-grid>
+							<ion-row>
+								<ion-col width-90 class="day-title">
+									Mercoledi
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col width-90 class="day-lunch">
+									pranzo
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col width-90 class="day-dinner">
+									cena
+								</ion-col>
+							</ion-row>	
+						</ion-grid>				
+					</ion-col>
+
+			  	</ion-row>
+
+			  	<ion-row>
+
+					<ion-col width-33 class="day" (click)="flip()">
+						<ion-grid>
+							<ion-row>
+								<ion-col width-90 class="day-title">
+									Giovedi
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col width-90 class="day-lunch">
+									pranzo
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col width-90 class="day-dinner">
+									cena
+								</ion-col>
+							</ion-row>	
+						</ion-grid>				
+					</ion-col>
+
+					<ion-col width-33 class="day" (click)="flip()">
+						<ion-grid>
+							<ion-row>
+								<ion-col width-90 class="day-title">
+									Venerdi
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col width-90 class="day-lunch">
+									pranzo
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col width-90 class="day-dinner">
+									cena
+								</ion-col>
+							</ion-row>	
+						</ion-grid>				
+					</ion-col>
+
+					<ion-col width-33 class="day" (click)="flip()">
+						<ion-grid>
+							<ion-row>
+								<ion-col width-90 class="day-title">
+									Sabato
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col width-90 class="day-lunch">
+									pranzo
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col width-90 class="day-dinner">
+									cena
+								</ion-col>
+							</ion-row>	
+						</ion-grid>				
+					</ion-col>
+
+			  	</ion-row>
+
+			  	<ion-row>
+
+					<ion-col width-33 class="day" (click)="flip()">
+						<ion-grid>
+							<ion-row>
+								<ion-col width-90 class="day-title">
+									Domenica
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col width-90 class="day-lunch">
+									pranzo
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col width-90 class="day-dinner">
+									cena
+								</ion-col>
+							</ion-row>	
+						</ion-grid>				
+					</ion-col>
+
+			  	</ion-row>
+			</ion-grid>
+		</div> <!-- front -->
+
+		<div class="back">
+	 
+			<ion-grid>
+
+				<ion-row>
+					<ion-col width-90 (click)="flip()">
+						<ion-icon name="arrow-round-back"></ion-icon>
+					</ion-col>
+				</ion-row>
+		
+				<ion-row>
+					<ion-col width-90>
+						<h3>Lunedi</h3>
+					</ion-col>
+				</ion-row>
+
+				<ion-row>
+					<ion-col width-90>
+				        <ion-card>
+						    <ion-card-header>
+						    	Pranzo
+						    </ion-card-header>
+						    <ion-card-content>
+						    	<ion-list>
+									<ion-item>
+										<span (click)="presentModalRecipe()">A Pizza Ca' Pummarola Ncopp'</span>
+										<ion-icon name="trash"></ion-icon>
+										<ion-icon name="share"></ion-icon>
+									</ion-item>
+									<ion-item>
+										<span (click)="presentModalRecipe()">Abbacchio A Scottadito</span>
+										<ion-icon name="trash"></ion-icon>
+										<ion-icon name="share"></ion-icon>
+									</ion-item>
+								</ion-list>
+								<button ion-button small (click)="presentModalAddRecipe()">
+									<ion-icon name="add"></ion-icon>
+									Aggiungi
+								</button>
+						    </ion-card-content>
+						</ion-card>
+					</ion-col>
+				</ion-row>
+				
+				<ion-row>
+					<ion-col width-90>
+						<ion-card>
+						    <ion-card-header>
+						    	Cena
+						    </ion-card-header>
+						    <ion-card-content>
+						    	<ion-list>
+									<ion-item>
+										<span (click)="presentModalRecipe()">Abbraccio Di Mezze Maniche</span>
+										<ion-icon name="trash"></ion-icon>
+										<ion-icon name="share"></ion-icon>
+									</ion-item>
+								</ion-list>
+								<button ion-button small (click)="presentModalAddRecipe()">
+									<ion-icon name="add"></ion-icon>
+									Aggiungi
+								</button>
+						    </ion-card-content>
+						</ion-card>
+					</ion-col>
+				</ion-row>
+
+			</ion-grid>
+
+	    </div> <!-- back -->
+
+	</div> <!-- flipper -->
+
 </ion-content>

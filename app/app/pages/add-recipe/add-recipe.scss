@@ -1,0 +1,51 @@
+.add-recipe-header {
+	ion-toolbar {
+		div.toolbar-background {
+			background: color($colors, secondary, base);
+		}
+		div.toolbar-content {
+			ion-title {
+				div.toolbar-title {
+					color: color($colors, fontColor, base);
+				}
+			}
+		}
+		ion-buttons {
+			button {
+				color: color($colors, fontColor, base);
+			}
+		}	
+	}
+}
+
+.add-recipe {
+	background: color($colors, primary, base);
+	scroll-content {
+		color: color($colors, fontColor, base);
+	} 
+
+	ion-item {
+		margin-bottom: .5em;
+		background: color($colors, secondary, base);
+		color: color($colors, fontColor, base);
+		div {
+			padding-right: 0 !important;
+			border-bottom: none !important;
+			div {
+				ion-label {
+					font-size: .7em;
+				}
+				ion-icon {
+					display: inline-block;
+					float: right;
+					font-size: 1.5em;
+					margin-right: .8em;
+				}
+			}
+		}
+	}
+
+	ion-list > .item:first-child, ion-list > .item-wrapper:first-child .item {
+		border-top: none;
+	}
+}

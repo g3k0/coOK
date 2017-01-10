@@ -1,4 +1,101 @@
 .calendar {
 	background : color($colors, primary, base);
 	color: color($colors, fontColor, base);
+
+	ion-grid {
+		padding: 0;
+	}
+
+	ion-col[width-90] {
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
+
+	.day {
+		border: 1px solid white;
+		padding: 0;
+		ion-grid {
+			padding: 0;
+		}
+		.day-title {
+			background : color($colors, secondary, base);
+			text-align: center;
+		}
+		.day-lunch, .day-dinner {
+			background : color($colors, lightGrey, base);
+			color: color($colors, inverseFontColor, base);
+			min-height: 4.9em;
+		}
+		.day-dinner {
+			border-top: 1px solid white;
+		}
+	}
+
+	ion-item {
+		margin-bottom: .5em;
+		div {
+			padding-right: 0;
+			div {
+				ion-label {
+					font-size: .6em;
+				}
+				ion-icon {
+					display: inline-block;
+					float: right;
+					font-size: 1.4em;
+					margin-right: .8em;
+				}
+			}
+		}
+	}
+}
+
+/*
+ *  Flip animation by David Walsh: https://davidwalsh.name/css-flip
+ */
+
+/* entire container, keeps perspective */
+.flip-container {
+    perspective: 1000px;
+}
+
+/* flip the pane when hovered */
+.flip-container.flipped .flipper {
+    transform: rotateY(180deg);
+}
+
+.flip-container, .front, .back {
+    width: 100%;
+}
+
+/* flip speed goes here */
+.flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+
+    position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+    z-index: 2;
+    /* for firefox 31 */
+    transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+    transform: rotateY(180deg);
 }

@@ -10,7 +10,7 @@ import {RecipePage} from '../recipe/recipe';
 
 export class FavoritesPage {
 
-    @ViewChild(RecipePage) RecipePage: RecipePage;
+  @ViewChild(RecipePage) RecipePage: RecipePage;
 
 	items: any[];
 
