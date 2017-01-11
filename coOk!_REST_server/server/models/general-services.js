@@ -53,7 +53,18 @@
 		 * The service modify the recipes data documents on db
 		 */
 		GeneralServices.modifyDbData = (cb) => {
-			return cb(null,{results:'ok'});
+			app.models.recipes.find((err, recipes) => {
+				if (err) {
+					log.error(`[GeneralServices][modifyDbData] error: ${err}`);
+					return cb(err);
+				}
+				
+				_.each(recipes, (recipe) => {
+					
+				});
+
+				return cb(null,{results:'ok'});
+			});
 		}; 
 	};
 })();
