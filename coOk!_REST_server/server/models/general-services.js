@@ -17,13 +17,13 @@
 	let fs = require('fs');
 	let _ = require('underscore');
 
-	module.exports = (Generalservices) => {
+	module.exports = (GeneralServices) => {
 
 		/**
 		 * The service take recipes from a txt file, validate the data and import them into the db
 		 */
-		Generalservices.importRecipes = (cb) => {
-			log.info(`[Generalservices][importRecipes] received request with recipes to import...`);
+		GeneralServices.importRecipes = (cb) => {
+			log.info(`[GeneralServices][importRecipes] received request with recipes to import...`);
 
 			let recipes = fs.readFileSync(`${__base}/uploads/ricette`, 'utf8');
 			let recipesArray = recipes.split(':Ricette').filter((item) => {
@@ -40,13 +40,20 @@
 
 			app.models.recipes.create(recipeObjs, (err) => {
 				if (err) {
-					log.error(`[Generalservices][importRecipes] error: ${err}`);
+					log.error(`[GeneralServices][importRecipes] error: ${err}`);
 					return cb(err);
 				}
 
-				log.info(`[Generalservices][importRecipes] ${recipeObjs.length} ricette sono state correttamente importate nel database`);
+				log.info(`[GeneralServices][importRecipes] ${recipeObjs.length} ricette sono state correttamente importate nel database`);
 				return cb(null,{results:'ok'});
 			});
 		};
+
+		/**
+		 * The service modify the recipes data documents on db
+		 */
+		GeneralServices.modifyDbData = (cb) => {
+			return cb(null,{results:'ok'});
+		}; 
 	};
 })();
