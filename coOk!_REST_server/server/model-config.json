@@ -39,7 +39,7 @@
   },
   "general-services": {
     "dataSource": null,
-    "public": false
+    "public": true
   },
   "users": {
     "dataSource": "db",

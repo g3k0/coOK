@@ -54,6 +54,25 @@
           "verb": "get"
         }
       ]
+    },
+    "modifyDbData": {
+      "isStatic": true,
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "object",
+          "root": true,
+          "description": "service response"
+        }
+      ],
+      "description": "Modify recipes data on db",
+      "http": [
+        {
+          "path": "/modify-db-data",
+          "verb": "get"
+        }
+      ]
     }
   }
 }
