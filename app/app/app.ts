@@ -16,6 +16,7 @@ export class MyApp {
     @ViewChild('nav') nav : NavController;
     private rootPage: any;
     private pages: any[];
+    private loading: boolean;
 
     constructor (private platform: Platform, private menu: MenuController) {
         this.menu = menu;
@@ -25,6 +26,7 @@ export class MyApp {
             { title: 'Votaci', component: VotePage, icon: 'star-outline' }
         ];
         this.rootPage = TabsPage;
+        this.loading = false; //cambia in base alle chiamate di registrazione e autenticazione
 
         platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.

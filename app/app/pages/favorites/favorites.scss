@@ -8,8 +8,12 @@
 
 	ion-item {
 		margin-bottom: .5em;
+		background : color($colors, secondary, base);
+		color: color($colors, fontColor, base);
+		border-top: none !important;
 		div {
-			padding-right: 0 !important;
+			padding-right: 0;
+			border-bottom: none !important;
 			div {
 				ion-label {
 					font-size: .7em;
