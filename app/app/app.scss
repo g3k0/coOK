@@ -1,0 +1,30 @@
+.loading {
+	background: color($colors, primary, base);
+	color: color($colors, fontColor, base);
+
+	.logo-container {
+		margin-top: 6em;
+		.logo {
+			display: block;
+			margin: 0 auto;
+		}
+	}
+
+	.text {
+		text-align: center;
+	}
+
+	.spinner {
+		margin-top: 4em;
+		ion-spinner {
+			display: block;
+			margin: 0 auto;
+			zoom: 2; 
+			svg {
+				circle {
+					fill: color($colors, fontColor, base);
+				}
+			}
+		}
+	}	
+}

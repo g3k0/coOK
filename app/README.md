@@ -7,7 +7,6 @@ hybrid mobile application for Android devices. It suggest a list of recipes to c
 #How to run
 
 - `npm install`
-- `bower install`
 - `ionic serve`
 
 #to build:
