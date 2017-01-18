@@ -139,7 +139,7 @@ export class SearchPage {
 	    });
 	    alert.present();
   	}
-
+  	/*
   	persons() {
 	    let alert = this.alertCtrl.create();
     	alert.setTitle('Numero di persone');
@@ -161,4 +161,5 @@ export class SearchPage {
     	});
     	alert.present();
   	}
+  	*/
 }
