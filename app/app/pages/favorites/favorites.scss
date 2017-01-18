@@ -6,15 +6,22 @@
 		padding: 0 0 8px 0;
 	}
 
-	ion-item {
+	div.item {
 		margin-bottom: .5em;
 		background : color($colors, secondary, base);
 		color: color($colors, fontColor, base);
 		border-top: none !important;
-		div {
+		div.container {
+			width: 100%;
 			padding-right: 0;
 			border-bottom: none !important;
-			div {
+			div.name {
+				float:left;
+				width: 76%;
+			}
+			div.icon {
+				float:left;
+				width: 12%; 
 				ion-label {
 					font-size: .7em;
 				}
