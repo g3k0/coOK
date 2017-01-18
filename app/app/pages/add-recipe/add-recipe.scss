@@ -24,14 +24,22 @@
 		color: color($colors, fontColor, base);
 	} 
 
-	ion-item {
+	div.item {
 		margin-bottom: .5em;
-		background: color($colors, secondary, base);
+		background : color($colors, secondary, base);
 		color: color($colors, fontColor, base);
-		div {
-			padding-right: 0 !important;
+		border-top: none !important;
+		div.container {
+			width: 100%;
+			padding-right: 0;
 			border-bottom: none !important;
-			div {
+			div.name {
+				float:left;
+				width: 80%;
+			}
+			div.icon {
+				float:left;
+				width: 20%; 
 				ion-label {
 					font-size: .7em;
 				}
@@ -43,9 +51,5 @@
 				}
 			}
 		}
-	}
-
-	ion-list > .item:first-child, ion-list > .item-wrapper:first-child .item {
-		border-top: none;
 	}
 }

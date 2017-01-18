@@ -189,18 +189,27 @@
 						    	Pranzo
 						    </ion-card-header>
 						    <ion-card-content>
-						    	<ion-list>
-									<ion-item>
-										<span (click)="presentModalRecipe()">A Pizza Ca' Pummarola Ncopp'</span>
-										<ion-icon name="trash"></ion-icon>
-										<ion-icon name="share"></ion-icon>
-									</ion-item>
-									<ion-item>
-										<span (click)="presentModalRecipe()">Abbacchio A Scottadito</span>
-										<ion-icon name="trash"></ion-icon>
-										<ion-icon name="share"></ion-icon>
-									</ion-item>
-								</ion-list>
+						    	<div class="item">
+									<div class="container">
+										<div class="name" (click)="presentModalRecipe()">
+											A Pizza Ca' Pummarola Ncopp'
+										</div>
+										<div class="icon">
+											<ion-icon name="trash"></ion-icon>
+										</div>
+									</div>
+								</div>
+								<div class="item">
+									<div class="container">
+										<div class="name" (click)="presentModalRecipe()">
+											Abbacchio A Scottadito
+										</div>
+										<div class="icon">
+											<ion-icon name="trash"></ion-icon>
+										</div>
+									</div>
+								</div>
+
 								<button ion-button small (click)="presentModalAddRecipe()">
 									<ion-icon name="add"></ion-icon>
 									Aggiungi
@@ -217,13 +226,16 @@
 						    	Cena
 						    </ion-card-header>
 						    <ion-card-content>
-						    	<ion-list>
-									<ion-item>
-										<span (click)="presentModalRecipe()">Abbraccio Di Mezze Maniche</span>
-										<ion-icon name="trash"></ion-icon>
-										<ion-icon name="share"></ion-icon>
-									</ion-item>
-								</ion-list>
+						    	<div class="item">
+									<div class="container">
+										<div class="name" (click)="presentModalRecipe()">
+											Abbraccio di mezze maniche
+										</div>
+										<div class="icon">
+											<ion-icon name="trash"></ion-icon>
+										</div>
+									</div>
+								</div>
 								<button ion-button small (click)="presentModalAddRecipe()">
 									<ion-icon name="add"></ion-icon>
 									Aggiungi
