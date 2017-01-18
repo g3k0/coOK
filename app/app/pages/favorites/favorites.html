@@ -11,8 +11,7 @@
 
 	<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 	
-	<div *ngFor="let item of items">
-		<div class="item">
+		<div class="item" *ngFor="let item of items">
 
 			<div class="container">
 
@@ -31,6 +30,5 @@
 			</div>
 
 		</div>
-	</div>
 
 </ion-content>
