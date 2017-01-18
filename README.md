@@ -2,11 +2,10 @@
 Hybrid mobile app built in Ionic 
 ================================
 
-**version 0.3.6** 
+**version 0.3.7** 
 
 description
 -----------
-
 The application server exposes the REST API to get access to a MongoDB database of about 28000 recipes. The mobile application uses the API to register the application into the system and to get the recipes filtered with differents types of queries.
 The web server is deployed with a simple client to permit the authentication and registration operations by the web users.
 The web server is developed by Node.js version 4.6.1 and the mobile app is an hybrid application built by Cordova/Ionic 2 framework. 
