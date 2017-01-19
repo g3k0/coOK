@@ -131,17 +131,21 @@
 	/**
 	 * Ingredients boxes
 	 */
-	ion-grid.ingredients {
+	div.ingredients {
 		padding: 0;
-		ion-row {
+		div.container {
+			width: 100%;
 			margin-top: -.5em;
 			margin-bottom: -.5em;
-			ion-col {
+			div.box {
+				float:left;
+				width: 25%;
 				padding: .3em;
 				p {
 					font-family: Architects_Daughter !important;
 					font-size: .9em;
 					padding: .5em;
+					margin-top: 0;
 					font-weight: bold;
 					text-align: center;
 					color: color($colors, fontColor, base);

@@ -6,10 +6,30 @@ import { AlertController } from 'ionic-angular';
 })
 
 export class SearchPage {
+
+	ingredients: any[];
+
 	constructor(
 		public alertCtrl: AlertController
 	) {
+		this.ingredients = [];
+	}
 
+	/**
+	 * ingredients form input
+	 */
+	pushIngredient(ingredient:string) {
+		return this.ingredients.push(ingredient);
+	}
+
+	deleteIngredient(ingredient:string) {
+		let index = this.ingredients.indexOf(ingredient);
+
+		if (index > -1) {
+		    this.ingredients.splice(index, 1);
+		}
+
+		return;
 	}
 
 	/**
