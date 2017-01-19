@@ -12,35 +12,20 @@
     <h4>ricerca ricette per ingredienti:</h4>
 
 	<form class="form-wrapper cf">
-        <input type="text" placeholder="Inserisci gli ingredienti...">
-        <button type="submit">Inserisci</button>
+        <input type="text" name="ingredient" placeholder="Inserisci gli ingredienti..." [(ngModel)]="ingredient">
+        <button type="submit" (click)="pushIngredient(ingredient);ingredient=null">Inserisci</button>
     </form>
-
-    <ion-grid class="ingredients">
-		<ion-row>
-			<ion-col width-25>
-				<p>Patate <span>x</span></p>
-			</ion-col>
-			<ion-col width-25>
-				<p>Carote <span>x</span></p>
-			</ion-col>
-			<ion-col width-25>
-				<p>Burro <span>x</span></p>
-			</ion-col>
-			<ion-col width-25>
-				<p>Ricotta <span>x</span></p>
-			</ion-col>
-		</ion-row>
-
-		<ion-row>
-			<ion-col width-25>
-				<p>Fettine di carne <span>x</span></p>
-			</ion-col>
-			<ion-col width-25>
-				<p>Insalata <span>x</span></p>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
+    
+    <div class="ingredients">
+        <div class="container">
+            <div class="box" *ngFor="let ingredient of ingredients">
+                <p>
+                    {{ingredient}} 
+                    <span (click)="deleteIngredient(ingredient)">x</span>
+                </p>
+            </div>
+        </div>
+    </div>
     
     <ion-card class="filters">
 
@@ -76,10 +61,10 @@
 
     </ion-card>
 
-    <button ion-button color="secondary" small>
+    <button ion-button color="secondary" small (click)="clearFilters();presentToast('top')">
         Reset filtri
     </button>
 
-    <button ion-button color="success" class="search-button">Cerca</button>
+    <button ion-button color="success" class="search-button" (click)="search()">Cerca</button>
 
 </ion-content>
