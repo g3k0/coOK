@@ -31,6 +31,8 @@ export class SearchPage {
 	 * ingredients form input
 	 */
 	pushIngredient(ingredient:string) {
+		if (!ingredient) return;
+		
 		return this.ingredients.push(ingredient);
 	}
 
