@@ -224,4 +224,23 @@ export class SearchPage {
     });
     toast.present();
   }
+
+  /**
+   * Search method, called by the search html button
+   */
+  search() {
+
+  	if (!this.ingredients.length && 
+  		!this.filters.recipeName &&
+  		!this.filters.mainIngredient &&
+  		!this.filters.recipeType.length
+  	) {
+  		console.log('no data');
+  		return;
+  	}
+
+  	console.log(this.ingredients);
+  	console.log(this.filters);
+  	return;
+  } 
 }
