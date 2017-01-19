@@ -32,10 +32,14 @@ export class SearchPage {
 	 */
 	pushIngredient(ingredient:string) {
 		if (!ingredient) return;
-		
+
 		return this.ingredients.push(ingredient);
 	}
 
+	/**
+	 * method that pop an ingredient from the ingredients array, 
+	 * called in the ingredient x html button
+	 */
 	deleteIngredient(ingredient:string) {
 		let index = this.ingredients.indexOf(ingredient);
 
@@ -197,6 +201,9 @@ export class SearchPage {
   	}
   	*/
 
+  	/**
+  	 * Init filters method in clear filter html button
+   	 */
   	clearFilters() {
   		this.filters = {
 			recipeName: null,
@@ -206,6 +213,9 @@ export class SearchPage {
 		return;
   	}
 
+  	/**
+  	 * toast message method when clear filter button is pressed
+  	 */
   	presentToast(position: string) {
     let toast = this.toastCtrl.create({
       message: 'Filtri resettati con successo!',
