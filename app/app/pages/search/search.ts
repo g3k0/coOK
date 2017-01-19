@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { AlertController } from 'ionic-angular';
+import { AlertController, ToastController } from 'ionic-angular';
 
 @Component({
 	templateUrl: 'build/pages/search/search.html'
@@ -9,10 +9,22 @@ export class SearchPage {
 
 	ingredients: any[];
 
+	filters: {
+		recipeName:string,
+		mainIngredient:string,
+		recipeType: any[]
+	}
+
 	constructor(
-		public alertCtrl: AlertController
+		public alertCtrl: AlertController,
+		public toastCtrl: ToastController
 	) {
 		this.ingredients = [];
+		this.filters = {
+			recipeName: null,
+			mainIngredient: null,
+			recipeType: []
+		}
 	}
 
 	/**
@@ -49,13 +61,13 @@ export class SearchPage {
 	        	{
 	          		text: 'Cancella',
 	          		handler: data => {
-	            		console.log('Cancel clicked');
+	            		return;
 	          		}
 	        	},
 	        	{
 	          		text: 'Salva',
 	          		handler: data => {
-	            		console.log('Saved clicked');
+	            		this.filters.recipeName = data.recipeName;
 	          		}
 	        	}
 	      	]
@@ -77,13 +89,13 @@ export class SearchPage {
 	        	{
 	          		text: 'Cancella',
 	          		handler: data => {
-	            		console.log('Cancel clicked');
+	            		return;
 	          		}
 	        	},
 	        	{
 	          		text: 'Salva',
 	          		handler: data => {
-	            		console.log('Saved clicked');
+	            		this.filters.mainIngredient = data.mainIngredient;
 	          		}
 	        	}
 	      	]
@@ -98,55 +110,55 @@ export class SearchPage {
 	    alert.addInput({
 	    	type: 'checkbox',
 	    	label: 'Bevande',
-	    	value: 'value1'
+	    	value: 'Bevande'
 	    });
 
 	    alert.addInput({
 	    	type: 'checkbox',
 	    	label: 'Antipasti',
-	     	value: 'value2'
+	     	value: 'Antipasti'
 	    });
 
 	    alert.addInput({
 	    	type: 'checkbox',
 	    	label: 'Primi',
-	     	value: 'value3'
+	     	value: 'Primi'
 	    });
 
 	    alert.addInput({
 	    	type: 'checkbox',
 	    	label: 'Carni',
-	     	value: 'value4'
+	     	value: 'Carni'
 	    });
 
 	    alert.addInput({
 	    	type: 'checkbox',
 	    	label: 'Pollame',
-	     	value: 'value5'
+	     	value: 'Pollame'
 	    });
 
 	    alert.addInput({
 	    	type: 'checkbox',
 	    	label: 'Pesce',
-	     	value: 'value6'
+	     	value: 'Pesce'
 	    });
 
 	    alert.addInput({
 	    	type: 'checkbox',
 	    	label: 'Contorni',
-	     	value: 'value7'
+	     	value: 'Contorni'
 	    });
 
 	    alert.addInput({
 	    	type: 'checkbox',
 	    	label: 'Salse',
-	     	value: 'value8'
+	     	value: 'Salse'
 	    });
 
 	    alert.addInput({
 	    	type: 'checkbox',
 	    	label: 'Dolci',
-	     	value: 'value9'
+	     	value: 'Dolci'
 	    });
 
 	    alert.addButton('Cancella');
@@ -154,7 +166,7 @@ export class SearchPage {
 	    alert.addButton({
 	    	text: 'Salva',
 	    	handler: data => {
-	        	console.log('Checkbox data:', data);
+	        	this.filters.recipeType = data;
 	      	}
 	    });
 	    alert.present();
@@ -182,4 +194,22 @@ export class SearchPage {
     	alert.present();
   	}
   	*/
+
+  	clearFilters() {
+  		this.filters = {
+			recipeName: null,
+			mainIngredient: null,
+			recipeType: []
+		};
+		return;
+  	}
+
+  	presentToast(position: string) {
+    let toast = this.toastCtrl.create({
+      message: 'Filtri resettati con successo!',
+      duration: 2000,
+      position: position
+    });
+    toast.present();
+  }
 }
