@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import { AlertController, ToastController } from 'ionic-angular';
+import {DataService} from '../../services';
+
 
 @Component({
 	templateUrl: 'build/pages/search/search.html'
@@ -8,6 +10,7 @@ import { AlertController, ToastController } from 'ionic-angular';
 export class SearchPage {
 
 	ingredients: any[];
+	config: any;
 
 	filters: {
 		recipeName:string,
@@ -17,7 +20,8 @@ export class SearchPage {
 
 	constructor(
 		public alertCtrl: AlertController,
-		public toastCtrl: ToastController
+		public toastCtrl: ToastController,
+		public data: DataService
 	) {
 		this.ingredients = [];
 		this.filters = {
@@ -25,6 +29,14 @@ export class SearchPage {
 			mainIngredient: null,
 			recipeType: []
 		}
+
+		/**
+		 * Loading configuration
+		 */
+		let self = this;
+		data.retrieveData(function(data) {
+			self.config = data; //use this.config in class methods!
+		});
 	}
 
 	/**
@@ -32,7 +44,6 @@ export class SearchPage {
 	 */
 	pushIngredient(ingredient:string) {
 		if (!ingredient) return;
-
 		return this.ingredients.push(ingredient);
 	}
 
