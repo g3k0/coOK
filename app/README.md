@@ -14,6 +14,11 @@ hybrid mobile application for Android devices. It suggest a list of recipes to c
 - `ionic add platform android` (only the first time)
 - `ionic build android`
 
+#to run on a device (android):
+
+- `ionic add platform android` (if not already done previously)
+- `ionic run android`
+
 #to emulate
 
 - `ionic emulate android`
