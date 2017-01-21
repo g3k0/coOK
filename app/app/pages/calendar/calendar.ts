@@ -24,19 +24,20 @@ export class CalendarPage {
  	 * Flip the day detail page
  	 */
 	flip () {
-    	this.flipped = !this.flipped;
-  	}
+    this.flipped = !this.flipped;
+  }
 
   	/**
      * Modal page loading method
      */
-    presentModalRecipe () {
-        let modal = this.modalCtrl.create(RecipePage);
-        modal.present();
+    presentModalRecipe (item:any) {
+      if (!item) return;
+      let modal = this.modalCtrl.create(RecipePage, {recipe:item});
+      modal.present();
     }
 
     presentModalAddRecipe () {
-        let modal = this.modalCtrl.create(AddRecipePage);
-        modal.present();
+      let modal = this.modalCtrl.create(AddRecipePage);
+      modal.present();
     }
 }

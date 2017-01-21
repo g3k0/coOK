@@ -58,6 +58,7 @@ export class FavoritesPage {
    * Modal page loading method
    */
   presentModal(item:any) {
+    if (!item) return;
     let modal = this.modalCtrl.create(RecipePage, {recipe:item});
     modal.present();
     return;
