@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {ModalController} from 'ionic-angular';
+import {ModalController, AlertController} from 'ionic-angular';
 import {Http} from '@angular/http';
 import {RecipePage} from '../recipe/recipe';
 import {DataService} from '../../services';
@@ -13,13 +13,15 @@ export class FavoritesPage {
 
   @ViewChild(RecipePage) RecipePage: RecipePage;
 
-	items: any[];
-  initialItems: any[];
+	items:any[];
+  initialItems:any[];
+  delete:any;
 
 	constructor (
         public http: Http, 
         public modalCtrl: ModalController,
-        public data: DataService
+        public data: DataService,
+        public alertCtrl: AlertController
     ) {
 		
       /**
@@ -30,12 +32,14 @@ export class FavoritesPage {
         self.items = data;
         self.initialItems = data;
       });
+
+      this.delete = data.delete;
     }
     
   /** 
    * Search bar filter method
    */
-	getItems (ev: any) {
+	getItems (ev:any) {
   	
   	// set val to the value of the searchbar
   	let val = ev.target.value;
@@ -53,8 +57,34 @@ export class FavoritesPage {
   /**
    * Modal page loading method
    */
-  presentModal(item) {
+  presentModal(item:any) {
     let modal = this.modalCtrl.create(RecipePage, {recipe:item});
     modal.present();
+    return;
+  }
+
+  /**
+   *  Delete recipe confirmation alert
+   */
+  showDeleteConfirm(index, name) {
+    let confirm = this.alertCtrl.create({
+      title: 'Cancella ricetta',
+      message: `sei sicuro di voler cancellare la ricetta ${name}?`,
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            return;
+          }
+        },
+        {
+          text: 'Si',
+          handler: () => {
+            return this.delete(index,'favorites.json');
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }

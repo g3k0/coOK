@@ -24,5 +24,10 @@ export class DataService {
       return cb(data.json());
     });
   }
+
+  delete(index:number, file:string) {
+    console.log(index);
+    return;
+  }
 }
 

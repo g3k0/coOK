@@ -227,7 +227,7 @@ export class SearchPage {
   	/**
   	 * toast message method when clear filter button is pressed
   	 */
-  	presentToast(position: string) {
+  	presentToast(position:string) {
     let toast = this.toastCtrl.create({
       message: 'Filtri resettati con successo!',
       duration: 2000,
