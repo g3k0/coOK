@@ -14,6 +14,7 @@ export class FavoritesPage {
   @ViewChild(RecipePage) RecipePage: RecipePage;
 
 	items: any[];
+  initialItems: any[];
 
 	constructor (
         public http: Http, 
@@ -27,6 +28,7 @@ export class FavoritesPage {
       let self = this;
       data.retrieveFavorites(function(data) {
         self.items = data;
+        self.initialItems = data;
       });
     }
     
@@ -44,10 +46,7 @@ export class FavoritesPage {
     		return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
     	})
   	} else {
-  		this.http.get('./saved_recipes.json')
-		  .subscribe(res => {
-			  this.items = res.json();
-		  });
+  		this.items = this.initialItems;
   	}
 	}
 

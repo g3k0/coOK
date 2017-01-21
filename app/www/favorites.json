@@ -91,5 +91,73 @@
 	        "200 Cl Aceto Di Vino"
 	    ],
 	    "preparation" : "Tritate l'aglio e lo scalogno. Fate bollire lentamente l'aceto finché si riduce a metà. Versatelo caldo in una ciotola dove avrete preparato tutti gli aromi. Coprite il recipiente e lasciate macerare 2 ore. Filtrate, imbottigliate, tappate ermeticamente le bottiglie. La perfetta riuscita dipende dalla freschezza e dalla varietà delle erbe. Serve per condire verdure crude o cotte."
+	},
+	{
+	    "name" : "Antipasto Magro",
+	    "type" : "Antipasto",
+	    "mainIngredient" : "Patate",
+	    "persons" : 4,
+	    "notes" : "",
+	    "ingredients" : [ 
+	        "2 Patate Intere", 
+	        "4 Carciofi Piccoli", 
+	        "Poco Limone", 
+	        "2 Insalate Belghe (indivie)", 
+	        "Formaggio Philadelphia", 
+	        "3 Cucchiai Panna Fresca", 
+	        "1 Cucchiaino Paprica", 
+	        "Aglio", 
+	        "Prezzemolo"
+	    ],
+	    "preparation" : "Fate lessare due patate intere e fate cuocere 4 piccoli carciofi in acqua bollente con un po' di limone. Lavate e asciugate le foglie intere di due indivie belghe. Ponete al centro di un piatto i carciofi tagliati a metà e intorno le foglie di indivia e le rondelle di patate. Mischiate Philadelphia con tre cucchiai di panna fresca, dividete la crema in due parti: in una metà mettete un cucchiaino di paprica e nell'altra aglio e prezzemolo tritati.Versate la crema all'aglio sui carciofi e quella alla paprica sull'indivia."
+	},
+	{
+	    "name" : "Caffè Viennese",
+	    "type" : "Dessert",
+	    "mainIngredient" : "Caffè",
+	    "persons" : 4,
+	    "notes" : "Luogo: Austria. Luogo: Vienna.",
+	    "ingredients" : [ 
+	        "4 Palline Gelato Alla Vaniglia", 
+	        "4 Bicchieri Caffè Forte", 
+	        "Zucchero", 
+	        "4 Cucchiai Liquore Al Caffè", 
+	        "Panna Montata", 
+	        "4 Cialde"
+	    ],
+	    "preparation" : "Zuccherare il caffè, farlo raffreddare e tenerlo in frigo per circa 2 ore. In 4 bicchieri alti porre le palline di gelato, irrorarle con il liquore e versarvi il caffè freddo. Aggiungere panna montata fino all'orlo del bicchiere, decorare con le cialde e servire subito."
+	},
+	{
+	    "name" : "Insalata Di Pollo All'americana",
+	    "type" : "Pollame",
+	    "mainIngredient" : "Pollo",
+	    "persons" : 4,
+	    "notes" : "",
+	    "ingredients" : [ 
+	        "300 G Pollo Cotto", 
+	        "1 Sedano Bianco", 
+	        "2 Uova Sode", 
+	        "1 Tazza Maionese", 
+	        "2 Cucchiai Panna", 
+	        "12 Olive Nere", 
+	        "Capperi", 
+	        "Sale", 
+	        "Pepe"
+	    ],
+	    "preparation" : "Eliminate la pelle e tagliate la carne del pollo a striscioline. Pulite il sedano a tagliatelo a bastoncini. Riunite tutto in una insalatiera. Aggiungete la maionese ammorbidita con la panna, sale e pepe. Mescolate delicatamente. Disponete sul piatto da portata. Cospargete la superficie con capperi e olive. Guarnite con le uova a spicchi e servite. Vini di accompagnamento: i vini bianchi con struttura sono quelli ideali: Collio Tocai DOC, Pomino Bianco DOC, Greco Di Tufo DOC."
+	},
+	{
+	    "name" : "El Presidente",
+	    "type" : "Bevande",
+	    "mainIngredient" : "Rum Bianco",
+	    "persons" : 1,
+	    "notes" : "",
+	    "ingredients" : [ 
+	        "2/3 Rum Bianco", 
+	        "1/3 Vermouth Bianco Secco", 
+	        "1 Cucchiaino Sciroppo Di Granatina", 
+	        "1 Spruzzo Curacao"
+	    ],
+	    "preparation" : "Versare gli ingredienti in un mixing-glass con alcuni cubetti di ghiaccio. Mescolare bene e passare in una coppetta da cocktail."
 	}
 ]
