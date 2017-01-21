@@ -54,8 +54,8 @@ export class FavoritesPage {
   /**
    * Modal page loading method
    */
-  presentModal() {
-    let modal = this.modalCtrl.create(RecipePage);
+  presentModal(item) {
+    let modal = this.modalCtrl.create(RecipePage, {recipe:item});
     modal.present();
   }
 }
