@@ -1,7 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
-import {ModalController} from 'ionic-angular';
+import {ModalController, AlertController} from 'ionic-angular';
 import {Http} from '@angular/http';
 import {RecipePage} from '../recipe/recipe';
+import {DataService} from '../../services';
 
 @Component({
   templateUrl: 'build/pages/favorites/favorites.html',
@@ -12,44 +13,79 @@ export class FavoritesPage {
 
   @ViewChild(RecipePage) RecipePage: RecipePage;
 
-	items: any[];
+	items:any[];
+  initialItems:any[];
+  delete:any;
 
 	constructor (
         public http: Http, 
-        public modalCtrl: ModalController
+        public modalCtrl: ModalController,
+        public data: DataService,
+        public alertCtrl: AlertController
     ) {
-		this.http.get('./saved_recipes.json')
-		.subscribe(res => {
-			this.items = res.json();
-		});
+		
+      /**
+       * Get the favorites list
+       */
+      let self = this;
+      data.retrieveFavorites(function(data) {
+        self.items = data;
+        self.initialItems = data;
+      });
+
+      this.delete = data.delete;
     }
     
-    /** 
-     * Search bar filter method
-     */
-	getItems (ev: any) {
+  /** 
+   * Search bar filter method
+   */
+	getItems (ev:any) {
   	
-      	// set val to the value of the searchbar
-      	let val = ev.target.value;
+  	// set val to the value of the searchbar
+  	let val = ev.target.value;
 
-      	// if the value is an empty string don't filter the items
-      	if (val && val.trim() != '') {
-        		this.items = this.items.filter((item) => {
-        			return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-        		})
-      	} else {
-      		this.http.get('./saved_recipes.json')
-    		.subscribe(res => {
-    			this.items = res.json();
-    		});
-      	}
+  	// if the value is an empty string don't filter the items
+  	if (val && val.trim() != '') {
+    	this.items = this.items.filter((item) => {
+    		return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+    	})
+  	} else {
+  		this.items = this.initialItems;
+  	}
 	}
 
-    /**
-     * Modal page loading method
-     */
-    presentModal() {
-        let modal = this.modalCtrl.create(RecipePage);
-        modal.present();
-    }
+  /**
+   * Modal page loading method
+   */
+  presentModal(item:any) {
+    if (!item) return;
+    let modal = this.modalCtrl.create(RecipePage, {recipe:item});
+    modal.present();
+    return;
+  }
+
+  /**
+   *  Delete recipe confirmation alert
+   */
+  showDeleteConfirm(index, name) {
+    let confirm = this.alertCtrl.create({
+      title: 'Cancella ricetta',
+      message: `sei sicuro di voler cancellare la ricetta ${name}?`,
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            return;
+          }
+        },
+        {
+          text: 'Si',
+          handler: () => {
+            return this.delete(index,'favorites.json');
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
 }

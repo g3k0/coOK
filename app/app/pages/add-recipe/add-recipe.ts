@@ -21,7 +21,7 @@ export class AddRecipePage {
 		public http: Http, 
         public modalCtrl: ModalController
 	) {
-		this.http.get('./saved_recipes.json')
+		this.http.get('./favorites.json')
 		.subscribe(res => {
 			this.items = res.json();
 		});
@@ -37,8 +37,10 @@ export class AddRecipePage {
 	/**
      * Modal page loading method
      */
-    presentModal() {
-        let modal = this.modalCtrl.create(RecipePage);
-        modal.present();
-    }
+     presentModal(item:any) {
+     	if (!item) return;
+	    let modal = this.modalCtrl.create(RecipePage, {recipe:item});
+	    modal.present();
+	    return;
+	}
 }

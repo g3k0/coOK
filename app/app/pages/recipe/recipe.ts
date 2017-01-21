@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ViewController} from 'ionic-angular';
+import {ViewController,NavParams} from 'ionic-angular';
 
 @Component({
 	templateUrl: 'build/pages/recipe/recipe.html',
@@ -8,10 +8,19 @@ import {ViewController} from 'ionic-angular';
 
 export class RecipePage { 
 
-	constructor (
-		public viewCtrl: ViewController
-	) {
+	recipe: any;
+	persons: number[];
 
+	constructor (
+		public viewCtrl: ViewController,
+		public params: NavParams
+	) {
+		this.recipe = params.get('recipe');
+
+		this.persons = [];
+		for (let i=0; i<this.recipe.persons; ++i) {
+			this.persons.push(i);
+		}
 	}
 
 	/**

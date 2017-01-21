@@ -1,0 +1,163 @@
+[
+	{
+	    "name" : "A Pizza Ca' Pummarola Ncopp'",
+	    "type" : "Primo",
+	    "mainIngredient" : "Pomodorini",
+	    "persons" : 8,
+	    "notes" : "Luogo: Campania.",
+	    "ingredients" : [ 
+	        "700 G Farina", 
+	        "3500 Cl Acqua Tiepida", 
+	        "1 Cucchiaino Sale", 
+	        "1/2 Cucchiaino Zucchero", 
+	        "1 Panetto Lievito Di Birra", 
+	        "1 Scatola Pomodorini", 
+	        "Basilico", 
+	        "250 G Mozzarella"
+	    ],
+	    "preparation" : "Mettere a fontana la farina, al centro sbriciolare il lievito aggiungere il sale lo zucchero e l'acqua lentamente cominciando ad impastare il tutto. Quando sentite che la pasta è abbastanza elastica e si stacca dalle pareti della terrina lasciatela lievitare per almeno un'ora e mezza. Ungere una teglia o anche due, perchè la pasta è abbondante, stendere ben bene una parte di pasta e ricoprirla di pomodoro, basilico, sale, un filo d'olio, quindi in forno già preriscaldato a 250 gradi per 30 minuti. Solo 5 minuti prima aggiungervi la mozzarella a dadini."
+	},
+	{
+	    "name" : "Abbraccio Di Mezze Maniche",
+	    "type" : "Primo",
+	    "mainIngredient" : "Prosciutto Cotto",
+	    "persons" : 4,
+	    "notes" : "Fonte: i4moschettieri.mastertopforum.net.",
+	    "ingredients" : [ 
+	        "150 G Pasta Tipo Mezze Maniche", 
+	        "50 G Fiocchi Di Latte", 
+	        "50 G Prosciutto Cotto", 
+	        "Prezzemolo", 
+	        "Basilico", 
+	        "1 Costa Sedano", 
+	        "1 Carota", 
+	        "2 Pomodori Pelati", 
+	        "Vino Bianco", 
+	        "Olio D'oliva", 
+	        "Sale"
+	    ],
+	    "preparation" : "Farcire le mezze maniche scottate in acqua bollente salata con una farcia composta da fiocchi di latte, prosciutto cotto, basilico e prezzemolo tritati; finire la loro cottura al vapore. Nel frattempo cuocere i pomodori pelati in padella con un soffritto di carota e sedano tritati, sfumando con vino bianco dopo alcuni minuti. Servire le mezze maniche farcite su tale salsa di pomodoro (finta genovese)."
+	},
+	{
+	    "name" : "Abbacchio A Scottadito",
+	    "type" : "Carne",
+	    "mainIngredient" : "Agnello",
+	    "persons" : 4,
+	    "notes" : "",
+	    "ingredients" : [ 
+	        "400 G Costolette D'abbacchio", 
+	        "1 Manciata Dragoncello", 
+	        "Sale", 
+	        "Pepe", 
+	        "Olio D'oliva", 
+	        "Limone"
+	    ],
+	    "preparation" : "Bagnare l'abbacchio già tagliato a costoletta con sale, pepe, olio ed dragoncello. Mettere le costolette sulla piastra e farle rosolare da ambo i lati per 4 minuti. Servirle con limone."
+	},
+	{
+	    "name" : "A Tutto Tonno",
+	    "type" : "Pesce",
+	    "mainIngredient" : "Tonno",
+	    "persons" : 4,
+	    "notes" : "Fonte: i4moschettieri.mastertopforum.net.",
+	    "ingredients" : [ 
+	        "300 G Tonno Fresco", 
+	        "3 Pomodori Secchi", 
+	        "200 G Melanzane", 
+	        "100 G Fagioli Borlotti Precotti", 
+	        "1 Cipolla", 
+	        "1 Foglio Pasta Fillo", 
+	        "1 Carota", 
+	        "1 Costa Sedano", 
+	        "1 Rametto  Rosmarino", 
+	        "Olio D'oliva", 
+	        "Sale", 
+	        "Pepe"
+	    ],
+	    "preparation" : "Dividere il filetto di tonno in tre parti lavorarli e servirli come segue. Per la tartara battere a coltello il tonno e condirlo con olio, sale, pepe e aghi di rosmarino. Per il sandwich ricavare dei cerchi di melanzana e uno di tonno, grigliarli e salarli. Per la pepita avvolgere un cubo di tonno nella pasta fillo e friggerlo dopo averlo infilzato con uno spiedino. A parte cuocere i fagioli in padella con olio ed un fondo di carota, cipolla e sedano tritati. Frullare a cottura e servire a specchio sotto la pepita dorata."
+	},
+	{
+	    "name" : "Aceto Agli Aromi",
+	    "type" : "Salsa",
+	    "mainIngredient" : "Aceto Di Vino",
+	    "persons" : 4,
+	    "notes" : "",
+	    "ingredients" : [ 
+	        "Alcuni Spicchi Aglio", 
+	        "Alcuni Spicchi Scalogno", 
+	        "1 Mazzetto Erbe Miste (maggiorana, Alloro, Basilico, Erba Cipollina)", 
+	        "Sale", 
+	        "Pepe", 
+	        "200 Cl Aceto Di Vino"
+	    ],
+	    "preparation" : "Tritate l'aglio e lo scalogno. Fate bollire lentamente l'aceto finché si riduce a metà. Versatelo caldo in una ciotola dove avrete preparato tutti gli aromi. Coprite il recipiente e lasciate macerare 2 ore. Filtrate, imbottigliate, tappate ermeticamente le bottiglie. La perfetta riuscita dipende dalla freschezza e dalla varietà delle erbe. Serve per condire verdure crude o cotte."
+	},
+	{
+	    "name" : "Antipasto Magro",
+	    "type" : "Antipasto",
+	    "mainIngredient" : "Patate",
+	    "persons" : 4,
+	    "notes" : "",
+	    "ingredients" : [ 
+	        "2 Patate Intere", 
+	        "4 Carciofi Piccoli", 
+	        "Poco Limone", 
+	        "2 Insalate Belghe (indivie)", 
+	        "Formaggio Philadelphia", 
+	        "3 Cucchiai Panna Fresca", 
+	        "1 Cucchiaino Paprica", 
+	        "Aglio", 
+	        "Prezzemolo"
+	    ],
+	    "preparation" : "Fate lessare due patate intere e fate cuocere 4 piccoli carciofi in acqua bollente con un po' di limone. Lavate e asciugate le foglie intere di due indivie belghe. Ponete al centro di un piatto i carciofi tagliati a metà e intorno le foglie di indivia e le rondelle di patate. Mischiate Philadelphia con tre cucchiai di panna fresca, dividete la crema in due parti: in una metà mettete un cucchiaino di paprica e nell'altra aglio e prezzemolo tritati.Versate la crema all'aglio sui carciofi e quella alla paprica sull'indivia."
+	},
+	{
+	    "name" : "Caffè Viennese",
+	    "type" : "Dessert",
+	    "mainIngredient" : "Caffè",
+	    "persons" : 4,
+	    "notes" : "Luogo: Austria. Luogo: Vienna.",
+	    "ingredients" : [ 
+	        "4 Palline Gelato Alla Vaniglia", 
+	        "4 Bicchieri Caffè Forte", 
+	        "Zucchero", 
+	        "4 Cucchiai Liquore Al Caffè", 
+	        "Panna Montata", 
+	        "4 Cialde"
+	    ],
+	    "preparation" : "Zuccherare il caffè, farlo raffreddare e tenerlo in frigo per circa 2 ore. In 4 bicchieri alti porre le palline di gelato, irrorarle con il liquore e versarvi il caffè freddo. Aggiungere panna montata fino all'orlo del bicchiere, decorare con le cialde e servire subito."
+	},
+	{
+	    "name" : "Insalata Di Pollo All'americana",
+	    "type" : "Pollame",
+	    "mainIngredient" : "Pollo",
+	    "persons" : 4,
+	    "notes" : "",
+	    "ingredients" : [ 
+	        "300 G Pollo Cotto", 
+	        "1 Sedano Bianco", 
+	        "2 Uova Sode", 
+	        "1 Tazza Maionese", 
+	        "2 Cucchiai Panna", 
+	        "12 Olive Nere", 
+	        "Capperi", 
+	        "Sale", 
+	        "Pepe"
+	    ],
+	    "preparation" : "Eliminate la pelle e tagliate la carne del pollo a striscioline. Pulite il sedano a tagliatelo a bastoncini. Riunite tutto in una insalatiera. Aggiungete la maionese ammorbidita con la panna, sale e pepe. Mescolate delicatamente. Disponete sul piatto da portata. Cospargete la superficie con capperi e olive. Guarnite con le uova a spicchi e servite. Vini di accompagnamento: i vini bianchi con struttura sono quelli ideali: Collio Tocai DOC, Pomino Bianco DOC, Greco Di Tufo DOC."
+	},
+	{
+	    "name" : "El Presidente",
+	    "type" : "Bevande",
+	    "mainIngredient" : "Rum Bianco",
+	    "persons" : 1,
+	    "notes" : "",
+	    "ingredients" : [ 
+	        "2/3 Rum Bianco", 
+	        "1/3 Vermouth Bianco Secco", 
+	        "1 Cucchiaino Sciroppo Di Granatina", 
+	        "1 Spruzzo Curacao"
+	    ],
+	    "preparation" : "Versare gli ingredienti in un mixing-glass con alcuni cubetti di ghiaccio. Mescolare bene e passare in una coppetta da cocktail."
+	}
+]

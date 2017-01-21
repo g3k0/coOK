@@ -3,7 +3,7 @@
 	<ion-toolbar>
 
 		<ion-title>
-			Abbraccio Di Mezze Maniche
+			{{recipe.name}}
 		</ion-title>
 
 		<ion-buttons start>
@@ -27,8 +27,16 @@
 		</ion-row>
 		<ion-row class="section content category-content">
 	    	<ion-col width-90>
-	    		Primi
-	    		<img class="category-icon" src="asset/135541-gastronomy-set/png/pasta.png" alt="primi" />
+	    		<img class="category-icon" src="asset/135541-gastronomy-set/png/glass-4.png" alt="bevande" *ngIf="recipe.type==='Bevande'" /> 
+	    		<img class="category-icon" src="asset/135541-gastronomy-set/png/salami.png" alt="antipasti" *ngIf="recipe.type==='Antipasto'" /> 
+	    		<img class="category-icon" src="asset/135541-gastronomy-set/png/pasta-1.png" alt="primi" *ngIf="recipe.type==='Primo'" /> 
+	    		<img class="category-icon" src="asset/135541-gastronomy-set/png/steak.png" alt="carni" *ngIf="recipe.type==='Carne'" /> 
+	    		<img class="category-icon" src="asset/135541-gastronomy-set/png/turkey.png" alt="pollame" *ngIf="recipe.type==='Pollame'" /> 
+	    		<img class="category-icon" src="asset/135541-gastronomy-set/png/fish.png" alt="pesce" *ngIf="recipe.type==='Pesce'" /> 
+	    		<img class="category-icon" src="asset/135541-gastronomy-set/png/potatoes.png" alt="contorni" *ngIf="recipe.type==='Contorno'" /> 
+	    		<img class="category-icon" src="asset/135541-gastronomy-set/png/mustard-2.png" alt="salse" *ngIf="recipe.type==='Salsa'" /> 
+	    		<img class="category-icon" src="asset/135541-gastronomy-set/png/cupcake-2.png" alt="dolci" *ngIf="recipe.type==='Dessert'" /> 
+	    		{{recipe.type}}
 	    	</ion-col>
 		</ion-row>
 
@@ -39,7 +47,7 @@
 		</ion-row>
 		<ion-row class="section content mainIngredient-content">
 	    	<ion-col width-90>
-	    		Prosciutto Cotto
+	    		{{recipe.mainIngredient}}
 	    	</ion-col>
 		</ion-row>
 
@@ -50,10 +58,7 @@
 		</ion-row>
 		<ion-row class="section content persons-content">
 	    	<ion-col width-90>
-	    		<img class="recipe-persons" src="asset/google-material-icons/ic_person_white_24dp/android/drawable-mdpi/ic_person_white_24dp.png"/>
-	    		<img class="recipe-persons" src="asset/google-material-icons/ic_person_white_24dp/android/drawable-mdpi/ic_person_white_24dp.png"/>
-	    		<img class="recipe-persons" src="asset/google-material-icons/ic_person_white_24dp/android/drawable-mdpi/ic_person_white_24dp.png"/>
-	    		<img class="recipe-persons" src="asset/google-material-icons/ic_person_white_24dp/android/drawable-mdpi/ic_person_white_24dp.png"/>
+	    		<img class="recipe-persons" src="asset/google-material-icons/ic_person_white_24dp/android/drawable-mdpi/ic_person_white_24dp.png" *ngFor="let person of persons" />
 	    	</ion-col>
 		</ion-row>
 
@@ -65,17 +70,7 @@
 		<ion-row class="section content ingredients-content">
 	    	<ion-col width-90>
 	    		<ul>
-				    <li>150 G Pasta Tipo Mezze Maniche</li>
-				    <li>50 G Fiocchi Di Latte</li>
-				    <li>50 G Prosciutto Cotto</li>
-				    <li>Prezzemolo</li>
-				    <li>Basilico</li>
-				    <li>1 Costa Sedano</li>
-				    <li>1 Carota</li>
-				    <li>2 Pomodori Pelati</li>
-				    <li>Vino Bianco</li>
-				    <li>Olio D'oliva</li>
-				    <li>Sale</li>
+				    <li *ngFor="let ingredient of recipe.ingredients">{{ingredient}}</li>
 				</ul>
 	    	</ion-col>
 		</ion-row>
@@ -87,18 +82,18 @@
 		</ion-row>
 		<ion-row class="section content preparation-content">
 	    	<ion-col width-90>
-	    		Farcire le mezze maniche scottate in acqua bollente salata con una farcia composta da fiocchi di latte, prosciutto cotto, basilico e prezzemolo tritati; finire la loro cottura al vapore. Nel frattempo cuocere i pomodori pelati in padella con un soffritto di carota e sedano tritati, sfumando con vino bianco dopo alcuni minuti. Servire le mezze maniche farcite su tale salsa di pomodoro (finta genovese).
+	    		{{recipe.preparation}}
 	    	</ion-col>
 		</ion-row>
 
-		<ion-row class="section title notes-title">
+		<ion-row class="section title notes-title" *ngIf="recipe.notes">
 	    	<ion-col width-90>
 	    		<h3>Note</h3>
 	    	</ion-col>
 		</ion-row>
-		<ion-row class="section content notes-content">
+		<ion-row class="section content notes-content" *ngIf="recipe.notes">
 	    	<ion-col width-90>
-	    		Fonte: i4moschettieri.mastertopforum.net.
+	    		{{recipe.notes}}
 	    	</ion-col>
 		</ion-row>
 

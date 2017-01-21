@@ -34,7 +34,7 @@ export class SearchPage {
 		 * Loading configuration
 		 */
 		let self = this;
-		data.retrieveData(function(data) {
+		data.retrieveConfig(function(data) {
 			self.config = data; //use this.config in class methods!
 		});
 	}
@@ -227,7 +227,7 @@ export class SearchPage {
   	/**
   	 * toast message method when clear filter button is pressed
   	 */
-  	presentToast(position: string) {
+  	presentToast(position:string) {
     let toast = this.toastCtrl.create({
       message: 'Filtri resettati con successo!',
       duration: 2000,
