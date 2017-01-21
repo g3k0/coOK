@@ -11,8 +11,15 @@ export class DataService {
     this.http = http;
   }
 
-  retrieveData(cb) {
+  retrieveConfig(cb) {
     this.http.get('./config.development.json')
+    .subscribe(data => {
+      return cb(data.json());
+    });
+  }
+
+  retrieveFavorites(cb) {
+    this.http.get('./favorites.json')
     .subscribe(data => {
       return cb(data.json());
     });

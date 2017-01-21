@@ -34,7 +34,7 @@ export class SearchPage {
 		 * Loading configuration
 		 */
 		let self = this;
-		data.retrieveData(function(data) {
+		data.retrieveConfig(function(data) {
 			self.config = data; //use this.config in class methods!
 		});
 	}
