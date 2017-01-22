@@ -18,7 +18,7 @@
 					</div>
 					<div class="meal" *ngFor="let meal of day.meals">
 						{{meal.name}}
-						<div class="recipe" *ngFor="let recipe of meal.recipes">{{recipe}}</div>
+						<div class="recipe" *ngFor="let recipe of meal.recipes">{{recipe.name || ''}}</div>
 					</div>
 				</div>
 	    	</div>

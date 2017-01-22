@@ -4,7 +4,7 @@
 
 	div.container {
 		width: 100;
-		padding: 0;
+		margin: 0 .4em;
 		div.day {
 			float: left;
 			width: 33%;
@@ -13,11 +13,20 @@
 			div.title {
 				background : color($colors, secondary, base);
 				text-align: center;
+				padding: .3em 0;
 			}
 			div.meal {
 				background : color($colors, lightGrey, base);
-				color: color($colors, inverseFontColor, base);
-				min-height: 4.9em;
+				color: color($colors, primary, base);
+				min-height: 5.7em;
+				max-height: 5.7em;
+				padding-left: .2em;
+				font-size: .9em;
+				div.recipe {
+					background : color($colors, lightGrey, base);
+					color: color($colors, inverseFontColor, base);
+					font-size: .6em;
+				}
 			} 
 			div.meal:last-child {
 				border-top: 1px solid white;

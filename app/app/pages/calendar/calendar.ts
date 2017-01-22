@@ -39,10 +39,9 @@ export class CalendarPage {
  	/**
  	 * Flip the day detail page
  	 */
-	flip (daySelected) {
+	flip (daySelected:any) {
     if (daySelected) {
       this.day = daySelected;
-      console.log(this.day);
     }
     this.flipped = !this.flipped;
   }
