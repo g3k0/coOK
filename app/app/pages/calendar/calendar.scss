@@ -2,32 +2,26 @@
 	background : color($colors, primary, base);
 	color: color($colors, fontColor, base);
 
-	ion-grid {
+	div.container {
+		width: 100;
 		padding: 0;
-	}
-
-	ion-col[width-90] {
-		flex: 0 0 100%;
-		max-width: 100%;
-	}
-
-	.day {
-		border: 1px solid white;
-		padding: 0;
-		ion-grid {
+		div.day {
+			float: left;
+			width: 33%;
+			border: 1px solid white;
 			padding: 0;
-		}
-		.day-title {
-			background : color($colors, secondary, base);
-			text-align: center;
-		}
-		.day-lunch, .day-dinner {
-			background : color($colors, lightGrey, base);
-			color: color($colors, inverseFontColor, base);
-			min-height: 4.9em;
-		}
-		.day-dinner {
-			border-top: 1px solid white;
+			div.title {
+				background : color($colors, secondary, base);
+				text-align: center;
+			}
+			div.meal {
+				background : color($colors, lightGrey, base);
+				color: color($colors, inverseFontColor, base);
+				min-height: 4.9em;
+			} 
+			div.meal:last-child {
+				border-top: 1px solid white;
+			}
 		}
 	}
 

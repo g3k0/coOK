@@ -1,37 +1,72 @@
 [
 	{
-		"day": "Monday",
-		"lunch": [],
-		"dinner": []
+		"day": "Lunedi",
+		"meals": [{
+			"name":"pranzo",
+			"recipes": []
+		},{
+			"name": "cena",
+			"recipes": []
+		}]
 	},
 	{
-		"day": "Tuesday",
-		"lunch": [],
-		"dinner": []
+		"day": "Martedi",
+		"meals": [{
+			"name":"pranzo",
+			"recipes": []
+		},{
+			"name": "cena",
+			"recipes": []
+		}]
 	},
 	{
-		"day": "Wednesday",
-		"lunch": [],
-		"dinner": []
+		"day": "Mercoledi",
+		"meals": [{
+			"name":"pranzo",
+			"recipes": []
+		},{
+			"name": "cena",
+			"recipes": []
+		}]
 	},
 	{
-		"day": "Thursday",
-		"lunch": [],
-		"dinner": []
+		"day": "Giovedi",
+		"meals": [{
+			"name":"pranzo",
+			"recipes": []
+		},{
+			"name": "cena",
+			"recipes": []
+		}]
 	},
 	{
-		"day": "Friday",
-		"lunch": [],
-		"dinner": []
+		"day": "Venerdi",
+		"meals": [{
+			"name":"pranzo",
+			"recipes": []
+		},{
+			"name": "cena",
+			"recipes": []
+		}]
 	},
 	{
-		"day": "Saturday",
-		"lunch": [],
-		"dinner": []
+		"day": "Sabato",
+		"meals": [{
+			"name":"pranzo",
+			"recipes": []
+		},{
+			"name": "cena",
+			"recipes": []
+		}]
 	},
 	{
-		"day": "Sunday",
-		"lunch": [],
-		"dinner": []
+		"day": "Domenica",
+		"meals": [{
+			"name":"pranzo",
+			"recipes": []
+		},{
+			"name": "cena",
+			"recipes": []
+		}]
 	}
 ]
