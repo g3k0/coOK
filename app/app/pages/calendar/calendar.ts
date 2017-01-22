@@ -16,7 +16,7 @@ export class CalendarPage {
 	flipped:boolean = false;
   calendar:any;
   day:any = {
-    "day": 'Lunedi',
+    'day': 'Lunedi',
     'meals': [{
       'name':'pranzo',
       'recipes': []
@@ -39,12 +39,12 @@ export class CalendarPage {
 
       this.delete = data.delete;
 	}
- 	
- 	/**
+
+  /**
  	 * Flip the day detail page
  	 */
 	flip (daySelected:any) {
-    if (daySelected) {
+    if (daySelected && this.day !== daySelected) {
       this.day = daySelected;
     }
     this.flipped = !this.flipped;
@@ -70,7 +70,7 @@ export class CalendarPage {
   showDeleteConfirm(index, name) {
     let confirm = this.alertCtrl.create({
       title: 'Cancella ricetta',
-      message: `sei sicuro di voler cancellare la ricetta ${name}?`,
+      message: `sei sicuro di voler rimuovere dal calendario la ricetta ${name}?`,
       buttons: [
         {
           text: 'No',

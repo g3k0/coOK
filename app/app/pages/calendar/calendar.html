@@ -26,7 +26,7 @@
 
 		<div class="back">
 
-			<div class="container">
+			<div class="container-two">
 					
 				<div class="arrow">
 					<ion-icon name="arrow-round-back" (click)="flip()"></ion-icon>
@@ -44,7 +44,7 @@
 					    <ion-card-content>
 					    	<div class="item" *ngFor="let recipe of card.recipes;let index=index ">
 								<div class="container">
-									<div class="name" (click)="presentModalRecipe()">
+									<div class="name" (click)="presentModalRecipe(recipe)">
 										{{recipe.name}}
 									</div>
 									<div class="icon">
