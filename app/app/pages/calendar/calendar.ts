@@ -70,7 +70,7 @@ export class CalendarPage {
   showDeleteConfirm(index, name) {
     let confirm = this.alertCtrl.create({
       title: 'Cancella ricetta',
-      message: `sei sicuro di voler cancellare la ricetta ${name}?`,
+      message: `sei sicuro di voler rimuovere dal calendario la ricetta ${name}?`,
       buttons: [
         {
           text: 'No',
