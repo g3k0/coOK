@@ -16,7 +16,7 @@ export class CalendarPage {
 	flipped:boolean = false;
   calendar:any;
   day:any = {
-    "day": 'Lunedi',
+    'day': 'Lunedi',
     'meals': [{
       'name':'pranzo',
       'recipes': []
@@ -39,8 +39,8 @@ export class CalendarPage {
 
       this.delete = data.delete;
 	}
- 	
- 	/**
+
+  /**
  	 * Flip the day detail page
  	 */
 	flip (daySelected:any) {
