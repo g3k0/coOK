@@ -61,30 +61,34 @@
 		}
 	}
 	
-	div.item {
-		margin-bottom: .5em;
-		background : color($colors, secondary, base);
-		color: color($colors, fontColor, base);
-		border-top: none !important;
-		div.container {
-			width: 100%;
-			padding-right: 0;
-			border-bottom: none !important;
-			div.name {
-				float:left;
-				width: 80%;
-			}
-			div.icon {
-				float:left;
-				width: 20%; 
-				ion-label {
-					font-size: .7em;
+	ion-card {
+		margin: 10px 0 10px 0;
+		width: 98%; 
+		div.item {
+			margin-bottom: .5em;
+			background : color($colors, secondary, base);
+			color: color($colors, fontColor, base);
+			border-top: none !important;
+			div.container {
+				width: 100%;
+				padding-right: 0;
+				border-bottom: none !important;
+				div.name {
+					float:left;
+					width: 80%;
 				}
-				ion-icon {
-					display: inline-block;
-					float: right;
-					font-size: 1.5em;
-					margin-right: .8em;
+				div.icon {
+					float:left;
+					width: 20%; 
+					ion-label {
+						font-size: .7em;
+					}
+					ion-icon {
+						display: inline-block;
+						float: right;
+						font-size: 1.5em;
+						margin-right: .8em;
+					}
 				}
 			}
 		}
