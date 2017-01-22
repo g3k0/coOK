@@ -1,6 +1,11 @@
 .calendar {
+
 	background : color($colors, primary, base);
 	color: color($colors, fontColor, base);
+	
+	/**
+	 * calendar table
+	 */
 
 	div.container {
 		width: 100;
@@ -22,10 +27,11 @@
 				max-height: 5.7em;
 				padding-left: .2em;
 				font-size: .9em;
+				overflow: scroll;
 				div.recipe {
 					background : color($colors, lightGrey, base);
 					color: color($colors, inverseFontColor, base);
-					font-size: .6em;
+					font-size: .7em;
 				}
 			} 
 			div.meal:last-child {
@@ -34,6 +40,26 @@
 		}
 	}
 
+	/**
+	 * day card
+	 */
+
+	.back {
+		padding-left: .5em;
+	}
+
+	div.container {
+		width:100%;
+		div.arrow {
+			float:left;
+			width:100%;
+		}
+		div.day-title {
+			clear:both;
+			text-align: center;
+		}
+	}
+	
 	div.item {
 		margin-bottom: .5em;
 		background : color($colors, secondary, base);
@@ -61,10 +87,6 @@
 				}
 			}
 		}
-	}
-
-	.day-title-detail {
-		text-align: center;
 	}
 }
 
