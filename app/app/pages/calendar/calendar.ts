@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {ModalController} from 'ionic-angular';
+import {ModalController, AlertController} from 'ionic-angular';
 import {RecipePage} from '../recipe/recipe';
 import {AddRecipePage} from '../add-recipe/add-recipe';
 import {DataService} from '../../services';
@@ -25,15 +25,19 @@ export class CalendarPage {
       'recipes': []
     }]
   };
+  delete:any;
  
 	constructor(
 		public modalCtrl: ModalController,
-    public data: DataService
+    public data: DataService,
+    public alertCtrl: AlertController
 	) {
  		 let self = this;
       data.retrieveCalendar(function(data) {
         self.calendar = data;
       });
+
+      this.delete = data.delete;
 	}
  	
  	/**
@@ -46,17 +50,42 @@ export class CalendarPage {
     this.flipped = !this.flipped;
   }
 
-  	/**
-     * Modal page loading method
-     */
-    presentModalRecipe (item:any) {
-      if (!item) return;
-      let modal = this.modalCtrl.create(RecipePage, {recipe:item});
-      modal.present();
-    }
+	/**
+   * Modal page loading method
+   */
+  presentModalRecipe (item:any) {
+    if (!item) return;
+    let modal = this.modalCtrl.create(RecipePage, {recipe:item});
+    modal.present();
+  }
 
-    presentModalAddRecipe () {
-      let modal = this.modalCtrl.create(AddRecipePage);
-      modal.present();
-    }
+  presentModalAddRecipe () {
+    let modal = this.modalCtrl.create(AddRecipePage);
+    modal.present();
+  }
+
+  /**
+   *  Delete recipe confirmation alert
+   */
+  showDeleteConfirm(index, name) {
+    let confirm = this.alertCtrl.create({
+      title: 'Cancella ricetta',
+      message: `sei sicuro di voler cancellare la ricetta ${name}?`,
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            return;
+          }
+        },
+        {
+          text: 'Si',
+          handler: () => {
+            return this.delete(index,'favorites.json');
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
 }
