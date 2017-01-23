@@ -3,6 +3,7 @@ import {ModalController, AlertController} from 'ionic-angular';
 import {Http} from '@angular/http';
 import {RecipePage} from '../recipe/recipe';
 import {DataService} from '../../services';
+import {Recipe} from '../../interfaces';
 
 @Component({
   templateUrl: 'build/pages/favorites/favorites.html',
@@ -13,9 +14,9 @@ export class FavoritesPage {
 
   @ViewChild(RecipePage) RecipePage: RecipePage;
 
-	items:any[];
-  initialItems:any[];
-  delete:any;
+	items: Recipe[];
+  initialItems: Recipe[];
+  delete: any;
 
 	constructor (
         public http: Http, 
@@ -57,7 +58,7 @@ export class FavoritesPage {
   /**
    * Modal page loading method
    */
-  presentModal(item:any) {
+  presentModal(item:Recipe) {
     if (!item) return;
     let modal = this.modalCtrl.create(RecipePage, {recipe:item});
     modal.present();
