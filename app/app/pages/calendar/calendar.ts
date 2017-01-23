@@ -3,6 +3,7 @@ import {ModalController, AlertController} from 'ionic-angular';
 import {RecipePage} from '../recipe/recipe';
 import {AddRecipePage} from '../add-recipe/add-recipe';
 import {DataService} from '../../services';
+import {Recipe} from '../../interfaces';
 
 @Component({
 	templateUrl: 'build/pages/calendar/calendar.html',
@@ -32,7 +33,7 @@ export class CalendarPage {
     public data: DataService,
     public alertCtrl: AlertController
 	) {
- 		 let self = this;
+ 		  let self = this;
       data.retrieveCalendar(function(data) {
         self.calendar = data;
       });
@@ -53,7 +54,7 @@ export class CalendarPage {
 	/**
    * Modal page loading method
    */
-  presentModalRecipe (item:any) {
+  presentModalRecipe (item:Recipe) {
     if (!item) return;
     let modal = this.modalCtrl.create(RecipePage, {recipe:item});
     modal.present();

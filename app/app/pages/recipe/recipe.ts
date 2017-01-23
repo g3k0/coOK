@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {ViewController,NavParams} from 'ionic-angular';
+import {Recipe} from '../../interfaces';
 
 @Component({
 	templateUrl: 'build/pages/recipe/recipe.html',
@@ -8,7 +9,7 @@ import {ViewController,NavParams} from 'ionic-angular';
 
 export class RecipePage { 
 
-	recipe: any;
+	recipe: Recipe;
 	persons: number[];
 
 	constructor (

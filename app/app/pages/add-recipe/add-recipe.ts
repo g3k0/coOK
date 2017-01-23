@@ -3,28 +3,32 @@ import {ViewController} from 'ionic-angular';
 import {Http} from '@angular/http';
 import {ModalController} from 'ionic-angular';
 import {RecipePage} from '../recipe/recipe';
+import {DataService} from '../../services';
+import {Recipe} from '../../interfaces';
 
 
 @Component({
 	templateUrl: 'build/pages/add-recipe/add-recipe.html',
 	selector: 'add-recipe',
-  	directives: [RecipePage]
+  	directives: [RecipePage],
+    providers: [DataService]
 })
 
 export class AddRecipePage { 
 
 	@ViewChild(RecipePage) RecipePage: RecipePage;
-	items: any[];
+	items: Recipe[];
 
 	constructor (
 		public viewCtrl: ViewController,
 		public http: Http, 
-        public modalCtrl: ModalController
+        public modalCtrl: ModalController,
+        public data: DataService
 	) {
-		this.http.get('./favorites.json')
-		.subscribe(res => {
-			this.items = res.json();
-		});
+		let self = this;
+      	data.retrieveFavorites(function(data) {
+        	self.items = data;
+      	});
 	}
 
 	/**
@@ -37,7 +41,7 @@ export class AddRecipePage {
 	/**
      * Modal page loading method
      */
-     presentModal(item:any) {
+     presentModal(item:Recipe) {
      	if (!item) return;
 	    let modal = this.modalCtrl.create(RecipePage, {recipe:item});
 	    modal.present();

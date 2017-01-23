@@ -228,30 +228,30 @@ export class SearchPage {
   	 * toast message method when clear filter button is pressed
   	 */
   	presentToast(position:string) {
-    let toast = this.toastCtrl.create({
-      message: 'Filtri resettati con successo!',
-      duration: 2000,
-      position: position
-    });
-    toast.present();
-  }
+	    let toast = this.toastCtrl.create({
+	      message: 'Filtri resettati con successo!',
+	      duration: 2000,
+	      position: position
+	    });
+	    toast.present();
+	}
 
-  /**
-   * Search method, called by the search html button
-   */
-  search() {
+    /**
+     * Search method, called by the search html button
+     */
+    search() {
 
-  	if (!this.ingredients.length && 
-  		!this.filters.recipeName &&
-  		!this.filters.mainIngredient &&
-  		!this.filters.recipeType.length
-  	) {
-  		console.log('no data');
-  		return;
-  	}
+	  	if (!this.ingredients.length && 
+	  		!this.filters.recipeName &&
+	  		!this.filters.mainIngredient &&
+	  		!this.filters.recipeType.length
+	  	) {
+	  		console.log('no data');
+	  		return;
+	  	}
 
-  	console.log(this.ingredients);
-  	console.log(this.filters);
-  	return;
-  } 
+	  	console.log(this.ingredients);
+	  	console.log(this.filters);
+	  	return;
+    } 
 }
