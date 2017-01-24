@@ -2,6 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {ModalController, AlertController} from 'ionic-angular';
 import {RecipePage} from '../recipe/recipe';
 import {AddRecipePage} from '../add-recipe/add-recipe';
+import {ShoppingListPage} from '../shopping-list/shopping-list';
 import {DataService} from '../../services';
 import {Recipe} from '../../interfaces';
 
@@ -26,6 +27,7 @@ export class CalendarPage {
       'recipes': []
     }]
   };
+  shoppingList:string[];
   delete:any;
  
 	constructor(
@@ -38,6 +40,7 @@ export class CalendarPage {
         self.calendar = data;
       });
 
+      this.shoppingList = [];
       this.delete = data.delete;
 	}
 
@@ -59,12 +62,32 @@ export class CalendarPage {
   presentModalRecipe (item:Recipe) {
     if (!item) return;
     let modal = this.modalCtrl.create(RecipePage, {recipe:item});
-    modal.present();
+    return modal.present();
   }
 
+  /**
+   * Modal that show the favorites recipes to add to the calendar
+   */
   presentModalAddRecipe () {
     let modal = this.modalCtrl.create(AddRecipePage);
+    return modal.present();
+  }
+
+  /**
+   * Modal that show all the ingredients for the recipes of the day
+   * @param {Array<any>} the meals array 
+   */
+  presentModalShoppingList(meals:Array<any>) {
+
+    for (let meal of meals) {
+      for(let recipe of meal.recipes) {
+        this.shoppingList = this.shoppingList.concat(recipe.ingredients);
+      }
+    }
+    let modal = this.modalCtrl.create(ShoppingListPage, {shoppingList:this.shoppingList});
     modal.present();
+    this.shoppingList = [];
+    return;
   }
 
   /**
