@@ -40,6 +40,7 @@ export class AddRecipePage {
 
 	/**
      * Modal page loading method
+     * @param {Recipe} a recipe object defined in the interfaces file
      */
      presentModal(item:Recipe) {
      	if (!item) return;

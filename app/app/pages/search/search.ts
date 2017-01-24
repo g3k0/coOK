@@ -41,6 +41,7 @@ export class SearchPage {
 
 	/**
 	 * ingredients form input
+	 * @param {string} the ingredient passed by the text input html element
 	 */
 	pushIngredient(ingredient:string) {
 		if (!ingredient) return;
@@ -50,6 +51,7 @@ export class SearchPage {
 	/**
 	 * method that pop an ingredient from the ingredients array, 
 	 * called in the ingredient x html button
+	 * @param {string} the ingredient passed by the text input html element
 	 */
 	deleteIngredient(ingredient:string) {
 		let index = this.ingredients.indexOf(ingredient);
@@ -226,6 +228,7 @@ export class SearchPage {
 
   	/**
   	 * toast message method when clear filter button is pressed
+  	 * @param {string} where to show the toast in the web page: top | middle | bottom
   	 */
   	presentToast(position:string) {
 	    let toast = this.toastCtrl.create({

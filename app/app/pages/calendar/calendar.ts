@@ -43,6 +43,7 @@ export class CalendarPage {
 
   /**
  	 * Flip the day detail page
+   * param {any} a day object, see www/lendar.json for reference
  	 */
 	flip (daySelected:any) {
     if (daySelected && this.day !== daySelected) {
@@ -53,6 +54,7 @@ export class CalendarPage {
 
 	/**
    * Modal page loading method
+   * @param {Recipe} a recipe object defined in the interfaces file
    */
   presentModalRecipe (item:Recipe) {
     if (!item) return;
@@ -66,9 +68,11 @@ export class CalendarPage {
   }
 
   /**
-   *  Delete recipe confirmation alert
+   * Delete recipe confirmation alert
+   * @param {number} the array index of the element in the recipes array
+   * @param {string} the name of the recipe
    */
-  showDeleteConfirm(index, name) {
+  showDeleteConfirm(index:number, name:string) {
     let confirm = this.alertCtrl.create({
       title: 'Cancella ricetta',
       message: `sei sicuro di voler rimuovere dal calendario la ricetta ${name}?`,
