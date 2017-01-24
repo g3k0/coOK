@@ -1,3 +1,29 @@
+.shopping-list-header {
+	ion-toolbar {
+		div.toolbar-background {
+			background: color($colors, secondary, base);
+		}
+		div.toolbar-content {
+			ion-title {
+				div.toolbar-title {
+					color: color($colors, fontColor, base);
+				}
+			}
+		}
+		ion-buttons {
+			button {
+				color: color($colors, fontColor, base);
+			}
+		}	
+	}
+}
+
 .shopping-list {
-	
+	background: color($colors, primary, base);
+
+	.item {
+		.item-inner {
+			color: color($colors, inverseFontColor, base);;
+		}
+	}
 }

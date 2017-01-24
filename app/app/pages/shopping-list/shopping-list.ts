@@ -23,4 +23,12 @@ export class ShoppingListPage {
 	dismiss () {
 	    this.viewCtrl.dismiss();
 	}
+
+	/**
+	 * check a certain ingredient
+	 */
+	ingredientSelected(ingredient:string) {
+		console.log(ingredient); 
+		return;
+	}
 }

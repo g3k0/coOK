@@ -85,7 +85,9 @@ export class CalendarPage {
       }
     }
     let modal = this.modalCtrl.create(ShoppingListPage, {shoppingList:this.shoppingList});
-    return modal.present();
+    modal.present();
+    this.shoppingList = [];
+    return;
   }
 
   /**
