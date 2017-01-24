@@ -26,4 +26,8 @@
 			color: color($colors, inverseFontColor, base);;
 		}
 	}
+
+	ion-label {
+		white-space: normal;
+	}
 }
