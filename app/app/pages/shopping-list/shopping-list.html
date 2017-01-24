@@ -23,7 +23,8 @@
 		<ion-card-content>
 			<ion-list>
 			  <button ion-item *ngFor="let ingredient of shoppingList" (click)="ingredientSelected(ingredient)">
-			    {{ingredient}}
+			  <ion-label>{{ingredient}}</ion-label>
+			    <ion-toggle></ion-toggle>
 			  </button>  
 			</ion-list>
 		</ion-card-content>
