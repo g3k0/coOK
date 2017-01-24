@@ -6,13 +6,15 @@ import {ViewController,NavParams} from 'ionic-angular';
 	selector: 'shopping-list'
 })
 
-export class RecipePage { 
+export class ShoppingListPage { 
+
+	shoppingList: string[];
 
 	constructor (
 		public viewCtrl: ViewController,
 		public params: NavParams
 	) {
-		
+		this.shoppingList = params.get('shoppingList');
 	}
 
 	/**

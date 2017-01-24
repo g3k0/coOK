@@ -3,5 +3,7 @@
 </ion-header>
 
 <ion-content padding class="shopping-list">
-	SHOPPING LIST VIEW
+	<ul>
+		<li *ngFor ="let ingredient of shoppingList">{{ingredient}}</li>
+	</ul>
 </ion-content>
