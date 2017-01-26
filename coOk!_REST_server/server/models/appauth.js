@@ -59,6 +59,21 @@
 			});
 		};
 
+		/*
+		{
+			available: true,
+			platform: "Android",
+			version: "5.0",
+			uuid: "d57593a7fc301e5f",
+			cordova: "6.0.0",
+			model: "ASUS_ZooAD",
+			manufacturer: "asus",
+			isVirtual: false, 
+			serial: "F6AZFGo84541"
+		}
+
+		 */
+
 		//------------------------------------------------------------------------------------------------------------------------------
 
 		/**
