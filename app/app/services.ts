@@ -1,7 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
-import {File} from "ionic-native";
+import {Device} from "ionic-native";
 import 'rxjs/Rx';
+//declare var cordova: any
 
 @Injectable()
 export class DataService {
@@ -21,6 +22,13 @@ export class DataService {
     .subscribe(data => {
       return cb(data.json());
     });
+  }
+
+  /**
+   * Get the device info
+   */
+  getDeviceInfo() {
+    return Device.device;
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/
@@ -47,15 +55,7 @@ export class DataService {
       let newFavorites = [];
       newFavorites = favorites.splice(index, 1);
 
-      console.log(cordova);
-
-      /*cordova object should be available only on a device/emulator*/
-      File.createDir(cordova.file.applicationDirectory, 'coOk_test',true)
-      .then( 
-        () => console.log('yay')
-      ).catch(
-        err => console.log(err)
-      );
+      return;
 
     });
   }
