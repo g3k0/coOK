@@ -2,6 +2,7 @@
   "dependencies": {},
   "devDependencies": {},
   "globalDependencies": {
+    "cordova": "registry:dt/cordova#0.0.0+20160819210047",
     "es6-shim": "registry:dt/es6-shim#0.31.2+20160602141504"
   }
 }
