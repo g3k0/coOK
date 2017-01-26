@@ -10,7 +10,6 @@ import {DataService} from '../../services';
 export class SearchPage {
 
 	ingredients: any[];
-	config: any;
 
 	filters: {
 		recipeName:string,
@@ -29,14 +28,6 @@ export class SearchPage {
 			mainIngredient: null,
 			recipeType: []
 		}
-
-		/**
-		 * Loading configuration
-		 */
-		let self = this;
-		data.retrieveConfig(function(data) {
-			self.config = data; //use this.config in class methods!
-		});
 	}
 
 	/**

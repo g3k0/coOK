@@ -18,8 +18,14 @@ export class MyApp {
     private rootPage: any;
     private pages: any[];
     private loading: boolean;
+    private device: any; //TO DO - implement interface
+    private config: any; //TO DO - implement interface
 
-    constructor (private platform: Platform, private menu: MenuController) {
+    constructor (
+        private platform: Platform, 
+        private menu: MenuController,
+        private data: DataService
+    ) {
         this.menu = menu;
         this.pages = [
             { title: 'Guida', component: GuidePage, icon: 'help' },
@@ -27,7 +33,20 @@ export class MyApp {
             { title: 'Votaci', component: VotePage, icon: 'star-outline' }
         ];
         this.rootPage = TabsPage;
-        this.loading = false; //cambia in base alle chiamate di registrazione e autenticazione
+        this.loading = true; //cambia in base alle chiamate di registrazione e autenticazione
+
+        /**
+         * Loading device Informations
+         */
+        this.device = JSON.stringify(data.getDeviceInfo());
+
+        /**
+         * Loading configuration
+         */
+        let self = this;
+        data.retrieveConfig(function(data) {
+            self.config = data; //use this.config in class methods!
+        });
 
         platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
