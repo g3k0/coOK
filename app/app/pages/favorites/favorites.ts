@@ -16,7 +16,7 @@ export class FavoritesPage {
 
 	items: Recipe[];
   initialItems: Recipe[];
-  delete: any;
+  deleteFavorite: any;
 
 	constructor (
         public http: Http, 
@@ -34,7 +34,7 @@ export class FavoritesPage {
         self.initialItems = data;
       });
 
-      this.delete = data.delete;
+      this.deleteFavorite = data.deleteFavorite;
     }
     
   /** 
@@ -86,7 +86,7 @@ export class FavoritesPage {
         {
           text: 'Si',
           handler: () => {
-            return this.delete(index,'favorites.json');
+            return this.deleteFavorite(index);
           }
         }
       ]

@@ -28,7 +28,7 @@ export class CalendarPage {
     }]
   };
   shoppingList:string[];
-  delete:any;
+  deleteCalendarRecipe:any;
  
 	constructor(
 		public modalCtrl: ModalController,
@@ -41,7 +41,7 @@ export class CalendarPage {
       });
 
       this.shoppingList = [];
-      this.delete = data.delete;
+      this.deleteCalendarRecipe = data.deleteCalendarRecipe;
 	}
 
   /**
@@ -109,7 +109,7 @@ export class CalendarPage {
         {
           text: 'Si',
           handler: () => {
-            return this.delete(index,'favorites.json');
+            return this.deleteCalendarRecipe(index);
           }
         }
       ]
