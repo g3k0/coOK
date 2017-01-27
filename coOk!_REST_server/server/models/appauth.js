@@ -21,6 +21,21 @@
 		/**
 		 * The service takes a token furnished by the app, generate an app id for the app and register it as a user
 		 */
+		/*
+         * req.body:
+	        {
+				token: "token",
+				available: true,
+				platform: "Android",
+				version: "5.0",
+				uuid: "d57593a7fc301e5f",
+				cordova: "6.0.0",
+				model: "ASUS_ZooAD",
+				manufacturer: "asus",
+				isVirtual: false, 
+				serial: "F6AZFGo84541"
+			}
+		 */
 		Appauth.register = (data, cb) => {
 			log.info(`[Appauth][register] received app mobile registration request. Processing...`);
 			let err = new Error();
