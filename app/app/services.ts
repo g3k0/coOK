@@ -44,7 +44,7 @@ export class DataService {
   //TO DO - implemment the register and login services
   register() {
     var self = this;
-    this.retrieveConfig(function(data) {
+    this.retrieveConfig(function(config) {
       //this.deviceData = Device.device;
       self.deviceData = {
         available: true,
@@ -57,7 +57,7 @@ export class DataService {
         isVirtual: false, 
         serial: "F6AZFGo84541"
       }
-      self.deviceData.token = data.token;
+      self.deviceData.token = config.token;
       //TO DO - call back end register
       console.log(self.deviceData);
     });
