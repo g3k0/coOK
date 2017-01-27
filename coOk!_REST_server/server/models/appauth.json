@@ -39,8 +39,11 @@
     "login": {
       "isStatic": true,
       "accepts": [{
-        "arg": "appId",
-        "type": "string"
+        "arg": "data",
+        "type": "object",
+        "http": { 
+          "source": "body" 
+        }
       }],
       "returns": [
         {
@@ -53,8 +56,8 @@
       "description": "mobile app login",
       "http": [
         {
-          "path": "/login/:appId",
-          "verb": "get"
+          "path": "/login",
+          "verb": "post"
         }
       ]
     }

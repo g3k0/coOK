@@ -83,14 +83,14 @@
 		 * The service takes the app id furnished by the mobile application, extract the user from the users collection, 
 		 * then execute the login and returns the Loopback access token.
 		 */
-		Appauth.login = (appId, cb) => {
+		Appauth.login = (data, cb) => {
 			log.info(`[Appauth][login] received app mobile login request. Processing...`);
 			let err = new Error();
 
-			if (!appId || appId === '{appId}') {
+			if (!data.uuid || data.uuid === '{appId}') {
 				log.info(`[Appauth][login] application id not present. Stopping the login process...`);
 				err.statusCode = 401;
-				err.message = 'app id not set';
+				err.message = 'uuid id not set';
 
 				return cb(err);
 			}
@@ -98,9 +98,9 @@
 			//I extract here the user from the collection
 
 			/* Promises declaration */
-			let user = (appId) => {
+			let user = (uuid) => {
 				let userPromise = new Promise((resolve, reject) => {
-					app.models.users.findOne({where:{appId: appId}}, (err, user) => {
+					app.models.users.findOne({where:{uuid: uuid}}, (err, user) => {
 						if (err) reject(err);
 						resolve(user);
 					});
@@ -125,7 +125,7 @@
 			};
 			/* End promises declaration */
 
-			user(appId)
+			user(data.uuid)
 			.then((user) => {
 				//resolve
 				if (!user) {
