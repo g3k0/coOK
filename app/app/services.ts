@@ -45,6 +45,29 @@ export class DataService {
   /*--------------------------------------------------------------------------------------------------------------*/
 
   /**
+   * Register the app to the back end services 
+   */
+  //TO DO - implemment the register and login services
+  register() {
+    var self = this;
+    this.retrieveConfig(function(config) {
+      self.deviceData = Device.device;
+      self.deviceData.token = config.token;
+      //TO DO - call back end register
+      return console.log(self.deviceData);
+    });
+  }
+
+  /**
+   * Log in the app to the back end services
+   */
+  login() {
+
+  }
+
+  /*--------------------------------------------------------------------------------------------------------------*/
+
+  /**
    * App authentication
    */
   authentication() {
@@ -59,7 +82,7 @@ export class DataService {
               console.log('TABLE CREATED: ', system);
               return resolve()
 
-              /*first app init, I insert the record, then registration and login*/
+              /*first app init, I call registration method, insert the record, then login*/
               //if (!system.rows) {
               
               /*app is already registered, only login here*/                  
@@ -77,49 +100,6 @@ export class DataService {
       });
     });
     return authenticationPromise;
-  }
-  
-
-  /*--------------------------------------------------------------------------------------------------------------*/
-
-  /**
-   * It calls the internal db and check if the app is already registered
-   */
-  isRegistered():boolean {
-    return false
-  }
-
-  /**
-   * Register the app to the back end services 
-   * 
-   */
-  //TO DO - implemment the register and login services
-  register() {
-    var self = this;
-    this.retrieveConfig(function(config) {
-      //this.deviceData = Device.device;
-      self.deviceData = {
-        available: true,
-        platform: "Android",
-        version: "5.0",
-        uuid: "d57593a7fc301e5f",
-        cordova: "6.0.0",
-        model: "ASUS_ZooAD",
-        manufacturer: "asus",
-        isVirtual: false, 
-        serial: "F6AZFGo84541"
-      }
-      self.deviceData.token = config.token;
-      //TO DO - call back end register
-      return console.log(self.deviceData);
-    });
-  }
-
-  /**
-   * Log in the app to the back end services
-   */
-  login() {
-
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/
