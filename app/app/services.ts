@@ -41,6 +41,17 @@ export class DataService {
 
   /*--------------------------------------------------------------------------------------------------------------*/
 
+  /**
+   * It calls the internal db and check if the app is already registered
+   */
+  isRegistered():boolean {
+    return false
+  }
+
+  /**
+   * Register the app to the back end services 
+   * 
+   */
   //TO DO - implemment the register and login services
   register() {
     var self = this;
@@ -61,6 +72,13 @@ export class DataService {
       //TO DO - call back end register
       console.log(self.deviceData);
     });
+  }
+
+  /**
+   * Log in the app to the back end services
+   */
+  login() {
+
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/
@@ -86,7 +104,7 @@ export class DataService {
       let favorites = data.json();
       let newFavorites = [];
       newFavorites = favorites.splice(index, 1);
-
+      //TO DO- complete
       return;
 
     });
@@ -111,7 +129,7 @@ export class DataService {
    */
   deleteCalendarRecipe(index:number) {
     console.log(index);
+    //TO DO - complete
     return;
   }
 }
-
