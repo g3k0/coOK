@@ -30,15 +30,23 @@ export class MyApp {
             { title: 'Votaci', component: VotePage, icon: 'star-outline' }
         ];
         this.rootPage = TabsPage;
-        this.loading = true; //cambia in base alle chiamate di registrazione e autenticazione
+        this.loading = true;
 
-        /**
-         * Loading configuration
-         */
         platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             StatusBar.styleDefault();
+
+            /*Authentication method call*/
+            data.authentication()
+            .then(()=> {
+                this.loading = false;
+                return;
+            })
+            .catch((err) => {
+                console.error(`There was an error during the authentication: ${JSON.stringify(err)}`)
+                return;
+            });
         });
     }
 

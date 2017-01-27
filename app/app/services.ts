@@ -45,8 +45,39 @@ export class DataService {
   /*--------------------------------------------------------------------------------------------------------------*/
 
   /**
-   * SQLite REST methods
+   * App authentication
    */
+  authentication() {
+    let authenticationPromise = new Promise((resolve, reject) => {
+      let db = new SQLite();
+      db.openDatabase({
+          name: 'data.db',
+          location: 'default'
+      }).then(() => {
+          db.executeSql('CREATE TABLE IF NOT EXISTS system (id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT, value TEXT)', {})
+          .then((system) => {
+              console.log('TABLE CREATED: ', system);
+              return resolve()
+
+              /*first app init, I insert the record, then registration and login*/
+              //if (!system.rows) {
+              
+              /*app is already registered, only login here*/                  
+              //} else {
+
+              //}
+
+          }, (error) => {
+              console.error('Unable to execute sql', error);
+              return reject(error);
+          })
+      }, (error) => {
+          console.error('Unable to open database', error);
+          return reject(error);
+      });
+    });
+    return authenticationPromise;
+  }
   
 
   /*--------------------------------------------------------------------------------------------------------------*/
