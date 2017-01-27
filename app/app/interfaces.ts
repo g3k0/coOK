@@ -10,3 +10,24 @@ export interface Recipe {
     "ingredients": string[],
     "preparation": string
 }
+
+export interface DeviceData {
+    "token"?: string,
+    "available": boolean,
+    "platform": string,
+    "version": string,
+    "uuid": string,
+    "cordova": string,
+    "model": string,
+    "manufacturer": string,
+    "isVirtual": boolean, 
+    "serial": string
+}
+
+export interface Config {
+	"token": string,
+	"authAPI": {
+		"register": string,
+		"login": string
+	}
+}

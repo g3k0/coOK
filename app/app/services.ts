@@ -1,16 +1,31 @@
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {Device} from "ionic-native";
+import {DeviceData} from "./interfaces";
 import 'rxjs/Rx';
-//declare var cordova: any
 
 @Injectable()
 export class DataService {
 
-  http: any;
+  private http: any;
+  private deviceData: DeviceData;
 
-  constructor(http: Http) {
+  constructor(
+    http: Http
+  ) {
     this.http = http;
+    this.deviceData = {
+      token: '',
+      available: false,
+      platform: '',
+      version: '',
+      uuid: '',
+      cordova: '',
+      model: '',
+      manufacturer: '',
+      isVirtual: false, 
+      serial: ''
+    };
   }
 
   /**
@@ -24,11 +39,28 @@ export class DataService {
     });
   }
 
-  /**
-   * Get the device info
-   */
-  getDeviceInfo() {
-    return Device.device;
+  /*--------------------------------------------------------------------------------------------------------------*/
+
+  //TO DO - implemment the register and login services
+  register() {
+    var self = this;
+    this.retrieveConfig(function(data) {
+      //this.deviceData = Device.device;
+      self.deviceData = {
+        available: true,
+        platform: "Android",
+        version: "5.0",
+        uuid: "d57593a7fc301e5f",
+        cordova: "6.0.0",
+        model: "ASUS_ZooAD",
+        manufacturer: "asus",
+        isVirtual: false, 
+        serial: "F6AZFGo84541"
+      }
+      self.deviceData.token = data.token;
+      //TO DO - call back end register
+      console.log(self.deviceData);
+    });
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/
