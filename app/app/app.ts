@@ -7,7 +7,6 @@ import {GuidePage} from './pages/guide/guide';
 import {VotePage} from './pages/vote/vote';
 import {DataService} from './services';
 
-
 @Component({
     templateUrl: 'build/app.html',
     providers: [NavController, DataService]

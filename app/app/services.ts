@@ -1,7 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
-import {Device} from "ionic-native";
-import {DeviceData} from "./interfaces";
+import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
+import {Device} from 'ionic-native';
+import {DeviceData} from './interfaces';
+import {SQLite} from 'ionic-native';
 import 'rxjs/Rx';
 
 @Injectable()
@@ -28,6 +29,8 @@ export class DataService {
     };
   }
 
+  /*--------------------------------------------------------------------------------------------------------------*/
+
   /**
    * Get the configuration file 
    * @param {Function} cb configuration callback function
@@ -38,6 +41,13 @@ export class DataService {
       return cb(data.json());
     });
   }
+
+  /*--------------------------------------------------------------------------------------------------------------*/
+
+  /**
+   * SQLite REST methods
+   */
+  
 
   /*--------------------------------------------------------------------------------------------------------------*/
 
@@ -70,7 +80,7 @@ export class DataService {
       }
       self.deviceData.token = config.token;
       //TO DO - call back end register
-      console.log(self.deviceData);
+      return console.log(self.deviceData);
     });
   }
 
