@@ -34,9 +34,33 @@
     "group": {
       "type": "string"
     },
-    "appId": {
+    "uuid": {
       "type": "string",
       "unique": true
+    },
+    "available": {
+      "type": "boolean"
+    },
+    "platform": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "cordova": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "manufacturer": {
+      "type": "string"
+    },
+    "isVirtual": {
+      "type": "boolean"
+    },
+    "serial": {
+      "type": "string"
     }
   },
   "validations": [],

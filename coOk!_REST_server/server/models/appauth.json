@@ -14,8 +14,11 @@
     "register": {
       "isStatic": true,
       "accepts": [{
-        "arg": "token",
-        "type": "string"
+        "arg": "data",
+        "type": "object",
+        "http": { 
+          "source": "body" 
+        }
       }],
       "returns": [
         {
@@ -28,8 +31,8 @@
       "description": "mobile app registration",
       "http": [
         {
-          "path": "/register/:token",
-          "verb": "get"
+          "path": "/register",
+          "verb": "post"
         }
       ]
     },

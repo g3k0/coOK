@@ -31,6 +31,7 @@
     "loopback-connector-mongodb": "^1.17.0",
     "loopback-context": "^1.0.0",
     "loopback-datasource-juggler": "^2.39.0",
+    "node.extend": "^1.1.6",
     "serve-favicon": "^2.0.1",
     "underscore": "^1.8.3"
   },
