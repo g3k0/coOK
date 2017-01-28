@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Device} from 'ionic-native';
-import {DeviceData} from './interfaces';
 import {SQLite} from 'ionic-native';
 import 'rxjs/Rx';
 
@@ -9,7 +8,7 @@ import 'rxjs/Rx';
 export class DataService {
 
   private http: any;
-  private deviceData: DeviceData;
+  private deviceData: any;
 
   constructor(
     http: Http
