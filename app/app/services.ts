@@ -97,7 +97,7 @@ export class DataService {
           return reject(err);
         });
       });*/
-      return resolve({access_token: 'mocktoken'})
+      return resolve('mocktoken')
     });
     return loginPromise;
   }
