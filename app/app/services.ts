@@ -251,6 +251,61 @@ export class DataService {
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/
+  // /api/recipes?filter={"where":{"mainIngredient":"patate"}}&access_token=<token>
+  //filter[where][ingredients][regexp]=/(?=.*?<ingrediente_1>)(?=.*?<ingrediente_2>)/i
+
+  /**
+   * Get the recipes returned from a call to the recipes back end service
+   * @param {string[]} ingredients array pushed by the user
+   * @param {Object} filters objet setted by the user
+   */
+  getRecipes(ingredients:string[]=[''],filters:any={}) {
+    let getRecipesPromise = new Promise((resolve,reject) => {
+      this.retrieveConfig((config) => {
+        let baseUrl = this.http.config.authAPI.recipes;
+        let uri;
+
+        this.retrieveAccessToken()
+        .then((access_token) => {
+          baseUrl += `?access_token=${access_token}`
+
+          if (ingredients && ingredients.length) {
+            baseUrl += `&filter[where][ingredients][regexp]=/`;
+
+            for (let ingredient of ingredients) {
+              baseUrl += `(?=.*?${ingredient})`;
+            }
+
+            baseUrl += `/i`;
+          }
+
+          if (filters && filters.recipeName) {
+            baseUrl += `&filter[where][name]=${filters.recipeName}`;
+          }
+
+          if (filters && filters.mainIngredient) {
+            baseUrl += `&filter[where][mainIngredient]=${filters.mainIngredient}`;
+          }
+
+          if (filters && filters.recipeType && filters.recipeType.length) {
+            for (let type of filters.recipeType) {
+              baseUrl += `&filter[where][type]=${type}`;
+            }
+          }
+          // TO DO - call the service
+          return resolve(baseUrl);
+        })
+        .catch((err) => {
+          console.error(`${err}`);
+          return reject(err);
+        });
+      });
+    });
+    return getRecipesPromise;
+
+  }
+
+  /*--------------------------------------------------------------------------------------------------------------*/  
   
   /**
    * Get the favorites recipes saved by the user

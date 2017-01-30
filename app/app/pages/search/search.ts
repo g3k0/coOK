@@ -126,19 +126,19 @@ export class SearchPage {
 	    alert.addInput({
 	    	type: 'checkbox',
 	    	label: 'Antipasti',
-	     	value: 'Antipasti'
+	     	value: 'Antipasto'
 	    });
 
 	    alert.addInput({
 	    	type: 'checkbox',
 	    	label: 'Primi',
-	     	value: 'Primi'
+	     	value: 'Primo'
 	    });
 
 	    alert.addInput({
 	    	type: 'checkbox',
 	    	label: 'Carni',
-	     	value: 'Carni'
+	     	value: 'Carne'
 	    });
 
 	    alert.addInput({
@@ -156,19 +156,19 @@ export class SearchPage {
 	    alert.addInput({
 	    	type: 'checkbox',
 	    	label: 'Contorni',
-	     	value: 'Contorni'
+	     	value: 'Contorno'
 	    });
 
 	    alert.addInput({
 	    	type: 'checkbox',
 	    	label: 'Salse',
-	     	value: 'Salse'
+	     	value: 'Salsa'
 	    });
 
 	    alert.addInput({
 	    	type: 'checkbox',
 	    	label: 'Dolci',
-	     	value: 'Dolci'
+	     	value: 'Dessert'
 	    });
 
 	    alert.addButton('Cancella');
@@ -244,8 +244,15 @@ export class SearchPage {
 	  		return;
 	  	}
 
-	  	console.log(this.ingredients);
-	  	console.log(this.filters);
-	  	return;
+	  	this.data.getRecipes(this.ingredients,this.filters)
+	  	.then((recipes) => {
+	  		console.log(recipes);
+	  		//TO DO: open modal with search results
+	  		return;
+	  	})
+	  	.catch((err) => {
+	  		console.error(`There was an error on getting the recipes: ${JSON.stringify(err)}`);
+	  		return;
+	  	});
     } 
 }
