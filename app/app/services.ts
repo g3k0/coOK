@@ -44,10 +44,31 @@ export class DataService {
   /**
    * Get the access_token needed for authenticated calls to the back end services
    */
-  // TO DO 
   retrieveAccessToken() {
     let retrieveAccessTokenPromise = new Promise((resolve, reject) => {
-      return resolve('mocktocken');
+      let db = new SQLite();
+      let access_token = '';
+      db.openDatabase({
+          name: 'data.db',
+          location: 'default'
+      }).then(() => {
+        db.executeSql("SELECT * FROM system WHERE key = 'access_token'"
+          , []).then((data) => {
+            if (!data.rows.length) {
+              return reject('data not found');
+            }
+            for(var i = 0; i < data.rows.length; i++) {
+                access_token = data.rows.item(i).value;
+            }
+            return resolve(access_token);
+          }, (error) => {
+            console.error('impossible to execute the query', error);
+            return reject(error);
+        });
+      }, (error) => {
+        console.error('impossible to open the database', error);
+        return reject(error);
+      });
     });
     return retrieveAccessTokenPromise;
   }
@@ -124,40 +145,26 @@ export class DataService {
           name: 'data.db',
           location: 'default'
       }).then(() => {
-          db.executeSql('CREATE TABLE IF NOT EXISTS system (id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT, value TEXT)', {})
+          db.executeSql("CREATE TABLE IF NOT EXISTS system (id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT, value TEXT)", {})
           .then((system) => {
               console.log('TABLE CREATED: ', system);
 
               /*first app init, I call registration method, insert the record, then login*/
-              if (!system.rows) {
+              if (!system.rows.length) {
                 this.register()
                   .then(() => {
                     //Now I create the other SQLite tables I need
-                    db.executeSql(`
-                      CREATE TABLE IF NOT EXISTS favorites (
-                      id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                      name TEXT,
-                      type TEXT,
-                      mainIngredient TEXT,
-                      persons INTEGER,
-                      notes TEXT,
-                      ingredients TEXT,
-                      preparation TEXT
-                    )`, {})
+                    db.executeSql("CREATE TABLE IF NOT EXISTS favorites (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, type TEXT, mainIngredient TEXT, persons INTEGER, notes TEXT, ingredients TEXT, preparation TEXT)"
+                    , {})
                     .then(() => {
-                      db.executeSql(`CREATE TABLE IF NOT EXISTS calendar (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        day TEXT,
-                        data BLOB
-                      )`, {})
+                      db.executeSql("CREATE TABLE IF NOT EXISTS calendar (id INTEGER PRIMARY KEY AUTOINCREMENT, day TEXT, data BLOB)"
+                      , {})
                       .then(() => {
                         //tables created, now log in the application and store of the token
                         this.login()
                         .then((access_token) =>{
-                          db.executeSql(`
-                            INSERT INTO system (key, value)
-                            VALUES ('access_token', '${access_token}')
-                          `, {}).then(() => {
+                          db.executeSql("INSERT INTO system (key, value) VALUES ('access_token', '" + access_token + "')"
+                            , []).then(() => {
                               db.close().then(() => {
                                 return resolve();
                               }).catch((error) => {
@@ -192,11 +199,8 @@ export class DataService {
               } else {
                 this.login()
                 .then((access_token) =>{
-                  db.executeSql(`
-                    UPDATE system 
-                    SET value = '${access_token}' 
-                    WHERE key = 'access_token'
-                  `, {}).then(() => {
+                  db.executeSql("UPDATE system SET value = '" + access_token + "' WHERE key = 'access_token'"
+                    , []).then(() => {
                       db.close().then(() => {
                         return resolve();
                       }).catch((error) => {

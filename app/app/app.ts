@@ -40,7 +40,7 @@ export class MyApp {
 
             /*Authentication method call*/
             data.authentication()
-            .then(()=> {
+            .then(() => {
                 this.loading = false;
                 return;
             })
