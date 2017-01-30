@@ -41,12 +41,22 @@ export class DataService {
     });
   }
 
+  /**
+   * Get the access_token needed for authenticated calls to the back end services
+   */
+  // TO DO 
+  retrieveAccessToken() {
+    let retrieveAccessTokenPromise = new Promise((resolve, reject) => {
+      return resolve('mocktocken');
+    });
+    return retrieveAccessTokenPromise;
+  }
+
   /*--------------------------------------------------------------------------------------------------------------*/
 
   /**
    * Register the app to the back end services 
    */
-  //TO DO - implemment the register and login services
   register() {
     let registerPromise = new Promise((resolve, reject) =>{
       /*let self = this;
@@ -142,9 +152,16 @@ export class DataService {
                       .then(() => {
                         //tables created, now log in the application and store of the token
                         this.login()
-                        .then((uuid) =>{
-                          //TO DO - I store the access token into the system table of the database
-                          return resolve();
+                        .then((access_token) =>{
+                          db.executeSql(` 
+                            INSERT INTO system (key, value)
+                            VALUES ('access_token', ${access_token})
+                          `).then(() => {
+                              return resolve();
+                          }, (error) => {
+                            console.error('Unable to save the access token', error);
+                            return reject(error);
+                          });
                         })
                         .catch(error => {
                           console.error('Unable to log in the application', error);
@@ -168,9 +185,17 @@ export class DataService {
               /*app is already registered, only login here*/                  
               } else {
                 this.login()
-                .then((uuid) =>{
-                  //TO DO - I store the access token into the system table of the database
-                  return resolve();
+                .then((access_token) =>{
+                  db.executeSql(` 
+                    UPDATE system 
+                    SET value = ${access_token} 
+                    WHERE key = 'access_token'
+                  `).then(() => {
+                      return resolve();
+                  }, (error) => {
+                    console.error('Unable to save the access token', error);
+                    return reject(error);
+                  });
                 })
                 .catch(error => {
                   console.error('Unable to log in the application', error);
