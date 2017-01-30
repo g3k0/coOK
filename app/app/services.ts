@@ -157,7 +157,12 @@ export class DataService {
                             INSERT INTO system (key, value)
                             VALUES ('access_token', ${access_token})
                           `).then(() => {
-                              return resolve();
+                              db.close().then(() => {
+                                return resolve();
+                              }).catch((error) => {
+                                log.error('unable to close the database', error);
+                                return reject(error);
+                              });
                           }, (error) => {
                             console.error('Unable to save the access token', error);
                             return reject(error);
@@ -191,7 +196,12 @@ export class DataService {
                     SET value = ${access_token} 
                     WHERE key = 'access_token'
                   `).then(() => {
-                      return resolve();
+                      db.close().then(() => {
+                        return resolve();
+                      }).catch((error) => {
+                        log.error('unable to close the database', error);
+                        return reject(error);
+                      });
                   }, (error) => {
                     console.error('Unable to save the access token', error);
                     return reject(error);
