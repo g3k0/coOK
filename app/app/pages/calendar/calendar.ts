@@ -31,9 +31,9 @@ export class CalendarPage {
   deleteCalendarRecipe:any;
  
 	constructor(
-		public modalCtrl: ModalController,
-    public data: DataService,
-    public alertCtrl: AlertController
+		private modalCtrl: ModalController,
+    private data: DataService,
+    private alertCtrl: AlertController
 	) {
  		  let self = this;
       data.retrieveCalendar(function(data) {

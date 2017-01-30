@@ -1,6 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
 import {ViewController} from 'ionic-angular';
-import {Http} from '@angular/http';
 import {ModalController} from 'ionic-angular';
 import {RecipePage} from '../recipe/recipe';
 import {DataService} from '../../services';
@@ -20,10 +19,9 @@ export class AddRecipePage {
 	items: Recipe[];
 
 	constructor (
-		public viewCtrl: ViewController,
-		public http: Http, 
-        public modalCtrl: ModalController,
-        public data: DataService
+		private viewCtrl: ViewController,
+        private modalCtrl: ModalController,
+        private data: DataService
 	) {
 		let self = this;
       	data.retrieveFavorites(function(data) {

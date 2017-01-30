@@ -18,9 +18,9 @@ export class SearchPage {
 	}
 
 	constructor(
-		public alertCtrl: AlertController,
-		public toastCtrl: ToastController,
-		public data: DataService
+		private alertCtrl: AlertController,
+		private toastCtrl: ToastController,
+		private data: DataService
 	) {
 		this.ingredients = [];
 		this.filters = {
