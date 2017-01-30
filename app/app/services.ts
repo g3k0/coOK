@@ -131,9 +131,10 @@ export class DataService {
               /*first app init, I call registration method, insert the record, then login*/
               if (!system.rows) {
                 this.register()
-                  .then(() =>{
+                  .then(() => {
                     //Now I create the other SQLite tables I need
-                    db.executeSql(`CREATE TABLE IF NOT EXISTS favorites (
+                    db.executeSql(`
+                      CREATE TABLE IF NOT EXISTS favorites (
                       id INTEGER PRIMARY KEY AUTOINCREMENT, 
                       name TEXT,
                       type TEXT,
@@ -153,14 +154,14 @@ export class DataService {
                         //tables created, now log in the application and store of the token
                         this.login()
                         .then((access_token) =>{
-                          db.executeSql(` 
+                          db.executeSql(`
                             INSERT INTO system (key, value)
-                            VALUES ('access_token', ${access_token})
-                          `).then(() => {
+                            VALUES ('access_token', '${access_token}')
+                          `, {}).then(() => {
                               db.close().then(() => {
                                 return resolve();
                               }).catch((error) => {
-                                log.error('unable to close the database', error);
+                                console.error('unable to close the database', error);
                                 return reject(error);
                               });
                           }, (error) => {
@@ -191,15 +192,15 @@ export class DataService {
               } else {
                 this.login()
                 .then((access_token) =>{
-                  db.executeSql(` 
+                  db.executeSql(`
                     UPDATE system 
-                    SET value = ${access_token} 
+                    SET value = '${access_token}' 
                     WHERE key = 'access_token'
-                  `).then(() => {
+                  `, {}).then(() => {
                       db.close().then(() => {
                         return resolve();
                       }).catch((error) => {
-                        log.error('unable to close the database', error);
+                        console.error('unable to close the database', error);
                         return reject(error);
                       });
                   }, (error) => {

@@ -17,6 +17,7 @@ export class MyApp {
     private rootPage: any;
     private pages: any[];
     private loading: boolean;
+    //public test: any;
 
     constructor (
         private platform: Platform, 
@@ -45,6 +46,7 @@ export class MyApp {
             })
             .catch((err) => {
                 console.error(`There was an error during the authentication: ${JSON.stringify(err)}`)
+                //this.test = JSON.stringify(err);
                 return;
             });
         });
