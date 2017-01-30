@@ -52,7 +52,7 @@ export class DataService {
           name: 'data.db',
           location: 'default'
       }).then(() => {
-        db.executeSql("SELECT * FROM system WHERE key = 'access_token'"
+        db.executeSql(`SELECT * FROM system WHERE key = 'access_token'`
           , []).then((data) => {
             if (!data.rows.length) {
               return reject('data not found');
@@ -60,7 +60,12 @@ export class DataService {
             for(var i = 0; i < data.rows.length; i++) {
                 access_token = data.rows.item(i).value;
             }
-            return resolve(access_token);
+            db.close().then(() => {
+              return resolve(access_token);
+            }).catch((error) => {
+              console.error('unable to close the database', error);
+              return reject(error);
+            });
           }, (error) => {
             console.error('impossible to execute the query', error);
             return reject(error);
@@ -90,7 +95,7 @@ export class DataService {
             return resolve();
           }
           let err = new Error();
-          err.status = 500;
+          err.statusCode = 500;
           err.message = 'There was an error on registering the app';
           log.error('Unable to register the application',err);
           return reject(err);
@@ -118,7 +123,7 @@ export class DataService {
             return resolve(res.access_token);
           }
           let err = new Error();
-          err.status = 500;
+          err.statusCode = 500;
           err.message = 'There was an error on logging the app';
           log.error('Unable to log in the application',err);
           return reject(err);
@@ -145,7 +150,7 @@ export class DataService {
           name: 'data.db',
           location: 'default'
       }).then(() => {
-          db.executeSql("CREATE TABLE IF NOT EXISTS system (id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT, value TEXT)", {})
+          db.executeSql(`CREATE TABLE IF NOT EXISTS system (id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT, value TEXT)`, {})
           .then((system) => {
               console.log('TABLE CREATED: ', system);
 
@@ -154,16 +159,31 @@ export class DataService {
                 this.register()
                   .then(() => {
                     //Now I create the other SQLite tables I need
-                    db.executeSql("CREATE TABLE IF NOT EXISTS favorites (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, type TEXT, mainIngredient TEXT, persons INTEGER, notes TEXT, ingredients TEXT, preparation TEXT)"
+                    db.executeSql(`
+                      CREATE TABLE IF NOT EXISTS favorites (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                        name TEXT, 
+                        type TEXT, 
+                        mainIngredient TEXT, 
+                        persons INTEGER, 
+                        notes TEXT, 
+                        ingredients TEXT, 
+                        preparation TEXT
+                      )`
                     , {})
                     .then(() => {
-                      db.executeSql("CREATE TABLE IF NOT EXISTS calendar (id INTEGER PRIMARY KEY AUTOINCREMENT, day TEXT, data BLOB)"
+                      db.executeSql(`
+                        CREATE TABLE IF NOT EXISTS calendar (
+                          id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                          day TEXT, 
+                          data BLOB
+                        )`
                       , {})
                       .then(() => {
                         //tables created, now log in the application and store of the token
                         this.login()
                         .then((access_token) =>{
-                          db.executeSql("INSERT INTO system (key, value) VALUES ('access_token', '" + access_token + "')"
+                          db.executeSql(`INSERT INTO system (key, value) VALUES ('access_token', '${access_token}')`
                             , []).then(() => {
                               db.close().then(() => {
                                 return resolve();
@@ -199,7 +219,7 @@ export class DataService {
               } else {
                 this.login()
                 .then((access_token) =>{
-                  db.executeSql("UPDATE system SET value = '" + access_token + "' WHERE key = 'access_token'"
+                  db.executeSql(`UPDATE system SET value = '${access_token}' WHERE key = 'access_token'`
                     , []).then(() => {
                       db.close().then(() => {
                         return resolve();
