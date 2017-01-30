@@ -146,7 +146,7 @@
 						return cb(err);
 					}
 					return cb(null, {
-						results: token
+						access_token: token
 					});
 
 				}, (err) => {

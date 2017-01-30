@@ -48,20 +48,58 @@ export class DataService {
    */
   //TO DO - implemment the register and login services
   register() {
-    var self = this;
-    this.retrieveConfig(function(config) {
-      self.deviceData = Device.device;
-      self.deviceData.token = config.token;
-      //TO DO - call back end register
-      return console.log(self.deviceData);
+    let registerPromise = new Promise((resolve, reject) =>{
+      let self = this;
+      /*this.retrieveConfig((config) => {
+        self.deviceData = Device.device;
+        self.deviceData.token = config.token;
+        this.http.post(config.authAPI.register, self.deviceData)
+        .map((res) => {
+          if (res.result === 'ok') {
+            return resolve();
+          }
+          let err = new Error();
+          err.status = 500;
+          err.message = 'There was an error on registering the app';
+          log.error('Unable to register the application',err);
+          return reject(err);
+        })
+        .catch((err) => {
+          log.error('Unable to register the application',err);
+          return reject(err);
+        });
+      });*/
+      return resolve();
     });
+    return registerPromise;
   }
 
   /**
    * Log in the app to the back end services
    */
   login() {
-
+    let loginPromise = new Promise((resove, reject) => {
+      /*let self = this;
+      this.retrieveConfig((config) => {
+        this.http.post(config.authAPI.register, {uuid: Device.device.uuid})
+        .map((res) => {
+          if (res.access_token) {
+            return resolve(res.access_token);
+          }
+          let err = new Error();
+          err.status = 500;
+          err.message = 'There was an error on logging the app';
+          log.error('Unable to log in the application',err);
+          return reject(err);
+        })
+        .catch((err) => {
+          log.error('Unable to log in the application',err);
+          return reject(err);
+        });
+      });*/
+      return resolve({access_token: 'mocktoken'})
+    });
+    return loginPromise;
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/
@@ -79,15 +117,21 @@ export class DataService {
           db.executeSql('CREATE TABLE IF NOT EXISTS system (id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT, value TEXT)', {})
           .then((system) => {
               console.log('TABLE CREATED: ', system);
-              return resolve()
 
               /*first app init, I call registration method, insert the record, then login*/
-              //if (!system.rows) {
-              
+              if (!system.rows) {
+                this.register()
+                  .then(() =>{
+                    //Now I create the other SQLite tables I need
+                  })
+                  .catch(err => {
+                    console.error('Unable to register the application', error);
+                    return reject(error);
+                  })
               /*app is already registered, only login here*/                  
-              //} else {
+              } else {
 
-              //}
+              }
 
           }, (error) => {
               console.error('Unable to execute sql', error);
