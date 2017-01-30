@@ -49,8 +49,8 @@ export class DataService {
   //TO DO - implemment the register and login services
   register() {
     let registerPromise = new Promise((resolve, reject) =>{
-      let self = this;
-      /*this.retrieveConfig((config) => {
+      /*let self = this;
+      this.retrieveConfig((config) => {
         self.deviceData = Device.device;
         self.deviceData.token = config.token;
         this.http.post(config.authAPI.register, self.deviceData)
@@ -78,7 +78,7 @@ export class DataService {
    * Log in the app to the back end services
    */
   login() {
-    let loginPromise = new Promise((resove, reject) => {
+    let loginPromise = new Promise((resolve, reject) => {
       /*let self = this;
       this.retrieveConfig((config) => {
         this.http.post(config.authAPI.register, {uuid: Device.device.uuid})
@@ -123,14 +123,59 @@ export class DataService {
                 this.register()
                   .then(() =>{
                     //Now I create the other SQLite tables I need
+                    db.executeSql(`CREATE TABLE IF NOT EXISTS favorites (
+                      id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                      name TEXT,
+                      type TEXT,
+                      mainIngredient TEXT,
+                      persons INTEGER,
+                      notes TEXT,
+                      ingredients TEXT,
+                      preparation TEXT
+                    )`, {})
+                    .then(() => {
+                      db.executeSql(`CREATE TABLE IF NOT EXISTS calendar (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        day TEXT,
+                        data BLOB
+                      )`, {})
+                      .then(() => {
+                        //tables created, now log in the application and store of the token
+                        this.login()
+                        .then((uuid) =>{
+                          //TO DO - I store the access token into the system table of the database
+                          return resolve();
+                        })
+                        .catch(error => {
+                          console.error('Unable to log in the application', error);
+                          return reject(error);
+                        })
+                      }, (error) => {
+                        console.error('Unable to execute sql', error);
+                        return reject(error);
+                      })
+
+                    }, (error) => {
+                      console.error('Unable to execute sql', error);
+                      return reject(error);
+                    });
                   })
-                  .catch(err => {
+                  .catch(error => {
                     console.error('Unable to register the application', error);
                     return reject(error);
                   })
+
               /*app is already registered, only login here*/                  
               } else {
-
+                this.login()
+                .then((uuid) =>{
+                  //TO DO - I store the access token into the system table of the database
+                  return resolve();
+                })
+                .catch(error => {
+                  console.error('Unable to log in the application', error);
+                  return reject(error);
+                })
               }
 
           }, (error) => {
