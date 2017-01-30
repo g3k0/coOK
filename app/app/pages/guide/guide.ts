@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
 
 @Component({
 	templateUrl: 'build/pages/guide/guide.html'
@@ -7,7 +6,6 @@ import {NavController} from 'ionic-angular';
 
 export class GuidePage {
 	constructor(
-  		private navCtrl: NavController
   	) {
 
 	}

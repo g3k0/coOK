@@ -7,7 +7,6 @@ import {GuidePage} from './pages/guide/guide';
 import {VotePage} from './pages/vote/vote';
 import {DataService} from './services';
 
-
 @Component({
     templateUrl: 'build/app.html',
     providers: [NavController, DataService]
@@ -18,8 +17,7 @@ export class MyApp {
     private rootPage: any;
     private pages: any[];
     private loading: boolean;
-    private device: any; //TO DO - implement interface
-    private config: any; //TO DO - implement interface
+    //public test: any;
 
     constructor (
         private platform: Platform, 
@@ -33,25 +31,24 @@ export class MyApp {
             { title: 'Votaci', component: VotePage, icon: 'star-outline' }
         ];
         this.rootPage = TabsPage;
-        this.loading = true; //cambia in base alle chiamate di registrazione e autenticazione
-
-        /**
-         * Loading device Informations
-         */
-        this.device = JSON.stringify(data.getDeviceInfo());
-
-        /**
-         * Loading configuration
-         */
-        let self = this;
-        data.retrieveConfig(function(data) {
-            self.config = data; //use this.config in class methods!
-        });
+        this.loading = true;
 
         platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             StatusBar.styleDefault();
+
+            /*Authentication method call*/
+            data.authentication()
+            .then(() => {
+                this.loading = false;
+                return;
+            })
+            .catch((err) => {
+                console.error(`There was an error during the authentication: ${JSON.stringify(err)}`)
+                //this.test = JSON.stringify(err);
+                return;
+            });
         });
     }
 

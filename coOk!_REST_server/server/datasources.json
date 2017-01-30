@@ -1,7 +1,7 @@
 {
   "db": {
-    "name": "cook",
-    "connector": "remote",
-    "url": "mongodb://ilmionomeenessuno:macomenessuno@ds129189.mlab.com:29189/cook"
-  }
+	  "defaultForType": "mongodb",
+	  "connector": "loopback-connector-mongodb",
+	  "url": "mongodb://ilmionomeenessuno:macomenessuno@ds129189.mlab.com:29189/cook"
+	}
 }

@@ -11,8 +11,8 @@ export class ShoppingListPage {
 	shoppingList: string[];
 
 	constructor (
-		public viewCtrl: ViewController,
-		public params: NavParams
+		private viewCtrl: ViewController,
+		private params: NavParams
 	) {
 		this.shoppingList = params.get('shoppingList');
 	}

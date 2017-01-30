@@ -38,8 +38,20 @@ Web server API
   }  
 }  
 
-* [GET] /api/appauth/register/:token  
-  accetta: \<token\> String;  
+* [POST] /api/appauth/register  
+  accetta: \<data\> Object;  
+  {
+    token: String,
+    available: Boolean,
+    platform: String,
+    version: String,
+    uuid: String,
+    cordova: String,
+    model: String,
+    manufacturer: String,
+    isVirtual: Boolean, 
+    serial: String
+  }
 
   case 401: {  
     "error": {  
@@ -65,8 +77,9 @@ Web server API
     "results": String  
   }  
 
-* [GET] /api/appauth/login/:appId  
-accetta: \<appId\> String  
+* [POST] /api/appauth/login  
+accetta: \<data\> Object
+{uuid: String}  
 
 case 200: {  
   "results": String  

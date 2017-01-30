@@ -10,3 +10,11 @@ export interface Recipe {
     "ingredients": string[],
     "preparation": string
 }
+
+export interface Config {
+	"token": string,
+	"authAPI": {
+		"register": string,
+		"login": string
+	}
+}

@@ -13,8 +13,8 @@ export class RecipePage {
 	persons: number[];
 
 	constructor (
-		public viewCtrl: ViewController,
-		public params: NavParams
+		private viewCtrl: ViewController,
+		private params: NavParams
 	) {
 		this.recipe = params.get('recipe');
 

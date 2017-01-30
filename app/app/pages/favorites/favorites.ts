@@ -1,6 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
 import {ModalController, AlertController} from 'ionic-angular';
-import {Http} from '@angular/http';
 import {RecipePage} from '../recipe/recipe';
 import {DataService} from '../../services';
 import {Recipe} from '../../interfaces';
@@ -19,10 +18,9 @@ export class FavoritesPage {
   deleteFavorite: any;
 
 	constructor (
-        public http: Http, 
-        public modalCtrl: ModalController,
-        public data: DataService,
-        public alertCtrl: AlertController
+        private modalCtrl: ModalController,
+        private data: DataService,
+        private alertCtrl: AlertController
     ) {
 		
       /**

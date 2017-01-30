@@ -1,17 +1,34 @@
-import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
-import {Device} from "ionic-native";
+import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
+import {Device} from 'ionic-native';
+import {SQLite} from 'ionic-native';
 import 'rxjs/Rx';
-//declare var cordova: any
 
 @Injectable()
 export class DataService {
 
-  http: any;
+  private http: any;
+  private deviceData: any;
 
-  constructor(http: Http) {
+  constructor(
+    http: Http
+  ) {
     this.http = http;
+    this.deviceData = {
+      token: '',
+      available: false,
+      platform: '',
+      version: '',
+      uuid: '',
+      cordova: '',
+      model: '',
+      manufacturer: '',
+      isVirtual: false, 
+      serial: ''
+    };
   }
+
+  /*--------------------------------------------------------------------------------------------------------------*/
 
   /**
    * Get the configuration file 
@@ -25,10 +42,212 @@ export class DataService {
   }
 
   /**
-   * Get the device info
+   * Get the access_token needed for authenticated calls to the back end services
    */
-  getDeviceInfo() {
-    return Device.device;
+  retrieveAccessToken() {
+    let retrieveAccessTokenPromise = new Promise((resolve, reject) => {
+      let db = new SQLite();
+      let access_token = '';
+      db.openDatabase({
+          name: 'data.db',
+          location: 'default'
+      }).then(() => {
+        db.executeSql(`SELECT * FROM system WHERE key = 'access_token'`
+          , []).then((data) => {
+            if (!data.rows.length) {
+              return reject('data not found');
+            }
+            for(var i = 0; i < data.rows.length; i++) {
+                access_token = data.rows.item(i).value;
+            }
+            db.close().then(() => {
+              return resolve(access_token);
+            }).catch((error) => {
+              console.error('unable to close the database', error);
+              return reject(error);
+            });
+          }, (error) => {
+            console.error('impossible to execute the query', error);
+            return reject(error);
+        });
+      }, (error) => {
+        console.error('impossible to open the database', error);
+        return reject(error);
+      });
+    });
+    return retrieveAccessTokenPromise;
+  }
+
+  /*--------------------------------------------------------------------------------------------------------------*/
+
+  /**
+   * Register the app to the back end services 
+   */
+  register() {
+    let registerPromise = new Promise((resolve, reject) =>{
+      /*let self = this;
+      this.retrieveConfig((config) => {
+        self.deviceData = Device.device;
+        self.deviceData.token = config.token;
+        this.http.post(config.authAPI.register, self.deviceData)
+        .map((res) => {
+          if (res.result === 'ok') {
+            return resolve();
+          }
+          let err = new Error();
+          err.statusCode = 500;
+          err.message = 'There was an error on registering the app';
+          log.error('Unable to register the application',err);
+          return reject(err);
+        })
+        .catch((err) => {
+          log.error('Unable to register the application',err);
+          return reject(err);
+        });
+      });*/
+      return resolve();
+    });
+    return registerPromise;
+  }
+
+  /**
+   * Log in the app to the back end services
+   */
+  login() {
+    let loginPromise = new Promise((resolve, reject) => {
+      /*let self = this;
+      this.retrieveConfig((config) => {
+        this.http.post(config.authAPI.register, {uuid: Device.device.uuid})
+        .map((res) => {
+          if (res.access_token) {
+            return resolve(res.access_token);
+          }
+          let err = new Error();
+          err.statusCode = 500;
+          err.message = 'There was an error on logging the app';
+          log.error('Unable to log in the application',err);
+          return reject(err);
+        })
+        .catch((err) => {
+          log.error('Unable to log in the application',err);
+          return reject(err);
+        });
+      });*/
+      return resolve('mocktoken')
+    });
+    return loginPromise;
+  }
+
+  /*--------------------------------------------------------------------------------------------------------------*/
+
+  /**
+   * App authentication
+   */
+  authentication() {
+    let authenticationPromise = new Promise((resolve, reject) => {
+      let db = new SQLite();
+      db.openDatabase({
+          name: 'data.db',
+          location: 'default'
+      }).then(() => {
+          db.executeSql(`CREATE TABLE IF NOT EXISTS system (id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT, value TEXT)`, {})
+          .then((system) => {
+              console.log('TABLE CREATED: ', system);
+
+              /*first app init, I call registration method, insert the record, then login*/
+              if (!system.rows.length) {
+                this.register()
+                  .then(() => {
+                    //Now I create the other SQLite tables I need
+                    db.executeSql(`
+                      CREATE TABLE IF NOT EXISTS favorites (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                        name TEXT, 
+                        type TEXT, 
+                        mainIngredient TEXT, 
+                        persons INTEGER, 
+                        notes TEXT, 
+                        ingredients TEXT, 
+                        preparation TEXT
+                      )`
+                    , {})
+                    .then(() => {
+                      db.executeSql(`
+                        CREATE TABLE IF NOT EXISTS calendar (
+                          id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                          day TEXT, 
+                          data BLOB
+                        )`
+                      , {})
+                      .then(() => {
+                        //tables created, now log in the application and store of the token
+                        this.login()
+                        .then((access_token) =>{
+                          db.executeSql(`INSERT INTO system (key, value) VALUES ('access_token', '${access_token}')`
+                            , []).then(() => {
+                              db.close().then(() => {
+                                return resolve();
+                              }).catch((error) => {
+                                console.error('unable to close the database', error);
+                                return reject(error);
+                              });
+                          }, (error) => {
+                            console.error('Unable to save the access token', error);
+                            return reject(error);
+                          });
+                        })
+                        .catch(error => {
+                          console.error('Unable to log in the application', error);
+                          return reject(error);
+                        })
+                      }, (error) => {
+                        console.error('Unable to execute sql', error);
+                        return reject(error);
+                      })
+
+                    }, (error) => {
+                      console.error('Unable to execute sql', error);
+                      return reject(error);
+                    });
+                  })
+                  .catch(error => {
+                    console.error('Unable to register the application', error);
+                    return reject(error);
+                  })
+
+              /*app is already registered, only login here*/                  
+              } else {
+                this.login()
+                .then((access_token) =>{
+                  db.executeSql(`UPDATE system SET value = '${access_token}' WHERE key = 'access_token'`
+                    , []).then(() => {
+                      db.close().then(() => {
+                        return resolve();
+                      }).catch((error) => {
+                        console.error('unable to close the database', error);
+                        return reject(error);
+                      });
+                  }, (error) => {
+                    console.error('Unable to save the access token', error);
+                    return reject(error);
+                  });
+                })
+                .catch(error => {
+                  console.error('Unable to log in the application', error);
+                  return reject(error);
+                })
+              }
+
+          }, (error) => {
+              console.error('Unable to execute sql', error);
+              return reject(error);
+          })
+      }, (error) => {
+          console.error('Unable to open database', error);
+          return reject(error);
+      });
+    });
+    return authenticationPromise;
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/
@@ -54,7 +273,7 @@ export class DataService {
       let favorites = data.json();
       let newFavorites = [];
       newFavorites = favorites.splice(index, 1);
-
+      //TO DO- complete
       return;
 
     });
@@ -79,7 +298,7 @@ export class DataService {
    */
   deleteCalendarRecipe(index:number) {
     console.log(index);
+    //TO DO - complete
     return;
   }
 }
-

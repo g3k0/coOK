@@ -1,3 +1,7 @@
 {
-	"test": "development"
+	"token": "gfkoSif40dM3dLlm2",
+	"authAPI": {
+		"register": "http://localhost:3000/register",
+		"login": "http://localhost:3000/login"
+	}
 }
