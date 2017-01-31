@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Device} from 'ionic-native';
 import {SQLite} from 'ionic-native';
+import {Recipe} from './interfaces';
 import 'rxjs/Rx';
 
 @Injectable()
@@ -251,9 +252,7 @@ export class DataService {
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/
-  // /api/recipes?filter={"where":{"mainIngredient":"patate"}}&access_token=<token>
-  //filter[where][ingredients][regexp]=/(?=.*?<ingrediente_1>)(?=.*?<ingrediente_2>)/i
-
+  
   /**
    * Get the recipes returned from a call to the recipes back end service
    * @param {string[]} ingredients array pushed by the user
@@ -308,17 +307,110 @@ export class DataService {
     return getRecipesPromise;
   }
 
+  /*--------------------------------------------------------------------------------------------------------------*/
+
+  /**
+   * Add a recipe retrieved from the search into the database
+   * @param {Recipe} a recipe object as declared in the interfaces file
+   */
+  addRecipe(recipe:Recipe) {
+    if (!recipe) return;
+
+    
+    let addRecipePromise = new Promise((resolve, reject) => {
+      let db = new SQLite();
+      db.openDatabase({
+          name: 'data.db',
+          location: 'default'
+      }).then(() => {
+        let name = recipe.name.replace(new RegExp("'", 'g'),"\"")
+                              .replace(new RegExp("à", 'g'),"agrave")
+                              .replace(new RegExp("è", 'g'),"egrave")
+                              .replace(new RegExp("é", 'g'),"eacute")
+                              .replace(new RegExp("ì", 'g'),"igrave")
+                              .replace(new RegExp("ò", 'g'),"ograve")
+                              .replace(new RegExp("ù", 'g'),"ugrave");
+        let type = recipe.type.replace(new RegExp("'", 'g'),"\"")
+                              .replace(new RegExp("à", 'g'),"agrave")
+                              .replace(new RegExp("è", 'g'),"egrave")
+                              .replace(new RegExp("é", 'g'),"eacute")
+                              .replace(new RegExp("ì", 'g'),"igrave")
+                              .replace(new RegExp("ò", 'g'),"ograve")
+                              .replace(new RegExp("ù", 'g'),"ugrave");
+        let mainIngredient = recipe.mainIngredient.replace(new RegExp("'", 'g'),"\"")
+                                                  .replace(new RegExp("à", 'g'),"agrave")
+                                                  .replace(new RegExp("è", 'g'),"egrave")
+                                                  .replace(new RegExp("é", 'g'),"eacute")
+                                                  .replace(new RegExp("ì", 'g'),"igrave")
+                                                  .replace(new RegExp("ò", 'g'),"ograve")
+                                                  .replace(new RegExp("ù", 'g'),"ugrave");
+        let notes = recipe.notes.replace(new RegExp("'", 'g'),"\"")
+                                .replace(new RegExp("à", 'g'),"agrave")
+                                .replace(new RegExp("è", 'g'),"egrave")
+                                .replace(new RegExp("é", 'g'),"eacute")
+                                .replace(new RegExp("ì", 'g'),"igrave")
+                                .replace(new RegExp("ò", 'g'),"ograve")
+                                .replace(new RegExp("ù", 'g'),"ugrave");
+        let preparation = recipe.preparation.replace(new RegExp("'", 'g'),"\"")
+                                            .replace(new RegExp("à", 'g'),"agrave")
+                                            .replace(new RegExp("è", 'g'),"egrave")
+                                            .replace(new RegExp("é", 'g'),"eacute")
+                                            .replace(new RegExp("ì", 'g'),"igrave")
+                                            .replace(new RegExp("ò", 'g'),"ograve")
+                                            .replace(new RegExp("ù", 'g'),"ugrave");
+
+        let ingredients = [];
+        for (let ingredient of recipe.ingredients) {
+          let ing = ingredient.replace(new RegExp("'", 'g'),"\"")
+                              .replace(new RegExp("à", 'g'),"agrave")
+                              .replace(new RegExp("è", 'g'),"egrave")
+                              .replace(new RegExp("é", 'g'),"eacute")
+                              .replace(new RegExp("ì", 'g'),"igrave")
+                              .replace(new RegExp("ò", 'g'),"ograve")
+                              .replace(new RegExp("ù", 'g'),"ugrave");
+          ingredients.push(ing);
+        }
+
+        db.executeSql(`
+          INSERT INTO favorites
+          (name, type, mainIngredient, persons, notes, ingredients, preparation)
+          VALUES ('${name}',
+                  '${type}',
+                  '${mainIngredient}',
+                  '${recipe.persons}',
+                  '${notes || ''}',
+                  '${ingredients}',
+                  '${preparation}'
+          )
+        `,[])
+        .then(()=>{
+          db.close().then(() => {
+            console.log('recipe was inserted into the database');
+            return resolve();
+          }).catch((error) => {
+            console.error('unable to close the database', error);
+            return reject(error);
+          });
+        }, (error) => {
+          console.error('Unable to execute sql', error);
+          return reject(error);
+        });
+      }, (error) => {
+          console.error('Unable to open database', error);
+          return reject(error);
+      });
+    });
+    return addRecipePromise;
+  }
+
   /*--------------------------------------------------------------------------------------------------------------*/  
   
   /**
    * Get the favorites recipes saved by the user
    * @param {Function} cb callback function
    */
-  retrieveFavorites(cb) {
-    this.http.get('./favorites.json')
-    .subscribe(data => {
-      return cb(data.json());
-    });
+  retrieveFavorites() {
+    //TO DO
   }
 
   /**

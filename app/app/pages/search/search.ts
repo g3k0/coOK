@@ -237,7 +237,6 @@ export class SearchPage {
      * Search method, called by the search html button
      */
     search() {
-
 	  	if (!this.ingredients.length && 
 	  		!this.filters.recipeName &&
 	  		!this.filters.mainIngredient &&
