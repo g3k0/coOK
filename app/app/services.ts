@@ -410,6 +410,31 @@ export class DataService {
    */
   retrieveFavorites() {
     let retrieveFavoritesPromise = new Promise((resolve, reject) =>{
+      let db = new SQLite();
+      db.openDatabase({
+          name: 'data.db',
+          location: 'default'
+      }).then(() => {
+        db.executeSql(`SELECT 
+          name,
+          type,
+          mainIngredient,
+          persons,
+          notes,
+          ingredients,
+          preparation 
+          FROM favorites
+        `,[]).then((data) =>{
+            //TO DO
+        }, (error) => {
+          console.error('Unable to execute sql', error);
+          return reject(error);
+        });
+      },(error) => {
+        console.error('Unable to open database', error);
+        return reject(error);
+      });
+
       return resolve();
     });
     return retrieveFavoritesPromise;
