@@ -261,45 +261,53 @@ export class DataService {
    */
   getRecipes(ingredients:string[]=[''],filters:any={}) {
     let getRecipesPromise = new Promise((resolve,reject) => {
+      let self = this;
       this.retrieveConfig((config) => {
-        let baseUrl = this.http.config.authAPI.recipes;
-        let uri;
+        let url = config.authAPI.recipes;
 
-        this.retrieveAccessToken()
+        self.retrieveAccessToken()
         .then((access_token) => {
-          baseUrl += `?access_token=${access_token}`
+          url += `?access_token=${access_token}`
 
           if (ingredients && ingredients.length) {
-            baseUrl += `&filter[where][ingredients][regexp]=/`;
+            url += `&filter[where][ingredients][regexp]=/`;
 
             for (let ingredient of ingredients) {
-              baseUrl += `(?=.*?${ingredient})`;
+              url += `(?=.*?${ingredient})`;
             }
 
-            baseUrl += `/i`;
+            url += `/i`;
           }
 
           if (filters && filters.recipeName) {
-            baseUrl += `&filter[where][name]=${filters.recipeName}`;
+            url += `&filter[where][name]=${filters.recipeName}`;
           }
 
           if (filters && filters.mainIngredient) {
-            baseUrl += `&filter[where][mainIngredient]=${filters.mainIngredient}`;
+            url += `&filter[where][mainIngredient]=${filters.mainIngredient}`;
           }
 
           if (filters && filters.recipeType && filters.recipeType.length) {
             for (let type of filters.recipeType) {
-              baseUrl += `&filter[where][type]=${type}`;
+              url += `&filter[where][type]=${type}`;
             }
           }
-          // TO DO - call the service
-          return resolve(baseUrl);
+          
+          //this.http.get(uri)
+          self.http.get('./mock.json')
+          .subscribe(data => {
+            return resolve(data.json());
+          });
         })
         .catch((err) => {
           console.error(`${err}`);
           return reject(err);
         });
       });
+      /*this.http.get('./mock.json')
+      .subscribe(data => {
+        return resolve(data.json());
+      });*/
     });
     return getRecipesPromise;
 

@@ -39,7 +39,7 @@ export class MyApp {
             StatusBar.styleDefault();
 
             /*Authentication method call*/
-            data.authentication()
+            /*data.authentication()
             .then(() => {
                 this.loading = false;
                 return;
@@ -48,7 +48,8 @@ export class MyApp {
                 console.error(`There was an error during the authentication: ${JSON.stringify(err)}`)
                 //this.test = JSON.stringify(err);
                 return;
-            });
+            });*/
+            this.loading =false;
         });
     }
 

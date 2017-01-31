@@ -1,16 +1,14 @@
 import {Component, ViewChild} from '@angular/core';
-import {ViewController} from 'ionic-angular';
+import {ViewController,NavParams} from 'ionic-angular';
 import {ModalController} from 'ionic-angular';
 import {RecipePage} from '../recipe/recipe';
-import {DataService} from '../../services';
 import {Recipe} from '../../interfaces';
 
 
 @Component({
 	templateUrl: 'build/pages/add-recipe/add-recipe.html',
 	selector: 'add-recipe',
-  	directives: [RecipePage],
-    providers: [DataService]
+  	directives: [RecipePage]
 })
 
 export class AddRecipePage { 
@@ -21,12 +19,9 @@ export class AddRecipePage {
 	constructor (
 		private viewCtrl: ViewController,
         private modalCtrl: ModalController,
-        private data: DataService
+        private params: NavParams
 	) {
-		let self = this;
-      	data.retrieveFavorites(function(data) {
-        	self.items = data;
-      	});
+		this.items = params.get('recipes');
 	}
 
 	/**

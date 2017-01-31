@@ -1,10 +1,12 @@
 import {Component} from '@angular/core';
-import { AlertController, ToastController } from 'ionic-angular';
+import {AlertController, ToastController, ModalController} from 'ionic-angular';
 import {DataService} from '../../services';
+import {AddRecipePage} from '../add-recipe/add-recipe';
 
 
 @Component({
-	templateUrl: 'build/pages/search/search.html'
+	templateUrl: 'build/pages/search/search.html',
+	directives: [AddRecipePage]
 })
 
 export class SearchPage {
@@ -20,6 +22,7 @@ export class SearchPage {
 	constructor(
 		private alertCtrl: AlertController,
 		private toastCtrl: ToastController,
+		private modalCtrl: ModalController,
 		private data: DataService
 	) {
 		this.ingredients = [];
@@ -246,9 +249,8 @@ export class SearchPage {
 
 	  	this.data.getRecipes(this.ingredients,this.filters)
 	  	.then((recipes) => {
-	  		console.log(recipes);
-	  		//TO DO: open modal with search results
-	  		return;
+	  		let modal = this.modalCtrl.create(AddRecipePage, {recipes:recipes});
+    		return modal.present();
 	  	})
 	  	.catch((err) => {
 	  		console.error(`There was an error on getting the recipes: ${JSON.stringify(err)}`);
