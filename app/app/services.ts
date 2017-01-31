@@ -426,6 +426,7 @@ export class DataService {
           FROM favorites
         `,[]).then((data) =>{
             //TO DO
+            return resolve();
         }, (error) => {
           console.error('Unable to execute sql', error);
           return reject(error);
@@ -434,8 +435,6 @@ export class DataService {
         console.error('Unable to open database', error);
         return reject(error);
       });
-
-      return resolve();
     });
     return retrieveFavoritesPromise;
   }
