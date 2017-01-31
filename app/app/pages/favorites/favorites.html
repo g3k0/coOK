@@ -10,8 +10,14 @@
 <ion-content padding class="favorites">
 
 	<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
+		<div *ngIf="message" class="item">
+			<div class="name">
+				{{message}}
+			</div>
+		</div>
 	
-		<div class="item" *ngFor="let item of items;let index=index ">
+		<div *ngIf="!message" class="item" *ngFor="let item of items;let index=index ">
 
 			<div class="container">
 

@@ -53,7 +53,7 @@ export class DataService {
           name: 'data.db',
           location: 'default'
       }).then(() => {
-        db.executeSql(`SELECT * FROM system WHERE key = 'access_token'`
+        db.executeSql(`SELECT key, value FROM system WHERE key = 'access_token'`
           , []).then((data) => {
             if (!data.rows.length) {
               return reject('data not found');
@@ -407,10 +407,12 @@ export class DataService {
   
   /**
    * Get the favorites recipes saved by the user
-   * @param {Function} cb callback function
    */
   retrieveFavorites() {
-    //TO DO
+    let retrieveFavoritesPromise = new Promise((resolve, reject) =>{
+      return resolve();
+    });
+    return retrieveFavoritesPromise;
   }
 
   /**

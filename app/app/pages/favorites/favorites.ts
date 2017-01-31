@@ -13,9 +13,10 @@ export class FavoritesPage {
 
   @ViewChild(RecipePage) RecipePage: RecipePage;
 
-	items: Recipe[];
-  initialItems: Recipe[];
+	items: /*Recipe[]*/any;
+  initialItems: /*Recipe[]*/any;
   deleteFavorite: any;
+  message: string;
 
 	constructor (
         private modalCtrl: ModalController,
@@ -27,9 +28,18 @@ export class FavoritesPage {
        * Get the favorites list
        */
       let self = this;
-      data.retrieveFavorites(function(data) {
-        self.items = data;
-        self.initialItems = data;
+      data.retrieveFavorites()
+      .then((recipes) => {
+        if(!recipes) {
+          this.message = 'Nessuna ricetta salvata nei favoriti';
+          return;
+        }
+
+        self.items = recipes;
+        self.initialItems = recipes;
+      })
+      .catch((err) => {
+        return;
       });
 
       this.deleteFavorite = data.deleteFavorite;
