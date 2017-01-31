@@ -27,21 +27,19 @@ export class FavoritesPage {
       /**
        * Get the favorites list
        */
-      let self = this;
       data.retrieveFavorites()
       .then((recipes) => {
         if(!recipes) {
           this.message = 'Nessuna ricetta salvata nei favoriti';
           return;
         }
-
-        self.items = recipes;
-        self.initialItems = recipes;
+        this.items = recipes;
+        this.initialItems = recipes;
+        return;
       })
       .catch((err) => {
         return;
       });
-
       this.deleteFavorite = data.deleteFavorite;
     }
     
@@ -61,6 +59,7 @@ export class FavoritesPage {
     	})
   	} else {
   		this.items = this.initialItems;
+      return;
   	}
 	}
 

@@ -424,9 +424,24 @@ export class DataService {
           ingredients,
           preparation 
           FROM favorites
-        `,[]).then((data) =>{
-            //TO DO
-            return resolve();
+        `,[]).then((data) => {
+            let recipes = data.rows.length;
+            let rv:Recipe[] = new Array(recipes);
+            for (let i = 0; i < recipes; i++) {
+              let recipe:any = data.rows.item(i);
+              rv[i] = {
+                name: recipe.name, 
+                type: recipe.type, 
+                mainIngredient: recipe.mainIngredient,
+                persons: recipe.persons,
+                notes: recipe.notes,
+                ingredients: recipe.ingredients.split(','),
+                preparation: recipe.preparation
+              };
+
+              //TO DO - convertire gli accenti e gli apostrofi
+            }
+            return resolve(rv);
         }, (error) => {
           console.error('Unable to execute sql', error);
           return reject(error);
