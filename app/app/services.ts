@@ -304,13 +304,8 @@ export class DataService {
           return reject(err);
         });
       });
-      /*this.http.get('./mock.json')
-      .subscribe(data => {
-        return resolve(data.json());
-      });*/
     });
     return getRecipesPromise;
-
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/  

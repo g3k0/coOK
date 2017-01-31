@@ -249,7 +249,7 @@ export class SearchPage {
 
 	  	this.data.getRecipes(this.ingredients,this.filters)
 	  	.then((recipes) => {
-	  		let modal = this.modalCtrl.create(AddRecipePage, {recipes:recipes});
+	  		let modal = this.modalCtrl.create(AddRecipePage, {recipes:recipes, title:'risultati ricerca'});
     		return modal.present();
 	  	})
 	  	.catch((err) => {

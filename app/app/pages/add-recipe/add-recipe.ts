@@ -15,6 +15,7 @@ export class AddRecipePage {
 
 	@ViewChild(RecipePage) RecipePage: RecipePage;
 	items: Recipe[];
+	title: string;
 
 	constructor (
 		private viewCtrl: ViewController,
@@ -22,6 +23,7 @@ export class AddRecipePage {
         private params: NavParams
 	) {
 		this.items = params.get('recipes');
+		this.title = params.get('title');
 	}
 
 	/**
