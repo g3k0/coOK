@@ -151,7 +151,7 @@ export class DataService {
           name: 'data.db',
           location: 'default'
       }).then(() => {
-          db.executeSql(`CREATE TABLE IF NOT EXISTS system (id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT, value TEXT)`, {})
+          db.executeSql(`CREATE TABLE IF NOT EXISTS system (id INTEGER PRIMARY KEY AUTOINCREMENT, key VARCHAR(255), value VARCHAR(255))`, {})
           .then((system) => {
               console.log('TABLE CREATED: ', system);
 
@@ -163,20 +163,20 @@ export class DataService {
                     db.executeSql(`
                       CREATE TABLE IF NOT EXISTS favorites (
                         id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                        name TEXT, 
-                        type TEXT, 
-                        mainIngredient TEXT, 
+                        name VARCHAR(255), 
+                        type VARCHAR(255), 
+                        mainIngredient VARCHAR(255), 
                         persons INTEGER, 
-                        notes TEXT, 
-                        ingredients TEXT, 
-                        preparation TEXT
+                        notes VARCHAR(255), 
+                        ingredients VARCHAR(255), 
+                        preparation VARCHAR(255)
                       )`
                     , {})
                     .then(() => {
                       db.executeSql(`
                         CREATE TABLE IF NOT EXISTS calendar (
                           id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                          day TEXT, 
+                          day VARCHAR(255), 
                           data BLOB
                         )`
                       , {})
@@ -323,51 +323,15 @@ export class DataService {
           name: 'data.db',
           location: 'default'
       }).then(() => {
-        let name = recipe.name.replace(new RegExp("'", 'g'),"\"")
-                              .replace(new RegExp("à", 'g'),"agrave")
-                              .replace(new RegExp("è", 'g'),"egrave")
-                              .replace(new RegExp("é", 'g'),"eacute")
-                              .replace(new RegExp("ì", 'g'),"igrave")
-                              .replace(new RegExp("ò", 'g'),"ograve")
-                              .replace(new RegExp("ù", 'g'),"ugrave");
-        let type = recipe.type.replace(new RegExp("'", 'g'),"\"")
-                              .replace(new RegExp("à", 'g'),"agrave")
-                              .replace(new RegExp("è", 'g'),"egrave")
-                              .replace(new RegExp("é", 'g'),"eacute")
-                              .replace(new RegExp("ì", 'g'),"igrave")
-                              .replace(new RegExp("ò", 'g'),"ograve")
-                              .replace(new RegExp("ù", 'g'),"ugrave");
-        let mainIngredient = recipe.mainIngredient.replace(new RegExp("'", 'g'),"\"")
-                                                  .replace(new RegExp("à", 'g'),"agrave")
-                                                  .replace(new RegExp("è", 'g'),"egrave")
-                                                  .replace(new RegExp("é", 'g'),"eacute")
-                                                  .replace(new RegExp("ì", 'g'),"igrave")
-                                                  .replace(new RegExp("ò", 'g'),"ograve")
-                                                  .replace(new RegExp("ù", 'g'),"ugrave");
-        let notes = recipe.notes.replace(new RegExp("'", 'g'),"\"")
-                                .replace(new RegExp("à", 'g'),"agrave")
-                                .replace(new RegExp("è", 'g'),"egrave")
-                                .replace(new RegExp("é", 'g'),"eacute")
-                                .replace(new RegExp("ì", 'g'),"igrave")
-                                .replace(new RegExp("ò", 'g'),"ograve")
-                                .replace(new RegExp("ù", 'g'),"ugrave");
-        let preparation = recipe.preparation.replace(new RegExp("'", 'g'),"\"")
-                                            .replace(new RegExp("à", 'g'),"agrave")
-                                            .replace(new RegExp("è", 'g'),"egrave")
-                                            .replace(new RegExp("é", 'g'),"eacute")
-                                            .replace(new RegExp("ì", 'g'),"igrave")
-                                            .replace(new RegExp("ò", 'g'),"ograve")
-                                            .replace(new RegExp("ù", 'g'),"ugrave");
+        let name = recipe.name.replace(new RegExp("'", 'g'),"\"");
+        let type = recipe.type.replace(new RegExp("'", 'g'),"\"");
+        let mainIngredient = recipe.mainIngredient.replace(new RegExp("'", 'g'),"\"");
+        let notes = recipe.notes.replace(new RegExp("'", 'g'),"\"");
+        let preparation = recipe.preparation.replace(new RegExp("'", 'g'),"\"");
 
         let ingredients = [];
         for (let ingredient of recipe.ingredients) {
           let ing = ingredient.replace(new RegExp("'", 'g'),"\"")
-                              .replace(new RegExp("à", 'g'),"agrave")
-                              .replace(new RegExp("è", 'g'),"egrave")
-                              .replace(new RegExp("é", 'g'),"eacute")
-                              .replace(new RegExp("ì", 'g'),"igrave")
-                              .replace(new RegExp("ò", 'g'),"ograve")
-                              .replace(new RegExp("ù", 'g'),"ugrave");
           ingredients.push(ing);
         }
 
@@ -430,18 +394,23 @@ export class DataService {
             for (let i = 0; i < recipes; i++) {
               let recipe:any = data.rows.item(i);
               rv[i] = {
-                name: recipe.name, 
-                type: recipe.type, 
-                mainIngredient: recipe.mainIngredient,
+                name: recipe.name.replace(new RegExp("\"", 'g'),"'"), 
+                type: recipe.type.replace(new RegExp("\"", 'g'),"'"), 
+                mainIngredient: recipe.mainIngredient.replace(new RegExp("\"", 'g'),"'"),
                 persons: recipe.persons,
-                notes: recipe.notes,
-                ingredients: recipe.ingredients.split(','),
-                preparation: recipe.preparation
+                notes: recipe.notes.replace(new RegExp("\"", 'g'),"'"),
+                ingredients: recipe.ingredients.replace(new RegExp("\"", 'g'),"'").split(','),
+                preparation: recipe.preparation.replace(new RegExp("\"", 'g'),"'")
               };
-
-              //TO DO - convertire gli accenti e gli apostrofi
             }
-            return resolve(rv);
+
+            db.close().then(() => {
+              console.log('recipe was inserted into the database');
+              return resolve(rv);
+            }).catch((error) => {
+              console.error('unable to close the database', error);
+              return reject(error);
+            });
         }, (error) => {
           console.error('Unable to execute sql', error);
           return reject(error);
