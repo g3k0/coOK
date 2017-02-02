@@ -25,12 +25,19 @@ export class SearchPage {
 		private modalCtrl: ModalController,
 		private data: DataService
 	) {
+		
+	}
+
+	/**
+     * Component life cycle methods
+     */
+	ngOnInit() {
 		this.ingredients = [];
 		this.filters = {
 			recipeName: null,
 			mainIngredient: null,
 			recipeType: []
-		}
+		};
 	}
 
 	/**

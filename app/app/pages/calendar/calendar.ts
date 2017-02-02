@@ -35,14 +35,21 @@ export class CalendarPage {
     private data: DataService,
     private alertCtrl: AlertController
 	) {
- 		  let self = this;
-      data.retrieveCalendar(function(data) {
-        self.calendar = data;
-      });
-
-      this.shoppingList = [];
-      this.deleteCalendarRecipe = data.deleteCalendarRecipe;
+ 		  
 	}
+
+  /**
+   * Component life cycle methods
+   */
+  ngOnInit() {
+    let self = this;
+    this.data.retrieveCalendar(function(data) {
+      self.calendar = data;
+    });
+
+    this.shoppingList = [];
+    this.deleteCalendarRecipe = this.data.deleteCalendarRecipe;
+  }
 
   /**
  	 * Flip the day detail page

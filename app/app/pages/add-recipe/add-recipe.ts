@@ -26,8 +26,15 @@ export class AddRecipePage {
         private params: NavParams,
         private data: DataService
 	) {
-		this.items = params.get('recipes');
-		this.title = params.get('title');
+		
+	}
+
+	/**
+     * Component life cycle methods
+     */
+	ngOnInit() {
+		this.items = this.params.get('recipes');
+		this.title = this.params.get('title');
 	}
 
 	/**

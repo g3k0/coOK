@@ -23,25 +23,28 @@ export class FavoritesPage {
         private data: DataService,
         private alertCtrl: AlertController
     ) {
-		
-      /**
-       * Get the favorites list
-       */
-      data.retrieveFavorites()
-      .then((recipes) => {
-        if(!recipes) {
-          this.message = 'Nessuna ricetta salvata nei favoriti';
-          return;
-        }
-        this.items = recipes;
-        this.initialItems = recipes;
-        return;
-      })
-      .catch((err) => {
-        return;
-      });
-      this.deleteFavorite = data.deleteFavorite;
+
     }
+
+  /**
+   * Component life cycle methods
+   */
+  ngOnInit() {
+    this.data.retrieveFavorites()
+    .then((recipes) => {
+      if(!recipes) {
+        this.message = 'Nessuna ricetta salvata nei favoriti';
+        return;
+      }
+      this.items = recipes;
+      this.initialItems = recipes;
+      return;
+    })
+    .catch((err) => {
+      return;
+    });
+    this.deleteFavorite = this.data.deleteFavorite;
+  }
     
   /** 
    * Search bar filter method

@@ -16,7 +16,14 @@ export class RecipePage {
 		private viewCtrl: ViewController,
 		private params: NavParams
 	) {
-		this.recipe = params.get('recipe');
+		
+	}
+
+	/**
+     * Component life cycle methods
+     */
+	ngOnInit() {
+		this.recipe = this.params.get('recipe');
 
 		this.persons = [];
 		for (let i=0; i<this.recipe.persons; ++i) {
