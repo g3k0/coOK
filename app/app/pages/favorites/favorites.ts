@@ -56,6 +56,14 @@ export class FavoritesPage {
       return;
     });
   }
+
+  /**
+   * Called by show delete confirm method below if yes is pressed by the user
+   * param {string} the recipe name to delete
+   */
+  deleteFavorite(name:string) {
+    return console.log(name);
+  }
     
   /** 
    * Search bar filter method
@@ -90,10 +98,9 @@ export class FavoritesPage {
 
   /**
    * Delete recipe confirmation alert
-   * @param {number} the array index of the element in the recipes array
    * @param {string} the name of the recipe
    */
-  showDeleteConfirm(index:number, name:string) {
+  showDeleteConfirm(name:string) {
     let confirm = this.alertCtrl.create({
       title: 'Cancella ricetta',
       message: `sei sicuro di voler cancellare la ricetta ${name}?`,
@@ -107,7 +114,8 @@ export class FavoritesPage {
         {
           text: 'Si',
           handler: () => {
-            return this.deleteFavorite(index);
+            this.deleteFavorite(name);
+            return;
           }
         }
       ]
