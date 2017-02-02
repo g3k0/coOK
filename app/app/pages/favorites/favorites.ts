@@ -13,8 +13,8 @@ export class FavoritesPage {
 
   @ViewChild(RecipePage) RecipePage: RecipePage;
 
-	items: /*Recipe[]*/any;
-  initialItems: /*Recipe[]*/any;
+	items: any;
+  initialItems: any;
   deleteFavorite: any;
   message: string;
 
@@ -32,10 +32,6 @@ export class FavoritesPage {
   ngOnInit() {
     this.data.retrieveFavorites()
     .then((recipes) => {
-      if(!recipes) {
-        this.message = 'Nessuna ricetta salvata nei favoriti';
-        return;
-      }
       this.items = recipes;
       this.initialItems = recipes;
       return;
