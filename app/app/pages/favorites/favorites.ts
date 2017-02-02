@@ -41,12 +41,24 @@ export class FavoritesPage {
     });
     this.deleteFavorite = this.data.deleteFavorite;
   }
+
+  getFavorites() {
+    this.data.retrieveFavorites()
+    .then((recipes) => {
+      this.items = recipes;
+      this.initialItems = recipes;
+      return;
+    })
+    .catch((err) => {
+      return;
+    });
+  }
     
   /** 
    * Search bar filter method
    * @param {any} the event on the input element
    */
-	getItems (ev:any) {
+	getItems(ev:any) {
   	
   	// set val to the value of the searchbar
   	let val = ev.target.value;
