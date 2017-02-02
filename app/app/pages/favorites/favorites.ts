@@ -42,6 +42,9 @@ export class FavoritesPage {
     this.deleteFavorite = this.data.deleteFavorite;
   }
 
+  /**
+   * Called by a button to update the favorites items list
+   */
   getFavorites() {
     this.data.retrieveFavorites()
     .then((recipes) => {
