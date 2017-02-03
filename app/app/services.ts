@@ -169,7 +169,8 @@ export class DataService {
                         persons INTEGER, 
                         notes VARCHAR(255), 
                         ingredients VARCHAR(255), 
-                        preparation VARCHAR(255)
+                        preparation VARCHAR(255),
+                        CONSTRAINT constraint_name UNIQUE (name)
                       )`
                     , {})
                     .then(() => {

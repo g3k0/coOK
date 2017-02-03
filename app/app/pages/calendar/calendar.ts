@@ -76,8 +76,14 @@ export class CalendarPage {
    * Modal that show the favorites recipes to add to the calendar
    */
   presentModalAddRecipe () {
-    let modal = this.modalCtrl.create(AddRecipePage);
-    return modal.present();
+    this.data.retrieveFavorites()
+    .then((recipes) => {
+      let modal = this.modalCtrl.create(AddRecipePage, {recipes:recipes, title:'Aggiungi al calendario'});
+      return modal.present();
+    })
+    .catch((err) => {
+      return;
+    });
   }
 
   /**
