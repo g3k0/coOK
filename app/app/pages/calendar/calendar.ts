@@ -42,9 +42,13 @@ export class CalendarPage {
    * Component life cycle methods
    */
   ngOnInit() {
-    let self = this;
-    this.data.retrieveCalendar(function(data) {
-      self.calendar = data;
+    this.data.retrieveCalendar()
+    .then((calendar) => {
+      this.calendar = calendar;
+      return;
+    })
+    .catch((err) => {
+      return;
     });
 
     this.shoppingList = [];

@@ -473,13 +473,84 @@ export class DataService {
 
   /**
    * Get the calendar JSON
-   * @param {Function} cb callback function
    */
-  retrieveCalendar(cb) {
-    this.http.get('./calendar.json')
-    .subscribe(data => {
-      return cb(data.json());
+  retrieveCalendar() {
+    let retrieveCalendarPromise = new Promise((resolve, reject) => {
+      let calendar = [
+        {
+          "day": "Lunedi",
+          "meals": [{
+            "name":"pranzo",
+            "recipes": []
+          },{
+            "name": "cena",
+            "recipes": []
+          }]
+        },
+        {
+          "day": "Martedi",
+          "meals": [{
+            "name":"pranzo",
+            "recipes": []
+          },{
+            "name": "cena",
+            "recipes": []
+          }]
+        },
+        {
+          "day": "Mercoledi",
+          "meals": [{
+            "name":"pranzo",
+            "recipes": []
+          },{
+            "name": "cena",
+            "recipes": []
+          }]
+        },
+        {
+          "day": "Giovedi",
+          "meals": [{
+            "name":"pranzo",
+            "recipes": []
+          },{
+            "name": "cena",
+            "recipes": []
+          }]
+        },
+        {
+          "day": "Venerdi",
+          "meals": [{
+            "name":"pranzo",
+            "recipes": []
+          },{
+            "name": "cena",
+            "recipes": []
+          }]
+        },
+        {
+          "day": "Sabato",
+          "meals": [{
+            "name":"pranzo",
+            "recipes": []
+          },{
+            "name": "cena",
+            "recipes": []
+          }]
+        },
+        {
+          "day": "Domenica",
+          "meals": [{
+            "name":"pranzo",
+            "recipes": []
+          },{
+            "name": "cena",
+            "recipes": []
+          }]
+        }
+      ];
+      return resolve(calendar);
     });
+    return retrieveCalendarPromise;
   }
 
   /**
