@@ -177,36 +177,52 @@ export class DataService {
                       db.executeSql(`
                         CREATE TABLE IF NOT EXISTS calendar (
                           id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                          day VARCHAR(255), 
-                          data BLOB
+                          day CHARACTER(20), 
+                          meals BLOB
                         )`
                       , {})
                       .then(() => {
-                        //tables created, now log in the application and store of the token
-                        this.login()
-                        .then((access_token) =>{
-                          db.executeSql(`INSERT INTO system (key, value) VALUES ('access_token', '${access_token}')`
-                            , []).then(() => {
-                              db.close().then(() => {
-                                return resolve();
-                              }).catch((error) => {
-                                console.error('unable to close the database', error);
-                                return reject(error);
-                              });
-                          }, (error) => {
-                            console.error('Unable to save the access token', error);
+                        let meals = '[{"name":"pranzo","recipes": []},{"name": "cena","recipes": []}]'
+                        db.executeSql(`
+                          INSERT INTO calendar
+                          (day,meals)
+                          VALUES
+                          ('Lunedi', '${meals}'),
+                          ('Martedi', '${meals}'),
+                          ('Mercoledi', '${meals}'),
+                          ('Giovedi', '${meals}'),
+                          ('Venerdi', '${meals}'),
+                          ('Sabato', '${meals}'),
+                          ('Domenica', '${meals}')
+                        `, []).then(() => {
+                          //tables created, now log in the application and store of the token
+                          this.login()
+                          .then((access_token) =>{
+                            db.executeSql(`INSERT INTO system (key, value) VALUES ('access_token', '${access_token}')`
+                              , []).then(() => {
+                                db.close().then(() => {
+                                  return resolve();
+                                }).catch((error) => {
+                                  console.error('unable to close the database', error);
+                                  return reject(error);
+                                });
+                            }, (error) => {
+                              console.error('Unable to save the access token', error);
+                              return reject(error);
+                            });
+                          })
+                          .catch(error => {
+                            console.error('Unable to log in the application', error);
                             return reject(error);
-                          });
-                        })
-                        .catch(error => {
-                          console.error('Unable to log in the application', error);
+                          })
+                        }, (error) =>{
+                          console.error('Unable to execute sql', error);
                           return reject(error);
                         })
                       }, (error) => {
                         console.error('Unable to execute sql', error);
                         return reject(error);
                       })
-
                     }, (error) => {
                       console.error('Unable to execute sql', error);
                       return reject(error);
