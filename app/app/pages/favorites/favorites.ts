@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {ModalController, AlertController} from 'ionic-angular';
+import {ModalController, AlertController, ToastController} from 'ionic-angular';
 import {RecipePage} from '../recipe/recipe';
 import {DataService} from '../../services';
 import {Recipe} from '../../interfaces';
@@ -15,13 +15,13 @@ export class FavoritesPage {
 
 	items: any;
   initialItems: any;
-  deleteFavorite: any;
   message: string;
 
 	constructor (
         private modalCtrl: ModalController,
         private data: DataService,
-        private alertCtrl: AlertController
+        private alertCtrl: AlertController,
+        private toastCtrl: ToastController
     ) {
 
     }
@@ -39,7 +39,6 @@ export class FavoritesPage {
     .catch((err) => {
       return;
     });
-    this.deleteFavorite = this.data.deleteFavorite;
   }
 
   /**
@@ -58,11 +57,31 @@ export class FavoritesPage {
   }
 
   /**
+   * toast message method when a recipe is deleted from favorites
+   * @param {string} where to show the toast in the web page: top | middle | bottom
+   */
+  presentToast(position:string='top') {
+    let toast = this.toastCtrl.create({
+      message: 'Ricetta cancellata con successo!',
+      duration: 2000,
+      position: position
+    });
+    toast.present();
+  }
+
+  /**
    * Called by show delete confirm method below if yes is pressed by the user
    * param {string} the recipe name to delete
    */
   deleteFavorite(name:string) {
-    return console.log(name);
+    this.data.deleteFavorite(name)
+    .then(() => {
+      this.presentToast();
+      return
+    })
+    .catch((err) => {
+      return;
+    });
   }
     
   /** 

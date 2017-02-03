@@ -425,18 +425,31 @@ export class DataService {
 
   /**
    * Delete a recipe from the favorites file
-   * @param {number} index array index of the recipe to delete
+   * @param {string} recipe name to delete
    */
-  deleteFavorite(index:number) {
-    this.http.get('./favorites.json')
-    .subscribe(data => {
-      let favorites = data.json();
-      let newFavorites = [];
-      newFavorites = favorites.splice(index, 1);
-      //TO DO- complete
-      return;
-
+  deleteFavorite(name:string) {
+    let deleteFavoritePromise = new Promise((resolve, reject) => {
+      let db = new SQLite();
+      db.openDatabase({
+          name: 'data.db',
+          location: 'default'
+      }).then(() => {
+        db.executeSql(`
+          DELETE FROM favorites
+          WHERE name = '${name}'
+        `,[]).then(()=>{
+          return resolve();
+        }, (error) => {
+          console.error('Unable to execute sql', error);
+          return reject(error);
+        });
+      }, (error) => {
+        console.error('Unable to open database', error);
+        return reject(error);
+      });
+      return resolve();
     });
+    return deleteFavoritePromise;
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/
