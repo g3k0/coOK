@@ -455,7 +455,13 @@ export class DataService {
           DELETE FROM favorites
           WHERE name = '${name}'
         `,[]).then(()=>{
-          return resolve();
+          db.close().then(() => {
+            console.log('recipe was deleted from the database');
+            return resolve();
+          }).catch((error) => {
+            console.error('unable to close the database', error);
+            return reject(error);
+          });
         }, (error) => {
           console.error('Unable to execute sql', error);
           return reject(error);
@@ -464,7 +470,6 @@ export class DataService {
         console.error('Unable to open database', error);
         return reject(error);
       });
-      return resolve();
     });
     return deleteFavoritePromise;
   }
@@ -476,79 +481,40 @@ export class DataService {
    */
   retrieveCalendar() {
     let retrieveCalendarPromise = new Promise((resolve, reject) => {
-      let calendar = [
-        {
-          "day": "Lunedi",
-          "meals": [{
-            "name":"pranzo",
-            "recipes": []
-          },{
-            "name": "cena",
-            "recipes": []
-          }]
-        },
-        {
-          "day": "Martedi",
-          "meals": [{
-            "name":"pranzo",
-            "recipes": []
-          },{
-            "name": "cena",
-            "recipes": []
-          }]
-        },
-        {
-          "day": "Mercoledi",
-          "meals": [{
-            "name":"pranzo",
-            "recipes": []
-          },{
-            "name": "cena",
-            "recipes": []
-          }]
-        },
-        {
-          "day": "Giovedi",
-          "meals": [{
-            "name":"pranzo",
-            "recipes": []
-          },{
-            "name": "cena",
-            "recipes": []
-          }]
-        },
-        {
-          "day": "Venerdi",
-          "meals": [{
-            "name":"pranzo",
-            "recipes": []
-          },{
-            "name": "cena",
-            "recipes": []
-          }]
-        },
-        {
-          "day": "Sabato",
-          "meals": [{
-            "name":"pranzo",
-            "recipes": []
-          },{
-            "name": "cena",
-            "recipes": []
-          }]
-        },
-        {
-          "day": "Domenica",
-          "meals": [{
-            "name":"pranzo",
-            "recipes": []
-          },{
-            "name": "cena",
-            "recipes": []
-          }]
-        }
-      ];
-      return resolve(calendar);
+      let db = new SQLite();
+      db.openDatabase({
+          name: 'data.db',
+          location: 'default'
+      }).then(() => {
+        db.executeSql(`
+          SELECT day, meals
+          FROM calendar
+        `, []).then((data) => {
+          //let days = data.rows.length;
+          let calendar:any[] = new Array();
+          for (let i = 0; i < 7; i++) {
+            let day:any = data.rows.item(i);
+            let item = {
+              day: day.day,
+              meals: /*JSON.parse(day.meals)*/[{
+                "name":"pranzo",
+                "recipes": []
+              },{
+                "name": "cena",
+                "recipes": []
+              }]
+            }
+            calendar.push(item);
+          }
+          return resolve(calendar);
+        }, (error) => {
+          console.error('Unable to execute sql', error);
+          return reject(error);
+        })
+      }, (error) => {
+        console.error('Unable to open database', error);
+        return reject(error);
+      });
     });
     return retrieveCalendarPromise;
   }
@@ -563,3 +529,79 @@ export class DataService {
     return;
   }
 }
+
+
+/*
+[
+  {
+    "day": "Lunedi",
+    "meals": [{
+      "name":"pranzo",
+      "recipes": []
+    },{
+      "name": "cena",
+      "recipes": []
+    }]
+  },
+  {
+    "day": "Martedi",
+    "meals": [{
+      "name":"pranzo",
+      "recipes": []
+    },{
+      "name": "cena",
+      "recipes": []
+    }]
+  },
+  {
+    "day": "Mercoledi",
+    "meals": [{
+      "name":"pranzo",
+      "recipes": []
+    },{
+      "name": "cena",
+      "recipes": []
+    }]
+  },
+  {
+    "day": "Giovedi",
+    "meals": [{
+      "name":"pranzo",
+      "recipes": []
+    },{
+      "name": "cena",
+      "recipes": []
+    }]
+  },
+  {
+    "day": "Venerdi",
+    "meals": [{
+      "name":"pranzo",
+      "recipes": []
+    },{
+      "name": "cena",
+      "recipes": []
+    }]
+  },
+  {
+    "day": "Sabato",
+    "meals": [{
+      "name":"pranzo",
+      "recipes": []
+    },{
+      "name": "cena",
+      "recipes": []
+    }]
+  },
+  {
+    "day": "Domenica",
+    "meals": [{
+      "name":"pranzo",
+      "recipes": []
+    },{
+      "name": "cena",
+      "recipes": []
+    }]
+  }
+]
+*/

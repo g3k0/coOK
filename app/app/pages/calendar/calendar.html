@@ -61,7 +61,7 @@
 					</ion-card>
 				</div>
 
-				<div class="shopping-list-button">
+				<div class="shopping-list-button" *ngIf="day.meals[0].recipes.length || day.meals[1].recipes.length">
 					<button ion-button small color="success" (click)="presentModalShoppingList(day.meals)">
 						Vedi lista della spesa
 					</button>
