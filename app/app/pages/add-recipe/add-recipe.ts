@@ -19,6 +19,8 @@ export class AddRecipePage {
 	items: Recipe[];
 	title: string;
 	message: string;
+	day: string;
+	meal: string;
 
 	constructor (
 		private viewCtrl: ViewController,
@@ -36,6 +38,8 @@ export class AddRecipePage {
 	ngOnInit() {
 		this.items = this.params.get('recipes');
 		this.title = this.params.get('title');
+		this.day = this.params.get('day') || '';
+		this.meal = this.params.get('meal') || '';
 
 		if (!this.items.length) {
 			this.message = 'Non ci sono ricette salvate. Effettua una ricerca e salva le ricette nei favoriti.'
@@ -63,10 +67,11 @@ export class AddRecipePage {
 	/**
   	 * toast message method when a recipe is added to favorites
   	 * @param {string} where to show the toast in the web page: top | middle | bottom
-  	 */
-  	presentToast(position:string='top') {
+  	 * @param {string} the toast message
+  	 */ 
+  	presentToast(position:string='top', message:string) {
 	    let toast = this.toastCtrl.create({
-	      message: 'Ricetta aggiunta ai favoriti!',
+	      message: message,
 	      duration: 2000,
 	      position: position
 	    });
@@ -79,9 +84,25 @@ export class AddRecipePage {
 	 */
 	addFavorite(recipe:Recipe) {
 		if (!recipe) return;
-		this.data.addRecipe(recipe)
+		this.data.addRecipeToFavorites(recipe)
 		.then(() => {
-			this.presentToast();
+			this.presentToast('top', 'Ricetta aggiunta ai favoriti!');
+			return;
+		})
+		.catch((err) => {
+			return;
+		});
+	}
+
+	/**
+	 *  Add a recipe to the calendar
+	 *  @param {Recipe} the recipe to save into the calendar
+	 */
+	addRecipeToCalendar(recipe:Recipe) {
+		if (!recipe) return;
+		this.data.addRecipeToCalendar(this.day,this.meal, recipe)
+		.then(() => {
+			this.presentToast('top', 'Ricetta aggiunta al calendario!');
 			return;
 		})
 		.catch((err) => {

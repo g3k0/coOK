@@ -330,7 +330,7 @@ export class DataService {
    * Add a recipe retrieved from the search into the database
    * @param {Recipe} a recipe object as declared in the interfaces file
    */
-  addRecipe(recipe:Recipe) {
+  addRecipeToFavorites(recipe:Recipe) {
     if (!recipe) return;
 
     
@@ -513,6 +513,20 @@ export class DataService {
   }
 
   /**
+   * Add a recipe to the calendar table
+   * @param {string} the day selected by the user
+   * @param {string} the meal selected by the user
+   * @param {Recipe} the recipe to add
+   */
+  addRecipeToCalendar(day:string, meal:string, recipe:Recipe) {
+    let addRecipeToCalendarPromise = new Promise((resolve, reject) => {
+      return resolve();
+    });
+    return addRecipeToCalendarPromise;
+  }
+  
+
+  /**
    * Delete a recipe from the calendar file
    * @param {number} index array index of the recipe to delete
    */
@@ -522,79 +536,3 @@ export class DataService {
     return;
   }
 }
-
-
-/*
-[
-  {
-    "day": "Lunedi",
-    "meals": [{
-      "name":"pranzo",
-      "recipes": []
-    },{
-      "name": "cena",
-      "recipes": []
-    }]
-  },
-  {
-    "day": "Martedi",
-    "meals": [{
-      "name":"pranzo",
-      "recipes": []
-    },{
-      "name": "cena",
-      "recipes": []
-    }]
-  },
-  {
-    "day": "Mercoledi",
-    "meals": [{
-      "name":"pranzo",
-      "recipes": []
-    },{
-      "name": "cena",
-      "recipes": []
-    }]
-  },
-  {
-    "day": "Giovedi",
-    "meals": [{
-      "name":"pranzo",
-      "recipes": []
-    },{
-      "name": "cena",
-      "recipes": []
-    }]
-  },
-  {
-    "day": "Venerdi",
-    "meals": [{
-      "name":"pranzo",
-      "recipes": []
-    },{
-      "name": "cena",
-      "recipes": []
-    }]
-  },
-  {
-    "day": "Sabato",
-    "meals": [{
-      "name":"pranzo",
-      "recipes": []
-    },{
-      "name": "cena",
-      "recipes": []
-    }]
-  },
-  {
-    "day": "Domenica",
-    "meals": [{
-      "name":"pranzo",
-      "recipes": []
-    },{
-      "name": "cena",
-      "recipes": []
-    }]
-  }
-]
-*/
