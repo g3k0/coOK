@@ -56,6 +56,20 @@ export class CalendarPage {
   }
 
   /**
+   *  Update the calendar view
+   */
+  updateCalendar() {
+    this.data.retrieveCalendar()
+    .then((calendar) => {
+      this.calendar = calendar;
+      return;
+    })
+    .catch((err) => {
+      return;
+    });
+  }
+
+  /**
  	 * Flip the day detail page
    * param {any} a day object, see www/lendar.json for reference
  	 */

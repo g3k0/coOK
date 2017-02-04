@@ -86,11 +86,10 @@ export class DataService {
    */
   register() {
     let registerPromise = new Promise((resolve, reject) =>{
-      /*let self = this;
-      this.retrieveConfig((config) => {
-        self.deviceData = Device.device;
-        self.deviceData.token = config.token;
-        this.http.post(config.authAPI.register, self.deviceData)
+      /*this.retrieveConfig((config) => {
+        this.deviceData = Device.device;
+        this.deviceData.token = config.token;
+        this.http.post(config.authAPI.register, this.deviceData)
         .map((res) => {
           if (res.result === 'ok') {
             return resolve();
@@ -116,8 +115,7 @@ export class DataService {
    */
   login() {
     let loginPromise = new Promise((resolve, reject) => {
-      /*let self = this;
-      this.retrieveConfig((config) => {
+      /*this.retrieveConfig((config) => {
         this.http.post(config.authAPI.register, {uuid: Device.device.uuid})
         .map((res) => {
           if (res.access_token) {
@@ -187,13 +185,13 @@ export class DataService {
                           INSERT INTO calendar
                           (day,meals)
                           VALUES
-                          ('Lunedi', '${meals}'),
-                          ('Martedi', '${meals}'),
-                          ('Mercoledi', '${meals}'),
-                          ('Giovedi', '${meals}'),
-                          ('Venerdi', '${meals}'),
-                          ('Sabato', '${meals}'),
-                          ('Domenica', '${meals}')
+                          ('lunedi', '${meals}'),
+                          ('martedi', '${meals}'),
+                          ('mercoledi', '${meals}'),
+                          ('giovedi', '${meals}'),
+                          ('venerdi', '${meals}'),
+                          ('sabato', '${meals}'),
+                          ('domenica', '${meals}')
                         `, []).then(() => {
                           //tables created, now log in the application and store of the token
                           this.login()
@@ -520,7 +518,59 @@ export class DataService {
    */
   addRecipeToCalendar(day:string, meal:string, recipe:Recipe) {
     let addRecipeToCalendarPromise = new Promise((resolve, reject) => {
-      return resolve();
+      let db = new SQLite();
+       db.openDatabase({
+          name: 'data.db',
+          location: 'default'
+      }).then(() => {
+        db.executeSql(`
+          SELECT day, meals
+          FROM calendar
+          WHERE day = '${day}'
+        `, [])
+        .then((data) => {
+          let calendarDay:any = data.rows.item(0);
+          let item:any = {
+            day: calendarDay.day,
+            meals: JSON.parse(calendarDay.meals)
+          };
+          let newRecipe:Recipe = {
+            name: recipe.name.replace(new RegExp("'", 'g'),"\""),
+            type: recipe.type.replace(new RegExp("'", 'g'),"\""),
+            mainIngredient: recipe.mainIngredient.replace(new RegExp("'", 'g'),"\""),
+            notes: recipe.notes.replace(new RegExp("'", 'g'),"\""),
+            ingredients: [],
+            persons: recipe.persons,
+            preparation: recipe.preparation.replace(new RegExp("'", 'g'),"\"")
+          };
+          
+          for (let i=0; i < recipe.ingredients.length; i++) {
+            newRecipe.ingredients.push(recipe.ingredients[i].replace(new RegExp("'", 'g'),"\""));
+          }
+
+          for (let k=0; k < item.meals.length; k++) {
+            if (item.meals[k].name === meal) {
+              item.meals[k].recipes.push(newRecipe);
+            }
+          }
+          db.executeSql(`
+            UPDATE calendar 
+            SET meals = '${JSON.stringify(item.meals)}' 
+            WHERE day = '${day}'
+          `,[]).then(() => {
+            return resolve();
+          }, (error) => {
+            console.error('Unable to execute sql', error);
+            return reject(error);
+          });
+        }, (error) => {
+          console.error('Unable to execute sql', error);
+          return reject(error);
+        });
+      }, (error) => {
+        console.error('Unable to open database', error);
+        return reject(error);
+      });
     });
     return addRecipeToCalendarPromise;
   }

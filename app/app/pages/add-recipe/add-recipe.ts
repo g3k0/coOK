@@ -101,7 +101,7 @@ export class AddRecipePage {
 	addRecipeToCalendar(recipe:Recipe) {
 		if (!recipe) return;
 		this.data.addRecipeToCalendar(this.day,this.meal, recipe)
-		.then(() => {
+		.then((dati) => {
 			this.presentToast('top', 'Ricetta aggiunta al calendario!');
 			return;
 		})

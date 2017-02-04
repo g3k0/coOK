@@ -9,9 +9,10 @@
 
 <ion-content padding class="calendar flip-container" [class.flipped]="flipped">
     <div class="flipper">
-
+		
 	    <div class="front">
 	    	<div class="container">
+	    		<button ion-button color="success" (click)="updateCalendar()">Aggiorna il calendario</button>
 				<div class="day" *ngFor="let day of calendar" (click)="flip(day)">
 					<div class="title">
 							{{day.day}}
