@@ -19,6 +19,10 @@
 
 <ion-content padding class="add-recipe">
 
+	<div *ngIf="message">
+		{{message}}
+	</div>
+
 	<div class="item" *ngFor="let item of items">
 
 		<div class="container">

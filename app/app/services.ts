@@ -490,19 +490,12 @@ export class DataService {
           SELECT day, meals
           FROM calendar
         `, []).then((data) => {
-          //let days = data.rows.length;
           let calendar:any[] = new Array();
           for (let i = 0; i < 7; i++) {
             let day:any = data.rows.item(i);
             let item = {
               day: day.day,
-              meals: /*JSON.parse(day.meals)*/[{
-                "name":"pranzo",
-                "recipes": []
-              },{
-                "name": "cena",
-                "recipes": []
-              }]
+              meals: JSON.parse(day.meals)
             }
             calendar.push(item);
           }

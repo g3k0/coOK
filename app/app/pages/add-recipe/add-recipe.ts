@@ -18,6 +18,7 @@ export class AddRecipePage {
 	@ViewChild(RecipePage) RecipePage: RecipePage;
 	items: Recipe[];
 	title: string;
+	message: string;
 
 	constructor (
 		private viewCtrl: ViewController,
@@ -35,6 +36,10 @@ export class AddRecipePage {
 	ngOnInit() {
 		this.items = this.params.get('recipes');
 		this.title = this.params.get('title');
+
+		if (!this.items.length) {
+			this.message = 'Non ci sono ricette salvate. Effettua una ricerca e salva le ricette nei favoriti.'
+		}
 	}
 
 	/**
