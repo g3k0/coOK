@@ -46,7 +46,7 @@ export class DataService {
    * Get the access_token needed for authenticated calls to the back end services
    */
   retrieveAccessToken() {
-    let retrieveAccessTokenPromise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       let db = new SQLite();
       let access_token = '';
       db.openDatabase({
@@ -63,20 +63,14 @@ export class DataService {
             }
             db.close().then(() => {
               return resolve(access_token);
-            }).catch((error) => {
-              console.error('unable to close the database', error);
-              return reject(error);
             });
-          }, (error) => {
-            console.error('impossible to execute the query', error);
-            return reject(error);
-        });
-      }, (error) => {
-        console.error('impossible to open the database', error);
+          });
+      })
+      .catch((error) => {
+        console.error(`[retrieveAccessToken] Error: ${JSON.stringify(error)}`);
         return reject(error);
       });
     });
-    return retrieveAccessTokenPromise;
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/
@@ -85,7 +79,7 @@ export class DataService {
    * Register the app to the back end services 
    */
   register() {
-    let registerPromise = new Promise((resolve, reject) =>{
+    return new Promise((resolve, reject) =>{
       /*this.retrieveConfig((config) => {
         this.deviceData = Device.device;
         this.deviceData.token = config.token;
@@ -107,14 +101,13 @@ export class DataService {
       });*/
       return resolve();
     });
-    return registerPromise;
   }
 
   /**
    * Log in the app to the back end services
    */
   login() {
-    let loginPromise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       /*this.retrieveConfig((config) => {
         this.http.post(config.authAPI.register, {uuid: Device.device.uuid})
         .map((res) => {
@@ -134,7 +127,6 @@ export class DataService {
       });*/
       return resolve('mocktoken')
     });
-    return loginPromise;
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/
@@ -143,127 +135,98 @@ export class DataService {
    * App authentication
    */
   authentication() {
-    let authenticationPromise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       let db = new SQLite();
       db.openDatabase({
           name: 'data.db',
           location: 'default'
-      }).then(() => {
-          db.executeSql(`CREATE TABLE IF NOT EXISTS system (id INTEGER PRIMARY KEY AUTOINCREMENT, key VARCHAR(255), value VARCHAR(255))`, {})
-          .then((system) => {
-              console.log('TABLE CREATED: ', system);
+      })
+      .then(() => {
+        db.executeSql(`CREATE TABLE IF NOT EXISTS system (id INTEGER PRIMARY KEY AUTOINCREMENT, key VARCHAR(255), value VARCHAR(255))`, {})
+        .then((system) => {
+          console.log('TABLE CREATED: ', system);
 
-              /*first app init, I call registration method, insert the record, then login*/
-              if (!system.rows.length) {
-                this.register()
+          /*first app init, I call registration method, insert the record, then login*/
+          if (!system.rows.length) {
+            this.register()
+              .then(() => {
+                //Now I create the other SQLite tables I need
+                db.executeSql(`
+                  CREATE TABLE IF NOT EXISTS favorites (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                    name VARCHAR(255), 
+                    type VARCHAR(255), 
+                    mainIngredient VARCHAR(255), 
+                    persons INTEGER, 
+                    notes VARCHAR(255), 
+                    ingredients VARCHAR(255), 
+                    preparation VARCHAR(255),
+                    CONSTRAINT constraint_name UNIQUE (name)
+                  )`
+                , {})
+                .then(() => {
+                  db.executeSql(`
+                    CREATE TABLE IF NOT EXISTS calendar (
+                      id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                      day CHARACTER(20), 
+                      meals BLOB
+                    )`
+                  , {})
                   .then(() => {
-                    //Now I create the other SQLite tables I need
+                    let meals = '[{"name":"pranzo","recipes": []},{"name": "cena","recipes": []}]'
                     db.executeSql(`
-                      CREATE TABLE IF NOT EXISTS favorites (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                        name VARCHAR(255), 
-                        type VARCHAR(255), 
-                        mainIngredient VARCHAR(255), 
-                        persons INTEGER, 
-                        notes VARCHAR(255), 
-                        ingredients VARCHAR(255), 
-                        preparation VARCHAR(255),
-                        CONSTRAINT constraint_name UNIQUE (name)
-                      )`
-                    , {})
-                    .then(() => {
-                      db.executeSql(`
-                        CREATE TABLE IF NOT EXISTS calendar (
-                          id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                          day CHARACTER(20), 
-                          meals BLOB
-                        )`
-                      , {})
-                      .then(() => {
-                        let meals = '[{"name":"pranzo","recipes": []},{"name": "cena","recipes": []}]'
+                      INSERT INTO calendar
+                      (day,meals)
+                      VALUES
+                      ('lunedi', '${meals}'),
+                      ('martedi', '${meals}'),
+                      ('mercoledi', '${meals}'),
+                      ('giovedi', '${meals}'),
+                      ('venerdi', '${meals}'),
+                      ('sabato', '${meals}'),
+                      ('domenica', '${meals}')
+                    `, []).then(() => {
+                      //tables created, now log in the application and store of the token
+                      this.login()
+                      .then((access_token) =>{
                         db.executeSql(`
-                          INSERT INTO calendar
-                          (day,meals)
-                          VALUES
-                          ('lunedi', '${meals}'),
-                          ('martedi', '${meals}'),
-                          ('mercoledi', '${meals}'),
-                          ('giovedi', '${meals}'),
-                          ('venerdi', '${meals}'),
-                          ('sabato', '${meals}'),
-                          ('domenica', '${meals}')
-                        `, []).then(() => {
-                          //tables created, now log in the application and store of the token
-                          this.login()
-                          .then((access_token) =>{
-                            db.executeSql(`INSERT INTO system (key, value) VALUES ('access_token', '${access_token}')`
-                              , []).then(() => {
-                                db.close().then(() => {
-                                  return resolve();
-                                }).catch((error) => {
-                                  console.error('unable to close the database', error);
-                                  return reject(error);
-                                });
-                            }, (error) => {
-                              console.error('Unable to save the access token', error);
-                              return reject(error);
-                            });
-                          })
-                          .catch(error => {
-                            console.error('Unable to log in the application', error);
-                            return reject(error);
-                          })
-                        }, (error) =>{
-                          console.error('Unable to execute sql', error);
-                          return reject(error);
-                        })
-                      }, (error) => {
-                        console.error('Unable to execute sql', error);
-                        return reject(error);
-                      })
-                    }, (error) => {
-                      console.error('Unable to execute sql', error);
-                      return reject(error);
-                    });
-                  })
-                  .catch(error => {
-                    console.error('Unable to register the application', error);
-                    return reject(error);
-                  })
-
-              /*app is already registered, only login here*/                  
-              } else {
-                this.login()
-                .then((access_token) =>{
-                  db.executeSql(`UPDATE system SET value = '${access_token}' WHERE key = 'access_token'`
-                    , []).then(() => {
-                      db.close().then(() => {
-                        return resolve();
-                      }).catch((error) => {
-                        console.error('unable to close the database', error);
-                        return reject(error);
+                          INSERT INTO system 
+                          (key, value) 
+                          VALUES ('access_token', '${access_token}')
+                        `, [])
+                        .then(() => {
+                          db.close().then(() => {
+                            return resolve();
+                          });
+                        });
                       });
-                  }, (error) => {
-                    console.error('Unable to save the access token', error);
-                    return reject(error);
+                    });
                   });
-                })
-                .catch(error => {
-                  console.error('Unable to log in the application', error);
-                  return reject(error);
-                })
-              }
-
-          }, (error) => {
-              console.error('Unable to execute sql', error);
-              return reject(error);
-          })
-      }, (error) => {
-          console.error('Unable to open database', error);
-          return reject(error);
+                });
+              });
+            /*app is already registered, only login here*/                  
+            } else {
+              this.login()
+              .then((access_token) =>{
+                db.executeSql(`
+                  UPDATE system 
+                  SET value = '${access_token}' 
+                  WHERE key = 'access_token'
+                `, [])
+                .then(() => {
+                  db.close().then(() => {
+                    return resolve();
+                  });
+                });
+              });
+            }
+        });
+      })
+      .catch((error) => {
+        console.error(`[authentication] Error: ${JSON.stringify(error)}`);
+        return reject(error);
       });
     });
-    return authenticationPromise;
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/
