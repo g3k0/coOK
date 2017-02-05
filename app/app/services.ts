@@ -497,7 +497,12 @@ export class DataService {
             }
             calendar.push(item);
           }
-          return resolve(calendar);
+          db.close().then(() => {
+            return resolve(calendar);
+          }).catch((error) => {
+            console.error('unable to close the database', error);
+            return reject(error);
+          });
         }, (error) => {
           console.error('Unable to execute sql', error);
           return reject(error);
@@ -558,7 +563,12 @@ export class DataService {
             SET meals = '${JSON.stringify(item.meals)}' 
             WHERE day = '${day}'
           `,[]).then(() => {
-            return resolve();
+            db.close().then(() => {
+              return resolve();
+            }).catch((error) => {
+              console.error('unable to close the database', error);
+              return reject(error);
+            });
           }, (error) => {
             console.error('Unable to execute sql', error);
             return reject(error);
@@ -584,7 +594,64 @@ export class DataService {
    */
   deleteCalendarRecipe(day:string, meal:string, recipeName:string) {
     let deleteCalendarRecipePromise = new Promise((resolve, reject) => {
-      return resolve();
+      let db = new SQLite();
+       db.openDatabase({
+          name: 'data.db',
+          location: 'default'
+      }).then(() => {
+        db.executeSql(`
+          SELECT day, meals
+          FROM calendar
+          WHERE day = '${day}'
+        `, [])
+        .then((data) => {
+          let calendarDay:any = data.rows.item(0);
+          let item:any = {
+            day: calendarDay.day,
+            meals: JSON.parse(calendarDay.meals)
+          };
+
+          for (let i=0; i < item.meals.length; i++) {
+            if (!item.meals(i).recipes.length) {
+              db.close().then(() => {
+                return resolve();
+              }).catch((error) => {
+                console.error('unable to close the database', error);
+                return reject(error);
+              });
+            }
+            if (item.meals(i).name === meal) {
+               for (let k = 0; k < item.meals(i).recipes.length; k++) {
+                 if (item.meals(i).recipes(k).name.replace(new RegExp("\"", 'g'),"'") === recipeName) {
+                   item.meals(i).recipes.splice(k,1);
+                 }
+               }
+            }
+          }
+          db.executeSql(`
+            UPDATE calendar 
+            SET meals = '${JSON.stringify(item.meals)}' 
+            WHERE day = '${day}'
+          `,[])
+          .then(() => {
+            db.close().then(() => {
+              return resolve();
+            }).catch((error) => {
+              console.error('unable to close the database', error);
+              return reject(error);
+            });
+          }, (error) => {
+            console.error('Unable to execute sql', error);
+            return reject(error);
+          });
+        }, (error) => {
+          console.error('Unable to execute sql', error);
+          return reject(error);
+        });
+      }, (error) => {
+        console.error('Unable to open database', error);
+        return reject(error);
+      });
     });
     return deleteCalendarRecipePromise;
   }
