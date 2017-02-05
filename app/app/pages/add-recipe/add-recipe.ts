@@ -3,14 +3,15 @@ import {ViewController,NavParams,ToastController} from 'ionic-angular';
 import {ModalController} from 'ionic-angular';
 import {RecipePage} from '../recipe/recipe';
 import {Recipe} from '../../interfaces';
-import {DataService} from '../../services';
+import {CalendarService} from '../calendar/calendar.service';
+import {FavoritesService} from '../favorites/favorites.service';
 
 
 @Component({
 	templateUrl: 'build/pages/add-recipe/add-recipe.html',
 	selector: 'add-recipe',
   	directives: [RecipePage],
-    providers: [DataService]
+    providers: [CalendarService, FavoritesService]
 })
 
 export class AddRecipePage { 
@@ -27,7 +28,8 @@ export class AddRecipePage {
         private modalCtrl: ModalController,
         private toastCtrl: ToastController,
         private params: NavParams,
-        private data: DataService
+        private calendarData: CalendarService,
+        private favoritesData: FavoritesService
 	) {
 		
 	}
@@ -84,7 +86,7 @@ export class AddRecipePage {
 	 */
 	addFavorite(recipe:Recipe) {
 		if (!recipe) return;
-		this.data.addRecipeToFavorites(recipe)
+		this.favoritesData.addRecipeToFavorites(recipe)
 		.then(() => {
 			this.presentToast('top', 'Ricetta aggiunta ai favoriti!');
 			return;
@@ -100,8 +102,8 @@ export class AddRecipePage {
 	 */
 	addRecipeToCalendar(recipe:Recipe) {
 		if (!recipe) return;
-		this.data.addRecipeToCalendar(this.day,this.meal, recipe)
-		.then((dati) => {
+		this.calendarData.addRecipeToCalendar(this.day,this.meal, recipe)
+		.then(() => {
 			this.presentToast('top', 'Ricetta aggiunta al calendario!');
 			return;
 		})

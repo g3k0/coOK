@@ -3,12 +3,14 @@ import {ModalController, AlertController} from 'ionic-angular';
 import {RecipePage} from '../recipe/recipe';
 import {AddRecipePage} from '../add-recipe/add-recipe';
 import {ShoppingListPage} from '../shopping-list/shopping-list';
-import {DataService} from '../../services';
+import {CalendarService} from './calendar.service';
+import {FavoritesService} from '../favorites/favorites.service';
 import {Recipe} from '../../interfaces';
 
 @Component({
 	templateUrl: 'build/pages/calendar/calendar.html',
-	directives: [RecipePage, AddRecipePage]
+	directives: [RecipePage, AddRecipePage],
+  providers: [CalendarService,FavoritesService]
 })
 
 export class CalendarPage {
@@ -31,7 +33,8 @@ export class CalendarPage {
  
 	constructor(
 		private modalCtrl: ModalController,
-    private data: DataService,
+    private calendarData: CalendarService,
+    private favoritesData: FavoritesService,
     private alertCtrl: AlertController
 	) {
  		  
@@ -41,7 +44,7 @@ export class CalendarPage {
    * Component life cycle methods
    */
   ngOnInit() {
-    this.data.retrieveCalendar()
+    this.calendarData.retrieveCalendar()
     .then((calendar) => {
       this.calendar = calendar;
       return;
@@ -57,7 +60,7 @@ export class CalendarPage {
    *  Update the calendar view
    */
   updateCalendar() {
-    this.data.retrieveCalendar()
+    this.calendarData.retrieveCalendar()
     .then((calendar) => {
       this.calendar = calendar;
       return;
@@ -94,7 +97,7 @@ export class CalendarPage {
    * @param {string} the meal selected
    */ 
   presentModalAddRecipe (day:string, meal:string) {
-    this.data.retrieveFavorites()
+    this.favoritesData.retrieveFavorites()
     .then((recipes) => {
       let modal = this.modalCtrl.create(AddRecipePage, {recipes:recipes, title:'Aggiungi al calendario',day:day, meal:meal});
       return modal.present();
@@ -128,7 +131,7 @@ export class CalendarPage {
    * @param {string} the recipe name to delete from calendar
    */
   deleteCalendarRecipe(day:string, meal:string, recipeName:string) {
-    this.data.deleteCalendarRecipe(day, meal, recipeName)
+    this.calendarData.deleteCalendarRecipe(day, meal, recipeName)
     .then(() => {
       return;
     })

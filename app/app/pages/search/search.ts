@@ -1,12 +1,13 @@
 import {Component} from '@angular/core';
 import {AlertController, ToastController, ModalController} from 'ionic-angular';
-import {DataService} from '../../services';
+import {SearchService} from './search.service';
 import {AddRecipePage} from '../add-recipe/add-recipe';
 
 
 @Component({
 	templateUrl: 'build/pages/search/search.html',
-	directives: [AddRecipePage]
+	directives: [AddRecipePage],
+    providers: [SearchService]
 })
 
 export class SearchPage {
@@ -23,7 +24,7 @@ export class SearchPage {
 		private alertCtrl: AlertController,
 		private toastCtrl: ToastController,
 		private modalCtrl: ModalController,
-		private data: DataService
+		private searchData: SearchService
 	) {
 		
 	}
@@ -253,7 +254,7 @@ export class SearchPage {
 	  		return;
 	  	}
 
-	  	this.data.getRecipes(this.ingredients,this.filters)
+	  	this.searchData.getRecipes(this.ingredients,this.filters)
 	  	.then((recipes) => {
 	  		let modal = this.modalCtrl.create(AddRecipePage, {recipes:recipes, title:'risultati ricerca'});
     		return modal.present();
