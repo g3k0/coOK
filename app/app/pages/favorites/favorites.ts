@@ -1,12 +1,13 @@
 import {Component, ViewChild} from '@angular/core';
 import {ModalController, AlertController, ToastController} from 'ionic-angular';
 import {RecipePage} from '../recipe/recipe';
-import {DataService} from '../../services';
+import {FavoritesService} from './favorites.service';
 import {Recipe} from '../../interfaces';
 
 @Component({
   templateUrl: 'build/pages/favorites/favorites.html',
-  directives: [RecipePage]
+  directives: [RecipePage],
+  providers: [FavoritesService]
 })
 
 export class FavoritesPage {
@@ -19,7 +20,7 @@ export class FavoritesPage {
 
 	constructor (
         private modalCtrl: ModalController,
-        private data: DataService,
+        private favoritesData: FavoritesService,
         private alertCtrl: AlertController,
         private toastCtrl: ToastController
     ) {
@@ -30,7 +31,7 @@ export class FavoritesPage {
    * Component life cycle methods
    */
   ngOnInit() {
-    this.data.retrieveFavorites()
+    this.favoritesData.retrieveFavorites()
     .then((recipes) => {
       this.items = recipes;
       this.initialItems = recipes;
@@ -45,7 +46,7 @@ export class FavoritesPage {
    * Called by a button to update the favorites items list
    */
   getFavorites() {
-    this.data.retrieveFavorites()
+    this.favoritesData.retrieveFavorites()
     .then((recipes) => {
       this.items = recipes;
       this.initialItems = recipes;
@@ -74,7 +75,7 @@ export class FavoritesPage {
    * param {string} the recipe name to delete
    */
   deleteFavorite(name:string) {
-    this.data.deleteFavorite(name)
+    this.favoritesData.deleteFavorite(name)
     .then(() => {
       this.presentToast();
       return
