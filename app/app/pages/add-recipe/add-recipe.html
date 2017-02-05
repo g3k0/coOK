@@ -3,7 +3,7 @@
 	<ion-toolbar>
 
 		<ion-title>
-			Aggiungi ricetta
+			{{title}}
 		</ion-title>
 
 		<ion-buttons start>
@@ -19,6 +19,10 @@
 
 <ion-content padding class="add-recipe">
 
+	<div *ngIf="message">
+		{{message}}
+	</div>
+
 	<div class="item" *ngFor="let item of items">
 
 		<div class="container">
@@ -27,10 +31,12 @@
 				{{item.name}}
 			</div>
 
-			<div class="icon">
+			<div *ngIf="!day" class="icon" (click)="addFavorite(item)">
 				<ion-icon name="add-circle"></ion-icon>
 			</div>
-
+			<div *ngIf="day" class="icon" (click)="addRecipeToCalendar(item)">
+				<ion-icon name="add-circle"></ion-icon>
+			</div>
 		</div>
 
 	</div>

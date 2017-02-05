@@ -13,6 +13,13 @@ export class TabsPage {
   private tab3Root: any;
 
   constructor () {
+    
+  }
+
+  /**
+   * Component life cycle methods
+   */
+  ngOnInit() {
     // this tells the tabs component which Pages
     // should be each tab's root Page
     this.tab1Root = SearchPage;

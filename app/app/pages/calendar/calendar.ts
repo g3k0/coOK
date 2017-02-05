@@ -28,21 +28,44 @@ export class CalendarPage {
     }]
   };
   shoppingList:string[];
-  deleteCalendarRecipe:any;
  
 	constructor(
 		private modalCtrl: ModalController,
     private data: DataService,
     private alertCtrl: AlertController
 	) {
- 		  let self = this;
-      data.retrieveCalendar(function(data) {
-        self.calendar = data;
-      });
-
-      this.shoppingList = [];
-      this.deleteCalendarRecipe = data.deleteCalendarRecipe;
+ 		  
 	}
+
+  /**
+   * Component life cycle methods
+   */
+  ngOnInit() {
+    this.data.retrieveCalendar()
+    .then((calendar) => {
+      this.calendar = calendar;
+      return;
+    })
+    .catch((err) => {
+      return;
+    });
+
+    this.shoppingList = [];
+  }
+
+  /**
+   *  Update the calendar view
+   */
+  updateCalendar() {
+    this.data.retrieveCalendar()
+    .then((calendar) => {
+      this.calendar = calendar;
+      return;
+    })
+    .catch((err) => {
+      return;
+    });
+  }
 
   /**
  	 * Flip the day detail page
@@ -67,10 +90,18 @@ export class CalendarPage {
 
   /**
    * Modal that show the favorites recipes to add to the calendar
-   */
-  presentModalAddRecipe () {
-    let modal = this.modalCtrl.create(AddRecipePage);
-    return modal.present();
+   * @param {string} the day selected
+   * @param {string} the meal selected
+   */ 
+  presentModalAddRecipe (day:string, meal:string) {
+    this.data.retrieveFavorites()
+    .then((recipes) => {
+      let modal = this.modalCtrl.create(AddRecipePage, {recipes:recipes, title:'Aggiungi al calendario',day:day, meal:meal});
+      return modal.present();
+    })
+    .catch((err) => {
+      return;
+    });
   }
 
   /**
@@ -91,14 +122,31 @@ export class CalendarPage {
   }
 
   /**
-   * Delete recipe confirmation alert
-   * @param {number} the array index of the element in the recipes array
-   * @param {string} the name of the recipe
+   * Delete a recipe from calendar
+   * @param {string} the day where from to delete the recipe
+   * @param {string} the meal where from to delete the recipe
+   * @param {string} the recipe name to delete from calendar
    */
-  showDeleteConfirm(index:number, name:string) {
+  deleteCalendarRecipe(day:string, meal:string, recipeName:string) {
+    this.data.deleteCalendarRecipe(day, meal, recipeName)
+    .then(() => {
+      return;
+    })
+    .catch((err)=>{
+      return;
+    }); 
+  }
+
+  /**
+   * Delete recipe confirmation alert
+   * @param {string} the day where from to delete the recipe
+   * @param {string} the meal where from to delete the recipe
+   * @param {string} the recipe name to delete from calendar
+   */
+  showDeleteConfirm(day:string, meal:string, recipeName:string) {
     let confirm = this.alertCtrl.create({
       title: 'Cancella ricetta',
-      message: `sei sicuro di voler rimuovere dal calendario la ricetta ${name}?`,
+      message: `sei sicuro di voler rimuovere dal calendario la ricetta ${recipeName}?`,
       buttons: [
         {
           text: 'No',
@@ -109,7 +157,7 @@ export class CalendarPage {
         {
           text: 'Si',
           handler: () => {
-            return this.deleteCalendarRecipe(index);
+            return this.deleteCalendarRecipe(day, meal, recipeName);
           }
         }
       ]

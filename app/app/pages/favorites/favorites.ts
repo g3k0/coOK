@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {ModalController, AlertController} from 'ionic-angular';
+import {ModalController, AlertController, ToastController} from 'ionic-angular';
 import {RecipePage} from '../recipe/recipe';
 import {DataService} from '../../services';
 import {Recipe} from '../../interfaces';
@@ -13,33 +13,82 @@ export class FavoritesPage {
 
   @ViewChild(RecipePage) RecipePage: RecipePage;
 
-	items: Recipe[];
-  initialItems: Recipe[];
-  deleteFavorite: any;
+	items: any;
+  initialItems: any;
+  message: string;
 
 	constructor (
         private modalCtrl: ModalController,
         private data: DataService,
-        private alertCtrl: AlertController
+        private alertCtrl: AlertController,
+        private toastCtrl: ToastController
     ) {
-		
-      /**
-       * Get the favorites list
-       */
-      let self = this;
-      data.retrieveFavorites(function(data) {
-        self.items = data;
-        self.initialItems = data;
-      });
 
-      this.deleteFavorite = data.deleteFavorite;
     }
+
+  /**
+   * Component life cycle methods
+   */
+  ngOnInit() {
+    this.data.retrieveFavorites()
+    .then((recipes) => {
+      this.items = recipes;
+      this.initialItems = recipes;
+      return;
+    })
+    .catch((err) => {
+      return;
+    });
+  }
+
+  /**
+   * Called by a button to update the favorites items list
+   */
+  getFavorites() {
+    this.data.retrieveFavorites()
+    .then((recipes) => {
+      this.items = recipes;
+      this.initialItems = recipes;
+      return;
+    })
+    .catch((err) => {
+      return;
+    });
+  }
+
+  /**
+   * toast message method when a recipe is deleted from favorites
+   * @param {string} where to show the toast in the web page: top | middle | bottom
+   */
+  presentToast(position:string='top') {
+    let toast = this.toastCtrl.create({
+      message: 'Ricetta cancellata con successo!',
+      duration: 2000,
+      position: position
+    });
+    toast.present();
+  }
+
+  /**
+   * Called by show delete confirm method below if yes is pressed by the user
+   * param {string} the recipe name to delete
+   */
+  deleteFavorite(name:string) {
+    this.data.deleteFavorite(name)
+    .then(() => {
+      this.presentToast();
+      return
+    })
+    .catch((err) => {
+      return;
+    });
+  }
     
   /** 
    * Search bar filter method
    * @param {any} the event on the input element
    */
-	getItems (ev:any) {
+	getItems(ev:any) {
   	
   	// set val to the value of the searchbar
   	let val = ev.target.value;
@@ -51,6 +100,7 @@ export class FavoritesPage {
     	})
   	} else {
   		this.items = this.initialItems;
+      return;
   	}
 	}
 
@@ -67,10 +117,9 @@ export class FavoritesPage {
 
   /**
    * Delete recipe confirmation alert
-   * @param {number} the array index of the element in the recipes array
    * @param {string} the name of the recipe
    */
-  showDeleteConfirm(index:number, name:string) {
+  showDeleteConfirm(name:string) {
     let confirm = this.alertCtrl.create({
       title: 'Cancella ricetta',
       message: `sei sicuro di voler cancellare la ricetta ${name}?`,
@@ -84,7 +133,8 @@ export class FavoritesPage {
         {
           text: 'Si',
           handler: () => {
-            return this.deleteFavorite(index);
+            this.deleteFavorite(name);
+            return;
           }
         }
       ]

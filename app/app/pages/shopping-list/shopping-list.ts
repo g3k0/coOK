@@ -14,7 +14,14 @@ export class ShoppingListPage {
 		private viewCtrl: ViewController,
 		private params: NavParams
 	) {
-		this.shoppingList = params.get('shoppingList');
+		
+	}
+
+	/**
+     * Component life cycle methods
+     */
+	ngOnInit() {
+		this.shoppingList = this.params.get('shoppingList');
 	}
 
 	/**

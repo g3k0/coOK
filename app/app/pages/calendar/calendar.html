@@ -9,9 +9,12 @@
 
 <ion-content padding class="calendar flip-container" [class.flipped]="flipped">
     <div class="flipper">
-
+		
 	    <div class="front">
 	    	<div class="container">
+	    		<div class="update-calendar">
+	    			<button ion-button color="success" (click)="updateCalendar()">Aggiorna il calendario</button>
+	    		</div>
 				<div class="day" *ngFor="let day of calendar" (click)="flip(day)">
 					<div class="title">
 							{{day.day}}
@@ -42,26 +45,27 @@
 					    	{{card.name}}
 					    </ion-card-header>
 					    <ion-card-content>
-					    	<div class="item" *ngFor="let recipe of card.recipes;let index=index ">
+					    	<div class="item" *ngFor="let recipe of card.recipes">
 								<div class="container">
 									<div class="name" (click)="presentModalRecipe(recipe)">
 										{{recipe.name}}
 									</div>
 									<div class="icon">
-										<ion-icon name="trash" (click)="showDeleteConfirm(index,recipe.name)"></ion-icon>
+										<ion-icon name="trash" (click)="showDeleteConfirm(day.day,card.name,recipe.name)"></ion-icon>
 									</div>
 								</div>
 							</div>
 
-							<button ion-button small (click)="presentModalAddRecipe()">
+							<button ion-button small (click)="presentModalAddRecipe(day.day,card.name)">
 								<ion-icon name="add"></ion-icon>
 								Aggiungi
 							</button>
+
 					    </ion-card-content>
 					</ion-card>
 				</div>
 
-				<div class="shopping-list-button">
+				<div class="shopping-list-button" *ngIf="day.meals[0].recipes.length || day.meals[1].recipes.length">
 					<button ion-button small color="success" (click)="presentModalShoppingList(day.meals)">
 						Vedi lista della spesa
 					</button>
