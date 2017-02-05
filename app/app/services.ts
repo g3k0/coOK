@@ -578,11 +578,14 @@ export class DataService {
 
   /**
    * Delete a recipe from the calendar file
-   * @param {number} index array index of the recipe to delete
+   * @param {string} the day where from to delete the recipe
+   * @param {string} the meal where from to delete the recipe
+   * @param {string} the recipe name to delete from calendar
    */
-  deleteCalendarRecipe(index:number) {
-    console.log(index);
-    //TO DO - complete
-    return;
+  deleteCalendarRecipe(day:string, meal:string, recipeName:string) {
+    let deleteCalendarRecipePromise = new Promise((resolve, reject) => {
+      return resolve();
+    });
+    return deleteCalendarRecipePromise;
   }
 }

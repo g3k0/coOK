@@ -45,13 +45,13 @@
 					    	{{card.name}}
 					    </ion-card-header>
 					    <ion-card-content>
-					    	<div class="item" *ngFor="let recipe of card.recipes;let index=index ">
+					    	<div class="item" *ngFor="let recipe of card.recipes">
 								<div class="container">
 									<div class="name" (click)="presentModalRecipe(recipe)">
 										{{recipe.name}}
 									</div>
 									<div class="icon">
-										<ion-icon name="trash" (click)="showDeleteConfirm(index,recipe.name)"></ion-icon>
+										<ion-icon name="trash" (click)="showDeleteConfirm(day.day,card.name,recipe.name)"></ion-icon>
 									</div>
 								</div>
 							</div>

@@ -28,7 +28,6 @@ export class CalendarPage {
     }]
   };
   shoppingList:string[];
-  deleteCalendarRecipe:any;
  
 	constructor(
 		private modalCtrl: ModalController,
@@ -52,7 +51,6 @@ export class CalendarPage {
     });
 
     this.shoppingList = [];
-    this.deleteCalendarRecipe = this.data.deleteCalendarRecipe;
   }
 
   /**
@@ -124,14 +122,31 @@ export class CalendarPage {
   }
 
   /**
-   * Delete recipe confirmation alert
-   * @param {number} the array index of the element in the recipes array
-   * @param {string} the name of the recipe
+   * Delete a recipe from calendar
+   * @param {string} the day where from to delete the recipe
+   * @param {string} the meal where from to delete the recipe
+   * @param {string} the recipe name to delete from calendar
    */
-  showDeleteConfirm(index:number, name:string) {
+  deleteCalendarRecipe(day:string, meal:string, recipeName:string) {
+    this.data.deleteCalendarRecipe(day, meal, recipeName)
+    .then(() => {
+      return;
+    })
+    .catch((err)=>{
+      return;
+    }); 
+  }
+
+  /**
+   * Delete recipe confirmation alert
+   * @param {string} the day where from to delete the recipe
+   * @param {string} the meal where from to delete the recipe
+   * @param {string} the recipe name to delete from calendar
+   */
+  showDeleteConfirm(day:string, meal:string, recipeName:string) {
     let confirm = this.alertCtrl.create({
       title: 'Cancella ricetta',
-      message: `sei sicuro di voler rimuovere dal calendario la ricetta ${name}?`,
+      message: `sei sicuro di voler rimuovere dal calendario la ricetta ${recipeName}?`,
       buttons: [
         {
           text: 'No',
@@ -142,7 +157,7 @@ export class CalendarPage {
         {
           text: 'Si',
           handler: () => {
-            return this.deleteCalendarRecipe(index);
+            return this.deleteCalendarRecipe(day, meal, recipeName);
           }
         }
       ]
