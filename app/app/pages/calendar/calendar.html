@@ -12,7 +12,9 @@
 		
 	    <div class="front">
 	    	<div class="container">
-	    		<button ion-button color="success" (click)="updateCalendar()">Aggiorna il calendario</button>
+	    		<div class="update-calendar">
+	    			<button ion-button color="success" (click)="updateCalendar()">Aggiorna il calendario</button>
+	    		</div>
 				<div class="day" *ngFor="let day of calendar" (click)="flip(day)">
 					<div class="title">
 							{{day.day}}
