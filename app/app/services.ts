@@ -237,7 +237,7 @@ export class DataService {
    * @param {Object} filters objet setted by the user
    */
   getRecipes(ingredients:string[]=[''],filters:any={}) {
-    let getRecipesPromise = new Promise((resolve,reject) => {
+    return new Promise((resolve,reject) => {
       let self = this;
       this.retrieveConfig((config) => {
         let url = config.authAPI.recipes;
@@ -276,13 +276,12 @@ export class DataService {
             return resolve(data.json());
           });
         })
-        .catch((err) => {
-          console.error(`${err}`);
-          return reject(err);
+        .catch((error) => {
+          console.error(`[getRecipes] Error: ${JSON.stringify(error)}`);
+          return reject(error);
         });
       });
     });
-    return getRecipesPromise;
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/
@@ -293,9 +292,7 @@ export class DataService {
    */
   addRecipeToFavorites(recipe:Recipe) {
     if (!recipe) return;
-
-    
-    let addRecipePromise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       let db = new SQLite();
       db.openDatabase({
           name: 'data.db',
@@ -312,7 +309,6 @@ export class DataService {
           let ing = ingredient.replace(new RegExp("'", 'g'),"\"")
           ingredients.push(ing);
         }
-
         db.executeSql(`
           INSERT INTO favorites
           (name, type, mainIngredient, persons, notes, ingredients, preparation)
@@ -329,20 +325,14 @@ export class DataService {
           db.close().then(() => {
             console.log('recipe was inserted into the database');
             return resolve();
-          }).catch((error) => {
-            console.error('unable to close the database', error);
-            return reject(error);
           });
-        }, (error) => {
-          console.error('Unable to execute sql', error);
-          return reject(error);
         });
-      }, (error) => {
-          console.error('Unable to open database', error);
-          return reject(error);
+      })
+      .catch((error) => {
+        console.log(`[addRecipeToFavorites] Error: ${JSON.stringify(error)}`);
+        return reject(error);
       });
     });
-    return addRecipePromise;
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/  
@@ -351,7 +341,7 @@ export class DataService {
    * Get the favorites recipes saved by the user
    */
   retrieveFavorites() {
-    let retrieveFavoritesPromise = new Promise((resolve, reject) =>{
+    return new Promise((resolve, reject) =>{
       let db = new SQLite();
       db.openDatabase({
           name: 'data.db',
@@ -366,39 +356,33 @@ export class DataService {
           ingredients,
           preparation 
           FROM favorites
-        `,[]).then((data) => {
-            let recipes = data.rows.length;
-            let rv:Recipe[] = new Array(recipes);
-            for (let i = 0; i < recipes; i++) {
-              let recipe:any = data.rows.item(i);
-              rv[i] = {
-                name: recipe.name.replace(new RegExp("\"", 'g'),"'"), 
-                type: recipe.type.replace(new RegExp("\"", 'g'),"'"), 
-                mainIngredient: recipe.mainIngredient.replace(new RegExp("\"", 'g'),"'"),
-                persons: recipe.persons,
-                notes: recipe.notes.replace(new RegExp("\"", 'g'),"'"),
-                ingredients: recipe.ingredients.replace(new RegExp("\"", 'g'),"'").split(','),
-                preparation: recipe.preparation.replace(new RegExp("\"", 'g'),"'")
-              };
-            }
-
-            db.close().then(() => {
-              console.log('recipe was inserted into the database');
-              return resolve(rv);
-            }).catch((error) => {
-              console.error('unable to close the database', error);
-              return reject(error);
-            });
-        }, (error) => {
-          console.error('Unable to execute sql', error);
-          return reject(error);
+        `,[])
+        .then((data) => {
+          let recipes = data.rows.length;
+          let rv:Recipe[] = new Array(recipes);
+          for (let i = 0; i < recipes; i++) {
+            let recipe:any = data.rows.item(i);
+            rv[i] = {
+              name: recipe.name.replace(new RegExp("\"", 'g'),"'"), 
+              type: recipe.type.replace(new RegExp("\"", 'g'),"'"), 
+              mainIngredient: recipe.mainIngredient.replace(new RegExp("\"", 'g'),"'"),
+              persons: recipe.persons,
+              notes: recipe.notes.replace(new RegExp("\"", 'g'),"'"),
+              ingredients: recipe.ingredients.replace(new RegExp("\"", 'g'),"'").split(','),
+              preparation: recipe.preparation.replace(new RegExp("\"", 'g'),"'")
+            };
+          }
+          db.close().then(() => {
+            console.log('recipe was inserted into the database');
+            return resolve(rv);
+          });
         });
-      },(error) => {
-        console.error('Unable to open database', error);
+      })
+      .catch((error) => {
+        console.log(`[retrieveFavorites] Error: ${JSON.stringify(error)}`);
         return reject(error);
       });
     });
-    return retrieveFavoritesPromise;
   }
 
   /**
@@ -406,7 +390,7 @@ export class DataService {
    * @param {string} recipe name to delete
    */
   deleteFavorite(name:string) {
-    let deleteFavoritePromise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       let db = new SQLite();
       db.openDatabase({
           name: 'data.db',
@@ -415,24 +399,19 @@ export class DataService {
         db.executeSql(`
           DELETE FROM favorites
           WHERE name = '${name}'
-        `,[]).then(()=>{
+        `,[])
+        .then(()=>{
           db.close().then(() => {
             console.log('recipe was deleted from the database');
             return resolve();
-          }).catch((error) => {
-            console.error('unable to close the database', error);
-            return reject(error);
           });
-        }, (error) => {
-          console.error('Unable to execute sql', error);
-          return reject(error);
         });
-      }, (error) => {
-        console.error('Unable to open database', error);
+      })
+      .catch((error) => {
+        console.log(`[deleteFavorite] Error: ${JSON.stringify(error)}`);
         return reject(error);
       });
     });
-    return deleteFavoritePromise;
   }
 
   /*--------------------------------------------------------------------------------------------------------------*/
@@ -441,7 +420,7 @@ export class DataService {
    * Get the calendar JSON
    */
   retrieveCalendar() {
-    let retrieveCalendarPromise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       let db = new SQLite();
       db.openDatabase({
           name: 'data.db',
@@ -450,7 +429,8 @@ export class DataService {
         db.executeSql(`
           SELECT day, meals
           FROM calendar
-        `, []).then((data) => {
+        `, [])
+        .then((data) => {
           let calendar:any[] = new Array();
           for (let i = 0; i < 7; i++) {
             let day:any = data.rows.item(i);
@@ -476,23 +456,16 @@ export class DataService {
             }
             calendar.push(item);
           }
-
           db.close().then(() => {
             return resolve(calendar);
-          }).catch((error) => {
-            console.error('unable to close the database', error);
-            return reject(error);
           });
-        }, (error) => {
-          console.error('Unable to execute sql', error);
-          return reject(error);
-        })
-      }, (error) => {
-        console.error('Unable to open database', error);
+        });
+      })
+      .catch((error) => {
+        console.log(`[retrieveCalendar] Error: ${JSON.stringify(error)}`);
         return reject(error);
       });
     });
-    return retrieveCalendarPromise;
   }
 
   /**
@@ -502,7 +475,7 @@ export class DataService {
    * @param {Recipe} the recipe to add
    */
   addRecipeToCalendar(day:string, meal:string, recipe:Recipe) {
-    let addRecipeToCalendarPromise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       let db = new SQLite();
        db.openDatabase({
           name: 'data.db',
@@ -542,27 +515,19 @@ export class DataService {
             UPDATE calendar 
             SET meals = '${JSON.stringify(item.meals)}' 
             WHERE day = '${day}'
-          `,[]).then(() => {
+          `,[])
+          .then(() => {
             db.close().then(() => {
               return resolve();
-            }).catch((error) => {
-              console.error('unable to close the database', error);
-              return reject(error);
             });
-          }, (error) => {
-            console.error('Unable to execute sql', error);
-            return reject(error);
           });
-        }, (error) => {
-          console.error('Unable to execute sql', error);
-          return reject(error);
         });
-      }, (error) => {
-        console.error('Unable to open database', error);
+      })
+      .catch((error) => {
+        console.log(`[addRecipeToCalendar] Error: ${JSON.stringify(error)}`);
         return reject(error);
       });
     });
-    return addRecipeToCalendarPromise;
   }
   
 
@@ -573,7 +538,7 @@ export class DataService {
    * @param {string} the recipe name to delete from calendar
    */
   deleteCalendarRecipe(day:string, meal:string, recipeName:string) {
-    let deleteCalendarRecipePromise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       let db = new SQLite();
        db.openDatabase({
           name: 'data.db',
@@ -616,23 +581,14 @@ export class DataService {
           .then(() => {
             db.close().then(() => {
               return resolve();
-            }).catch((error) => {
-              console.error('unable to close the database', error);
-              return reject(error);
             });
-          }, (error) => {
-            console.error('Unable to execute sql', error);
-            return reject(error);
           });
-        }, (error) => {
-          console.error('Unable to execute sql', error);
-          return reject(error);
         });
-      }, (error) => {
-        console.error('Unable to open database', error);
+      })
+      .catch((error) => {
+        console.log(`[deleteCalendarRecipe] Error: ${JSON.stringify(error)}`);
         return reject(error);
       });
     });
-    return deleteCalendarRecipePromise;
   }
 }
