@@ -1,58 +1,45 @@
 /**
  * CoOK REST server services.
  * @model: Recipes
- * @author: Christian Palazzo
+ * @author: Anahita Sepheri
  * @date: 2016 11 04
  */
-
 (function () {
 	'use strict';
-
-
 
 	let app = require(`${__base}/server`);
 	let log = require(`${__base}/lib/logging`);
 
 	module.exports = (Recipes) => {
 
-
 		Recipes.ingredients_calculation = (servingSize, cb) => {
-
 			let err = new Error();
-
 			if(!servingSize) {
-
 				log.error('[Recipes][ingredients_calculation] New ingredient calculation requested without servingSize parameter...');
 				err.status = 400;
 				err.message = "Parameter servingSize not set.";
 				return cb(err); 
 			}
 
-
 			if( !servingSize.numberOfPerson || !servingSize.recipeName ) {
-
 				log.error('[Recipes][ingredients_calculation] New ingredient calculation requested, missing properties of servingSize parameter ...');
 				err.status = 400;
 				err.message = "Properties numberOfPerson or recipeName not set.";
 				return cb(err); 
 			}
 
-
 			if( (isNaN(servingSize.numberOfPerson)  || !(Number.isInteger(servingSize.numberOfPerson)) ) && 
 				(isNaN(servingSize.recipeName)  || !(Number.isInteger(servingSize.recipeName)))) {
-
 				log.error('[Recipes][ingredients_calculation] New ingredient calculation requested with incorrect properties of servingSize parameter...');
 				err.status = 400;
 				err.message = "Incorrect type of properties.";
 				return cb(err); 
 			}
 
-
 			let numberOfPerson = servingSize.numberOfPerson;
 			let finalIngredients = [];
 
 			app.models.recipes.findOne({where:{name:servingSize.recipeName}}, (er, recipe) => {
-
 			 	if(er) {
 					log.error(`[Recipes][ingredients_calculation][findOne] error: ${er}`);
 					return cb(er);
@@ -75,7 +62,6 @@
 			 		return cb(null, {persons: numberOfPerson, ingredients: recipe.ingredients});
 			 	}
 
-
 			 	for(let initialIngredient of recipe.ingredients) {
 			 		
 			 		//if ingredient starts with number, then extract the number and do calculation.
@@ -94,19 +80,11 @@
 						else {
 							finalIngredient = finalAmount + restOfIngredient;
 						}
-
 						finalIngredients.push(finalIngredient);
-			 		
 			 		}
-
 			 	}
-
 				return cb(null, {persons: numberOfPerson, ingredients: finalIngredients});
-
 		  });
-
 		};
-
 	};
-
 })();

@@ -38,8 +38,10 @@ Web server API
   }  
 }  
 
-* [GET] /api/appauth/register/:token  
-  accetta: \<token\> String;  
+* [POST] /api/appauth/register  
+  accetta: {
+    "device": Object
+  }  
 
   case 401: {  
     "error": {  
@@ -65,8 +67,10 @@ Web server API
     "results": String  
   }  
 
-* [GET] /api/appauth/login/:appId  
-accetta: \<appId\> String  
+* [POST] /api/appauth/login/:appId  
+accetta: {
+  "uuid": String
+}  
 
 case 200: {  
   "results": String  
@@ -91,3 +95,26 @@ case 500: {
     "stack": String  
   }  
 }  
+
+* [POST] /api/recipes/ingredients-calculation
+accetta: {
+  "numberOfPersons": Number,
+  "recipeName": String
+}
+
+case 200: {
+  "persons": Number, 
+  "ingredients": [String]
+}
+
+case 400: {
+  "error": Object
+}
+
+case 404: {
+  "error": Object
+}
+
+case 500: {
+  "error": Object
+}
