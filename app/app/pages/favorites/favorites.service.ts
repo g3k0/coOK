@@ -46,13 +46,13 @@ export class FavoritesService {
 	        `,[])
 	        .then(()=>{
 	          db.close().then(() => {
-	            console.log('recipe was inserted into the database');
+	            console.log(`[addRecipeToFavorites] recipe was inserted into the database`);
 	            return resolve();
 	          });
 	        });
 	      })
 	      .catch((error) => {
-	        console.log(`[addRecipeToFavorites] Error: ${JSON.stringify(error)}`);
+	        console.error(`[addRecipeToFavorites] Error: ${JSON.stringify(error)}`);
 	        return reject(error);
 	      });
 	    });
@@ -81,6 +81,7 @@ export class FavoritesService {
           FROM favorites
         `,[])
         .then((data) => {
+
           let recipes = data.rows.length;
           let rv:Recipe[] = new Array(recipes);
           for (let i = 0; i < recipes; i++) {
@@ -96,13 +97,13 @@ export class FavoritesService {
             };
           }
           db.close().then(() => {
-            console.log('recipe was inserted into the database');
+            console.log(`[retrieveFavorites] Recipes retrieved`);
             return resolve(rv);
           });
         });
       })
       .catch((error) => {
-        console.log(`[retrieveFavorites] Error: ${JSON.stringify(error)}`);
+        console.error(`[retrieveFavorites] Error: ${JSON.stringify(error)}`);
         return reject(error);
       });
     });
@@ -127,13 +128,13 @@ export class FavoritesService {
         `,[])
         .then(()=>{
           db.close().then(() => {
-            console.log('recipe was deleted from the database');
+            console.log(`[deleteFavorite] recipe was deleted from the database`);
             return resolve();
           });
         });
       })
       .catch((error) => {
-        console.log(`[deleteFavorite] Error: ${JSON.stringify(error)}`);
+        console.error(`[deleteFavorite] Error: ${JSON.stringify(error)}`);
         return reject(error);
       });
     });

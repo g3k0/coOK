@@ -59,11 +59,11 @@ export class DataService {
           let err = new Error();
           err.statusCode = 500;
           err.message = 'There was an error on registering the app';
-          log.error('Unable to register the application',err);
+          console.error(`[register] Unable to register the application: ${JSON.stringify(err)}`);
           return reject(err);
         })
         .catch((err) => {
-          log.error('Unable to register the application',err);
+          console.error(`[register] Unable to register the application: ${JSON.stringify(err)}`);
           return reject(err);
         });
       });*/
@@ -85,11 +85,11 @@ export class DataService {
           let err = new Error();
           err.statusCode = 500;
           err.message = 'There was an error on logging the app';
-          log.error('Unable to log in the application',err);
+          console.error(`[login] Unable to log in the application: ${JSON.stringify(err)}`);
           return reject(err);
         })
         .catch((err) => {
-          log.error('Unable to log in the application',err);
+          console.error(`[login] Unable to log in the application: ${JSON.stringify(err)}`);
           return reject(err);
         });
       });*/

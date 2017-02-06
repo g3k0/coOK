@@ -12,6 +12,8 @@
 	<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 
 		<button class="update-favorites" ion-button color="success" (click)="getFavorites()">Aggiorna i favoriti</button>
+
+		<div *ngIf="message">{{message}}</div>
 		
 		<div class="item" *ngFor="let item of items;let index=index ">
 
