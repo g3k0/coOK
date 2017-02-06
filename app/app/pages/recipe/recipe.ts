@@ -11,6 +11,7 @@ export class RecipePage {
 
 	recipe: Recipe;
 	persons: number[];
+	peopleLeft: number[];
 
 	constructor (
 		private viewCtrl: ViewController,
@@ -26,8 +27,13 @@ export class RecipePage {
 		this.recipe = this.params.get('recipe');
 
 		this.persons = [];
+		this.peopleLeft = [];
 		for (let i=0; i<this.recipe.persons; ++i) {
 			this.persons.push(i);
+		}
+		let left = 9 - this.persons.length;
+		for (let k=0; k<left; ++k) {
+			this.peopleLeft.push(k);
 		}
 	}
 
