@@ -33,9 +33,17 @@ export class FavoritesPage {
   ngOnInit() {
     this.favoritesData.retrieveFavorites()
     .then((recipes) => {
-      this.items = recipes;
-      this.initialItems = recipes;
-      return;
+      let res = <any[]>recipes;
+      if (!res.length) {
+        this.message = 'Nessuna ricetta nei favoriti. Effettua una ricerca e salva le ricette';
+        this.items = [];
+        this.initialItems = [];
+      } else {
+        this.message = '';
+        this.items = recipes;
+        this.initialItems = recipes;
+        return;
+      }
     })
     .catch((err) => {
       return;
@@ -48,9 +56,17 @@ export class FavoritesPage {
   getFavorites() {
     this.favoritesData.retrieveFavorites()
     .then((recipes) => {
-      this.items = recipes;
-      this.initialItems = recipes;
-      return;
+      let res = <any[]>recipes;
+      if (!res.length) {
+        this.message = 'Nessuna ricetta nei favoriti. Effettua una ricerca e salva le ricette';
+        this.items = [];
+        this.initialItems = [];
+      } else {
+        this.message = '';
+        this.items = recipes;
+        this.initialItems = recipes;
+        return;
+      }
     })
     .catch((err) => {
       return;

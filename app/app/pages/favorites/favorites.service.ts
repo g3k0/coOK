@@ -82,6 +82,10 @@ export class FavoritesService {
         `,[])
         .then((data) => {
 
+          if (!data.rows.length) {
+            return resolve([]);
+          }
+
           let recipes = data.rows.length;
           let rv:Recipe[] = new Array(recipes);
           for (let i = 0; i < recipes; i++) {
