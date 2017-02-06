@@ -40,7 +40,44 @@ export class RecipePage {
 	/**
 	 * Modal partial view closing method
 	 */
-	dismiss () {
+	dismiss() {
 	    this.viewCtrl.dismiss();
+	}
+
+	/**
+	 * Remove people from people number and recalculate the ingredients
+	 * @param {number} the array index of persons array 
+	 */
+	removePeople(index:number) {
+		if (index) {
+			this.persons = [];
+			this.peopleLeft = [];
+			for (let i=0; i<index; ++i) {
+				this.persons.push(i);
+			}
+			let left = 9 - this.persons.length;
+			for (let k=0; k<left; ++k) {
+				this.peopleLeft.push(k);
+			}
+		}
+	}
+
+	/**
+	 * Add people to the people number of the recipe and recalculate the ingredients
+	 * @param {number} the array index of peopleLeft array
+	 */
+	addPeople(index:number) {
+		this.peopleLeft = [];
+		let remain = this.persons.length + index +1;
+		this.persons = [];
+		for (let i=0; i<remain; ++i) {
+			this.persons.push(i);
+		}
+		let left = 9 - this.persons.length;
+		for (let k=0; k<left; ++k) {
+			this.peopleLeft.push(k);
+		}
+
+
 	}
 }
