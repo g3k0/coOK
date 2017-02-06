@@ -1,10 +1,12 @@
 import {Component} from '@angular/core';
 import {ViewController,NavParams} from 'ionic-angular';
 import {Recipe} from '../../interfaces';
+import {RecipeService} from './recipe.service';
 
 @Component({
 	templateUrl: 'build/pages/recipe/recipe.html',
-	selector: 'recipe'
+	selector: 'recipe',
+  	providers: [RecipeService]
 })
 
 export class RecipePage { 
@@ -15,6 +17,7 @@ export class RecipePage {
 
 	constructor (
 		private viewCtrl: ViewController,
+		private recipeData: RecipeService,
 		private params: NavParams
 	) {
 		
@@ -47,8 +50,9 @@ export class RecipePage {
 	/**
 	 * Remove people from people number and recalculate the ingredients
 	 * @param {number} the array index of persons array 
+	 * @param {string} the recipe name to recalculate
 	 */
-	removePeople(index:number) {
+	removePeople(index:number, name:string) {
 		if (index) {
 			this.persons = [];
 			this.peopleLeft = [];
@@ -60,13 +64,23 @@ export class RecipePage {
 				this.peopleLeft.push(k);
 			}
 		}
+
+		this.recipeData.ingredientsCalculation(this.persons.length, name)
+		.then((calculatedIngredients):string[] => {
+			this.recipe.ingredients = <string[]>calculatedIngredients;
+			return;
+		})
+		.catch((err) => {
+			return;
+		});
 	}
 
 	/**
 	 * Add people to the people number of the recipe and recalculate the ingredients
 	 * @param {number} the array index of peopleLeft array
+	 * @param {string} the recipe name to recalculate
 	 */
-	addPeople(index:number) {
+	addPeople(index:number, name:string) {
 		this.peopleLeft = [];
 		let remain = this.persons.length + index +1;
 		this.persons = [];
@@ -78,6 +92,13 @@ export class RecipePage {
 			this.peopleLeft.push(k);
 		}
 
-
+		this.recipeData.ingredientsCalculation(this.persons.length, name)
+		.then((calculatedIngredients):string[] => {
+			this.recipe.ingredients = <string[]>calculatedIngredients;
+			return;
+		})
+		.catch((err) => {
+			return;
+		});
 	}
 }
