@@ -76,5 +76,31 @@
       "permission": "ALLOW"
     }
   ],
-  "methods": {}
+  "methods": {
+
+    "ingredients_calculation": {
+      "isStatic": true,
+      "accepts": [{
+        "arg": "servingSize",
+        "type": "object"
+      }],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "object",
+          "root": true,
+          "description": "Calculated serving size."
+        }
+      ],
+      "description": "Calculate the serving size of a recipe.",
+      "http": [
+        {
+          "path": "/ingredients-calculation",
+          "verb": "post"
+        }
+      ]
+    }
+
+
+  }
 }

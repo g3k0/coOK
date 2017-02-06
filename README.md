@@ -77,9 +77,10 @@ Web server API
     "results": String  
   }  
 
-* [POST] /api/appauth/login  
-accetta: \<data\> Object
-{uuid: String}  
+* [POST] /api/appauth/login/:appId  
+accetta: {
+  "uuid": String
+}  
 
 case 200: {  
   "results": String  
@@ -104,3 +105,26 @@ case 500: {
     "stack": String  
   }  
 }  
+
+* [POST] /api/recipes/ingredients-calculation?access_token=\<access-token\>
+accetta: {
+  "numberOfPersons": Number,
+  "recipeName": String
+}
+
+case 200: {
+  "persons": Number, 
+  "ingredients": [String]
+}
+
+case 400: {
+  "error": Object
+}
+
+case 404: {
+  "error": Object
+}
+
+case 500: {
+  "error": Object
+}
