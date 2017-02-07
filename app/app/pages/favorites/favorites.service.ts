@@ -10,53 +10,53 @@ export class FavoritesService {
 	}
 
 	/**
-     * Add a recipe retrieved from the search into the database
-     * @param {Recipe} a recipe object as declared in the interfaces file
-     */
-    addRecipeToFavorites(recipe:Recipe) {
-	    if (!recipe) return;
-	    return new Promise((resolve, reject) => {
-	      let db = new SQLite();
-	      db.openDatabase({
-	          name: 'data.db',
-	          location: 'default'
-	      }).then(() => {
-	        let name = recipe.name.replace(new RegExp("'", 'g'),"\"");
-	        let type = recipe.type.replace(new RegExp("'", 'g'),"\"");
-	        let mainIngredient = recipe.mainIngredient.replace(new RegExp("'", 'g'),"\"");
-	        let notes = recipe.notes.replace(new RegExp("'", 'g'),"\"");
-	        let preparation = recipe.preparation.replace(new RegExp("'", 'g'),"\"");
+   * Add a recipe retrieved from the search into the database
+   * @param {Recipe} a recipe object as declared in the interfaces file
+   */
+  addRecipeToFavorites(recipe:Recipe) {
+    if (!recipe) return;
+    return new Promise((resolve, reject) => {
+      let db = new SQLite();
+      db.openDatabase({
+          name: 'data.db',
+          location: 'default'
+      }).then(() => {
+        let name = recipe.name.replace(new RegExp("'", 'g'),"\"");
+        let type = recipe.type.replace(new RegExp("'", 'g'),"\"");
+        let mainIngredient = recipe.mainIngredient.replace(new RegExp("'", 'g'),"\"");
+        let notes = recipe.notes.replace(new RegExp("'", 'g'),"\"");
+        let preparation = recipe.preparation.replace(new RegExp("'", 'g'),"\"");
 
-	        let ingredients = [];
-	        for (let ingredient of recipe.ingredients) {
-	          let ing = ingredient.replace(new RegExp("'", 'g'),"\"")
-	          ingredients.push(ing);
-	        }
-	        db.executeSql(`
-	          INSERT INTO favorites
-	          (name, type, mainIngredient, persons, notes, ingredients, preparation)
-	          VALUES ('${name}',
-	                  '${type}',
-	                  '${mainIngredient}',
-	                  '${recipe.persons}',
-	                  '${notes || ''}',
-	                  '${ingredients}',
-	                  '${preparation}'
-	          )
-	        `,[])
-	        .then(()=>{
-	          db.close().then(() => {
-	            console.log(`[addRecipeToFavorites] recipe was inserted into the database`);
-	            return resolve();
-	          });
-	        });
-	      })
-	      .catch((error) => {
-	        console.error(`[addRecipeToFavorites] Error: ${JSON.stringify(error)}`);
-	        return reject(error);
-	      });
-	    });
-    }
+        let ingredients = [];
+        for (let ingredient of recipe.ingredients) {
+          let ing = ingredient.replace(new RegExp("'", 'g'),"\"")
+          ingredients.push(ing);
+        }
+        db.executeSql(`
+          INSERT INTO favorites
+          (name, type, mainIngredient, persons, notes, ingredients, preparation)
+          VALUES ('${name}',
+                  '${type}',
+                  '${mainIngredient}',
+                  '${recipe.persons}',
+                  '${notes || ''}',
+                  '${ingredients}',
+                  '${preparation}'
+          )
+        `,[])
+        .then(()=>{
+          db.close().then(() => {
+            console.log(`[addRecipeToFavorites] recipe was inserted into the database`);
+            return resolve();
+          });
+        });
+      })
+      .catch((error) => {
+        console.error(`[addRecipeToFavorites] Error: ${JSON.stringify(error)}`);
+        return reject(error);
+      });
+    });
+  }
 
   /*--------------------------------------------------------------------------------------------------------------*/  
   
@@ -143,4 +143,43 @@ export class FavoritesService {
       });
     });
   }
+
+  /**
+   * Update an existing recipe in the Favorites list
+   * @param {Recipe} the recipe to update
+   * @param {number} the new number of persons for the recalculated recipe
+   */
+  /*updateFavorite(recipe:Recipe, persons:number) {
+    return new Promise((resolve, reject) => {
+      let db = new SQLite();
+      db.openDatabase({
+          name: 'data.db',
+          location: 'default'
+      }).then(() => {
+
+        let newIngredients:string[];
+        for (let ingredient of recipe.ingredients) {
+          ingredient = ingredient.replace(new RegExp("'", 'g'),"\"");
+          newIngredients.push(ingredient);
+        }
+
+        db.executeSql(`
+          UPDATE favorites
+          SET ingredients = '${newIngredients}',
+              persons = '${persons}'
+          WHERE name = '${recipe.name.replace(new RegExp("'", 'g'),"\"")}'
+        `,[])
+        .then(() => {
+          db.close().then(() => {
+            console.log(`[updateFavorite] recipe was updated correctly`);
+            return resolve();
+          });
+        });
+      })
+      .catch((error) => {
+        console.error(`[updateFavorite] Error: ${JSON.stringify(error)}`);
+        return reject(error);
+      });
+    });
+  }*/
 }

@@ -2,11 +2,12 @@ import {Component} from '@angular/core';
 import {ViewController,NavParams} from 'ionic-angular';
 import {Recipe} from '../../interfaces';
 import {RecipeService} from './recipe.service';
+import {FavoritesService} from '../favorites/favorites.service';
 
 @Component({
 	templateUrl: 'build/pages/recipe/recipe.html',
 	selector: 'recipe',
-  	providers: [RecipeService]
+  	providers: [RecipeService,FavoritesService]
 })
 
 export class RecipePage { 
@@ -18,6 +19,7 @@ export class RecipePage {
 	constructor (
 		private viewCtrl: ViewController,
 		private recipeData: RecipeService,
+		private favoritesData: FavoritesService,
 		private params: NavParams
 	) {
 		
@@ -50,9 +52,9 @@ export class RecipePage {
 	/**
 	 * Remove people from people number and recalculate the ingredients
 	 * @param {number} the array index of persons array 
-	 * @param {string} the recipe name to recalculate
+	 * @param {Recipe} the recipe to recalculate
 	 */
-	removePeople(index:number, name:string) {
+	removePeople(index:number, recipe:Recipe) {
 		if (index) {
 			this.persons = [];
 			this.peopleLeft = [];
@@ -65,9 +67,13 @@ export class RecipePage {
 			}
 		}
 
-		this.recipeData.ingredientsCalculation(this.persons.length, name)
-		.then((calculatedIngredients):string[] => {
+		this.recipeData.ingredientsCalculation(this.persons.length, recipe.name)
+		.then((calculatedIngredients) => {
 			this.recipe.ingredients = <string[]>calculatedIngredients;
+			/*this.favoritesData.updateFavorite(recipe, this.persons.length)
+			.then(() => {
+				return;
+			});*/
 			return;
 		})
 		.catch((err) => {
@@ -78,9 +84,9 @@ export class RecipePage {
 	/**
 	 * Add people to the people number of the recipe and recalculate the ingredients
 	 * @param {number} the array index of peopleLeft array
-	 * @param {string} the recipe name to recalculate
+	 * @param {Recipe} the recipe to recalculate
 	 */
-	addPeople(index:number, name:string) {
+	addPeople(index:number, recipe:Recipe) {
 		this.peopleLeft = [];
 		let remain = this.persons.length + index +1;
 		this.persons = [];
@@ -92,9 +98,13 @@ export class RecipePage {
 			this.peopleLeft.push(k);
 		}
 
-		this.recipeData.ingredientsCalculation(this.persons.length, name)
-		.then((calculatedIngredients):string[] => {
+		this.recipeData.ingredientsCalculation(this.persons.length, recipe.name)
+		.then((calculatedIngredients) => {
 			this.recipe.ingredients = <string[]>calculatedIngredients;
+			/*this.favoritesData.updateFavorite(recipe, this.persons.length)
+			.then(() => {
+				return;
+			});*/
 			return;
 		})
 		.catch((err) => {

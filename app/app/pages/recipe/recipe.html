@@ -58,8 +58,8 @@
 		</ion-row>
 		<ion-row class="section content persons-content">
 	    	<ion-col width-90 *ngIf="recipe.type !== 'Bevande'">
-	    		<img class="recipe-persons" src="asset/google-material-icons/ic_person_white_24dp/android/drawable-mdpi/ic_person_white_24dp.png" *ngFor="let person of persons; let index = index " (click)="removePeople(index,recipe.name)"/>
-	    		<img class="recipe-persons" src="asset/google-material-icons/ic_person_outline_white_24dp/android/drawable-mdpi/ic_person_outline_white_24dp.png" *ngFor="let left of peopleLeft; let index = index " (click)="addPeople(index,recipe.name)" />
+	    		<img class="recipe-persons" src="asset/google-material-icons/ic_person_white_24dp/android/drawable-mdpi/ic_person_white_24dp.png" *ngFor="let person of persons; let index = index " (click)="removePeople(index,recipe)"/>
+	    		<img class="recipe-persons" src="asset/google-material-icons/ic_person_outline_white_24dp/android/drawable-mdpi/ic_person_outline_white_24dp.png" *ngFor="let left of peopleLeft; let index = index " (click)="addPeople(index,recipe)" />
 	    	</ion-col>
 	    	<ion-col width-90 *ngIf="recipe.type === 'Bevande'">
 	    		<img class="recipe-persons" src="asset/google-material-icons/ic_person_white_24dp/android/drawable-mdpi/ic_person_white_24dp.png" *ngFor="let person of persons;"/>
