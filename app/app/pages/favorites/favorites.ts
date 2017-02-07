@@ -1,5 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
-import {ModalController, AlertController, ToastController} from 'ionic-angular';
+import {ModalController, AlertController, ToastController, ActionSheetController} from 'ionic-angular';
+import {SocialSharing} from 'ionic-native';
 import {RecipePage} from '../recipe/recipe';
 import {FavoritesService} from './favorites.service';
 import {Recipe} from '../../interfaces';
@@ -22,7 +23,8 @@ export class FavoritesPage {
         private modalCtrl: ModalController,
         private favoritesData: FavoritesService,
         private alertCtrl: AlertController,
-        private toastCtrl: ToastController
+        private toastCtrl: ToastController,
+        private actionSheetCtrl: ActionSheetController
     ) {
 
     }
@@ -157,5 +159,101 @@ export class FavoritesPage {
       ]
     });
     confirm.present();
+  }
+
+  /**
+   * Social sharing methods
+   * @param {Recipe} the recipe to share
+   */
+  facebookShare(recipe:Recipe) {
+    let recipeText:string = `
+      NOME: ${recipe.name}\n
+      TIPO: ${recipe.type}\n
+      INGREDIENTE PRINCIPALE: ${recipe.mainIngredient}\n
+      PERSONE: ${recipe.persons}\n
+      INGREDIENTI: ${recipe.ingredients.toString()}\n
+      PREPARAZIONE: ${recipe.preparation}\n
+      NOTE: ${recipe.notes}
+    `;
+    SocialSharing.shareViaFacebook(recipeText, null /*Image*/, null)
+    .then(()=>{
+      return;
+    },
+    ()=>{
+      return;
+    });
+  }
+
+  whatsappShare(recipe:Recipe) {
+    let recipeText:string = `
+      \nNOME: ${recipe.name}\n
+      TIPO: ${recipe.type}\n
+      INGREDIENTE PRINCIPALE: ${recipe.mainIngredient}\n
+      PERSONE: ${recipe.persons}\n
+      INGREDIENTI: ${recipe.ingredients.toString()}\n
+      PREPARAZIONE: ${recipe.preparation}\n
+      NOTE: ${recipe.notes}
+    `;
+    SocialSharing.shareViaWhatsApp(recipeText, null /*Image*/,  null /* url */)
+      .then(()=>{
+        return
+      },
+      ()=>{
+        return;
+    });
+  }
+
+  otherShare(recipe:Recipe) {
+    let recipeText:string = `
+      \nNOME: ${recipe.name}\n
+      TIPO: ${recipe.type}\n
+      INGREDIENTE PRINCIPALE: ${recipe.mainIngredient}\n
+      PERSONE: ${recipe.persons}\n
+      INGREDIENTI: ${recipe.ingredients.toString()}\n
+      PREPARAZIONE: ${recipe.preparation}\n
+      NOTE: ${recipe.notes}
+    `;
+    SocialSharing.share(recipeText, recipe.name, null,  null)
+      .then(()=>{
+        return
+      },
+      ()=>{
+        return;
+    });
+  }
+
+  /**
+   * Open a modal with socials button to share recipe
+   * @param {Recipe} the rrecipe to share
+   */
+  share(recipe:Recipe) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Condividi',
+      buttons: [
+         {
+           text: 'Facebook',
+           role: 'destructive',
+           handler: () => {
+             console.log('Facebook clicked');
+             this.facebookShare(recipe);
+           }
+         },
+         {
+           text: 'WhatsApp',
+           handler: () => {
+             console.log('WhatsApp clicked');
+             this.whatsappShare(recipe);
+           }
+         },
+         {
+           text: 'Altro',
+           handler: () => {
+             console.log('WhatsApp clicked');
+             this.otherShare(recipe);
+           }
+         }
+      ]
+    });
+    return actionSheet.present();
   }
 }
