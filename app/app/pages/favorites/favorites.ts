@@ -23,8 +23,7 @@ export class FavoritesPage {
         private modalCtrl: ModalController,
         private favoritesData: FavoritesService,
         private alertCtrl: AlertController,
-        private toastCtrl: ToastController,
-        private actionSheetCtrl: ActionSheetController
+        private toastCtrl: ToastController
     ) {
 
     }
@@ -162,48 +161,10 @@ export class FavoritesPage {
   }
 
   /**
-   * Social sharing methods
-   * @param {Recipe} the recipe to share
+   * Social share a recipe method
+   * @param {Recipe} the rrecipe to share
    */
-  facebookShare(recipe:Recipe) {
-    let recipeText:string = `
-      NOME: ${recipe.name}\n
-      TIPO: ${recipe.type}\n
-      INGREDIENTE PRINCIPALE: ${recipe.mainIngredient}\n
-      PERSONE: ${recipe.persons}\n
-      INGREDIENTI: ${recipe.ingredients.toString()}\n
-      PREPARAZIONE: ${recipe.preparation}\n
-      NOTE: ${recipe.notes}
-    `;
-    SocialSharing.shareViaFacebook(recipeText, null /*Image*/, null)
-    .then(()=>{
-      return;
-    },
-    ()=>{
-      return;
-    });
-  }
-
-  whatsappShare(recipe:Recipe) {
-    let recipeText:string = `
-      \nNOME: ${recipe.name}\n
-      TIPO: ${recipe.type}\n
-      INGREDIENTE PRINCIPALE: ${recipe.mainIngredient}\n
-      PERSONE: ${recipe.persons}\n
-      INGREDIENTI: ${recipe.ingredients.toString()}\n
-      PREPARAZIONE: ${recipe.preparation}\n
-      NOTE: ${recipe.notes}
-    `;
-    SocialSharing.shareViaWhatsApp(recipeText, null /*Image*/,  null /* url */)
-      .then(()=>{
-        return
-      },
-      ()=>{
-        return;
-    });
-  }
-
-  otherShare(recipe:Recipe) {
+  share(recipe:Recipe) {
     let recipeText:string = `
       \nNOME: ${recipe.name}\n
       TIPO: ${recipe.type}\n
@@ -220,40 +181,5 @@ export class FavoritesPage {
       ()=>{
         return;
     });
-  }
-
-  /**
-   * Open a modal with socials button to share recipe
-   * @param {Recipe} the rrecipe to share
-   */
-  share(recipe:Recipe) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Condividi',
-      buttons: [
-         {
-           text: 'Facebook',
-           role: 'destructive',
-           handler: () => {
-             console.log('Facebook clicked');
-             this.facebookShare(recipe);
-           }
-         },
-         {
-           text: 'WhatsApp',
-           handler: () => {
-             console.log('WhatsApp clicked');
-             this.whatsappShare(recipe);
-           }
-         },
-         {
-           text: 'Altro',
-           handler: () => {
-             console.log('WhatsApp clicked');
-             this.otherShare(recipe);
-           }
-         }
-      ]
-    });
-    return actionSheet.present();
   }
 }
