@@ -162,18 +162,19 @@ export class FavoritesPage {
 
   /**
    * Social share a recipe method
-   * @param {Recipe} the rrecipe to share
+   * @param {Recipe} the recipe to share
    */
   share(recipe:Recipe) {
     let recipeText:string = `
-      \nNOME: ${recipe.name}\n
+      NOME: ${recipe.name}\n
       TIPO: ${recipe.type}\n
       INGREDIENTE PRINCIPALE: ${recipe.mainIngredient}\n
       PERSONE: ${recipe.persons}\n
       INGREDIENTI: ${recipe.ingredients.toString()}\n
       PREPARAZIONE: ${recipe.preparation}\n
-      NOTE: ${recipe.notes}
-    `;
+    `
+    if (recipe.notes) recipeText += `NOTE: ${recipe.notes}`;
+    
     SocialSharing.share(recipeText, recipe.name, null,  null)
       .then(()=>{
         return
