@@ -42,8 +42,9 @@ export class AddRecipePage {
 		this.title = this.params.get('title');
 		this.day = this.params.get('day') || '';
 		this.meal = this.params.get('meal') || '';
+		this.message = this.params.get('message') || '';
 
-		if (!this.items.length) {
+		if (!this.items.length && !this.message) {
 			this.message = 'Non ci sono ricette salvate. Effettua una ricerca e salva le ricette nei favoriti.'
 		}
 	}

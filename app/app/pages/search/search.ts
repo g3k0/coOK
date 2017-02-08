@@ -13,12 +13,12 @@ import {AddRecipePage} from '../add-recipe/add-recipe';
 export class SearchPage {
 
 	ingredients: any[];
-
 	filters: {
 		recipeName:string,
 		mainIngredient:string,
 		recipeType: any[]
 	}
+	message: any;
 
 	constructor(
 		private alertCtrl: AlertController,
@@ -256,8 +256,16 @@ export class SearchPage {
 
 	  	this.searchData.getRecipes(this.ingredients,this.filters)
 	  	.then((recipes) => {
-	  		let modal = this.modalCtrl.create(AddRecipePage, {recipes:recipes, title:'risultati ricerca'});
-    		return modal.present();
+	  		let res = <any[]>recipes;
+	  		if (!res.length) {
+	  			this.searchData.displaySentence((sentence) => {
+	  				let modal = this.modalCtrl.create(AddRecipePage, {recipes:recipes, title:'risultati ricerca', message:sentence});
+    				return modal.present();
+	  			});
+	  		} else {
+	  			let modal = this.modalCtrl.create(AddRecipePage, {recipes:recipes, title:'risultati ricerca'});
+    			return modal.present();
+	  		}
 	  	})
 	  	.catch((err) => {
 	  		console.error(`There was an error on getting the recipes: ${JSON.stringify(err)}`);

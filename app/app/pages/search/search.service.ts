@@ -111,4 +111,15 @@ export class SearchService {
 	      });
 	    });
 	}
+
+	/*
+	 * Return a string to display if the recipe search has no results
+	 * {Function} a callback function
+	 */
+	displaySentence(cb) {
+		this.retrieveConfig((config) => {
+			let sentences:string[] = config.noRecipesFoundSentences; 
+			return cb(sentences[Math.floor(Math.random()*sentences.length)]);
+		});
+	}
 }
