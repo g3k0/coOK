@@ -127,60 +127,15 @@ export class SearchPage {
 	recipeType() {
 	    let alert = this.alertCtrl.create();
 	    alert.setTitle('Tipo di piatto');
+	    let dishes:string[] = ['Bevande','Antipasto','Primo','Carne','Pollame','Pesce','Contorno','Salsa','Dessert'];
 
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Bevande',
-	    	value: 'Bevande'
-	    });
-
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Antipasti',
-	     	value: 'Antipasto'
-	    });
-
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Primi',
-	     	value: 'Primo'
-	    });
-
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Carni',
-	     	value: 'Carne'
-	    });
-
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Pollame',
-	     	value: 'Pollame'
-	    });
-
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Pesce',
-	     	value: 'Pesce'
-	    });
-
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Contorni',
-	     	value: 'Contorno'
-	    });
-
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Salse',
-	     	value: 'Salsa'
-	    });
-
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Dolci',
-	     	value: 'Dessert'
-	    });
+	    for (let dish of dishes) {
+		    alert.addInput({
+		    	type: 'checkbox',
+		    	label: dish,
+		    	value: dish
+		    });
+		}
 
 	    alert.addButton('Cancella');
 
