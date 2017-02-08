@@ -69,7 +69,8 @@ export class RecipePage {
 
 		this.recipeData.ingredientsCalculation(this.persons.length, recipe.name)
 		.then((calculatedIngredients) => {
-			this.recipe.ingredients = <string[]>calculatedIngredients;
+			this.recipe.ingredients = <string[]>calculatedIngredients;  
+			this.recipe.persons = this.persons.length;
 			/*this.favoritesData.updateFavorite(recipe, this.persons.length)
 			.then(() => {
 				return;
@@ -101,6 +102,7 @@ export class RecipePage {
 		this.recipeData.ingredientsCalculation(this.persons.length, recipe.name)
 		.then((calculatedIngredients) => {
 			this.recipe.ingredients = <string[]>calculatedIngredients;
+			this.recipe.persons = this.persons.length;
 			/*this.favoritesData.updateFavorite(recipe, this.persons.length)
 			.then(() => {
 				return;
