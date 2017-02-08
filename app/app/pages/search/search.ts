@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AlertController, ToastController, ModalController} from 'ionic-angular';
+import {AlertController, ToastController, ModalController, LoadingController} from 'ionic-angular';
 import {SearchService} from './search.service';
 import {AddRecipePage} from '../add-recipe/add-recipe';
 
@@ -13,17 +13,19 @@ import {AddRecipePage} from '../add-recipe/add-recipe';
 export class SearchPage {
 
 	ingredients: any[];
-
 	filters: {
 		recipeName:string,
 		mainIngredient:string,
 		recipeType: any[]
 	}
+	message: any;
+	loader: any;
 
 	constructor(
 		private alertCtrl: AlertController,
 		private toastCtrl: ToastController,
 		private modalCtrl: ModalController,
+		private loadingCtrl: LoadingController,
 		private searchData: SearchService
 	) {
 		
@@ -127,60 +129,15 @@ export class SearchPage {
 	recipeType() {
 	    let alert = this.alertCtrl.create();
 	    alert.setTitle('Tipo di piatto');
+	    let dishes:string[] = ['Bevande','Antipasto','Primo','Carne','Pollame','Pesce','Contorno','Salsa','Dessert'];
 
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Bevande',
-	    	value: 'Bevande'
-	    });
-
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Antipasti',
-	     	value: 'Antipasto'
-	    });
-
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Primi',
-	     	value: 'Primo'
-	    });
-
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Carni',
-	     	value: 'Carne'
-	    });
-
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Pollame',
-	     	value: 'Pollame'
-	    });
-
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Pesce',
-	     	value: 'Pesce'
-	    });
-
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Contorni',
-	     	value: 'Contorno'
-	    });
-
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Salse',
-	     	value: 'Salsa'
-	    });
-
-	    alert.addInput({
-	    	type: 'checkbox',
-	    	label: 'Dolci',
-	     	value: 'Dessert'
-	    });
+	    for (let dish of dishes) {
+		    alert.addInput({
+		    	type: 'checkbox',
+		    	label: dish,
+		    	value: dish
+		    });
+		}
 
 	    alert.addButton('Cancella');
 
@@ -192,29 +149,6 @@ export class SearchPage {
 	    });
 	    alert.present();
   	}
-  	/*
-  	persons() {
-	    let alert = this.alertCtrl.create();
-    	alert.setTitle('Numero di persone');
-
-    	let numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
-    	for (let num of numbers) {
-    		alert.addInput({
-	      		type: 'radio',
-	      		label: num,
-	      		value: num
-	    	});
-    	}
-
-    	alert.addButton('Cancella');
-    	alert.addButton({
-      		text: 'Salva',
-      		handler: data => {
-      		}
-    	});
-    	alert.present();
-  	}
-  	*/
 
   	/**
   	 * Init filters method in clear filter html button
@@ -254,10 +188,26 @@ export class SearchPage {
 	  		return;
 	  	}
 
+	  	this.loader = this.loadingCtrl.create({
+	      content: "Attendere...",
+	      duration: 10000
+	    });
+	    this.loader.present();
+
+	    let self=this;
 	  	this.searchData.getRecipes(this.ingredients,this.filters)
 	  	.then((recipes) => {
-	  		let modal = this.modalCtrl.create(AddRecipePage, {recipes:recipes, title:'risultati ricerca'});
-    		return modal.present();
+	  		self.loader.dismiss();
+	  		let res = <any[]>recipes;
+	  		if (!res.length) {
+	  			this.searchData.displaySentence((sentence) => {
+	  				let modal = this.modalCtrl.create(AddRecipePage, {recipes:recipes, title:'risultati ricerca', message:sentence});
+    				return modal.present();
+	  			});
+	  		} else {
+	  			let modal = this.modalCtrl.create(AddRecipePage, {recipes:recipes, title:'risultati ricerca'});
+    			return modal.present();
+	  		}
 	  	})
 	  	.catch((err) => {
 	  		console.error(`There was an error on getting the recipes: ${JSON.stringify(err)}`);

@@ -1,0 +1,19 @@
+{
+	"token": "gfkoSif40dM3dLlm2",
+	"authAPI": {
+		"register": "http://localhost:3000/register",
+		"login": "http://localhost:3000/login",
+		"recipes": "http://localhost:3000/api/recipes",
+		"ingredientsCalculation": "http://localhost:3000/api/recipes/ingredients-calculation"
+	},
+	"noRecipesFoundSentences": [
+		"Nessuna ricetta trovata. Fai un giro da Mac Donald",
+		"Nessuna ricetta trovata. Nel tuo frigorifero si sente l'eco",
+		"Nessuna ricetta trovata. Forse è il caso di iniziare una dieta",
+		"Nessuna ricetta trovata. Fatti invitare a cena dal vicino",
+		"Nessuna ricetta trovata. Spero tu non abbia ospiti",
+		"Nessuna ricetta trovata. Inserisci ingredienti intelligibili",
+		"Nessuna ricetta trovata. Mi chiedi troppo",
+		"Nessuna ricetta trovata. Tanto non hai fame, giusto?"
+	]
+}

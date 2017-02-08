@@ -55,7 +55,7 @@ export class CalendarService {
         		});
         	})
         	.catch((error) => {
-        		console.log(`[retrieveCalendar] Error: ${JSON.stringify(error)}`);
+        		console.error(`[retrieveCalendar] Error: ${JSON.stringify(error)}`);
         		return reject(error);
         	});
     	});
@@ -117,7 +117,7 @@ export class CalendarService {
         	});
         })
         .catch((error) => {
-        	console.log(`[addRecipeToCalendar] Error: ${JSON.stringify(error)}`);
+        	console.error(`[addRecipeToCalendar] Error: ${JSON.stringify(error)}`);
         	return reject(error);
       });
     });
@@ -179,7 +179,7 @@ export class CalendarService {
         		});
       		})
       		.catch((error) => {
-        		console.log(`[deleteCalendarRecipe] Error: ${JSON.stringify(error)}`);
+        		console.error(`[deleteCalendarRecipe] Error: ${JSON.stringify(error)}`);
         		return reject(error);
       		});
     	});

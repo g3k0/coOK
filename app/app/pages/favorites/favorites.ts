@@ -1,5 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
-import {ModalController, AlertController, ToastController} from 'ionic-angular';
+import {ModalController, AlertController, ToastController, ActionSheetController} from 'ionic-angular';
+import {SocialSharing} from 'ionic-native';
 import {RecipePage} from '../recipe/recipe';
 import {FavoritesService} from './favorites.service';
 import {Recipe} from '../../interfaces';
@@ -33,9 +34,17 @@ export class FavoritesPage {
   ngOnInit() {
     this.favoritesData.retrieveFavorites()
     .then((recipes) => {
-      this.items = recipes;
-      this.initialItems = recipes;
-      return;
+      let res = <any[]>recipes;
+      if (!res.length) {
+        this.message = 'Nessuna ricetta nei favoriti. Effettua una ricerca e salva le ricette';
+        this.items = [];
+        this.initialItems = [];
+      } else {
+        this.message = '';
+        this.items = recipes;
+        this.initialItems = recipes;
+        return;
+      }
     })
     .catch((err) => {
       return;
@@ -48,9 +57,17 @@ export class FavoritesPage {
   getFavorites() {
     this.favoritesData.retrieveFavorites()
     .then((recipes) => {
-      this.items = recipes;
-      this.initialItems = recipes;
-      return;
+      let res = <any[]>recipes;
+      if (!res.length) {
+        this.message = 'Nessuna ricetta nei favoriti. Effettua una ricerca e salva le ricette';
+        this.items = [];
+        this.initialItems = [];
+      } else {
+        this.message = '';
+        this.items = recipes;
+        this.initialItems = recipes;
+        return;
+      }
     })
     .catch((err) => {
       return;
@@ -141,5 +158,29 @@ export class FavoritesPage {
       ]
     });
     confirm.present();
+  }
+
+  /**
+   * Social share a recipe method
+   * @param {Recipe} the recipe to share
+   */
+  share(recipe:Recipe) {
+    let recipeText:string = `
+      NOME: ${recipe.name}\n
+      TIPO: ${recipe.type}\n
+      INGREDIENTE PRINCIPALE: ${recipe.mainIngredient}\n
+      PERSONE: ${recipe.persons}\n
+      INGREDIENTI: ${recipe.ingredients.toString()}\n
+      PREPARAZIONE: ${recipe.preparation}\n
+    `
+    if (recipe.notes) recipeText += `NOTE: ${recipe.notes}`;
+    
+    SocialSharing.share(recipeText, recipe.name, null,  null)
+      .then(()=>{
+        return
+      },
+      ()=>{
+        return;
+    });
   }
 }

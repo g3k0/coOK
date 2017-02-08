@@ -18,7 +18,7 @@ export class SearchService {
 	 * @param {Function} cb configuration callback function
 	 */
 	retrieveConfig(cb) {
-	    this.http.get('./config.development.json')
+	    this.http.get('./config.json')
 	    .subscribe(data => {
 	      return cb(data.json());
 	    });
@@ -110,5 +110,16 @@ export class SearchService {
 	        });
 	      });
 	    });
+	}
+
+	/*
+	 * Return a string to display if the recipe search has no results
+	 * {Function} a callback function
+	 */
+	displaySentence(cb) {
+		this.retrieveConfig((config) => {
+			let sentences:string[] = config.noRecipesFoundSentences; 
+			return cb(sentences[Math.floor(Math.random()*sentences.length)]);
+		});
 	}
 }
