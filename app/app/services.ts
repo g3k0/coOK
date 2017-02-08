@@ -35,7 +35,7 @@ export class DataService {
    * @param {Function} cb configuration callback function
    */
   retrieveConfig(cb) {
-    this.http.get('./config.development.json')
+    this.http.get('./config.json')
     .subscribe(data => {
       return cb(data.json());
     });
