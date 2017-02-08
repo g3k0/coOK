@@ -192,29 +192,6 @@ export class SearchPage {
 	    });
 	    alert.present();
   	}
-  	/*
-  	persons() {
-	    let alert = this.alertCtrl.create();
-    	alert.setTitle('Numero di persone');
-
-    	let numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
-    	for (let num of numbers) {
-    		alert.addInput({
-	      		type: 'radio',
-	      		label: num,
-	      		value: num
-	    	});
-    	}
-
-    	alert.addButton('Cancella');
-    	alert.addButton({
-      		text: 'Salva',
-      		handler: data => {
-      		}
-    	});
-    	alert.present();
-  	}
-  	*/
 
   	/**
   	 * Init filters method in clear filter html button
