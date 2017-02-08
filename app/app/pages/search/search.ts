@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AlertController, ToastController, ModalController} from 'ionic-angular';
+import {AlertController, ToastController, ModalController, LoadingController} from 'ionic-angular';
 import {SearchService} from './search.service';
 import {AddRecipePage} from '../add-recipe/add-recipe';
 
@@ -19,11 +19,13 @@ export class SearchPage {
 		recipeType: any[]
 	}
 	message: any;
+	loader: any;
 
 	constructor(
 		private alertCtrl: AlertController,
 		private toastCtrl: ToastController,
 		private modalCtrl: ModalController,
+		private loadingCtrl: LoadingController,
 		private searchData: SearchService
 	) {
 		
@@ -186,8 +188,16 @@ export class SearchPage {
 	  		return;
 	  	}
 
+	  	this.loader = this.loadingCtrl.create({
+	      content: "Attendere...",
+	      duration: 10000
+	    });
+	    this.loader.present();
+
+	    let self=this;
 	  	this.searchData.getRecipes(this.ingredients,this.filters)
 	  	.then((recipes) => {
+	  		self.loader.dismiss();
 	  		let res = <any[]>recipes;
 	  		if (!res.length) {
 	  			this.searchData.displaySentence((sentence) => {
