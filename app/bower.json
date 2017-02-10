@@ -16,5 +16,8 @@
     "test",
     "tests"
   ],
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "platform.js": "platform#^1.3.3"
+  }
 }
