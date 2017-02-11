@@ -18,6 +18,9 @@
 	let _ = require('underscore');
 
 	module.exports = (GeneralServices) => {
+		/*Remote methods disabling*/
+		GeneralServices.disableRemoteMethod("importRecipes", true);
+		GeneralServices.disableRemoteMethod("modifyDbData", true);
 
 		/**
 		 * The service take recipes from a txt file, validate the data and import them into the db
