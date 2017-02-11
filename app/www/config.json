@@ -1,10 +1,10 @@
 {
 	"token": "gfkoSif40dM3dLlm2",
 	"authAPI": {
-		"register": "http://localhost:3000/register",
-		"login": "http://localhost:3000/login",
-		"recipes": "http://localhost:3000/api/recipes",
-		"ingredientsCalculation": "http://localhost:3000/api/recipes/ingredients-calculation"
+		"register": "https://database-ricette.herokuapp.com/register",
+		"login": "https://database-ricette.herokuapp.com/login",
+		"recipes": "https://database-ricette.herokuapp.com/api/recipes",
+		"ingredientsCalculation": "https://database-ricette.herokuapp.com/api/recipes/ingredients-calculation"
 	},
 	"noRecipesFoundSentences": [
 		"Nessuna ricetta trovata. Fai un giro da Mac Donald",
