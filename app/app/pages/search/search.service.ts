@@ -102,8 +102,7 @@ export class SearchService {
 	            }
 	          }
 	          
-	          //this.http.get(uri)
-	          self.http.get('./mock.json')
+	          this.http.get(url)
 	          .subscribe(data => {
 	            return resolve(data.json());
 	          });
