@@ -82,7 +82,10 @@
       "isStatic": true,
       "accepts": [{
         "arg": "servingSize",
-        "type": "object"
+        "type": "object",
+        "http": { 
+          "source": "body" 
+        }
       }],
       "returns": [
         {

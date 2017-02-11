@@ -48,49 +48,47 @@
 			if(!servingSize) {
 				log.error('[Recipes][ingredients_calculation] New ingredient calculation requested without servingSize parameter...');
 				err.status = 400;
-				err.message = "Parameter servingSize not set.";
+				err.message = 'Parameter servingSize not set.';
 				return cb(err); 
 			}
 
 			if( !servingSize.numberOfPerson || !servingSize.recipeName ) {
 				log.error('[Recipes][ingredients_calculation] New ingredient calculation requested, missing properties of servingSize parameter ...');
 				err.status = 400;
-				err.message = "Properties numberOfPerson or recipeName not set.";
+				err.message = 'Properties numberOfPerson or recipeName not set.';
 				return cb(err); 
 			}
 
-			if( (isNaN(servingSize.numberOfPerson)  || !(Number.isInteger(servingSize.numberOfPerson)) ) && 
-				(isNaN(servingSize.recipeName)  || !(Number.isInteger(servingSize.recipeName)))) {
+			if( (isNaN(servingSize.numberOfPerson)  || !(Number.isInteger(servingSize.numberOfPerson)) ) || typeof servingSize.recipeName !== 'string') {
 				log.error('[Recipes][ingredients_calculation] New ingredient calculation requested with incorrect properties of servingSize parameter...');
 				err.status = 400;
-				err.message = "Incorrect type of properties.";
+				err.message = 'Incorrect type of properties.';
 				return cb(err); 
 			}
 
-			let numberOfPerson = servingSize.numberOfPerson;
 			let finalIngredients = [];
 
-			app.models.recipes.findOne({where:{name:servingSize.recipeName}}, (er, recipe) => {
-			 	if(er) {
-					log.error(`[Recipes][ingredients_calculation][findOne] error: ${er}`);
-					return cb(er);
+			app.models.recipes.findOne({where:{name:servingSize.recipeName}}, (err, recipe) => {
+			 	if(err) {
+					log.error(`[Recipes][ingredients_calculation][findOne] error: ${JSON.stringify(err)}`);
+					return cb(err);
 			 	}
 
 			 	if(!recipe) {
 			 	log.error('[Recipes][ingredients_calculation][findOne] No recipe found...');
 				err.status = 404;
-				err.message = "Recipe not found.";
+				err.message = 'Recipe not found.';
 				return cb(err); 
 			 	}
 
 			 	// No calculation for bevande.
-			 	if(recipe.type === "Bevande") {
-			 		return cb(null, {persons: numberOfPerson, ingredients: recipe.ingredients});
+			 	if(recipe.type === 'Bevande') {
+			 		return cb(null, {persons: servingSize.numberOfPerson, ingredients: recipe.ingredients});
 			 	}
 
 			 	// If numberOfPerson = recipe.persons, then no calculation needed.
-			 	if(recipe.persons === numberOfPerson) {
-			 		return cb(null, {persons: numberOfPerson, ingredients: recipe.ingredients});
+			 	if(recipe.persons === servingSize.numberOfPerson) {
+			 		return cb(null, {persons: servingSize.numberOfPerson, ingredients: recipe.ingredients});
 			 	}
 
 			 	for(let initialIngredient of recipe.ingredients) {
@@ -102,7 +100,7 @@
 			 		if(!isNaN(initialAmount) && isFinite(firstWord)) {
 
 			 			let restOfIngredient = initialIngredient.substring(initialIngredient.indexOf(" "));
-			 			let finalAmount = (initialAmount * (parseInt(numberOfPerson)/parseInt(recipe.persons))).toFixed(2);
+			 			let finalAmount = (initialAmount * (parseInt(servingSize.numberOfPerson)/parseInt(recipe.persons))).toFixed(2);
 			 			let finalIngredient = "";
 
 						if(finalAmount.match("[0-9](.00)")) {
@@ -112,9 +110,12 @@
 							finalIngredient = finalAmount + restOfIngredient;
 						}
 						finalIngredients.push(finalIngredient);
+
+			 		} else if (isNaN(initialAmount)) {
+			 			finalIngredients.push(initialIngredient);
 			 		}
 			 	}
-				return cb(null, {persons: numberOfPerson, ingredients: finalIngredients});
+				return cb(null, {persons: servingSize.numberOfPerson, ingredients: finalIngredients});
 		  });
 		};
 	};
