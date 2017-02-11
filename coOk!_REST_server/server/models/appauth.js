@@ -68,14 +68,14 @@
 			app.models.users.create(user, (err, userInstance) => {
 			    if (err) {
 
+			    	if (err.statusCode = 422) {
+			    		log.info(`[Appauth][register] App already registered, registration skypped`);
+			    		return cb(null, {results: 'ok'});
+			    	}
+
 			    	err.statusCode = 500;
 			    	err.message = 'Internal server error during app registration';
 			    	log.error(`[Appauth][register] Internal server error during app registration: ${err}`);
-
-			    	if (err === 'ValidationError: Internal server error during app registration') {
-			    		log.info(`[Appauth][register] App already registered, skipping...`);
-			    		return cb(null, {results: 'ok'});
-			    	}
 			    	return cb(err); 
 			    }
 			    log.info(`[Appauth][register] Mobile app registered with success`);
