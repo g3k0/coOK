@@ -53,8 +53,9 @@ export class DataService {
         self.deviceData = Device.device;
         self.deviceData.token = config.token;
         self.http.post(config.authAPI.register, self.deviceData)
-        .subscribe((res) => {
-          if (res.result === 'ok') {
+        .subscribe((data) => {
+          let res = data.json();
+          if (res.results === 'ok') {
             return resolve();
           }
           let err = new Error();
@@ -74,7 +75,8 @@ export class DataService {
       let self = this;
       this.retrieveConfig((config) => {
         self.http.post(config.authAPI.login, {uuid: Device.device.uuid})
-        .subscribe((res) => {
+        .subscribe((data) => {
+          let res = data.json();
           if (res.access_token) {
             return resolve(res.access_token);
           }
