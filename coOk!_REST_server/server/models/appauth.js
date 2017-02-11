@@ -63,16 +63,22 @@
 			user.group = app.get('mobileApp').group;
 			user.realm = app.get('mobileApp').realm;
 
-			log.info(`[Appauth][register] App id for the mobile app generated. Registering the app...`);
+			log.info(`[Appauth][register] User object created. Registering the app...`);
 
 			app.models.users.create(user, (err, userInstance) => {
 			    if (err) {
+
+			    	if (err.statusCode = 422) {
+			    		log.info(`[Appauth][register] App already registered, registration skypped`);
+			    		return cb(null, {results: 'ok'});
+			    	}
+
 			    	err.statusCode = 500;
 			    	err.message = 'Internal server error during app registration';
 			    	log.error(`[Appauth][register] Internal server error during app registration: ${err}`);
 			    	return cb(err); 
 			    }
-			    log.info(`[Appauth][register] Mobile app registered with success. App id is ${userInstance.appId}`);
+			    log.info(`[Appauth][register] Mobile app registered with success`);
 			    return cb(null, {results: 'ok'});
 			});
 		};
@@ -145,6 +151,7 @@
 						log.info(`[Appauth][login] ${err}. Stopping the login process...`);
 						return cb(err);
 					}
+					log.info(`[Appauth][login] Login successful`);
 					return cb(null, {
 						access_token: token
 					});

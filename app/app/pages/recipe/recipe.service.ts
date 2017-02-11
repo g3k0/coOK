@@ -66,19 +66,20 @@ export class RecipeService {
 	 */
 	ingredientsCalculation(persons:number, recipeName:string) {
 		return new Promise((resolve, reject) => {
-			/*this.retrieveConfig((config) => {
+			let self=this;
+			this.retrieveConfig((config) => {
 				let url = config.authAPI.ingredientsCalculation;
 				self.retrieveAccessToken()
 				.then((access_token) => {
 					url += `?access_token=${access_token}`
-					this.http.post(config.authAPI.register, {
-						numberOfPerson:persons
+					self.http.post(url, {
+						numberOfPerson:persons,
 						recipeName: recipeName
 					})
-					.map((res) => {
+					.subscribe((data) => {
+					  let res = data.json();
 			          if (!res.ingredients) {
 			          	let err = new Error();
-			          	err.statusCode = 500;
 			          	err.message = 'There was an error on recalculating the ingredients';
 			          	return reject(err);
 			          }
@@ -86,14 +87,11 @@ export class RecipeService {
 			          return resolve(response);
 			        })
 
-				})
-				.catch((err) => {
-					return reject(err);
-				})
-			});*/
+				});
+			});
 			/*mock*/
-			let res:string[] = ['mock 1', 'mock 2', 'mock 3'];
-			return resolve(res);
+			//let res:string[] = ['mock 1', 'mock 2', 'mock 3'];
+			//return resolve(res);
 		});
 	}
 }

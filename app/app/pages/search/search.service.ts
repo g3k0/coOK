@@ -84,6 +84,10 @@ export class SearchService {
 	            url += `/i`;
 	          }
 
+	          if(!filters.recipeName && !filters.mainIngredient && !filters.recipeType) {
+	          	url += `&filter[limit]=20`;
+	          } 
+
 	          if (filters && filters.recipeName) {
 	            url += `&filter[where][name]=${filters.recipeName}`;
 	          }
@@ -98,8 +102,7 @@ export class SearchService {
 	            }
 	          }
 	          
-	          //this.http.get(uri)
-	          self.http.get('./mock.json')
+	          this.http.get(url)
 	          .subscribe(data => {
 	            return resolve(data.json());
 	          });

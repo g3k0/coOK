@@ -48,26 +48,22 @@ export class DataService {
    */
   register() {
     return new Promise((resolve, reject) =>{
-      /*this.retrieveConfig((config) => {
-        this.deviceData = Device.device;
-        this.deviceData.token = config.token;
-        this.http.post(config.authAPI.register, this.deviceData)
-        .map((res) => {
-          if (res.result === 'ok') {
+      let self = this;
+      this.retrieveConfig((config) => {
+        self.deviceData = Device.device;
+        self.deviceData.token = config.token;
+        self.http.post(config.authAPI.register, self.deviceData)
+        .subscribe((data) => {
+          let res = data.json();
+          if (res.results === 'ok') {
             return resolve();
           }
           let err = new Error();
-          err.statusCode = 500;
           err.message = 'There was an error on registering the app';
           console.error(`[register] Unable to register the application: ${JSON.stringify(err)}`);
           return reject(err);
-        })
-        .catch((err) => {
-          console.error(`[register] Unable to register the application: ${JSON.stringify(err)}`);
-          return reject(err);
         });
-      });*/
-      return resolve();
+      });
     });
   }
 
@@ -76,24 +72,20 @@ export class DataService {
    */
   login() {
     return new Promise((resolve, reject) => {
-      /*this.retrieveConfig((config) => {
-        this.http.post(config.authAPI.register, {uuid: Device.device.uuid})
-        .map((res) => {
+      let self = this;
+      this.retrieveConfig((config) => {
+        self.http.post(config.authAPI.login, {uuid: Device.device.uuid})
+        .subscribe((data) => {
+          let res = data.json();
           if (res.access_token) {
             return resolve(res.access_token);
           }
           let err = new Error();
-          err.statusCode = 500;
           err.message = 'There was an error on logging the app';
           console.error(`[login] Unable to log in the application: ${JSON.stringify(err)}`);
           return reject(err);
-        })
-        .catch((err) => {
-          console.error(`[login] Unable to log in the application: ${JSON.stringify(err)}`);
-          return reject(err);
         });
-      });*/
-      return resolve('mocktoken')
+      });
     });
   }
 

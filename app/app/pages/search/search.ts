@@ -190,7 +190,7 @@ export class SearchPage {
 
 	  	this.loader = this.loadingCtrl.create({
 	      content: "Attendere...",
-	      duration: 10000
+	      duration: 5000
 	    });
 	    this.loader.present();
 
