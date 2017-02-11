@@ -63,7 +63,7 @@
 			user.group = app.get('mobileApp').group;
 			user.realm = app.get('mobileApp').realm;
 
-			log.info(`[Appauth][register] App id for the mobile app generated. Registering the app...`);
+			log.info(`[Appauth][register] User object created. Registering the app...`);
 
 			app.models.users.create(user, (err, userInstance) => {
 			    if (err) {
@@ -72,7 +72,7 @@
 			    	log.error(`[Appauth][register] Internal server error during app registration: ${err}`);
 			    	return cb(err); 
 			    }
-			    log.info(`[Appauth][register] Mobile app registered with success. App id is ${userInstance.appId}`);
+			    log.info(`[Appauth][register] Mobile app registered with success`);
 			    return cb(null, {results: 'ok'});
 			});
 		};
