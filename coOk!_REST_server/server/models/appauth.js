@@ -145,6 +145,7 @@
 						log.info(`[Appauth][login] ${err}. Stopping the login process...`);
 						return cb(err);
 					}
+					log.info(`[Appauth][login] Login successful`);
 					return cb(null, {
 						access_token: token
 					});
