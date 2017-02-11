@@ -1,8 +1,8 @@
 {
 	"token": "gfkoSif40dM3dLlm2",
 	"authAPI": {
-		"register": "https://database-ricette.herokuapp.com/register",
-		"login": "https://database-ricette.herokuapp.com/login",
+		"register": "https://database-ricette.herokuapp.com/api/appauth/register",
+		"login": "https://database-ricette.herokuapp.com/api/appauth/login",
 		"recipes": "https://database-ricette.herokuapp.com/api/recipes",
 		"ingredientsCalculation": "https://database-ricette.herokuapp.com/api/recipes/ingredients-calculation"
 	},
