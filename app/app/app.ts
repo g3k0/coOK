@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Platform, ionicBootstrap, MenuController, NavController} from 'ionic-angular';
+import {Platform, ionicBootstrap, NavController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
 import {InfoPage} from './pages/info/info';
@@ -21,10 +21,8 @@ export class MyApp {
 
     constructor (
         private platform: Platform, 
-        private menu: MenuController,
         private data: DataService
     ) {
-        this.menu = menu;
         this.pages = [
             { title: 'Guida', component: GuidePage, icon: 'help' },
             { title: 'Info', component: InfoPage, icon: 'information-circle' },
@@ -53,7 +51,6 @@ export class MyApp {
     }
 
     openPage(page) {
-        this.menu.close()
         // Using this.nav.setRoot() causes
         // Tabs to not show!
         this.nav.push(page.component);

@@ -47,6 +47,20 @@
     transform: rotateY(180deg); 
 }
 
+.calendar-header {
+	.image {
+		float:left;
+		.header-logo {
+			width: 50px;
+			height: 50px;
+		}
+	}
+	.title {
+		float:left;
+		margin-top: 1em;
+	}
+}
+
 .calendar {
 
 	background : color($colors, primary, base);

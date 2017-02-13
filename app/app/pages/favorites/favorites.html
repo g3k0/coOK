@@ -1,12 +1,19 @@
-<ion-header>
+<ion-header class="favorites-header">
     <ion-navbar secondary>
-        <button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-title>Lista Ricette Salvate</ion-title>
+        <div class="image">
+            <img class="header-logo" src="asset/teaser.png" /> 
+        </div>
+        <div class="title">
+            <ion-title>Ricette Salvate</ion-title>
+        </div>
     </ion-navbar>
 </ion-header>
-
+<div class="image">
+            <img class="header-logo" src="asset/teaser.png" /> 
+        </div>
+        <div class="title">
+            <ion-title>Cerca Ricette</ion-title>
+        </div>
 <ion-content padding class="favorites">
 
 	<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
