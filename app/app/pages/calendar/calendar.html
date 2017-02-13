@@ -15,6 +15,9 @@
 	    		<div class="update-calendar">
 	    			<button ion-button color="success" (click)="updateCalendar()">Aggiorna il calendario</button>
 	    		</div>
+	    		<div class="reset-calendar">
+	    			<button ion-button color="secondary" (click)="resetCalendar()">Resetta il calendario</button>
+	    		</div>
 				<div class="day" *ngFor="let day of calendar" (click)="flip(day)">
 					<div class="title">
 							{{day.day}}

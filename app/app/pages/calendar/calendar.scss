@@ -61,7 +61,15 @@
 		margin: 0 .4em;
 		.update-calendar {
 			float:left;
-			width: 100%;
+			width: 50%;
+			button {
+				zoom: .7;
+			}
+		}
+		.reset-calendar {
+			float:left;
+			width: 50%;
+			text-align: right;
 			button {
 				zoom: .7;
 			}

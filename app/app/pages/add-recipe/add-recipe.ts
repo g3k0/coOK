@@ -22,6 +22,7 @@ export class AddRecipePage {
 	message: string;
 	day: string;
 	meal: string;
+	results:string;
 
 	constructor (
 		private viewCtrl: ViewController,
@@ -43,6 +44,10 @@ export class AddRecipePage {
 		this.day = this.params.get('day') || '';
 		this.meal = this.params.get('meal') || '';
 		this.message = this.params.get('message') || '';
+
+		if(!this.day) {
+			this.results = ` - ${this.items.length} risultati`;
+		}
 
 		if (!this.items.length && !this.message) {
 			this.message = 'Non ci sono ricette salvate. Effettua una ricerca e salva le ricette nei favoriti.'

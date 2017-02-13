@@ -13,55 +13,82 @@ export class CalendarService {
      * Get the calendar JSON
      */
     retrieveCalendar() {
-        return new Promise((resolve, reject) => {
-            let db = new SQLite();
-            db.openDatabase({
-                name: 'data.db',
-                location: 'default'
-            }).then(() => {
-        		db.executeSql(`
-          			SELECT day, meals
-          			FROM calendar
-        		`, [])
-        		.then((data) => {
-          			let calendar:any[] = new Array();
-          			for (let i = 0; i < 7; i++) {
-            			let day:any = data.rows.item(i);
-            			let item = {
-	              			day: day.day,
-	              			meals: JSON.parse(day.meals)
-	            		}
-			            for (let k = 0; k < item.meals.length; k++) {
-			              if (item.meals[k].recipes.length) {
-			                for (let j = 0; j < item.meals[k].recipes.length; j++) {
-			                  let recipe = item.meals[k].recipes[j];
-			                  recipe.name = recipe.name.replace(new RegExp("\"", 'g'),"'"); 
-			                  recipe.type = recipe.type.replace(new RegExp("\"", 'g'),"'"); 
-			                  recipe.mainIngredient = recipe.mainIngredient.replace(new RegExp("\"", 'g'),"'");
-			                  recipe.notes = recipe.notes.replace(new RegExp("\"", 'g'),"'");
-			                  recipe.preparation = recipe.preparation.replace(new RegExp("\"", 'g'),"'");
+      return new Promise((resolve, reject) => {
+          let db = new SQLite();
+          db.openDatabase({
+              name: 'data.db',
+              location: 'default'
+          }).then(() => {
+      		db.executeSql(`
+        			SELECT day, meals
+        			FROM calendar
+      		`, [])
+      		.then((data) => {
+        			let calendar:any[] = new Array();
+        			for (let i = 0; i < 7; i++) {
+          			let day:any = data.rows.item(i);
+          			let item = {
+              			day: day.day,
+              			meals: JSON.parse(day.meals)
+            		}
+		            for (let k = 0; k < item.meals.length; k++) {
+		              if (item.meals[k].recipes.length) {
+		                for (let j = 0; j < item.meals[k].recipes.length; j++) {
+		                  let recipe = item.meals[k].recipes[j];
+		                  recipe.name = recipe.name.replace(new RegExp("\"", 'g'),"'"); 
+		                  recipe.type = recipe.type.replace(new RegExp("\"", 'g'),"'"); 
+		                  recipe.mainIngredient = recipe.mainIngredient.replace(new RegExp("\"", 'g'),"'");
+		                  recipe.notes = recipe.notes.replace(new RegExp("\"", 'g'),"'");
+		                  recipe.preparation = recipe.preparation.replace(new RegExp("\"", 'g'),"'");
 
-			                  for (let y=0; y < recipe.ingredients.length; y++) {
-			                    recipe.ingredients[y] = recipe.ingredients[y].replace(new RegExp("\"", 'g'),"'");
-			                  }
-			                }
-			              }
-			            }
-	            		calendar.push(item);
-	          		}
-	          		db.close().then(() => {
-	           			return resolve(calendar);
-	          		});
-        		});
-        	})
-        	.catch((error) => {
-        		console.error(`[retrieveCalendar] Error: ${JSON.stringify(error)}`);
-        		return reject(error);
-        	});
-    	});
-  	}
+		                  for (let y=0; y < recipe.ingredients.length; y++) {
+		                    recipe.ingredients[y] = recipe.ingredients[y].replace(new RegExp("\"", 'g'),"'");
+		                  }
+		                }
+		              }
+		            }
+            		calendar.push(item);
+          		}
+          		db.close().then(() => {
+           			return resolve(calendar);
+          		});
+      		});
+      	})
+      	.catch((error) => {
+      		console.error(`[retrieveCalendar] Error: ${JSON.stringify(error)}`);
+      		return reject(error);
+      	});
+  	});
+	}
 
-  	/*--------------------------------------------------------------------------------------------------------------*/
+  /*--------------------------------------------------------------------------------------------------------------*/
+
+  resetCalendar() {
+    return new Promise((resolve, reject) => {
+      let db = new SQLite();
+      db.openDatabase({
+          name: 'data.db',
+          location: 'default'
+      }).then(() => {
+        let meals = '[{"name":"pranzo","recipes": []},{"name": "cena","recipes": []}]'
+        db.executeSql(`
+          UPDATE calendar
+          SET meals = '${meals}'
+        `, [])
+        .then(() => {
+          db.close().then(() => {
+             return resolve();
+          });
+        });
+      })
+      .catch((error) => {
+        console.error(`[resetCalendar] Error: ${JSON.stringify(error)}`);
+        return reject(error);
+      });
+    });
+  }
+
+	/*--------------------------------------------------------------------------------------------------------------*/
 
   /**
    * Add a recipe to the calendar table
