@@ -84,9 +84,7 @@ export class SearchService {
 	            url += `/i`;
 	          }
 
-	          if(!filters.recipeName && !filters.mainIngredient && !filters.recipeType) {
-	          	url += `&filter[limit]=20`;
-	          } 
+	          url += `&filter[limit]=100`;
 
 	          if (filters && filters.recipeName) {
 	            url += `&filter[where][name]=${filters.recipeName}`;
