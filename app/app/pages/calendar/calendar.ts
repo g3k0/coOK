@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {ModalController, AlertController} from 'ionic-angular';
+import {ModalController, AlertController, ToastController} from 'ionic-angular';
 import {RecipePage} from '../recipe/recipe';
 import {AddRecipePage} from '../add-recipe/add-recipe';
 import {ShoppingListPage} from '../shopping-list/shopping-list';
@@ -33,6 +33,7 @@ export class CalendarPage {
  
 	constructor(
 		private modalCtrl: ModalController,
+    private toastCtrl: ToastController,
     private calendarData: CalendarService,
     private favoritesData: FavoritesService,
     private alertCtrl: AlertController
@@ -57,6 +58,19 @@ export class CalendarPage {
   }
 
   /**
+   * toast message method when a recipe is deleted from favorites
+   * @param {string} where to show the toast in the web page: top | middle | bottom
+   */
+  presentToast(position:string='top') {
+    let toast = this.toastCtrl.create({
+      message: 'Calendario resettato con successo!',
+      duration: 2000,
+      position: position
+    });
+    toast.present();
+  }
+
+  /**
    *  Update the calendar view
    */
   updateCalendar() {
@@ -64,6 +78,24 @@ export class CalendarPage {
     .then((calendar) => {
       this.calendar = calendar;
       return;
+    })
+    .catch((err) => {
+      return;
+    });
+  }
+
+  /**
+   * Reset the calendar view
+   */
+  resetCalendar() {
+    this.calendarData.resetCalendar()
+    .then(() => {
+      this.calendarData.retrieveCalendar()
+      .then((calendar) => {
+        this.calendar = calendar;
+        this.presentToast();
+        return;
+      });
     })
     .catch((err) => {
       return;
