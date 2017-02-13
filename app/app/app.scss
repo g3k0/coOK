@@ -1,5 +1,6 @@
 .loading {
-	background: color($colors, primary, base);
+	background-image: url('../../asset/bg1.png');
+	background-repeat: repeat;
 	color: color($colors, fontColor, base);
 
 	.logo-container {

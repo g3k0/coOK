@@ -19,7 +19,8 @@
 }
 
 .add-recipe {
-	background: color($colors, primary, base);
+	background-image: url('../../asset/bg1.png');
+	background-repeat: repeat;
 	scroll-content {
 		color: color($colors, fontColor, base);
 	} 

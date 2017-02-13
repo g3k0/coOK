@@ -19,7 +19,8 @@
 }
 
 .shopping-list {
-	background: color($colors, primary, base);
+	background-image: url('../../asset/bg1.png');
+	background-repeat: repeat;
 
 	.item {
 		.item-inner {
