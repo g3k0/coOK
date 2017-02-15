@@ -95,6 +95,7 @@
 			padding: 0;
 			div.title {
 				background : color($colors, secondary, base);
+				color: color($colors, inverseFontColor, base);
 				text-align: center;
 				padding: .3em 0;
 			}
@@ -108,7 +109,7 @@
 				overflow: scroll;
 				div.recipe {
 					background : color($colors, lightGrey, base);
-					color: color($colors, inverseFontColor, base);
+					color: color($colors, fontColor, base);
 					font-size: .7em;
 				}
 			} 
@@ -145,7 +146,7 @@
 		div.item {
 			margin-bottom: .5em;
 			background : color($colors, secondary, base);
-			color: color($colors, fontColor, base);
+			color: color($colors, inverseFontColor, base);
 			border-top: none !important;
 			div.container {
 				width: 100%;

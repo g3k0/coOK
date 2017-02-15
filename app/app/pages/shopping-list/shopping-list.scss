@@ -6,13 +6,13 @@
 		div.toolbar-content {
 			ion-title {
 				div.toolbar-title {
-					color: color($colors, fontColor, base);
+					color: color($colors, inverseFontColor, base);
 				}
 			}
 		}
 		ion-buttons {
 			button {
-				color: color($colors, fontColor, base);
+				color: color($colors, inverseFontColor, base);
 			}
 		}	
 	}
@@ -24,7 +24,7 @@
 
 	.item {
 		.item-inner {
-			color: color($colors, inverseFontColor, base);;
+			color: color($colors, fontColor, base);;
 		}
 	}
 
