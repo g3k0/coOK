@@ -15,7 +15,6 @@
 .favorites {
 	background-image: url('../../asset/bg1.png');
 	background-repeat: repeat;
-	color: color($colors, fontColor, base);
 
 	ion-searchbar {
 		padding: 0 0 8px 0;
@@ -28,7 +27,7 @@
 	div.item {
 		margin-bottom: .5em;
 		background : color($colors, secondary, base);
-		color: color($colors, fontColor, base);
+		color: color($colors, inverseFontColor, base);
 		border-top: none !important;
 		div.container {
 			width: 100%;
