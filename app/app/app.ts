@@ -15,7 +15,6 @@ import {DataService} from './services';
 export class MyApp {
     @ViewChild('nav') nav : NavController;
     private rootPage: any;
-    private pages: any[];
     private loading: boolean;
     //public test: any;
 
@@ -23,11 +22,6 @@ export class MyApp {
         private platform: Platform, 
         private data: DataService
     ) {
-        this.pages = [
-            { title: 'Guida', component: GuidePage, icon: 'help' },
-            { title: 'Info', component: InfoPage, icon: 'information-circle' },
-            { title: 'Votaci', component: VotePage, icon: 'star-outline' }
-        ];
         this.rootPage = TabsPage;
         this.loading = true;
 

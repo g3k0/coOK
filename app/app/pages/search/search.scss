@@ -57,7 +57,7 @@
 	    height: 1.89em;
 	    padding: .5em;
 	    float: left;    
-	    color: color($colors, inverseFontColor, base);
+	    color: color($colors, fontColor, base);
 	    border: none;
 	    background: rgba(238,238,238,1);
 	    -moz-border-radius: 3px 0 0 3px;
@@ -67,7 +67,7 @@
 
 	.form-wrapper input:focus {
 	    outline: 0;
-	    background: color($colors, fontColor, base);
+	    background: color($colors, inverseFontColor, base);
 	    -moz-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
 	    -webkit-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
 	    box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
@@ -103,7 +103,7 @@
 	    height: 3.2em;
 	    width: 7.1em;
 	    font: bold .6em Architects_Daughter;
-	    color: color($colors, fontColor, base);
+	    color: color($colors, inverseFontColor, base);
 	    background: color($colors, secondary, base);
 	    -moz-border-radius: 0 3px 3px 0;
 	    -webkit-border-radius: 0 3px 3px 0;
@@ -163,7 +163,7 @@
 					margin-top: 0;
 					font-weight: bold;
 					text-align: center;
-					color: color($colors, fontColor, base);
+					color: color($colors, inverseFontColor, base);
 					background-color: color($colors, secondary, base);
 					border-radius: 10px;
 				}  
@@ -180,8 +180,9 @@
 
 		ion-list {
 			button.item {
-				background-color: color($colors, fontColor, base);
+				background-color: color($colors, inverseFontColor, base);
 				color: color($colors, primary, base);
+				font-size: 1.5em;
 				-moz-border-radius: 5px;
 	    		-webkit-border-radius: 5px;
 	    		border-radius: 5px; 

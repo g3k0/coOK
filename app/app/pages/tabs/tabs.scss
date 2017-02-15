@@ -1,3 +1,6 @@
-.tabs {
-	
+ion-tabbar {
+	background: color($colors, secondary, base);
+	.tab-button {
+		color: color($colors, inverseFontColor, base);
+	}
 }
