@@ -6,13 +6,13 @@
 		div.toolbar-content {
 			ion-title {
 				div.toolbar-title {
-					color: color($colors, fontColor, base);
+					color: color($colors, inverseFontColor, base);
 				}
 			}
 		}
 		ion-buttons {
 			button {
-				color: color($colors, fontColor, base);
+				color: color($colors, inverseFontColor, base);
 			}
 		}	
 	}
@@ -22,13 +22,13 @@
 	background-image: url('../../asset/bg1.png');
 	background-repeat: repeat;
 	scroll-content {
-		color: color($colors, fontColor, base);
+		color: color($colors, inverseFontColor, base);
 	} 
 
 	div.item {
 		margin-bottom: .5em;
 		background : color($colors, secondary, base);
-		color: color($colors, fontColor, base);
+		color: color($colors, inverseFontColor, base);
 		border-top: none !important;
 		div.container {
 			width: 100%;

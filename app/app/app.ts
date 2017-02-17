@@ -3,8 +3,6 @@ import {Platform, ionicBootstrap, NavController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
 import {InfoPage} from './pages/info/info';
-import {GuidePage} from './pages/guide/guide';
-import {VotePage} from './pages/vote/vote';
 import {DataService} from './services';
 
 @Component({
