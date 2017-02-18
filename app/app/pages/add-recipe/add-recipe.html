@@ -19,8 +19,9 @@
 
 <ion-content padding class="add-recipe">
 
-	<div *ngIf="message">
+	<div class="message" *ngIf="message">
 		{{message}}
+		<img src="asset/sorry.png" />
 	</div>
 
 	<div class="item" *ngFor="let item of items">

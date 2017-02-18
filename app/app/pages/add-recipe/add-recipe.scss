@@ -21,9 +21,15 @@
 .add-recipe {
 	background-image: url('../../asset/bg1.png');
 	background-repeat: repeat;
+
 	scroll-content {
 		color: color($colors, inverseFontColor, base);
 	} 
+
+	div.message {
+		color: color($colors, fontColor, base);
+		font-size: 1.5em;
+	}
 
 	div.item {
 		margin-bottom: .5em;

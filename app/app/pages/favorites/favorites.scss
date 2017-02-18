@@ -24,6 +24,11 @@
 		zoom: .7;
 	}
 
+	div.favorites-message {
+		color: color($colors, fontColor, base);
+		font-size: 1.5em;
+	}
+
 	div.item {
 		margin-bottom: .5em;
 		background : color($colors, secondary, base);
