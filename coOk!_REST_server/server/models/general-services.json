@@ -73,6 +73,26 @@
           "verb": "get"
         }
       ]
+    },
+    "purgeDB": {
+      "isStatic": true,
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "object",
+          "root": true,
+          "description": "service response"
+        }
+      ],
+      "description": "Clean DB from expired tokens.",
+      "http": [
+        {
+          "path": "/purge-db",
+          "verb": "get"
+        }
+      ]
     }
+
   }
 }
