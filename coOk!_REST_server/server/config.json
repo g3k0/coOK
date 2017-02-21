@@ -29,5 +29,6 @@
     "realm": "app",
     "emailSuffix": "@app.com",
     "password": "mobileApp"
-  }
+  },
+  "accessTokensTimeLimit": 1209600000
 }

@@ -88,5 +88,24 @@
 				return cb(null,{results:'ok'});
 			});
 		}; 
+
+		/**
+		 * The service removes the access tokens that are created more than 2 weeks ago.
+		 */
+		GeneralServices.purgeDB = (cb) => {
+
+			let time = new Date().getTime();
+			//timelimit = ttl * 1000
+			let timeLimit = time - app.get('accessTokensTimeLimit');
+
+			app.models.AccessToken.destroyAll({created : {lt : timeLimit}}, (err)  => {
+				if (err) {
+					log.error(`[GeneralServices][purgeDB] error: ${JSON.stringify(err)}`);
+					return cb(err);
+				}
+
+				return cb(null, {results:'Ok'});
+			});
+		}
 	};
 })();
