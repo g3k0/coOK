@@ -91,15 +91,15 @@
 
 			let time = new Date().getTime();
 			//timelimit = ttl * 1000
-			let timeLimit = time - 1209600000;
+			let timeLimit = time - app.get('accessTokensTimeLimit');
 
 			app.models.AccessToken.destroyAll({created : {lt : timeLimit}}, (err)  => {
 				if (err) {
-					log.error(`[GeneralServices][purgeDB] error: ${err}`);
+					log.error(`[GeneralServices][purgeDB] error: ${JSON.stringify(err)}`);
 					return cb(err);
 				}
 
-				return cb(null, {results:"Ok"});
+				return cb(null, {results:'Ok'});
 			});
 		}
 	};
