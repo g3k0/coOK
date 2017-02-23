@@ -11,12 +11,15 @@
 
 <ion-content padding class="search">
     
-    <h4>ricerca ricette per ingredienti</h4>
+    <h5>Ricerca ricette per ingredienti</h5>
 
-	<form class="form-wrapper cf">
-        <input type="text" name="ingredient" placeholder="Inserisci gli ingredienti..." [(ngModel)]="ingredient">
-        <button type="submit" (click)="pushIngredient(ingredient);ingredient=null">Inserisci</button>
-    </form>
+    <div class="search-ingredients">
+        <ion-item>
+            <ion-label fixed>Ingredienti</ion-label>
+            <ion-input type="text" value="" [(ngModel)]="ingredient"></ion-input>
+        </ion-item>
+        <button type="submit" (click)="pushIngredient(ingredient);ingredient=null">+</button>
+    </div>
     
     <div class="ingredients">
         <div class="container">
@@ -29,7 +32,7 @@
         </div>
     </div>
 
-    <h4 class="filters-title">Migliora la ricerca con i filtri</h4>
+    <h5 class="filters-title">Migliora la ricerca con i filtri</h5>
     
     <ion-card class="filters">
 
