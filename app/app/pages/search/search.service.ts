@@ -90,12 +90,12 @@ export class SearchService {
 
 	getRecipeUrl(ingredients:string[]=[''],filters:any={},url:string='') {
 
-		if(ingredients && ingredients.length) {
+	if(ingredients && ingredients.length) {
     	let ingredientFilterCounter = 0;
-      for (let ingredient of ingredients) {
-      	url += `&filter[where][and][${ingredientFilterCounter}][ingredients][regexp]=/(?=.* ${ingredient} .*)/i`;
-      	ingredientFilterCounter++;	             
-      }
+      	for (let ingredient of ingredients) {
+      		url += `&filter[where][and][${ingredientFilterCounter}][ingredients][regexp]=/(?=.* ${ingredient} .*)/i`;
+      		ingredientFilterCounter++;	             
+      	}
     }
 
     url += `&filter[limit]=100`;
@@ -118,28 +118,24 @@ export class SearchService {
 	}
 
 
-
-
-  getData(ingredients:string[]=[''],filters:any={},url:string='') {
-  	return new Promise((resolve,reject) => {
+    getData(ingredients:string[]=[''],filters:any={},url:string='') {
+	  	return new Promise((resolve,reject) => {
 			this.http.get(this.getRecipeUrl(ingredients,filters,url))
 			.subscribe(result => {
-				if(result.json().length > 0) {
+				if(result.json().length || !ingredients.length) {
 					console.log(result.json().length);
-
 					return resolve(result.json());
-				} else {
-					let newIngredients = ingredients.slice(0, ingredients.length - 1);
-					console.log(newIngredients);
-
-					this.getData(newIngredients,filters,url).then ( (data) =>{
-						return resolve(data);
-						});
 				}
-			});
 
-  	});
-  }
+				let newIngredients = ingredients.slice(0, ingredients.length - 1);
+				console.log(newIngredients);
+
+				this.getData(newIngredients,filters,url).then (data => {
+					return resolve(data);
+				});
+			});
+	  	});
+    }
 
 
 	/*
@@ -147,7 +143,7 @@ export class SearchService {
 	 * {Function} a callback function
 	 */
 	displaySentence(cb) {
-		this.retrieveConfig((config) => {
+		this.retrieveConfig(config => {
 			let sentences:string[] = config.noRecipesFoundSentences; 
 			return cb(sentences[Math.floor(Math.random()*sentences.length)]);
 		});
