@@ -41,16 +41,21 @@
             <button ion-item (click)="recipeName()">
                 <ion-icon name="create" item-left></ion-icon>
                 Nome Ricetta
+                <div class="show-filter" *ngIf="filters.recipeName">({{filters.recipeName}})</div>
             </button>
 
             <button ion-item (click)="mainIngredient()">
                 <ion-icon name="pizza" item-left></ion-icon>
                 Ingrediente principale
+                <div class="show-filter" *ngIf="filters.mainIngredient">({{filters.mainIngredient}})</div>
             </button>
 
             <button ion-item (click)="recipeType()">
                 <ion-icon name="restaurant" item-left></ion-icon>
                 Tipo di piatto
+                <div class="show-filter" *ngIf="filters.recipeType.length">
+                    (<span *ngFor="let type of filters.recipeType">{{type + ' ' }}</span>)
+                </div>
             </button>
 
         </ion-list>

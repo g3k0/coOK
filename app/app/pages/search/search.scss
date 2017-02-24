@@ -103,6 +103,9 @@
 				-moz-border-radius: 5px;
 	    		-webkit-border-radius: 5px;
 	    		border-radius: 5px; 
+	    		.show-filter {
+	    			color: color($colors, fontColor, base);
+	    		}
 				ion-icon {
 					font-size: 1em;
 					margin-top: 1em;
