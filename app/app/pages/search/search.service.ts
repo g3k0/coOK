@@ -72,13 +72,11 @@ export class SearchService {
 	        let url = config.authAPI.recipes;
 	        self.retrieveAccessToken()
 	        .then((access_token) => {
-	          url += `?access_token=${access_token}`;
-
-						self.getData(ingredients,filters,url).then( (data) => {
-							console.log("end");
-							return resolve(data);
-						});
-
+	         	url += `?access_token=${access_token}`;
+				self.getData(ingredients,filters,url).then( (data) => {
+					console.log("end");
+					return resolve(data);
+				});
 	        })
 	        .catch((error) => {
 	          console.error(`[getRecipes] Error: ${JSON.stringify(error)}`);
@@ -89,32 +87,30 @@ export class SearchService {
 	}
 
 	getRecipeUrl(ingredients:string[]=[''],filters:any={},url:string='') {
+		if(ingredients && ingredients.length) {
+	    	let ingredientFilterCounter = 0;
+	      	for (let ingredient of ingredients) {
+	      		url += `&filter[where][and][${ingredientFilterCounter}][ingredients][regexp]=/(?=.* ${ingredient} .*)/i`;
+	      		ingredientFilterCounter++;	             
+	      	}
+	    }
 
-	if(ingredients && ingredients.length) {
-    	let ingredientFilterCounter = 0;
-      	for (let ingredient of ingredients) {
-      		url += `&filter[where][and][${ingredientFilterCounter}][ingredients][regexp]=/(?=.* ${ingredient} .*)/i`;
-      		ingredientFilterCounter++;	             
-      	}
-    }
+	    url += `&filter[limit]=200`;
 
-    url += `&filter[limit]=200`;
+	    if (filters && filters.recipeName) {
+	      url += `&filter[where][name][regexp]=/${filters.recipeName}/i`;
+	    }
 
-    if (filters && filters.recipeName) {
-      url += `&filter[where][name][regexp]=/${filters.recipeName}/i`;
-    }
+	    if (filters && filters.mainIngredient) {
+	      url += `&filter[where][mainIngredient]=${filters.mainIngredient}`;
+	    }
 
-    if (filters && filters.mainIngredient) {
-      url += `&filter[where][mainIngredient]=${filters.mainIngredient}`;
-    }
-
-    if (filters && filters.recipeType && filters.recipeType.length) {
-      for (let type of filters.recipeType) {
-        url += `&filter[where][type]=${type}`;
-      }
-    }
-
-	return url; 
+	    if (filters && filters.recipeType && filters.recipeType.length) {
+	      for (let type of filters.recipeType) {
+	        url += `&filter[where][type]=${type}`;
+	      }
+	    }
+		return url; 
 	}
 
 
