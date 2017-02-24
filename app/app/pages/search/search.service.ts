@@ -101,7 +101,7 @@ export class SearchService {
     url += `&filter[limit]=200`;
 
     if (filters && filters.recipeName) {
-      url += `&filter[where][name]=${filters.recipeName}`;
+      url += `&filter[where][name][regexp]=/${filters.recipeName}/i`;
     }
 
     if (filters && filters.mainIngredient) {
@@ -113,7 +113,7 @@ export class SearchService {
         url += `&filter[where][type]=${type}`;
       }
     }
-    
+
 	return url; 
 	}
 
