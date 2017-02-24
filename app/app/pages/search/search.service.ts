@@ -98,7 +98,7 @@ export class SearchService {
       	}
     }
 
-    url += `&filter[limit]=100`;
+    url += `&filter[limit]=200`;
 
     if (filters && filters.recipeName) {
       url += `&filter[where][name]=${filters.recipeName}`;
@@ -113,8 +113,8 @@ export class SearchService {
         url += `&filter[where][type]=${type}`;
       }
     }
-
-		return url; 
+    
+	return url; 
 	}
 
 
