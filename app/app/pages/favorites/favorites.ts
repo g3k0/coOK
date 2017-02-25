@@ -23,7 +23,8 @@ export class FavoritesPage {
         private modalCtrl: ModalController,
         private favoritesData: FavoritesService,
         private alertCtrl: AlertController,
-        private toastCtrl: ToastController
+        private toastCtrl: ToastController,
+        private SocialSharing: SocialSharing
     ) {
 
     }
