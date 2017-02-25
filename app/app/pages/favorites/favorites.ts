@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {ModalController, AlertController, ToastController, ActionSheetController} from 'ionic-angular';
-//import {SocialSharing} from 'ionic-native';
+import {SocialSharing} from 'ionic-native';
 import {RecipePage} from '../recipe/recipe';
 import {FavoritesService} from './favorites.service';
 import {Recipe} from '../../interfaces';
@@ -175,12 +175,12 @@ export class FavoritesPage {
     `
     if (recipe.notes) recipeText += `NOTE: ${recipe.notes}`;
     
-    /*SocialSharing.share(recipeText, recipe.name, null,  null)
+    SocialSharing.share(recipeText, recipe.name, null,  null)
       .then(()=>{
         return
       },
       ()=>{
         return;
-    });*/
+    });
   }
 }
