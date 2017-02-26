@@ -70,7 +70,7 @@ export class SearchService {
 		if(ingredients && ingredients.length) {
 	    	let ingredientFilterCounter = 0;
 	      	for (let ingredient of ingredients) {
-	      		url += `&filter[where][and][${ingredientFilterCounter}][ingredients][regexp]=/(?=.* ${ingredient} .*)/i`;
+	      		url += `&filter[where][and][${ingredientFilterCounter}][ingredients][regexp]=/(?=.* ${ingredient.toLowerCase()} .*)/i`;
 	      		ingredientFilterCounter++;	             
 	      	}
 	    }
@@ -78,11 +78,11 @@ export class SearchService {
 	    url += `&filter[limit]=50`;
 
 	    if (filters && filters.recipeName) {
-	      url += `&filter[where][name][regexp]=/${filters.recipeName}/i`;
+	      url += `&filter[where][name][regexp]=/${filters.recipeName.toLowerCase()}/i`;
 	    }
 
 	    if (filters && filters.mainIngredient) {
-	      url += `&filter[where][mainIngredient][regexp]=/${filters.mainIngredient}/i`;
+	      url += `&filter[where][mainIngredient][regexp]=/${filters.mainIngredient.toLowerCase()}/i`;
 	    }
 
 	    if (filters && filters.recipeType && filters.recipeType.length) {
