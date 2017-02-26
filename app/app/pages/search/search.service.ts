@@ -60,31 +60,11 @@ export class SearchService {
 	/*--------------------------------------------------------------------------------------------------------------*/
 
 	/**
-	 * Get the recipes returned from a call to the recipes back end service
+	 * getRecipeUrl is used in getData method
 	 * @param {string[]} ingredients array pushed by the user
 	 * @param {Object} filters objet setted by the user
+	 * @param {string} the url string to call to retrieve recipes
 	 */
-
-	getRecipes(ingredients:string[]=[''],filters:any={}) {
-	    return new Promise((resolve,reject) => {
-	      let self = this;
-	      this.retrieveConfig((config) => {
-	        let url = config.authAPI.recipes;
-	        self.retrieveAccessToken()
-	        .then((access_token) => {
-	         	url += `?access_token=${access_token}`;
-				self.getData(ingredients,filters,url).then( (data) => {
-					console.log("end");
-					return resolve(data);
-				});
-	        })
-	        .catch((error) => {
-	          console.error(`[getRecipes] Error: ${JSON.stringify(error)}`);
-	          return reject(error);
-	        });
-	      });
-	    });
-	}
 
 	getRecipeUrl(ingredients:string[]=[],filters:any={},url:string='') {
 		if(ingredients && ingredients.length) {
@@ -113,21 +93,25 @@ export class SearchService {
 		return url; 
 	}
 
+	/**
+	 * getData is used in getRecipes method
+	 * @param {string[]} ingredients array pushed by the user
+	 * @param {Object} filters objet setted by the user
+	 * @param {string} the url string to call to retrieve recipes
+	 */
 
     getData(ingredients:string[]=[],filters:any={},url:string='') {
 	  	return new Promise((resolve,reject) => {
 			this.http.get(this.getRecipeUrl(ingredients,filters,url))
 			.subscribe(result => {
 				if(result.json().length) {
-					console.log(result.json().length);
 					return resolve(result.json());
 				}
 
 				let newIngredients = ingredients.slice(0, ingredients.length - 1);
-				console.log(newIngredients);
-        if (!newIngredients.length) {
-        	return resolve([]);
-        }
+		        if (!newIngredients.length) {
+		        	return resolve([]);
+		        }
 				this.getData(newIngredients,filters,url).then (data => {
 					return resolve(data);
 				});
@@ -135,6 +119,33 @@ export class SearchService {
 	  	});
     }
 
+	/**
+	 * Get the recipes returned from a call to the recipes back end service
+	 * @param {string[]} ingredients array pushed by the user
+	 * @param {Object} filters objet setted by the user
+	 */
+
+	getRecipes(ingredients:string[]=[],filters:any={}) {
+	    return new Promise((resolve,reject) => {
+	      let self = this;
+	      this.retrieveConfig((config) => {
+	        let url = config.authAPI.recipes;
+	        self.retrieveAccessToken()
+	        .then((access_token) => {
+	         	url += `?access_token=${access_token}`;
+				self.getData(ingredients,filters,url).then( (data) => {
+					return resolve(data);
+				});
+	        })
+	        .catch((error) => {
+	          console.error(`[getRecipes] Error: ${JSON.stringify(error)}`);
+	          return reject(error);
+	        });
+	      });
+	    });
+	}
+
+	/*-------------------------------------------------------------------------------------------------------------------*/
 
 	/*
 	 * Return a string to display if the recipe search has no results
