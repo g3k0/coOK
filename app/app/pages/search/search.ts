@@ -88,7 +88,7 @@ export class SearchPage {
 	          		}
 	        	},
 	        	{
-	          		text: 'Salva',
+	          		text: 'Inserisci',
 	          		handler: data => {
 	            		this.filters.recipeName = data.recipeName;
 	          		}
@@ -116,7 +116,7 @@ export class SearchPage {
 	          		}
 	        	},
 	        	{
-	          		text: 'Salva',
+	          		text: 'Inserisci',
 	          		handler: data => {
 	            		this.filters.mainIngredient = data.mainIngredient;
 	          		}
@@ -142,7 +142,7 @@ export class SearchPage {
 	    alert.addButton('Cancella');
 
 	    alert.addButton({
-	    	text: 'Salva',
+	    	text: 'Inserisci',
 	    	handler: data => {
 	        	this.filters.recipeType = data;
 	      	}
