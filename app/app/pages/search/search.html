@@ -16,9 +16,9 @@
     <div class="search-ingredients">
         <ion-item>
             <ion-label fixed>Ingredienti</ion-label>
-            <ion-input type="text" value="" [(ngModel)]="ingredient"></ion-input>
+            <ion-input type="text" value="" [(ngModel)]="ingredient" (input)="checkIngredient(ingredient)"></ion-input>
         </ion-item>
-        <button type="submit" (click)="pushIngredient(ingredient);ingredient=null">+</button>
+        <button type="submit" (click)="pushIngredient(ingredient);ingredient=null" [disabled]="wrongIngredient">+</button>
     </div>
     
     <div class="ingredients">

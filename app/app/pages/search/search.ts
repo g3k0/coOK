@@ -20,6 +20,7 @@ export class SearchPage {
 	}
 	message: any;
 	loader: any;
+	wrongIngredient:boolean;
 
 	constructor(
 		private alertCtrl: AlertController,
@@ -41,6 +42,7 @@ export class SearchPage {
 			mainIngredient: null,
 			recipeType: []
 		};
+		this.wrongIngredient = false;
 	}
 
 	/**
@@ -66,6 +68,17 @@ export class SearchPage {
 
 		return;
 	}
+
+	checkIngredient(ingredient:string='') {
+		if (!ingredient) return;
+		
+		if (ingredient.indexOf(' ') > -1) {
+			this.wrongIngredient = true;
+		} else {
+			this.wrongIngredient = false;
+		}
+		return;
+	} 
 
 	/**
 	 * Filters alerts
