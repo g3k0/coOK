@@ -86,7 +86,7 @@ export class SearchService {
 	    });
 	}
 
-	getRecipeUrl(ingredients:string[]=[''],filters:any={},url:string='') {
+	getRecipeUrl(ingredients:string[]=[],filters:any={},url:string='') {
 		if(ingredients && ingredients.length) {
 	    	let ingredientFilterCounter = 0;
 	      	for (let ingredient of ingredients) {
@@ -95,14 +95,14 @@ export class SearchService {
 	      	}
 	    }
 
-	    url += `&filter[limit]=200`;
+	    url += `&filter[limit]=50`;
 
 	    if (filters && filters.recipeName) {
 	      url += `&filter[where][name][regexp]=/${filters.recipeName}/i`;
 	    }
 
 	    if (filters && filters.mainIngredient) {
-	      url += `&filter[where][mainIngredient]=${filters.mainIngredient}`;
+	      url += `&filter[where][mainIngredient][regexp]=/${filters.mainIngredient}/i`;
 	    }
 
 	    if (filters && filters.recipeType && filters.recipeType.length) {
