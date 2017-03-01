@@ -175,3 +175,20 @@
 		}
 	}
 }
+
+
+
+
+/**
+* specifically for IOS
+**/
+
+.platform-ios {	
+	.calendar {
+		div.container {
+			.reset-calendar {
+				margin-left: 32%;
+			}
+		}
+	}
+}
