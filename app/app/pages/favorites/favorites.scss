@@ -58,3 +58,22 @@
 		}
 	}
 }
+
+
+
+
+/**
+* specifically for IOS
+**/
+
+.platform-ios {
+
+	.favorites {
+
+		ion-searchbar {
+			background-color: transparent;
+			border: none;
+		}
+	}
+	
+}

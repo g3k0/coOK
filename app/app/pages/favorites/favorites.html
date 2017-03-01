@@ -4,7 +4,7 @@
             <img class="header-logo" src="asset/teaser.png" /> 
         </div>
         <div class="title">
-            <ion-title>Ricette Salvate</ion-title>
+            <ion-title>Favoriti</ion-title>
         </div>
     </ion-navbar>
 </ion-header>
@@ -16,7 +16,7 @@
         </div>
 <ion-content padding class="favorites">
 
-	<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+	<ion-searchbar *ngIf="!message" (ionInput)="getItems($event)"></ion-searchbar>
 
 		<button class="update-favorites" ion-button color="success" (click)="getFavorites()">Aggiorna i favoriti</button>
 

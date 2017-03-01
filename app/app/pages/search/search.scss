@@ -135,3 +135,29 @@
 	    margin-top: .5em;
 	}
 }
+
+
+
+
+
+/**
+* specifically for IOS
+**/
+
+.platform-ios {
+	
+
+	.search {
+
+		div.search-ingredients {
+			button {
+				height: 0.9em;
+			}
+
+		}
+		.search-button {
+			height: 10%;
+		}
+
+	}
+}
