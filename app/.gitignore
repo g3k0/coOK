@@ -4,6 +4,8 @@
 node_modules/
 www/build/
 platforms/
+!platforms/ios/coOk/Images.xcassets
+!platforms/android/coOk/Images.xcassets
 plugins/
 *.swp
 .DS_Store
