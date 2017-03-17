@@ -171,7 +171,7 @@
 					if(user.date)
 						userContent += "date: " + user.date;
 
-					userContent += "\n";
+					userContent += "<br />";
 					counter++;
 
 				
@@ -198,7 +198,7 @@
 						Subject: app.get('SMTP').email.subject , 
 						From: app.get('SMTP').email.from
 					}, 
-					BodyText: bodycontent,
+					BodyHtml: bodycontent,
 					/*BodyHtml: 'this is the HTML version of the ES API test', */
 					Tracking: true
 				};
@@ -208,7 +208,7 @@
 				api.get('/administration/users/current', (http_code, response) => {
 
 					if (http_code===200) {
-						AccountId=response.AccountId; //extracts account GUID from response obj
+						let AccountId = response.AccountId; //extracts account GUID from response obj
 						console.log("Success!  Account GUID: " + AccountId); //prints out the Account GUID
 						//Next Function sends the message
 						api.easySmtpDelivery(AccountId, jsonBody, (http_code, response) => {
