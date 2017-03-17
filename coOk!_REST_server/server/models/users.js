@@ -42,9 +42,7 @@
 
 	  	Users.observe('before save', function AddDate (ctx, next) {
 	  		
-	  		if(currentUser) {
-	  				ctx.instance.date = new Date();
-	  		}
+	  		ctx.instance.date = new Date();
 	  		return next();
 
 	  	});
