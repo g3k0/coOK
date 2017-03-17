@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 /**
  * CoOK REST server services.
  * @model: Users

@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 /** 
  * File: auth.js
  * @author: Christian Palazzo

@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 /**
  * CoOK REST server services.
  * @model: General-services
@@ -107,7 +108,7 @@
 
 				return cb(null, {results:'Ok'});
 			});
-		}
+		};
 
 
 
@@ -115,22 +116,17 @@
 
 			let api = new reachmail({token: app.get('SMTP').token});
 
-			let now= new Date();
+			let now = new Date();
 			let yesterday = new Date(now.getTime() - (1 * 60 * 60 * 24 * 1000));
-
 			let initialDate = new Date(yesterday.setHours(1, 0, 0, 0));
 			let finalDate = new Date(yesterday.setHours(24, 59, 59, 999));
 	
-			let filter = 
-				{ and : [
-					{
+			let filter = { 
+				and : [{
 					date: {gte: initialDate}
-					},
-					{
-						date: {lte: finalDate}
-					}
-
-				]
+				},{
+					date: {lte: finalDate}
+				}]
 			};
 	    	
 			app.models.Users.find({where:filter}, (err, users) => {
@@ -140,30 +136,14 @@
 					return cb(err);
 				}
 
-				let userContent = "";
-				let bodycontent = "";
-
+				let userContent = '';
+				let bodycontent = '';
 				let counter = 1;
 
 				_.each(users, (user) => {
 
 					userContent += counter + ") ";
 
-					if(user.name)
-						userContent += "name: " + user.name + " ** ";
-
-					if(user.surname)
-						userContent += "surname: " + user.surname + " ** ";
-				
-					if(user.email)
-						userContent += "email: " +  user.email + " ** ";
-
-					if(user.password)
-						userContent += "password: " + user.password + " ** ";
-				
-					if(user.group)
-						userContent += "group: " + user.group + " ** ";
-					
 					if(user.uuid)
 						userContent += "uuid: " + user.uuid + " ** ";
 
@@ -176,9 +156,6 @@
 					if(user.version)
 						userContent += "version: " + user.version + " ** ";
 
-					if(user.cordova)
-						userContent += "cordova: " + user.cordova + " ** ";
-				
 					if(user.model)
 						userContent += "model: " + user.model + " ** ";
 				
@@ -199,6 +176,7 @@
 
 				
 				});
+
 				let total = users.length;
 				userContent += "<br /> and the total = " + total;
 				//console.log(userContent);
@@ -210,25 +188,25 @@
 					bodycontent = app.get('SMTP').email.body + "<br />" + userContent;
 				}
 
-				console.log(bodycontent);
+				//console.log(bodycontent);
 				let email = {
-					FromAddress: 'from@domain.tld',
+					FromAddress: app.get('SMTP').email.from,
 					Recipients: [{
 						Address: app.get('SMTP').email.to
 					}],
-				  Headers: { 
-					Subject: app.get('SMTP').email.subject , 
-					From: app.get('SMTP').email.from
+				  	Headers: { 
+						Subject: app.get('SMTP').email.subject , 
+						From: app.get('SMTP').email.from
 					}, 
 					BodyText: bodycontent,
-					
+					/*BodyHtml: 'this is the HTML version of the ES API test', */
 					Tracking: true
 				};
+
 				let jsonBody = JSON.stringify(email);
 
 				api.get('/administration/users/current', (http_code, response) => {
 
-					console.log("hello");
 					if (http_code===200) {
 						AccountId=response.AccountId; //extracts account GUID from response obj
 						console.log("Success!  Account GUID: " + AccountId); //prints out the Account GUID
@@ -237,30 +215,27 @@
 							if (http_code===200) {
 								console.log("successful connection to EasySMTP API");
 								console.log(response);
-							}else { 
+								return cb(null, {result: "Email Sent."});
+							} else { 
 								console.log("Oops, looks like an error on send. Status Code: " + http_code);
 								console.log("Details: " + response);
+								return cb({
+									httpCode: http_code, 
+									response: response
+								});
 							}
 						});
 					} else {
-							console.log("Oops, there was an error when trying to get the account GUID. Status Code: " + http_code);
-							console.log("Details: " + response);
+						console.log("Oops, there was an error when trying to get the account GUID. Status Code: " + http_code);
+						console.log("Details: " + response);
+						return cb({
+							httpCode: http_code, 
+							response: response
+						});
 					}
 				});
-
-
-
-				/*BodyHtml: 'this is the HTML version of the ES API test', */
-				
-				if (err) {
-					log.error(`[GeneralServices][mailService] error: ${JSON.stringify(err)}`);
-					return cb(err);
-				}
-
-				return cb(null, {result: "Email Send."});
-
 			});
-		}
+		};
 
 	};
 })();

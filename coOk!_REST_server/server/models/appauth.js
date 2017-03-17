@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 /**
  * CoOK REST server services.
  * @model: Appauth
@@ -68,7 +69,7 @@
 			app.models.users.create(user, (err, userInstance) => {
 			    if (err) {
 
-			    	if (err.statusCode = 422) {
+			    	if (err.statusCode === 422) {
 			    		log.info(`[Appauth][register] App already registered, registration skypped`);
 			    		return cb(null, {results: 'ok'});
 			    	}
