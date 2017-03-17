@@ -142,6 +142,8 @@
 
 				_.each(users, (user) => {
 
+					userContent += "\n"
+
 					userContent += counter + ") ";
 
 					if(user.uuid)
@@ -171,14 +173,14 @@
 					if(user.date)
 						userContent += "date: " + user.date;
 
-					userContent += "<br />";
+					userContent += "\n";
 					counter++;
 
 				
 				});
 
 				let total = users.length;
-				userContent += "<br /> and the total = " + total;
+				userContent += "\n and the total = " + total;
 				//console.log(userContent);
 
 				if(users.length <= 0 ) {
@@ -198,7 +200,7 @@
 						Subject: app.get('SMTP').email.subject , 
 						From: app.get('SMTP').email.from
 					}, 
-					BodyHtml: bodycontent,
+					BodyText: bodycontent,
 					/*BodyHtml: 'this is the HTML version of the ES API test', */
 					Tracking: true
 				};
