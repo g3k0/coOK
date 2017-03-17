@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 /**
  * CoOK REST server services.
  * @model: Users
@@ -37,6 +38,15 @@
 	    	} else {
 	      		return next();
 	   	 	}
+	  	});
+
+	  	Users.observe('before save', function AddDate (ctx, next) {
+	  		
+	  		if(currentUser) {
+	  				ctx.instance.date = new Date();
+	  		}
+	  		return next();
+
 	  	});
 
 	    /*

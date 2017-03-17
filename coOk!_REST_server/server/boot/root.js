@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 /**
  * Root file. Executed at app boot
  * @author: Christian Palazzo
@@ -5,7 +6,7 @@
  */
 
 (function () {
-	'use strict'
+	'use strict';
 
 	/**
 	 * Module dependencies

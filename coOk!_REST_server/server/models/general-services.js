@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 /**
  * CoOK REST server services.
  * @model: General-services
@@ -15,6 +16,7 @@
 	let app = require(`${__base}/server`);
 	let commonUtils = require(`${__base}/lib/utils`).common;
 	let fs = require('fs');
+	let reachmail = require('reachmailapi');
 	let _ = require('underscore');
 
 	module.exports = (GeneralServices) => {
@@ -106,6 +108,134 @@
 
 				return cb(null, {results:'Ok'});
 			});
-		}
+		};
+
+
+
+		GeneralServices.mailService = (cb) => {
+
+			let api = new reachmail({token: app.get('SMTP').token});
+
+			let now = new Date();
+			let yesterday = new Date(now.getTime() - (1 * 60 * 60 * 24 * 1000));
+			let initialDate = new Date(yesterday.setHours(1, 0, 0, 0));
+			let finalDate = new Date(yesterday.setHours(24, 59, 59, 999));
+	
+			let filter = { 
+				and : [{
+					date: {gte: initialDate}
+				},{
+					date: {lte: finalDate}
+				}]
+			};
+	    	
+			app.models.Users.find({where:filter}, (err, users) => {
+				
+				if (err) {
+					log.error(`[GeneralServices][mailService] error: ${JSON.stringify(err)}`);
+					return cb(err);
+				}
+
+				let userContent = '';
+				let bodycontent = '';
+				let counter = 1;
+
+				_.each(users, (user) => {
+
+					userContent += counter + ") ";
+
+					if(user.uuid)
+						userContent += "uuid: " + user.uuid + " ** ";
+
+					if(user.available)
+						userContent += "available: " + user.available + " ** ";
+				
+					if(user.platform)
+						userContent += "platform: " + user.platform + " ** ";
+
+					if(user.version)
+						userContent += "version: " + user.version + " ** ";
+
+					if(user.model)
+						userContent += "model: " + user.model + " ** ";
+				
+					if(user.manufacturer)
+						userContent += "manufacturer: " + user.manufacturer + " ** ";
+
+					if(user.isVirtual)
+						userContent += "isVirtual: " + user.isVirtual + " ** ";
+				
+					if(user.serial)
+						userContent += "serial: " + user.serial + " ** ";
+				
+					if(user.date)
+						userContent += "date: " + user.date;
+
+					userContent += "\n";
+					counter++;
+
+				
+				});
+
+				let total = users.length;
+				userContent += "<br /> and the total = " + total;
+				//console.log(userContent);
+
+				if(users.length <= 0 ) {
+					 bodycontent = app.get('SMTP').email.bodynouser;
+				}
+				else {
+					bodycontent = app.get('SMTP').email.body + "<br />" + userContent;
+				}
+
+				//console.log(bodycontent);
+				let email = {
+					FromAddress: app.get('SMTP').email.from,
+					Recipients: [{
+						Address: app.get('SMTP').email.to
+					}],
+				  	Headers: { 
+						Subject: app.get('SMTP').email.subject , 
+						From: app.get('SMTP').email.from
+					}, 
+					BodyText: bodycontent,
+					/*BodyHtml: 'this is the HTML version of the ES API test', */
+					Tracking: true
+				};
+
+				let jsonBody = JSON.stringify(email);
+
+				api.get('/administration/users/current', (http_code, response) => {
+
+					if (http_code===200) {
+						AccountId=response.AccountId; //extracts account GUID from response obj
+						console.log("Success!  Account GUID: " + AccountId); //prints out the Account GUID
+						//Next Function sends the message
+						api.easySmtpDelivery(AccountId, jsonBody, (http_code, response) => {
+							if (http_code===200) {
+								console.log("successful connection to EasySMTP API");
+								console.log(response);
+								return cb(null, {result: "Email Sent."});
+							} else { 
+								console.log("Oops, looks like an error on send. Status Code: " + http_code);
+								console.log("Details: " + response);
+								return cb({
+									httpCode: http_code, 
+									response: response
+								});
+							}
+						});
+					} else {
+						console.log("Oops, there was an error when trying to get the account GUID. Status Code: " + http_code);
+						console.log("Details: " + response);
+						return cb({
+							httpCode: http_code, 
+							response: response
+						});
+					}
+				});
+			});
+		};
+
 	};
 })();
