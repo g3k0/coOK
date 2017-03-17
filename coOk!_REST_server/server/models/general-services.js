@@ -142,6 +142,8 @@
 
 				_.each(users, (user) => {
 
+					userContent += "\n"
+
 					userContent += counter + ") ";
 
 					if(user.uuid)
@@ -178,7 +180,7 @@
 				});
 
 				let total = users.length;
-				userContent += "<br /> and the total = " + total;
+				userContent += "\n and the total = " + total;
 				//console.log(userContent);
 
 				if(users.length <= 0 ) {
@@ -208,7 +210,7 @@
 				api.get('/administration/users/current', (http_code, response) => {
 
 					if (http_code===200) {
-						AccountId=response.AccountId; //extracts account GUID from response obj
+						let AccountId = response.AccountId; //extracts account GUID from response obj
 						console.log("Success!  Account GUID: " + AccountId); //prints out the Account GUID
 						//Next Function sends the message
 						api.easySmtpDelivery(AccountId, jsonBody, (http_code, response) => {
