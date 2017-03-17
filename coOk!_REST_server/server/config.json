@@ -35,7 +35,7 @@
   "SMTP": {
       "token": "pKR9KbLeLmTUv0k4m2dkFGDSFGBdvYwipjScgtlG0X4MF-cH1-EufCac4AOxBVA2",
       "email": {
-        "to": "enpassant8@gmail.com",
+        "to": "info@christianpalazzo.org",
         "from": "coOkRESTserver@noreply.com",
         "subject": "coOk! registration notification",
         "body": "Hello Christian, Here is some info of the users who downloaded the app in the whole day of yesterday, that is 24 hours. have fun!",
