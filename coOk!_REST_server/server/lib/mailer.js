@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 var extend = require('extend'),
   path = require('path'),
   nodemailer = require('nodemailer'),

@@ -14,24 +14,6 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$unauthenticated",
-      "permission": "DENY"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "web",
-      "permission": "DENY"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "mobile",
-      "permission": "DENY"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "admin",
       "permission": "ALLOW"
     }
   ],
@@ -92,6 +74,22 @@
           "verb": "get"
         }
       ]
+    },
+
+     "mailService": {
+      "isStatic": true,
+      "accepts": [],
+      "returns": {
+        "arg": "res",
+        "type": "object",
+        "root": true,
+        "description": "service response"
+      },
+      "description": "Getting newly registered users",
+      "http": {
+        "path": "/mailService",
+        "verb": "get"
+      }
     }
 
   }

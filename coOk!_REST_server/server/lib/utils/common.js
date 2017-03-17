@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 /**
  * @author: Christian PAlazzo
  * @date: 2016 November 04
