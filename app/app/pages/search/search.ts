@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {AlertController, ToastController, ModalController, LoadingController, Platform} from 'ionic-angular';
 import {SearchService} from './search.service';
 import {AddRecipePage} from '../add-recipe/add-recipe';
-import {AdMob} from 'ionic-native';
 
 
 @Component({
@@ -29,24 +28,16 @@ export class SearchPage {
 		private modalCtrl: ModalController,
 		private loadingCtrl: LoadingController,
 		private searchData: SearchService,
-		private platform: Platform,
-		private admob: AdMob
+		private platform: Platform
 	) {
 
-	 	//this.searchData.retrieveConfig(function(configData){
-		//let adId = configData.ads.admob_id.ID_app;
-
-		let options = {
-        	adId: 'ca-app-pub-6026705134129133/5082476001',
-        	adSize: 'SMART_BANNER',
-        	isTesting: false
-      	};
-
-      	if(AdMob) {
-			AdMob.createBanner(options).then(() => {
-				AdMob.showBanner(8); //check "https://github.com/floatinghotpot/cordova-admob-pro/wiki/1.2-Method:-AdMob.setOptions()"
-			});
-		}
+	 	searchData.adBanner()
+	 	.then(() => {
+	 		//nothing to do here
+	 	})
+	 	.catch(error => {
+	 		//nothing to do here
+	 	});
 		
 	}
 
