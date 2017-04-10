@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AlertController, ToastController, ModalController, LoadingController} from 'ionic-angular';
+import {AlertController, ToastController, ModalController, LoadingController, Platform} from 'ionic-angular';
 import {SearchService} from './search.service';
 import {AddRecipePage} from '../add-recipe/add-recipe';
 
@@ -27,8 +27,17 @@ export class SearchPage {
 		private toastCtrl: ToastController,
 		private modalCtrl: ModalController,
 		private loadingCtrl: LoadingController,
-		private searchData: SearchService
+		private searchData: SearchService,
+		private platform: Platform
 	) {
+
+	 	searchData.adBanner()
+	 	.then(() => {
+	 		//nothing to do here
+	 	})
+	 	.catch(error => {
+	 		//nothing to do here
+	 	});
 		
 	}
 

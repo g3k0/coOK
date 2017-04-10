@@ -15,5 +15,20 @@
 		"Nessuna ricetta trovata. Inserisci ingredienti intelligibili",
 		"Nessuna ricetta trovata. Mi chiedi troppo",
 		"Nessuna ricetta trovata. Tanto non hai fame, giusto?"
-	]
+	],
+	"adMob" : {
+		"banner": {
+			"id": {
+				"adId" : "ca-app-pub-6026705134129133~3605742804",
+				"adIdPublication" : "ca-app-pub-6026705134129133/5082476001"
+			},
+			"appearance": {
+				"adSize" : "SMART_BANNER",
+				"position" : 8,
+				"autoShow" : true,
+				"isTesting": false
+		 	}
+		}
+	}
 }
+
