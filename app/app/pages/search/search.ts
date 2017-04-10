@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {AlertController, ToastController, ModalController, LoadingController, Platform} from 'ionic-angular';
 import {SearchService} from './search.service';
 import {AddRecipePage} from '../add-recipe/add-recipe';
-import {AdMob} from 'ionic-native/admob';
+import {AdMob} from 'ionic-native';
 
 
 @Component({
@@ -33,24 +33,20 @@ export class SearchPage {
 		private admob: AdMob
 	) {
 
-		platform.ready().then(() => {
+	 	//this.searchData.retrieveConfig(function(configData){
+		//let adId = configData.ads.admob_id.ID_app;
 
-	 		//this.searchData.retrieveConfig(function(configData){
-			//let adId = configData.ads.admob_id.ID_app;
+		let options = {
+        	adId: 'ca-app-pub-6026705134129133/5082476001',
+        	adSize: 'SMART_BANNER',
+        	isTesting: false
+      	};
 
-			let options = {
-        adId: 'ca-app-pub-6026705134129133/5082476001',
-        adSize: 'SMART_BANNER',
-        isTesting: false
-      };
-
-      if(AdMob) {
-				AdMob.createBanner(options).then(() => {
-					AdMob.showBanner(8); //check "https://github.com/floatinghotpot/cordova-admob-pro/wiki/1.2-Method:-AdMob.setOptions()"
-				});
-			}
-		
-		});
+      	if(AdMob) {
+			AdMob.createBanner(options).then(() => {
+				AdMob.showBanner(8); //check "https://github.com/floatinghotpot/cordova-admob-pro/wiki/1.2-Method:-AdMob.setOptions()"
+			});
+		}
 		
 	}
 
