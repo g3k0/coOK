@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {SQLite,AdMob} from 'ionic-native';
+import {SQLite} from 'ionic-native';
 import {Http} from '@angular/http';
 import 'rxjs/Rx';
 
@@ -147,9 +147,9 @@ export class SearchService {
 
 	/*-------------------------------------------------------------------------------------------------------------------*/
 
-	/*
+	/**
 	 * Return a string to display if the recipe search has no results
-	 * {Function} a callback function
+	 * @param {Function} a callback function
 	 */
 	displaySentence(cb) {
 		this.retrieveConfig(config => {
@@ -157,32 +157,4 @@ export class SearchService {
 			return cb(sentences[Math.floor(Math.random()*sentences.length)]);
 		});
 	}
-
-	/*--------------------------------------------------------------------------------------------------------------------*/
-
-	/**
-	 * Display an advertisment banner
-	 */
-	adBanner() {
-		return new Promise((resolve, reject) => {
-			this.retrieveConfig(config => {
-				if(AdMob) {
-					AdMob.createBanner({
-						adId: config.adMob.banner.id.adIdPublication,
-			        	adSize: config.adMob.banner.appearance.adSize,
-			        	isTesting: config.adMob.banner.appearance.isTesting
-					})
-					.then(() => {
-						//check "https://github.com/floatinghotpot/cordova-admob-pro/wiki/1.2-Method:-AdMob.setOptions()"
-						AdMob.showBanner(config.adMob.banner.appearance.position);
-						return resolve();
-					});
-				} else {
-					let error = new Error();
-					error.message = 'Impossible to show the banner';
-					return reject(error);
-				}
-			});
-		});
-	}
- }
+}

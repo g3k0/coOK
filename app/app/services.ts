@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
-import {Device} from 'ionic-native';
-import {SQLite} from 'ionic-native';
+import {Device, SQLite, AdMob} from 'ionic-native';
 import 'rxjs/Rx';
 
 @Injectable()
@@ -186,6 +185,35 @@ export class DataService {
         console.error(`[authentication] Error: ${JSON.stringify(error)}`);
         return reject(error);
       });
+    });
+  }
+
+  /*--------------------------------------------------------------------------------------------------------------------*/
+
+  /**
+   * Display an advertisment banner for Android devices
+   */
+  adBanner() {
+    return new Promise((resolve, reject) => {
+      if(AdMob && Device.device.platform === 'Android') {
+        this.retrieveConfig(config => {
+          AdMob.createBanner({
+            adId: config.adMob.banner.id.adIdPublication,
+            adSize: config.adMob.banner.appearance.adSize,
+            isTesting: config.adMob.banner.appearance.isTesting,
+            autoShow: config.adMob.banner.appearance.autoShow
+          })
+          .then(() => {
+            //check "https://github.com/floatinghotpot/cordova-admob-pro/wiki/1.2-Method:-AdMob.setOptions()"
+            AdMob.showBanner(config.adMob.banner.appearance.position);
+            return resolve();
+          });
+        });
+      } else {
+        let error = new Error();
+        error.message = 'Impossible to show the banner';
+        return reject(error);
+      }
     });
   }
 }
