@@ -31,7 +31,15 @@ export class MyApp {
             data.authentication()
             .then(() => {
                 this.loading = false;
-                return;
+                data.adBanner()
+                .then(() => {
+                    //nothing to do here
+                    return;
+                })
+                .catch(error => {
+                    //nothing to do here
+                    return;
+                });
             })
             .catch((err) => {
                 console.error(`There was an error during the authentication: ${JSON.stringify(err)}`)

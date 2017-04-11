@@ -30,14 +30,6 @@ export class SearchPage {
 		private searchData: SearchService,
 		private platform: Platform
 	) {
-
-	 	searchData.adBanner()
-	 	.then(() => {
-	 		//nothing to do here
-	 	})
-	 	.catch(error => {
-	 		//nothing to do here
-	 	});
 		
 	}
 
