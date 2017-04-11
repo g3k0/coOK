@@ -199,9 +199,9 @@ export class DataService {
         this.retrieveConfig(config => {
           AdMob.createBanner({
             adId: config.adMob.banner.id.adIdPublication,
-                adSize: config.adMob.banner.appearance.adSize,
-                isTesting: config.adMob.banner.appearance.isTesting,
-                autoShow: config.adMob.banner.appearance.autoShow
+            adSize: config.adMob.banner.appearance.adSize,
+            isTesting: config.adMob.banner.appearance.isTesting,
+            autoShow: config.adMob.banner.appearance.autoShow
           })
           .then(() => {
             //check "https://github.com/floatinghotpot/cordova-admob-pro/wiki/1.2-Method:-AdMob.setOptions()"
