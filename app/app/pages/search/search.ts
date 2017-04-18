@@ -229,6 +229,10 @@ export class SearchPage {
 	  	});
     } 
 
+    /**
+     * gesture directive function
+     * @param {string} the event catched by the div tag of the directive
+     */
     doSwipe(direction: string) {
         console.log(direction);
     }
