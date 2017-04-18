@@ -19,7 +19,14 @@ export class HammerGesturesDirective implements AfterViewInit {
             
                 
 
+    /**
+     *
+     */
     ngAfterViewInit() {
+        
+        /*
+         * Docs: http://hammerjs.github.io/getting-started/
+         */
         if (!HammerGesturesDirective.hammerInitialized) {
 
             let hammertime = new Hammer(this.el.nativeElement);
