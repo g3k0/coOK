@@ -28,7 +28,7 @@ export class MyApp {
             StatusBar.styleDefault();
 
             /*Authentication method call*/
-            /*data.authentication()
+            data.authentication()
             .then(() => {
                 this.loading = false;
                 data.adBanner()
@@ -44,7 +44,7 @@ export class MyApp {
             .catch((err) => {
                 console.error(`There was an error during the authentication: ${JSON.stringify(err)}`)
                 return;
-            });*/this.loading=false;
+            });
         });
     }
 
