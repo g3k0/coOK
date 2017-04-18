@@ -1,13 +1,16 @@
 import {Component, ViewChild} from '@angular/core';
-import {ModalController, AlertController, ToastController, ActionSheetController} from 'ionic-angular';
+import {ModalController, AlertController, ToastController, ActionSheetController, NavController} from 'ionic-angular';
 import {SocialSharing} from 'ionic-native';
 import {RecipePage} from '../recipe/recipe';
+import {SearchPage} from '../search/search';
+import {CalendarPage} from '../calendar/calendar';
 import {FavoritesService} from './favorites.service';
 import {Recipe} from '../../interfaces';
+import {HammerGesturesDirective} from '../../directives/hammerGesturesDirective';
 
 @Component({
   templateUrl: 'build/pages/favorites/favorites.html',
-  directives: [RecipePage],
+  directives: [RecipePage, HammerGesturesDirective],
   providers: [FavoritesService]
 })
 
@@ -23,8 +26,10 @@ export class FavoritesPage {
         private modalCtrl: ModalController,
         private favoritesData: FavoritesService,
         private alertCtrl: AlertController,
-        private toastCtrl: ToastController
+        private toastCtrl: ToastController,
+        private nav: NavController
     ) {
+        this.nav = nav;
 
     }
 
@@ -183,4 +188,27 @@ export class FavoritesPage {
         return;
     });
   }
+
+     /**
+     * gesture directive function
+     * @param {string} the event catched by the div tag of the directive
+     */
+
+    doSwipe(direction: string) {
+
+      console.log("Direction: ", direction);
+      switch (direction) {
+        case 'swiperight':
+          this.nav.push(CalendarPage);
+          break;
+
+        case 'swipeleft':
+          this.nav.push(SearchPage);
+          break;
+
+        default:
+          break;
+      }
+        
+    }
 }

@@ -10,6 +10,8 @@
 </ion-header>
 
 <ion-content padding class="calendar flip-container" [class.flipped]="flipped">
+
+	<div class="gestures" (onGesture)="doSwipe($event)" hammer-gestures>
     <div class="flipper">
 		
 	    <div class="front">
@@ -80,6 +82,7 @@
 
 	    </div> <!-- back -->
 
-	</div> <!-- flipper -->
+	  </div> <!-- flipper -->
 
+  </div>
 </ion-content>

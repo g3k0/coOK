@@ -65,6 +65,12 @@
 	background-image: url('../../asset/bg1.png');
 	background-repeat: repeat;
 	color: color($colors, fontColor, base);
+
+
+	div.gestures {
+		height: 100%;
+	}
+
 	
 	/**
 	 * calendar table

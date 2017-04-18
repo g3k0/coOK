@@ -1,15 +1,18 @@
 import {Component, ViewChild} from '@angular/core';
-import {ModalController, AlertController, ToastController} from 'ionic-angular';
+import {ModalController, AlertController, ToastController, NavController} from 'ionic-angular';
 import {RecipePage} from '../recipe/recipe';
 import {AddRecipePage} from '../add-recipe/add-recipe';
 import {ShoppingListPage} from '../shopping-list/shopping-list';
 import {CalendarService} from './calendar.service';
 import {FavoritesService} from '../favorites/favorites.service';
+import {InfoPage} from '../info/info';
+import {FavoritesPage} from '../favorites/favorites';
 import {Recipe} from '../../interfaces';
+import {HammerGesturesDirective} from '../../directives/hammerGesturesDirective';
 
 @Component({
 	templateUrl: 'build/pages/calendar/calendar.html',
-	directives: [RecipePage, AddRecipePage],
+	directives: [RecipePage, AddRecipePage, HammerGesturesDirective],
   providers: [CalendarService,FavoritesService]
 })
 
@@ -36,9 +39,10 @@ export class CalendarPage {
     private toastCtrl: ToastController,
     private calendarData: CalendarService,
     private favoritesData: FavoritesService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private nav: NavController
 	) {
- 		  
+ 		  this.nav = nav;
 	}
 
   /**
@@ -199,4 +203,28 @@ export class CalendarPage {
     });
     confirm.present();
   }
+
+     /**
+     * gesture directive function
+     * @param {string} the event catched by the div tag of the directive
+     */
+
+    doSwipe(direction: string) {
+
+      console.log("Direction: ", direction);
+      switch (direction) {
+        case 'swiperight':
+          this.nav.push(InfoPage);
+          break;
+
+        case 'swipeleft':
+          this.nav.push(FavoritesPage);
+          break;
+
+        default:
+          break;
+      }
+        
+    }
+
 }

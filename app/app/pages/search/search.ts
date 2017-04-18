@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {AlertController, ToastController, ModalController, LoadingController, Platform} from 'ionic-angular';
+import {AlertController, ToastController, ModalController, LoadingController, Platform, NavController} from 'ionic-angular';
 import {SearchService} from './search.service';
 import {AddRecipePage} from '../add-recipe/add-recipe';
+import {FavoritesPage} from '../favorites/favorites';
 import {HammerGesturesDirective} from '../../directives/hammerGesturesDirective';
 
 @Component({
@@ -28,8 +29,11 @@ export class SearchPage {
 		private modalCtrl: ModalController,
 		private loadingCtrl: LoadingController,
 		private searchData: SearchService,
-		private platform: Platform
+		private platform: Platform,
+    private nav: NavController
+
 	) {
+		this.nav = nav;
 		
 	}
 
@@ -234,6 +238,14 @@ export class SearchPage {
      * @param {string} the event catched by the div tag of the directive
      */
     doSwipe(direction: string) {
-        console.log(direction);
+    	switch (direction) {
+    		 case 'swipeleft':
+    		 console.log(direction);
+    		 this.nav.push(FavoritesPage);
+    			break;
+    		default:
+    			break;
+    	}
+        
     }
 }
