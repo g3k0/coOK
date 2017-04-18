@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content padding class="search">
-    
+    <div (onGesture)="doSwipe($event)" hammer-gestures>
     <h5>Ricerca ricette per ingredienti</h5>
 
     <div class="search-ingredients">
@@ -67,5 +67,5 @@
     </button>
 
     <button ion-button color="success" class="search-button" (click)="search()">Cerca</button>
-
+    </div>
 </ion-content>

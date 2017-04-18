@@ -2,11 +2,11 @@ import {Component} from '@angular/core';
 import {AlertController, ToastController, ModalController, LoadingController, Platform} from 'ionic-angular';
 import {SearchService} from './search.service';
 import {AddRecipePage} from '../add-recipe/add-recipe';
-
+import {HammerGesturesDirective} from '../../directives/hammerGesturesDirective';
 
 @Component({
 	templateUrl: 'build/pages/search/search.html',
-	directives: [AddRecipePage],
+	directives: [AddRecipePage, HammerGesturesDirective],
     providers: [SearchService]
 })
 
@@ -228,4 +228,8 @@ export class SearchPage {
 	  		return;
 	  	});
     } 
+
+    doSwipe(direction: string) {
+        console.log(direction);
+    }
 }
