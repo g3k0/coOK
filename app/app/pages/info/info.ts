@@ -25,7 +25,7 @@ export class InfoPage {
     switch (direction) {
       case 'swiperight':
         this.nav.parent.select(2);
-        this.nav.parent.previousTab(false);
+        this.nav.parent.previousTab(true);
         //this.nav.setRoot(CalendarPage);
         break;
       default:

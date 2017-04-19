@@ -197,7 +197,7 @@ export class FavoritesPage {
 
       case 'swiperight':
         this.nav.parent.select(0);
-        this.nav.parent.previousTab(false);
+        this.nav.parent.previousTab(true);
         //this.nav.setRoot(SearchPage);
         break;
 
