@@ -1,0 +1,2 @@
+proxy=http://'christian.palazzo':'parisDakkar_8'@192.168.3.230:8080
+rejectUnauthorized=false

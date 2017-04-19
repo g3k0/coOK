@@ -13,4 +13,4 @@ Thumbs.db
 .gradle
 .tmp
 app/**/*.js
-!extlibs/
+!app/extlibs/

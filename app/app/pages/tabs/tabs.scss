@@ -3,4 +3,8 @@ ion-tabbar {
 	.tab-button {
 		color: color($colors, inverseFontColor, base);
 	}
+
+	.tab-button[aria-selected=true] {
+		color: color($colors, inverseFontColor, base);
+	}
 }

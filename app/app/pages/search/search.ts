@@ -1,12 +1,13 @@
 import {Component} from '@angular/core';
-import {AlertController, ToastController, ModalController, LoadingController, Platform} from 'ionic-angular';
+import {AlertController, ToastController, ModalController, LoadingController, Platform, NavController} from 'ionic-angular';
 import {SearchService} from './search.service';
 import {AddRecipePage} from '../add-recipe/add-recipe';
-
+import {FavoritesPage} from '../favorites/favorites';
+import {HammerGesturesDirective} from '../../directives/hammerGesturesDirective';
 
 @Component({
 	templateUrl: 'build/pages/search/search.html',
-	directives: [AddRecipePage],
+	directives: [AddRecipePage, HammerGesturesDirective],
     providers: [SearchService]
 })
 
@@ -28,7 +29,9 @@ export class SearchPage {
 		private modalCtrl: ModalController,
 		private loadingCtrl: LoadingController,
 		private searchData: SearchService,
-		private platform: Platform
+		private platform: Platform,
+    	private nav: NavController
+
 	) {
 		
 	}
@@ -228,4 +231,17 @@ export class SearchPage {
 	  		return;
 	  	});
     } 
+
+    /**
+     * gesture directive function
+     * @param {string} the event catched by the div tag of the directive
+     */
+    doSwipe(direction: string) {
+
+    	if (direction === 'swipeleft') {
+    		//this.nav.parent.select(1);
+    		this.nav.setRoot(FavoritesPage);
+    	}
+        
+    }
 }
