@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
+import {CalendarPage} from '../calendar/calendar';
 import {HammerGesturesDirective} from '../../directives/hammerGesturesDirective';
 
 @Component({
@@ -23,7 +24,7 @@ export class InfoPage {
 	doSwipe(direction: string) {
     switch (direction) {
       case 'swiperight':
-        this.nav.pop();
+        this.nav.setRoot(CalendarPage);
         break;
       default:
         break;

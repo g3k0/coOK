@@ -3,6 +3,7 @@ import {ModalController, AlertController, ToastController, ActionSheetController
 import {SocialSharing} from 'ionic-native';
 import {RecipePage} from '../recipe/recipe';
 import {CalendarPage} from '../calendar/calendar';
+import {SearchPage} from '../search/search';
 import {FavoritesService} from './favorites.service';
 import {Recipe} from '../../interfaces';
 import {HammerGesturesDirective} from '../../directives/hammerGesturesDirective';
@@ -195,11 +196,11 @@ export class FavoritesPage {
     switch (direction) {
 
       case 'swiperight':
-        this.nav.pop();
+        this.nav.setRoot(SearchPage);
         break;
 
       case 'swipeleft':
-        this.nav.push(CalendarPage);
+        this.nav.setRoot(CalendarPage);
         break;
 
       default:

@@ -239,7 +239,7 @@ export class SearchPage {
     doSwipe(direction: string) {
     	switch (direction) {
     		 case 'swipeleft':
-    		 	this.nav.push(FavoritesPage);
+    		 	this.nav.setRoot(FavoritesPage);
     			break;
     		default:
     			break;

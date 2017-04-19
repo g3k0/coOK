@@ -6,6 +6,7 @@ import {ShoppingListPage} from '../shopping-list/shopping-list';
 import {CalendarService} from './calendar.service';
 import {FavoritesService} from '../favorites/favorites.service';
 import {InfoPage} from '../info/info';
+import {FavoritesPage} from '../favorites/favorites';
 import {Recipe} from '../../interfaces';
 import {HammerGesturesDirective} from '../../directives/hammerGesturesDirective';
 
@@ -210,11 +211,11 @@ export class CalendarPage {
   doSwipe(direction: string) {
     switch (direction) {
       case 'swiperight':
-        this.nav.pop();
+        this.nav.setRoot(FavoritesPage);
         break;
 
       case 'swipeleft':
-        this.nav.push(InfoPage);
+        this.nav.setRoot(InfoPage);
         break;
 
       default:
