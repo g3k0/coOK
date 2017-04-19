@@ -196,11 +196,17 @@ export class FavoritesPage {
     switch (direction) {
 
       case 'swiperight':
-        this.nav.setRoot(SearchPage);
+        this.nav.setRoot(SearchPage)
+        .then(() =>{
+             this.nav.parent.select(0);
+           });
         break;
 
       case 'swipeleft':
-        this.nav.setRoot(CalendarPage);
+        this.nav.setRoot(CalendarPage)
+        .then(() =>{
+             this.nav.parent.select(2);
+           });
         break;
 
       default:

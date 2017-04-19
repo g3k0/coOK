@@ -211,11 +211,17 @@ export class CalendarPage {
   doSwipe(direction: string) {
     switch (direction) {
       case 'swiperight':
-        this.nav.setRoot(FavoritesPage);
+        this.nav.setRoot(FavoritesPage)
+        .then(() =>{
+          this.nav.parent.select(1);
+        });
         break;
 
       case 'swipeleft':
-        this.nav.setRoot(InfoPage);
+        this.nav.setRoot(InfoPage)
+        .then(() =>{
+          this.nav.parent.select(3);
+        });
         break;
 
       default:
