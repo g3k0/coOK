@@ -30,10 +30,9 @@ export class SearchPage {
 		private loadingCtrl: LoadingController,
 		private searchData: SearchService,
 		private platform: Platform,
-    private nav: NavController
+    	private nav: NavController
 
 	) {
-		this.nav = nav;
 		
 	}
 
@@ -240,8 +239,7 @@ export class SearchPage {
     doSwipe(direction: string) {
     	switch (direction) {
     		 case 'swipeleft':
-    		 console.log(direction);
-    		 this.nav.push(FavoritesPage);
+    		 	this.nav.push(FavoritesPage);
     			break;
     		default:
     			break;

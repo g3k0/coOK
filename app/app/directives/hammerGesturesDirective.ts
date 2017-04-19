@@ -7,17 +7,13 @@ import {Directive, ElementRef, AfterViewInit, Output, EventEmitter} from '@angul
 export class HammerGesturesDirective implements AfterViewInit {
 
     @Output() onGesture = new EventEmitter();
-    static hammerInitialized = false;
+    //static hammerInitialized = false;
 
     constructor(
         private el: ElementRef
     ) {
 
-    }
- 
-        
-            
-                
+    }          
 
     /**
      *
@@ -27,32 +23,28 @@ export class HammerGesturesDirective implements AfterViewInit {
         /*
          * Docs: http://hammerjs.github.io/getting-started/
          */
-        if (!HammerGesturesDirective.hammerInitialized) {
+        //if (!HammerGesturesDirective.hammerInitialized) {
 
             let hammertime = new Hammer(this.el.nativeElement);
             hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
-            hammertime.on('swipeup', (ev) => {
-                console.log('u');
+            /*hammertime.on('swipeup', (ev) => {
                 this.onGesture.emit('swipeup');
             });
             hammertime.on('swipedown', (ev) => {
-                console.log('d');
-                this.onGesture.emit('swipedown');
-            });
+               this.onGesture.emit('swipedown');
+            });*/
             hammertime.on('swipeleft', (ev) => {
-                console.log('l');
                 this.onGesture.emit('swipeleft');
             });
             hammertime.on('swiperight', (ev) => {
-                console.log('r');
                 this.onGesture.emit('swiperight');
             });
-            hammertime.on('tap', (ev) => {
+            /*hammertime.on('tap', (ev) => {
                 this.onGesture.emit('tap');
-            });
+            });*/
 
-            HammerGesturesDirective.hammerInitialized = true;
-        }
+            //HammerGesturesDirective.hammerInitialized = true;
+        //}
 
 
     }

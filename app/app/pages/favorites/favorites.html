@@ -8,41 +8,43 @@
         </div>
     </ion-navbar>
 </ion-header>
+
 <div class="image">
-            <img class="header-logo" src="asset/teaser.png" /> 
-        </div>
-        <div class="title">
-            <ion-title>Cerca Ricette</ion-title>
-        </div>
+    <img class="header-logo" src="asset/teaser.png" /> 
+</div>
+<div class="title">
+    <ion-title>Cerca Ricette</ion-title>
+</div>
+
 <ion-content padding class="favorites">
 
  	<div class="gestures" (onGesture)="doSwipe($event)" hammer-gestures>
 
 		<ion-searchbar *ngIf="!message" (ionInput)="getItems($event)"></ion-searchbar>
 
-	<button class="update-favorites" ion-button color="success" (click)="getFavorites()">Aggiorna i favoriti</button>
+		<button class="update-favorites" ion-button color="success" (click)="getFavorites()">Aggiorna i favoriti</button>
 
-	<div class="favorites-message" *ngIf="message">{{message}}</div>
+		<div class="favorites-message" *ngIf="message">{{message}}</div>
 	
-	<div class="item" *ngFor="let item of items;let index=index ">
+		<div class="item" *ngFor="let item of items;let index=index ">
 
-		<div class="container">
+			<div class="container">
 
-			<div class="name" (click)="presentModal(item)">
-				{{item.name}}
+				<div class="name" (click)="presentModal(item)">
+					{{item.name}}
+				</div>
+				
+				<div class="icon">
+					<ion-icon name="share" (click)="share(item)"></ion-icon>
+				</div>
+
+				<div class="icon">
+					<ion-icon name="trash" (click)="showDeleteConfirm(item.name)"></ion-icon>
+				</div>
+
 			</div>
 			
-			<div class="icon">
-				<ion-icon name="share" (click)="share(item)"></ion-icon>
-			</div>
-
-			<div class="icon">
-				<ion-icon name="trash" (click)="showDeleteConfirm(item.name)"></ion-icon>
-			</div>
-
 		</div>
-		
-	</div>
 
 	</div>
 

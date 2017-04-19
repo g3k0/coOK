@@ -2,7 +2,6 @@ import {Component, ViewChild} from '@angular/core';
 import {ModalController, AlertController, ToastController, ActionSheetController, NavController} from 'ionic-angular';
 import {SocialSharing} from 'ionic-native';
 import {RecipePage} from '../recipe/recipe';
-import {SearchPage} from '../search/search';
 import {CalendarPage} from '../calendar/calendar';
 import {FavoritesService} from './favorites.service';
 import {Recipe} from '../../interfaces';
@@ -29,7 +28,6 @@ export class FavoritesPage {
         private toastCtrl: ToastController,
         private nav: NavController
     ) {
-        this.nav = nav;
 
     }
 
@@ -189,26 +187,23 @@ export class FavoritesPage {
     });
   }
 
-     /**
-     * gesture directive function
-     * @param {string} the event catched by the div tag of the directive
-     */
+  /**
+   * gesture directive function
+   * @param {string} the event catched by the div tag of the directive
+   */
+  doSwipe(direction: string) {
+    switch (direction) {
 
-    doSwipe(direction: string) {
+      case 'swiperight':
+        this.nav.pop();
+        break;
 
-      console.log("Direction: ", direction);
-      switch (direction) {
-        case 'swiperight':
-          this.nav.push(CalendarPage);
-          break;
+      case 'swipeleft':
+        this.nav.push(CalendarPage);
+        break;
 
-        case 'swipeleft':
-          this.nav.push(SearchPage);
-          break;
-
-        default:
-          break;
-      }
-        
+      default:
+        break;
     }
+  }
 }
