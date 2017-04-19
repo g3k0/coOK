@@ -212,7 +212,8 @@ export class CalendarPage {
     switch (direction) {
       case 'swiperight':
         this.nav.parent.select(1);
-        this.nav.setRoot(FavoritesPage);
+        this.nav.parent.previousTab(true);
+        //this.nav.setRoot(FavoritesPage);
         break;
 
       case 'swipeleft':
