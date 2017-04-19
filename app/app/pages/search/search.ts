@@ -237,13 +237,10 @@ export class SearchPage {
      * @param {string} the event catched by the div tag of the directive
      */
     doSwipe(direction: string) {
-    	switch (direction) {
-    		 case 'swipeleft':
-    		 	this.nav.parent.select(1);
-    		 	this.nav.setRoot(FavoritesPage);
-    			break;
-    		default:
-    			break;
+
+    	if (direction === 'swipeleft') {
+    		this.nav.parent.select(1);
+    		this.nav.setRoot(FavoritesPage);
     	}
         
     }

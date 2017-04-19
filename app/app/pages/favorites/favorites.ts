@@ -193,21 +193,17 @@ export class FavoritesPage {
    * @param {string} the event catched by the div tag of the directive
    */
   doSwipe(direction: string) {
-    switch (direction) {
 
-      case 'swiperight':
-        this.nav.parent.select(0);
-        this.nav.parent.previousTab(true);
-        //this.nav.setRoot(SearchPage);
-        break;
-
-      case 'swipeleft':
-        this.nav.parent.select(2);
-        this.nav.setRoot(CalendarPage);
-        break;
-
-      default:
-        break;
+    if (direction === 'swiperight') {
+      this.nav.parent.select(0);
+      this.nav.parent.previousTab(true);
+      //this.nav.setRoot(SearchPage);
     }
+
+    if (direction === 'swipeleft') {
+      this.nav.parent.select(2);
+      this.nav.setRoot(CalendarPage);
+    }
+    
   }
 }

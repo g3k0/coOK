@@ -209,20 +209,17 @@ export class CalendarPage {
    * @param {string} the event catched by the div tag of the directive
    */
   doSwipe(direction: string) {
-    switch (direction) {
-      case 'swiperight':
-        this.nav.parent.select(1);
-        this.nav.parent.previousTab(true);
-        //this.nav.setRoot(FavoritesPage);
-        break;
 
-      case 'swipeleft':
-        this.nav.parent.select(3);
-        this.nav.setRoot(InfoPage);
-        break;
+    if (direction === 'swiperight') {
+      this.nav.parent.select(1);
+      this.nav.parent.previousTab(true);
+      //this.nav.setRoot(FavoritesPage);
+    }
 
-      default:
-        break;
-    } 
+    if (direction === 'swipeleft') {
+      this.nav.parent.select(3);
+      this.nav.setRoot(InfoPage);
+    }
+     
   }
 }

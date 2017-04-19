@@ -22,14 +22,12 @@ export class InfoPage {
    * @param {string} the event catched by the div tag of the directive
    */
 	doSwipe(direction: string) {
-    switch (direction) {
-      case 'swiperight':
-        this.nav.parent.select(2);
-        this.nav.parent.previousTab(true);
-        //this.nav.setRoot(CalendarPage);
-        break;
-      default:
-        break;
+
+    if (direction === 'swiperight') {
+      this.nav.parent.select(2);
+      this.nav.parent.previousTab(true);
+      //this.nav.setRoot(CalendarPage);
     }
+
   }
 }
