@@ -195,13 +195,13 @@ export class FavoritesPage {
   doSwipe(direction: string) {
 
     if (direction === 'swiperight') {
-      this.nav.parent.select(0);
-      this.nav.parent.previousTab(true);
-      //this.nav.setRoot(SearchPage);
+      //this.nav.parent.select(0);
+      //this.nav.parent.previousTab(true);
+      this.nav.setRoot(SearchPage);
     }
 
     if (direction === 'swipeleft') {
-      this.nav.parent.select(2);
+      //this.nav.parent.select(2);
       this.nav.setRoot(CalendarPage);
     }
     

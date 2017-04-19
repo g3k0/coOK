@@ -211,13 +211,13 @@ export class CalendarPage {
   doSwipe(direction: string) {
 
     if (direction === 'swiperight') {
-      this.nav.parent.select(1);
-      this.nav.parent.previousTab(true);
-      //this.nav.setRoot(FavoritesPage);
+      //this.nav.parent.select(1);
+      //this.nav.parent.previousTab(true);
+      this.nav.setRoot(FavoritesPage);
     }
 
     if (direction === 'swipeleft') {
-      this.nav.parent.select(3);
+      //this.nav.parent.select(3);
       this.nav.setRoot(InfoPage);
     }
      

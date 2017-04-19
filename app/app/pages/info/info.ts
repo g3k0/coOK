@@ -24,9 +24,9 @@ export class InfoPage {
 	doSwipe(direction: string) {
 
     if (direction === 'swiperight') {
-      this.nav.parent.select(2);
-      this.nav.parent.previousTab(true);
-      //this.nav.setRoot(CalendarPage);
+      //this.nav.parent.select(2);
+      //this.nav.parent.previousTab(true);
+      this.nav.setRoot(CalendarPage);
     }
 
   }
