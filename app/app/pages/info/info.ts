@@ -24,10 +24,8 @@ export class InfoPage {
 	doSwipe(direction: string) {
     switch (direction) {
       case 'swiperight':
-        this.nav.setRoot(CalendarPage)
-        .then(() =>{
-          this.nav.parent.select(2);
-        });
+        this.nav.parent.select(2);
+        this.nav.setRoot(CalendarPage);
         break;
       default:
         break;
