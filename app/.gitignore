@@ -12,3 +12,6 @@ plugins/
 Thumbs.db
 .gradle
 .tmp
+app/**/*.js
+!app/extlibs/
+.typingsrc

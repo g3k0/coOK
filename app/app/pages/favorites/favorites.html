@@ -8,20 +8,24 @@
         </div>
     </ion-navbar>
 </ion-header>
+
 <div class="image">
-            <img class="header-logo" src="asset/teaser.png" /> 
-        </div>
-        <div class="title">
-            <ion-title>Cerca Ricette</ion-title>
-        </div>
+    <img class="header-logo" src="asset/teaser.png" /> 
+</div>
+<div class="title">
+    <ion-title>Cerca Ricette</ion-title>
+</div>
+
 <ion-content padding class="favorites">
 
-	<ion-searchbar *ngIf="!message" (ionInput)="getItems($event)"></ion-searchbar>
+ 	<div class="gestures" (onGesture)="doSwipe($event)" hammer-gestures>
+
+		<ion-searchbar *ngIf="!message" (ionInput)="getItems($event)"></ion-searchbar>
 
 		<button class="update-favorites" ion-button color="success" (click)="getFavorites()">Aggiorna i favoriti</button>
 
 		<div class="favorites-message" *ngIf="message">{{message}}</div>
-		
+	
 		<div class="item" *ngFor="let item of items;let index=index ">
 
 			<div class="container">
@@ -39,7 +43,9 @@
 				</div>
 
 			</div>
-
+			
 		</div>
+
+	</div>
 
 </ion-content>

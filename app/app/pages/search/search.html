@@ -10,62 +10,62 @@
 </ion-header>
 
 <ion-content padding class="search">
-    
-    <h5>Ricerca ricette per ingredienti</h5>
+    <div class="gestures" (onGesture)="doSwipe($event)" hammer-gestures>
+        <h5>Ricerca ricette per ingredienti</h5>
 
-    <div class="search-ingredients">
-        <ion-item>
-            <ion-label fixed>Ingredienti</ion-label>
-            <ion-input type="text" value="" [(ngModel)]="ingredient" (input)="checkIngredient(ingredient)"></ion-input>
-        </ion-item>
-        <button type="submit" (click)="pushIngredient(ingredient);ingredient=null" [disabled]="wrongIngredient">+</button>
-    </div>
-    
-    <div class="ingredients">
-        <div class="container">
-            <div class="box" *ngFor="let ingredient of ingredients">
-                <p>
-                    {{ingredient}} 
-                    <span (click)="deleteIngredient(ingredient)">x</span>
-                </p>
+        <div class="search-ingredients">
+            <ion-item>
+                <ion-label fixed>Ingredienti</ion-label>
+                <ion-input type="text" value="" [(ngModel)]="ingredient" (input)="checkIngredient(ingredient)"></ion-input>
+            </ion-item>
+            <button type="submit" (click)="pushIngredient(ingredient);ingredient=null" [disabled]="wrongIngredient">+</button>
+        </div>
+        
+        <div class="ingredients">
+            <div class="container">
+                <div class="box" *ngFor="let ingredient of ingredients">
+                    <p>
+                        {{ingredient}} 
+                        <span (click)="deleteIngredient(ingredient)">x</span>
+                    </p>
+                </div>
             </div>
         </div>
+
+        <h5 class="filters-title">Migliora la ricerca con i filtri</h5>
+        
+        <ion-card class="filters">
+
+            <ion-list>
+
+                <button ion-item (click)="recipeName()">
+                    <ion-icon name="create" item-left></ion-icon>
+                    Nome Ricetta
+                    <div class="show-filter" *ngIf="filters.recipeName">({{filters.recipeName}})</div>
+                </button>
+
+                <button ion-item (click)="mainIngredient()">
+                    <ion-icon name="pizza" item-left></ion-icon>
+                    Ingrediente principale
+                    <div class="show-filter" *ngIf="filters.mainIngredient">({{filters.mainIngredient}})</div>
+                </button>
+
+                <button ion-item (click)="recipeType()">
+                    <ion-icon name="restaurant" item-left></ion-icon>
+                    Tipo di piatto
+                    <div class="show-filter" *ngIf="filters.recipeType.length">
+                        (<span *ngFor="let type of filters.recipeType">{{type + ' ' }}</span>)
+                    </div>
+                </button>
+
+            </ion-list>
+
+        </ion-card>
+
+        <button ion-button color="secondary" small (click)="clearFilters();presentToast('top')">
+            Reset filtri
+        </button>
+
+        <button ion-button color="success" class="search-button" (click)="search()">Cerca</button>
     </div>
-
-    <h5 class="filters-title">Migliora la ricerca con i filtri</h5>
-    
-    <ion-card class="filters">
-
-        <ion-list>
-
-            <button ion-item (click)="recipeName()">
-                <ion-icon name="create" item-left></ion-icon>
-                Nome Ricetta
-                <div class="show-filter" *ngIf="filters.recipeName">({{filters.recipeName}})</div>
-            </button>
-
-            <button ion-item (click)="mainIngredient()">
-                <ion-icon name="pizza" item-left></ion-icon>
-                Ingrediente principale
-                <div class="show-filter" *ngIf="filters.mainIngredient">({{filters.mainIngredient}})</div>
-            </button>
-
-            <button ion-item (click)="recipeType()">
-                <ion-icon name="restaurant" item-left></ion-icon>
-                Tipo di piatto
-                <div class="show-filter" *ngIf="filters.recipeType.length">
-                    (<span *ngFor="let type of filters.recipeType">{{type + ' ' }}</span>)
-                </div>
-            </button>
-
-        </ion-list>
-
-    </ion-card>
-
-    <button ion-button color="secondary" small (click)="clearFilters();presentToast('top')">
-        Reset filtri
-    </button>
-
-    <button ion-button color="success" class="search-button" (click)="search()">Cerca</button>
-
 </ion-content>
