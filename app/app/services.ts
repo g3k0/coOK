@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Device, SQLite, AdMob} from 'ionic-native';
+import {SingletonClass} from './singleton';
 import 'rxjs/Rx';
 
 @Injectable()
@@ -95,12 +96,16 @@ export class DataService {
    */
   authentication() {
     return new Promise((resolve, reject) => {
-      let db = new SQLite();
-      db.openDatabase({
-          name: 'data.db',
-          location: 'default'
-      })
-      .then(() => {
+
+      let singleton = SingletonClass.getInstance();
+      singleton.openDB((db) => {
+        
+      // let db = new SQLite();
+      // db.openDatabase({
+      //     name: 'data.db',
+      //     location: 'default'
+      // })
+      // .then(() => {
         db.executeSql(`CREATE TABLE IF NOT EXISTS system (id INTEGER PRIMARY KEY AUTOINCREMENT, key VARCHAR(255), value VARCHAR(255))`, {})
         .then((system) => {
           console.log('TABLE CREATED: ', system);
@@ -180,11 +185,11 @@ export class DataService {
               });
             }
         });
-      })
-      .catch((error) => {
-        console.error(`[authentication] Error: ${JSON.stringify(error)}`);
-        return reject(error);
       });
+      // .catch((error) => {
+      //   console.error(`[authentication] Error: ${JSON.stringify(error)}`);
+      //   return reject(error);
+      // });
     });
   }
 
