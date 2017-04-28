@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {SQLite} from 'ionic-native';
 import {Recipe} from '../../interfaces';
+import {DBSingletonClass} from '../../databaseSingleton';
 import 'rxjs/Rx';
 
 @Injectable()
@@ -16,11 +17,16 @@ export class FavoritesService {
   addRecipeToFavorites(recipe:Recipe) {
     if (!recipe) return;
     return new Promise((resolve, reject) => {
-      let db = new SQLite();
-      db.openDatabase({
-          name: 'data.db',
-          location: 'default'
-      }).then(() => {
+
+      let dbSingleton = DBSingletonClass.getInstance();
+
+      dbSingleton.openDB((db) => {
+
+      // let db = new SQLite();
+      // db.openDatabase({
+      //     name: 'data.db',
+      //     location: 'default'
+      // }).then(() => {
         let name = recipe.name.replace(new RegExp("'", 'g'),"\"");
         let type = recipe.type.replace(new RegExp("'", 'g'),"\"");
         let mainIngredient = recipe.mainIngredient.replace(new RegExp("'", 'g'),"\"");
@@ -32,6 +38,7 @@ export class FavoritesService {
           let ing = ingredient.replace(new RegExp("'", 'g'),"\"")
           ingredients.push(ing);
         }
+
         db.executeSql(`
           INSERT INTO favorites
           (name, type, mainIngredient, persons, notes, ingredients, preparation)
@@ -50,11 +57,11 @@ export class FavoritesService {
             return resolve();
           });
         });
-      })
-      .catch((error) => {
-        console.error(`[addRecipeToFavorites] Error: ${JSON.stringify(error)}`);
-        return reject(error);
       });
+      // .catch((error) => {
+      //   console.error(`[addRecipeToFavorites] Error: ${JSON.stringify(error)}`);
+      //   return reject(error);
+      // });
     });
   }
 

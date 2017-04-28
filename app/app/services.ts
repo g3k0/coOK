@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Device, SQLite, AdMob} from 'ionic-native';
-import {SingletonClass} from './singleton';
+import {DBSingletonClass} from './databaseSingleton';
 import 'rxjs/Rx';
 
 @Injectable()
@@ -97,9 +97,9 @@ export class DataService {
   authentication() {
     return new Promise((resolve, reject) => {
 
-      let singleton = SingletonClass.getInstance();
-      singleton.openDB((db) => {
-        
+      let dbSingleton = DBSingletonClass.getInstance();
+      dbSingleton.openDB((db) => {
+
       // let db = new SQLite();
       // db.openDatabase({
       //     name: 'data.db',
