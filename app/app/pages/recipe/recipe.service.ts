@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
-import {SQLite} from 'ionic-native';
+import {DBSingletonClass} from '../../database';
 import 'rxjs/Rx';
 
 @Injectable()
@@ -31,13 +31,9 @@ export class RecipeService {
 	 */
 	retrieveAccessToken() {
 	    return new Promise((resolve, reject) => {
-	      let db = new SQLite();
+	      DBSingletonClass.getInstance((instance) => {
 	      let access_token = '';
-	      db.openDatabase({
-	          name: 'data.db',
-	          location: 'default'
-	      }).then(() => {
-	        db.executeSql(`SELECT key, value FROM system WHERE key = 'access_token'`
+	        instance.db.executeSql(`SELECT key, value FROM system WHERE key = 'access_token'`
 	          , []).then((data) => {
 	            if (!data.rows.length) {
 	              return reject('data not found');
@@ -45,14 +41,8 @@ export class RecipeService {
 	            for(var i = 0; i < data.rows.length; i++) {
 	                access_token = data.rows.item(i).value;
 	            }
-	            db.close().then(() => {
-	              return resolve(access_token);
-	            });
+	            return resolve(access_token);
 	          });
-	      })
-	      .catch((error) => {
-	        console.error(`[retrieveAccessToken] Error: ${JSON.stringify(error)}`);
-	        return reject(error);
 	      });
 	    });
 	}
@@ -61,8 +51,8 @@ export class RecipeService {
 
 	/**
 	 * It calls a back end service for the calculation of new ingredients quantities
-	 * param {number} the new people number
-	 * param {string} the recipe name
+	 * @param {number} the new people number
+	 * @param {string} the recipe name
 	 */
 	ingredientsCalculation(persons:number, recipeName:string) {
 		return new Promise((resolve, reject) => {
@@ -89,9 +79,6 @@ export class RecipeService {
 
 				});
 			});
-			/*mock*/
-			//let res:string[] = ['mock 1', 'mock 2', 'mock 3'];
-			//return resolve(res);
 		});
 	}
 }

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {SQLite} from 'ionic-native';
+import {DBSingletonClass} from '../../database';
 import {Http} from '@angular/http';
 import 'rxjs/Rx';
 
@@ -31,13 +31,9 @@ export class SearchService {
 	 */
 	retrieveAccessToken() {
 	    return new Promise((resolve, reject) => {
-	      let db = new SQLite();
+	      DBSingletonClass.getInstance((instance) => {
 	      let access_token = '';
-	      db.openDatabase({
-	          name: 'data.db',
-	          location: 'default'
-	      }).then(() => {
-	        db.executeSql(`SELECT key, value FROM system WHERE key = 'access_token'`
+	        instance.db.executeSql(`SELECT key, value FROM system WHERE key = 'access_token'`
 	          , []).then((data) => {
 	            if (!data.rows.length) {
 	              return reject('data not found');
@@ -45,14 +41,8 @@ export class SearchService {
 	            for(var i = 0; i < data.rows.length; i++) {
 	                access_token = data.rows.item(i).value;
 	            }
-	            db.close().then(() => {
-	              return resolve(access_token);
-	            });
+	            return resolve(access_token);
 	          });
-	      })
-	      .catch((error) => {
-	        console.error(`[retrieveAccessToken] Error: ${JSON.stringify(error)}`);
-	        return reject(error);
 	      });
 	    });
 	}

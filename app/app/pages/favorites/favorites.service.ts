@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {SQLite} from 'ionic-native';
 import {Recipe} from '../../interfaces';
 import {DBSingletonClass} from '../../database';
 import 'rxjs/Rx';
@@ -57,12 +56,8 @@ export class FavoritesService {
    */
   retrieveFavorites() {
     return new Promise((resolve, reject) =>{
-      let db = new SQLite();
-      db.openDatabase({
-          name: 'data.db',
-          location: 'default'
-      }).then(() => {
-        db.executeSql(`SELECT 
+      DBSingletonClass.getInstance((instance) => {
+        instance.db.executeSql(`SELECT 
           name,
           type,
           mainIngredient,
@@ -92,15 +87,9 @@ export class FavoritesService {
               preparation: recipe.preparation.replace(new RegExp("\"", 'g'),"'")
             };
           }
-          db.close().then(() => {
-            console.log(`[retrieveFavorites] Recipes retrieved`);
-            return resolve(rv);
-          });
+          console.log(`[retrieveFavorites] Recipes retrieved`);
+          return resolve(rv);
         });
-      })
-      .catch((error) => {
-        console.error(`[retrieveFavorites] Error: ${JSON.stringify(error)}`);
-        return reject(error);
       });
     });
   }
@@ -113,65 +102,16 @@ export class FavoritesService {
    */
   deleteFavorite(name:string) {
     return new Promise((resolve, reject) => {
-      let db = new SQLite();
-      db.openDatabase({
-          name: 'data.db',
-          location: 'default'
-      }).then(() => {
-        db.executeSql(`
+      DBSingletonClass.getInstance((instance) => {
+        instance.db.executeSql(`
           DELETE FROM favorites
           WHERE name = '${name.replace(new RegExp("'", 'g'),"\"")}'
         `,[])
         .then(()=>{
-          db.close().then(() => {
-            console.log(`[deleteFavorite] recipe was deleted from the database`);
-            return resolve();
-          });
+          console.log(`[deleteFavorite] recipe was deleted from the database`);
+          return resolve();
         });
-      })
-      .catch((error) => {
-        console.error(`[deleteFavorite] Error: ${JSON.stringify(error)}`);
-        return reject(error);
       });
     });
   }
-
-  /**
-   * Update an existing recipe in the Favorites list
-   * @param {Recipe} the recipe to update
-   * @param {number} the new number of persons for the recalculated recipe
-   */
-  /*updateFavorite(recipe:Recipe, persons:number) {
-    return new Promise((resolve, reject) => {
-      let db = new SQLite();
-      db.openDatabase({
-          name: 'data.db',
-          location: 'default'
-      }).then(() => {
-
-        let newIngredients:string[];
-        for (let ingredient of recipe.ingredients) {
-          ingredient = ingredient.replace(new RegExp("'", 'g'),"\"");
-          newIngredients.push(ingredient);
-        }
-
-        db.executeSql(`
-          UPDATE favorites
-          SET ingredients = '${newIngredients}',
-              persons = '${persons}'
-          WHERE name = '${recipe.name.replace(new RegExp("'", 'g'),"\"")}'
-        `,[])
-        .then(() => {
-          db.close().then(() => {
-            console.log(`[updateFavorite] recipe was updated correctly`);
-            return resolve();
-          });
-        });
-      })
-      .catch((error) => {
-        console.error(`[updateFavorite] Error: ${JSON.stringify(error)}`);
-        return reject(error);
-      });
-    });
-  }*/
 }
