@@ -8,11 +8,11 @@ import {FavoritesService} from '../favorites/favorites.service';
 import {InfoPage} from '../info/info';
 import {FavoritesPage} from '../favorites/favorites';
 import {Recipe} from '../../interfaces';
-import {HammerGesturesDirective} from '../../directives/hammerGesturesDirective';
+//import {HammerGesturesDirective} from '../../directives/hammerGesturesDirective';
 
 @Component({
 	templateUrl: 'build/pages/calendar/calendar.html',
-	directives: [RecipePage, AddRecipePage, HammerGesturesDirective],
+	directives: [RecipePage, AddRecipePage/*, HammerGesturesDirective*/],
   providers: [CalendarService,FavoritesService]
 })
 
@@ -208,7 +208,7 @@ export class CalendarPage {
    * gesture directive function
    * @param {string} the event catched by the div tag of the directive
    */
-  doSwipe(direction: string) {
+  /*doSwipe(direction: string) {
 
     if (direction === 'swiperight') {
       //this.nav.parent.select(1);
@@ -221,5 +221,5 @@ export class CalendarPage {
       this.nav.setRoot(InfoPage);
     }
      
-  }
+  }*/
 }

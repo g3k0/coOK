@@ -3,11 +3,11 @@ import {AlertController, ToastController, ModalController, LoadingController, Pl
 import {SearchService} from './search.service';
 import {AddRecipePage} from '../add-recipe/add-recipe';
 import {FavoritesPage} from '../favorites/favorites';
-import {HammerGesturesDirective} from '../../directives/hammerGesturesDirective';
+//import {HammerGesturesDirective} from '../../directives/hammerGesturesDirective';
 
 @Component({
 	templateUrl: 'build/pages/search/search.html',
-	directives: [AddRecipePage, HammerGesturesDirective],
+	directives: [AddRecipePage/*, HammerGesturesDirective*/],
     providers: [SearchService]
 })
 
@@ -236,12 +236,12 @@ export class SearchPage {
      * gesture directive function
      * @param {string} the event catched by the div tag of the directive
      */
-    doSwipe(direction: string) {
+    /*doSwipe(direction: string) {
 
     	if (direction === 'swipeleft') {
     		//this.nav.parent.select(1);
     		this.nav.setRoot(FavoritesPage);
     	}
         
-    }
+    }*/
 }
